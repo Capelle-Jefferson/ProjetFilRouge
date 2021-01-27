@@ -9,5 +9,10 @@ namespace ProjetFilRouge.Models
     {
         public int? idLevel { get; set; }
         public string nameLevel { get; set; }
+        public Level(int? idLevel,string nameLevel)
+        {
+            this.idLevel = idLevel;
+            this.nameLevel = nameLevel;
+        }
     }
 }
