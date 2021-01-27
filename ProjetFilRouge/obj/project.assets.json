@@ -198,11 +198,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Capelle\\ProjetFilRouge\\ProjetFilRouge\\ProjetFilRouge\\ProjetFilRouge.csproj",
+      "projectUniqueName": "C:\\Users\\ib\\Desktop\\PFR\\ProjetFilRouge\\ProjetFilRouge\\ProjetFilRouge.csproj",
       "projectName": "ProjetFilRouge",
-      "projectPath": "C:\\Capelle\\ProjetFilRouge\\ProjetFilRouge\\ProjetFilRouge\\ProjetFilRouge.csproj",
+      "projectPath": "C:\\Users\\ib\\Desktop\\PFR\\ProjetFilRouge\\ProjetFilRouge\\ProjetFilRouge.csproj",
       "packagesPath": "C:\\Users\\ib\\.nuget\\packages\\",
-      "outputPath": "C:\\Capelle\\ProjetFilRouge\\ProjetFilRouge\\ProjetFilRouge\\obj\\",
+      "outputPath": "C:\\Users\\ib\\Desktop\\PFR\\ProjetFilRouge\\ProjetFilRouge\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\ib\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -254,7 +254,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }
