@@ -42,13 +42,13 @@ namespace ProjetFilRouge.Repositories
         */
         public abstract int Delete(long id);
 
-        public void openConnection ()
+        public void OpenConnection ()
         {
             Console.WriteLine("Connecting to MySQL...");
             connectionSql.Open();       
         }
         
-        public void closeConnection (MySqlDataReader reader)
+        public void CloseConnection (MySqlDataReader reader)
         {
             Console.WriteLine("Close MySQL...");
             reader.Close();
