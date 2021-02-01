@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProjetFilRouge.Dtos;
+using ProjetFilRouge.Dtos.CategoriesDtos;
 using ProjetFilRouge.Services;
 using System;
 using System.Collections.Generic;
@@ -36,20 +37,23 @@ namespace ProjetFilRouge.Controllers
 
         // POST api/<CategoriesController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public FindCategoryDto Post([FromBody] CreateCategoryDto cat)
         {
+            return categoriesServices.PostCategory(cat);
         }
 
         // PUT api/<CategoriesController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public FindCategoryDto Put(int id, [FromBody] CreateCategoryDto cat)
         {
+            return categoriesServices.PutCategory(id, cat);
         }
 
         // DELETE api/<CategoriesController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public int Delete(int id)
         {
+            return categoriesServices.Delete(id);
         }
     }
 }
