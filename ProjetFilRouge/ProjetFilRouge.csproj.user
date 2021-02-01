@@ -3,5 +3,12 @@
   <PropertyGroup>
     <Controller_SelectedScaffolderID>ApiControllerWithActionsScaffolder</Controller_SelectedScaffolderID>
     <Controller_SelectedScaffolderCategoryPath>root/Common/Api</Controller_SelectedScaffolderCategoryPath>
+<<<<<<< HEAD
+=======
+    <ActiveDebugProfile>ProjetFilRouge</ActiveDebugProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebuggerFlavor>ProjectDebugger</DebuggerFlavor>
+>>>>>>> c37fe137b2529f10b0dc9d2a58dc6c74a09088b5
   </PropertyGroup>
 </Project>

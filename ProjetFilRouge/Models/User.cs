@@ -17,7 +17,7 @@ namespace ProjetFilRouge.Models
 
         public User(int? id,string username,string password,string firstname,string lastname,string email,int? idRoles)
         {
-            this.id = id;
+            this.idUser = id;
             this.username = username;
             this.password = password;
             this.firstname = firstname;
