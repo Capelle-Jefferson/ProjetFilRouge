@@ -30,6 +30,13 @@ namespace ProjetFilRouge.Services
             return listQuestionDto;
         }
 
+        internal FindQuestionsDto GetQuestions(int id)
+        {
+            Question question = questionsRepository.Find(id);
+            FindQuestionsDto questionDto = TransformsModelToDTO(question);
+            return questionDto;
+        }
+
         private FindQuestionsDto TransformsModelToDTO(Question question)
         {
             return new FindQuestionsDto(question.IdQuestion,question.Intitule,question.IdCategory,question.IdLevel,question.IdAnswer);

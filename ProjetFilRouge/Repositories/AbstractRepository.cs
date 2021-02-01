@@ -22,7 +22,7 @@ namespace ProjetFilRouge.Repositories
          */
         /// <param name="id"> id de référence en bdd</param>
         /// <returns>Renvoi un objet</returns>
-        public abstract T Find(long id);
+        public abstract T Find(int id);
         
         /**
          * Permet de récupérer une liste d'objet
@@ -36,11 +36,11 @@ namespace ProjetFilRouge.Repositories
         /**
         * Permet de modifier un objet
         */
-        public abstract T Update(long id, T obj);
+        public abstract T Update(int id, T obj);
         /**
         * Permet de supprimer un objet
         */
-        public abstract int Delete(long id);
+        public abstract int Delete(int id);
 
         public void OpenConnection ()
         {

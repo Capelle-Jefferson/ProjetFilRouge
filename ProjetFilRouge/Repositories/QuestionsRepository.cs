@@ -20,7 +20,7 @@ namespace ProjetFilRouge.Repositories
             return obj;
         }
 
-        public override int Delete(long id)
+        public override int Delete(int id)
         {
             this.OpenConnection();
             string request = _queryBuilder.Delete("question", id);
@@ -30,9 +30,30 @@ namespace ProjetFilRouge.Repositories
             return result;
         }
 
-        public override Question Find(long id)
+        public override Question Find(int id)
         {
-            throw new NotImplementedException();
+            this.OpenConnection();
+            string request = _queryBuilder   
+                .Select()
+                .From("question")
+                .Where("id_question", id, "=")
+                .Get();
+
+            MySqlCommand cmd = new MySqlCommand(request, connectionSql); 
+            MySqlDataReader rdr = cmd.ExecuteReader();  
+            Question question = new Question();
+            while (rdr.Read()) 
+            {
+                question.IdQuestion = rdr.GetInt32(0);
+                question.Intitule = rdr.GetString(1);
+                question.IdCategory = rdr.GetInt32(2);
+                question.IdLevel = rdr.GetInt32(3);
+                question.IdAnswer = rdr.GetInt32(4);
+
+                
+            }
+            rdr.Close(); 
+            return question;
         }
 
         public override List<Question> FindAll()
@@ -53,8 +74,8 @@ namespace ProjetFilRouge.Repositories
                 question.IdQuestion = rdr.GetInt32(0);
                 question.Intitule = rdr.GetString(1);
                 question.IdCategory= rdr.GetInt32(2);
-                question.IdLevel = rdr.GetInt32(0);
-                question.IdAnswer = rdr.GetInt32(0);
+                question.IdLevel = rdr.GetInt32(3);
+                question.IdAnswer = rdr.GetInt32(4);
 
 
                 list.Add(question);
@@ -64,9 +85,22 @@ namespace ProjetFilRouge.Repositories
             return list;
         }
 
-        public override Question Update(long id, Question obj)
+        public override Question Update(int id, Question obj)
         {
-            throw new NotImplementedException();
+            this.OpenConnection();
+            Dictionary<string, dynamic> questionDict = new Dictionary<string, dynamic>();
+            questionDict = ObjectToDictionary(obj,"id_question");
+            string request = _queryBuilder
+              .Update("question")
+              .Set(questionDict)
+              .Where("id_question", id)
+              .Get();
+            Console.WriteLine(request);
+            MySqlCommand cmd = new MySqlCommand(request, connectionSql);
+            cmd.ExecuteNonQuery();
+            connectionSql.Close();
+            obj.IdQuestion = id;
+            return obj;
         }
     }
 }
