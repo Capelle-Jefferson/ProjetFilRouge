@@ -8,7 +8,7 @@ namespace ProjetTest.Models
         {
         }
 
-        public Question(int idQuestion, string intitule, int idCategory, int idLevel, int idAnswer)
+        public Question(int? idQuestion, string intitule, int idCategory, int idLevel, int idAnswer)
         {
             IdQuestion = idQuestion;
             Intitule = intitule;

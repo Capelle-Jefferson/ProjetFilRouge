@@ -17,19 +17,19 @@ namespace ProjetFilRouge.Repositories
             throw new NotImplementedException();
         }
 
-        public override int Delete(long id)
+        public override int Delete(int id)
         {
             throw new NotImplementedException();
         }
 
-        public override Category Find(long id)
+        public override Category Find(int id)
         {
             throw new NotImplementedException();
         }
 
         public override List<Category> FindAll()
         {
-            this.openConnection();
+            this.OpenConnection();
             string request = _queryBuilder
                 .Select()
                 .From("category")
@@ -44,11 +44,11 @@ namespace ProjetFilRouge.Repositories
                 cat.nameCategory = rdr.GetString(1);
                 list.Add(cat);
             }
-            this.closeConnection(rdr);
+            this.CloseConnection(rdr);
             return list;
         }
 
-        public override Category Update(long id, Category obj)
+        public override Category Update(int id, Category obj)
         {
             throw new NotImplementedException();
         }

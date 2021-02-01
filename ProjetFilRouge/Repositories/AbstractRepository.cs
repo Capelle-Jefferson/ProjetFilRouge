@@ -85,6 +85,7 @@ namespace ProjetFilRouge.Repositories
 
         private string ConvertCamelCaseToSnakecase(string name)
         {
+            
             int n = name.Length;
             StringBuilder snakeName = new StringBuilder();
             snakeName.Append(name[0]);
@@ -92,7 +93,7 @@ namespace ProjetFilRouge.Repositories
             {
                 if (Char.IsUpper(name[i]))
                 {
-                    snakeName.Append("");
+                    snakeName.Append("_");
                 }
                 snakeName.Append(name[i]);
             }

@@ -31,8 +31,9 @@ namespace ProjetFilRouge.Controllers
 
         // POST api/<QuestionsController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public Dtos.QuestionsDtos.FindQuestionsDto Post([FromBody] Dtos.QuestionsDtos.CreatedQuestionDTO obj)
         {
+            return questionService.PostQuestion(obj);
         }
 
         // PUT api/<QuestionsController>/5

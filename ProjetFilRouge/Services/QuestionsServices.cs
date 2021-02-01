@@ -37,6 +37,19 @@ namespace ProjetFilRouge.Services
             return questionDto;
         }
 
+        internal FindQuestionsDto PostQuestion(CreatedQuestionDTO obj)
+        {
+            Question questionModel = transformsDtoToModel(obj);
+            Question questioncreated = questionsRepository.Create(questionModel);
+            return TransformsModelToDTO(questioncreated);
+
+        }
+
+        private Question transformsDtoToModel(CreatedQuestionDTO obj)
+        {
+            return new Question(null,obj.Intitule, obj.IdCategory, obj.IdLevel, obj.IdAnswer) ;
+        }
+
         private FindQuestionsDto TransformsModelToDTO(Question question)
         {
             return new FindQuestionsDto(question.IdQuestion,question.Intitule,question.IdCategory,question.IdLevel,question.IdAnswer);
