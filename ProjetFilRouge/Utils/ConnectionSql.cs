@@ -12,7 +12,7 @@ namespace ProjetFilRouge.Utils
         private static string server = "localhost";
         private static string user = "root";
         private static string password = "root";
-        private static string db = "jdrib";
+        private static string db = "projetbdd";
         private static string port = "3306";
 
         private ConnectionSql() { }
