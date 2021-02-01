@@ -15,5 +15,9 @@ namespace ProjetFilRouge.Models
             this.idCategory = idCategory;
             this.nameCategory = nameCategory;
         }
+
+        public Category()
+        {
+        }
     }
 }
