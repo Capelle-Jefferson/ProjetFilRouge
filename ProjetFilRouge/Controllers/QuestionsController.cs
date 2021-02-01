@@ -38,14 +38,16 @@ namespace ProjetFilRouge.Controllers
 
         // PUT api/<QuestionsController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public Dtos.QuestionsDtos.FindQuestionsDto Put(int id, [FromBody] Dtos.QuestionsDtos.CreatedQuestionDTO obj)
         {
+            return questionService.PutQuestion(id, obj);
         }
 
         // DELETE api/<QuestionsController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public int Delete(int id)
         {
+            return questionService.DeleteQuestion(id);
         }
     }
 }
