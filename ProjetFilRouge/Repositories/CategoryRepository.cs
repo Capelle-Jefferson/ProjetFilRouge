@@ -14,17 +14,33 @@ namespace ProjetFilRouge.Repositories
 
         public override Category Create(Category obj)
         {
-            throw new NotImplementedException();
+            obj.IdCategory = CreatedObject(obj, "category", "id_category");
+            return obj;
         }
 
-        public override int Delete(long id)
+        public override int Delete(int id)
         {
-            throw new NotImplementedException();
+            return DeletedObject("category", id, "id_category");
         }
 
-        public override Category Find(long id)
+        public override Category Find(int id)
         {
-            throw new NotImplementedException();
+            this.openConnection();
+            string request = _queryBuilder
+                .Select()
+                .From("category")
+                .Where("id_category", id, "=")
+                .Get();
+            MySqlCommand cmd = new MySqlCommand(request, connectionSql);
+            MySqlDataReader rdr = cmd.ExecuteReader();
+            Category cat = new Category();
+            while (rdr.Read())
+            {
+                cat.IdCategory = rdr.GetInt32(0);
+                cat.NameCategory = rdr.GetString(1);
+            }
+            this.closeConnection(rdr);
+            return cat;
         }
 
         public override List<Category> FindAll()
@@ -40,17 +56,18 @@ namespace ProjetFilRouge.Repositories
             while (rdr.Read())
             {
                 Category cat = new Category();
-                cat.idCategory = rdr.GetInt32(0);
-                cat.nameCategory = rdr.GetString(1);
+                cat.IdCategory = rdr.GetInt32(0);
+                cat.NameCategory = rdr.GetString(1);
                 list.Add(cat);
             }
             this.closeConnection(rdr);
             return list;
         }
 
-        public override Category Update(long id, Category obj)
+        public override Category Update(int id, Category obj)
         {
-            throw new NotImplementedException();
+            UpdatedObject(obj, id, "category", "id_category");
+            return Find(id);
         }
     }
 }

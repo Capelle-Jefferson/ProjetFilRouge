@@ -22,7 +22,7 @@ namespace ProjetFilRouge.Repositories
          */
         /// <param name="id"> id de référence en bdd</param>
         /// <returns>Renvoi un objet</returns>
-        public abstract T Find(long id);
+        public abstract T Find(int id);
         
         /**
          * Permet de récupérer une liste d'objet
@@ -36,11 +36,11 @@ namespace ProjetFilRouge.Repositories
         /**
         * Permet de modifier un objet
         */
-        public abstract T Update(long id, T obj);
+        public abstract T Update(int id, T obj);
         /**
         * Permet de supprimer un objet
         */
-        public abstract int Delete(long id);
+        public abstract int Delete(int id);
 
         public void openConnection ()
         {
@@ -61,10 +61,64 @@ namespace ProjetFilRouge.Repositories
             {
                 if (pr.Name.ToLower() != idName && pr.GetValue(obj) != null)
                 {
-                    dict.Add(pr.Name.ToLower(), pr.GetValue(obj));
+                    string snakeName = ConvertCamelCaseToSnakecase(pr.Name);
+                    dict.Add(snakeName.ToLower(), pr.GetValue(obj));
                 }
             }
             return dict;
+        }
+
+        public int CreatedObject(T obj, string table, string idName = "id")
+        {
+            this.openConnection();
+            Dictionary<string, dynamic> dict = this.ObjectToDictionary(obj, idName);
+            string request = _queryBuilder
+                .Insert(table)
+                .Values(dict);
+            MySqlCommand cmd = new MySqlCommand(request, connectionSql);
+            cmd.ExecuteNonQuery();
+            int key = Convert.ToInt32(cmd.LastInsertedId);
+            connectionSql.Close();
+            return key;
+        }
+
+        private string ConvertCamelCaseToSnakecase(string name)
+        {
+            int n = name.Length;
+            StringBuilder snakeName = new StringBuilder();
+            snakeName.Append(name[0]);
+            for(int i = 1; i<n; i++)
+            {
+                if(Char.IsUpper(name[i]))
+                {
+                    snakeName.Append("_");
+                }
+                snakeName.Append(name[i]);
+            }
+            return snakeName.ToString();
+        }
+
+        protected int DeletedObject(string table, int id, string idName)
+        {
+            this.openConnection();
+            string request = _queryBuilder.Delete(table, id, idName);
+            MySqlCommand cmd = new MySqlCommand(request, connectionSql);
+            int result = cmd.ExecuteNonQuery();
+            connectionSql.Close();
+            return result;
+        }
+
+        protected void UpdatedObject(T obj, int id, string table, string idName)
+        {
+            this.openConnection();
+            Dictionary<string, dynamic> persoDictionnary = this.ObjectToDictionary(obj, idName);
+            string request = _queryBuilder
+              .Update(table)
+              .Set(persoDictionnary)
+              .Where(idName, id).Get();
+            MySqlCommand cmd = new MySqlCommand(request, connectionSql);
+            cmd.ExecuteNonQuery();
+            connectionSql.Close();
         }
     }
 }

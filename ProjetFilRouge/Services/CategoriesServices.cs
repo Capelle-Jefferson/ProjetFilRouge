@@ -1,4 +1,5 @@
 ﻿using ProjetFilRouge.Dtos;
+using ProjetFilRouge.Dtos.CategoriesDtos;
 using ProjetFilRouge.Models;
 using ProjetFilRouge.Repositories;
 using ProjetFilRouge.Utils;
@@ -28,15 +29,39 @@ namespace ProjetFilRouge.Services
             return cetegoriesDto;
         }
 
-
-        private Category TransformDtoToModel(FindCategoryDto cat)
+        public FindCategoryDto GetCategoryById(int id)
         {
-            return new Category(cat.IdCategory, cat.NameCategory);
+            Category cat = categoryRepository.Find(id);
+            return TransformModelToDto(cat);
+        }
+
+        public FindCategoryDto PostCategory(CreateCategoryDto cat)
+        {
+            Category categoryModel = TransformDtoToModel(cat);
+            Category categoryCreated = this.categoryRepository.Create(categoryModel);
+            return TransformModelToDto(categoryCreated);
+        }
+
+        public int Delete(int id)
+        {
+            return this.categoryRepository.Delete(id);
+        }
+
+        public FindCategoryDto PutCategory(int id, CreateCategoryDto cat)
+        {
+            Category categoryModel = TransformDtoToModel(cat);
+            Category categoryUpdated = this.categoryRepository.Update(id, categoryModel);
+            return TransformModelToDto(categoryUpdated);
+        }
+
+        private Category TransformDtoToModel(CreateCategoryDto cat)
+        {
+            return new Category(null, cat.NameCategory);
         }
 
         private FindCategoryDto TransformModelToDto(Category cat)
         {
-            return new FindCategoryDto(cat.nameCategory, cat.idCategory);
+            return new FindCategoryDto(cat.NameCategory, cat.IdCategory);
         }
     }
 }
