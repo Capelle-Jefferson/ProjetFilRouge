@@ -22,7 +22,12 @@ namespace ProjetFilRouge.Repositories
 
         public override int Delete(long id)
         {
-            throw new NotImplementedException();
+            this.OpenConnection();
+            string request = _queryBuilder.Delete("question", id);
+            MySqlCommand cmd = new MySqlCommand(request, connectionSql);
+            int result = cmd.ExecuteNonQuery();
+            connectionSql.Close();
+            return result;
         }
 
         public override Question Find(long id)
