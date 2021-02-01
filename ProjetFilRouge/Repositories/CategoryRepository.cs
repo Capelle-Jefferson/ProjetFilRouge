@@ -12,17 +12,32 @@ namespace ProjetFilRouge.Repositories
     {
         public CategoryRepository(QueryBuilder queryBuilder) : base(queryBuilder) { }
 
+        /// <summary>
+        /// Creation d'une catégorie  
+        /// </summary>
+        /// <param name="obj">objet Category à créer</param>
+        /// <returns>Objet category créé</returns>
         public override Category Create(Category obj)
         {
             obj.IdCategory = CreatedObject(obj, "category", "id_category");
             return obj;
         }
 
+        /// <summary>
+        /// Supprime la catégorie dont l'identifiant est id 
+        /// </summary>
+        /// <param name="id">identifiant de la catégorie à supprimer</param>
+        /// <returns>1 si la catégorie a bien été supprimé, 0 sinon</returns>
         public override int Delete(int id)
         {
             return DeletedObject("category", id, "id_category");
         }
 
+        /// <summary>
+        /// Selectionne une catégorie dont l'identifiant est id 
+        /// </summary>
+        /// <param name="id">identifiant de la catégorie à selectionner</param>
+        /// <returns>objet Catégorie</returns>
         public override Category Find(int id)
         {
             this.openConnection();
@@ -43,6 +58,10 @@ namespace ProjetFilRouge.Repositories
             return cat;
         }
 
+        /// <summary>
+        /// Selectionne toutes les catégories
+        /// </summary>
+        /// <returns>Liste de Catégories</returns>
         public override List<Category> FindAll()
         {
             this.openConnection();
@@ -64,6 +83,12 @@ namespace ProjetFilRouge.Repositories
             return list;
         }
 
+        /// <summary>
+        /// Met à jour la catégorie dont l'identifiant est id 
+        /// </summary>
+        /// <param name="id">l'indentifiant de la catégorie à modifier</param>
+        /// <param name="obj">La nouvelle Catégorie</param>
+        /// <returns>La nouvelle Catégorie</returns>
         public override Category Update(int id, Category obj)
         {
             UpdatedObject(obj, id, "category", "id_category");
