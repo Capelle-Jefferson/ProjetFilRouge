@@ -1,14 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace ProjetTest.Models
+namespace ProjetFilRouge.Dtos.QuestionsDtos
 {
-    public class Question
+    public class FindQuestionsDto
     {
-        public Question()
-        {
-        }
-
-        public Question(int idQuestion, string intitule, int idCategory, int idLevel, int idAnswer)
+        public FindQuestionsDto(int? idQuestion, string intitule, int? idCategory, int? idLevel, int? idAnswer)
         {
             IdQuestion = idQuestion;
             Intitule = intitule;
