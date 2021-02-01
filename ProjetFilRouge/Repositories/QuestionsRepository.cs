@@ -14,12 +14,23 @@ namespace ProjetFilRouge.Repositories
         
 
         public QuestionsRepository(QueryBuilder _queryBuilder) : base(_queryBuilder) { }
+
+        /// <summary>
+        /// Permet de créer une question grâce au QueryBuilder 
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns> la requête mysql pour insérer dans une table </returns>
         public override Question Create(Question obj)
         {
             obj.IdQuestion = CreatedObject(obj, "question", "id_question");
             return obj;
         }
 
+        /// <summary>
+        /// Permet de creer la requête sql pour supprimer une question selon son id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns> la requête mysql </returns>
         public override int Delete(int id)
         {
             this.OpenConnection();
@@ -30,6 +41,11 @@ namespace ProjetFilRouge.Repositories
             return result;
         }
 
+        /// <summary>
+        /// Creer la requête sql "select" pour trouver la question
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>la requête sql</returns>
         public override Question Find(int id)
         {
             this.OpenConnection();
@@ -56,6 +72,10 @@ namespace ProjetFilRouge.Repositories
             return question;
         }
 
+        /// <summary>
+        /// Creer la requête sql pour selectionner toute la table
+        /// </summary>
+        /// <returns>la requête sql</returns>
         public override List<Question> FindAll()
         {
             this.OpenConnection();
@@ -85,6 +105,12 @@ namespace ProjetFilRouge.Repositories
             return list;
         }
 
+        /// <summary>
+        /// Creer la requête sql pour set une question (modifier/faire une mise à jour)
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="obj"></param>
+        /// <returns>la requête sql</returns>
         public override Question Update(int id, Question obj)
         {
             this.OpenConnection();
