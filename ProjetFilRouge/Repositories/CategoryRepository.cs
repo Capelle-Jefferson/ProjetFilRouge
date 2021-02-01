@@ -17,12 +17,12 @@ namespace ProjetFilRouge.Repositories
             throw new NotImplementedException();
         }
 
-        public override int Delete(long id)
+        public override int Delete(int id)
         {
             throw new NotImplementedException();
         }
 
-        public override Category Find(long id)
+        public override Category Find(int id)
         {
             throw new NotImplementedException();
         }
@@ -48,7 +48,7 @@ namespace ProjetFilRouge.Repositories
             return list;
         }
 
-        public override Category Update(long id, Category obj)
+        public override Category Update(int id, Category obj)
         {
             throw new NotImplementedException();
         }
