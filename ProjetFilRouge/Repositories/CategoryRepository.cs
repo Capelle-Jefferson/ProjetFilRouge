@@ -24,7 +24,22 @@ namespace ProjetFilRouge.Repositories
 
         public override Category Find(long id)
         {
-            throw new NotImplementedException();
+            this.openConnection();
+            string request = _queryBuilder
+                .Select()
+                .From("category")
+                .Where("id_category", id, "=")
+                .Get();
+            MySqlCommand cmd = new MySqlCommand(request, connectionSql);
+            MySqlDataReader rdr = cmd.ExecuteReader();
+            Category cat = new Category();
+            while (rdr.Read())
+            {
+                cat.idCategory = rdr.GetInt32(0);
+                cat.nameCategory = rdr.GetString(1);
+            }
+            this.closeConnection(rdr);
+            return cat;
         }
 
         public override List<Category> FindAll()

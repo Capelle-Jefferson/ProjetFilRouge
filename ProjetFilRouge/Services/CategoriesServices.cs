@@ -28,6 +28,13 @@ namespace ProjetFilRouge.Services
             return cetegoriesDto;
         }
 
+        internal FindCategoryDto GetCategoryById(int id)
+        {
+            Category cat = categoryRepository.Find(id);
+            return TransformModelToDto(cat);
+        }
+
+
 
         private Category TransformDtoToModel(FindCategoryDto cat)
         {

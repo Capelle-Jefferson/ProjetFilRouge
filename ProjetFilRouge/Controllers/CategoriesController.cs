@@ -29,9 +29,9 @@ namespace ProjetFilRouge.Controllers
 
         // GET api/<CategoriesController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public FindCategoryDto Get(int id)
         {
-            return "value";
+            return categoriesServices.GetCategoryById(id);
         }
 
         // POST api/<CategoriesController>
