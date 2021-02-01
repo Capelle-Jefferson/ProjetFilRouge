@@ -16,18 +16,7 @@ namespace ProjetFilRouge.Repositories
         public QuestionsRepository(QueryBuilder _queryBuilder) : base(_queryBuilder) { }
         public override Question Create(Question obj)
         {
-            this.OpenConnection();
-            Dictionary<string, dynamic> questiondictionnary= ObjectToDictionary(obj, "id_question");
-
-            string request = _queryBuilder
-                .Insert("personnages")
-                .Values(questiondictionnary);
-
-            MySqlCommand cmd = new MySqlCommand(request, connectionSql);
-            cmd.ExecuteNonQuery();
-            int objId = Convert.ToInt32(cmd.LastInsertedId);
-            obj.IdQuestion = objId;
-            connectionSql.Close();
+            obj.IdQuestion = CreatedObject(obj, "question", "id_question");
             return obj;
         }
 

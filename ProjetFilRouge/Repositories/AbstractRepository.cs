@@ -54,6 +54,7 @@ namespace ProjetFilRouge.Repositories
             reader.Close();
             connectionSql.Close();       
         }
+
         public Dictionary<string, dynamic> ObjectToDictionary(T obj, string idName)
         {
             Dictionary<string, dynamic> dict = new Dictionary<string, dynamic>();
@@ -61,10 +62,42 @@ namespace ProjetFilRouge.Repositories
             {
                 if (pr.Name.ToLower() != idName && pr.GetValue(obj) != null)
                 {
-                    dict.Add(pr.Name.ToLower(), pr.GetValue(obj));
+                    string snakeName = ConvertCamelCaseToSnakecase(pr.Name);
+                    dict.Add(snakeName.ToLower(), pr.GetValue(obj));
                 }
             }
             return dict;
         }
+        public int CreatedObject(T obj, string table, string idName = "id")
+        {
+            this.OpenConnection();
+            Dictionary<string, dynamic> dict = this.ObjectToDictionary(obj, idName);
+            string request = _queryBuilder
+                .Insert(table)
+                .Values(dict);
+            Console.WriteLine(request);
+            MySqlCommand cmd = new MySqlCommand(request, connectionSql);
+            cmd.ExecuteNonQuery();
+            int key = Convert.ToInt32(cmd.LastInsertedId);
+            connectionSql.Close();
+            return key;
+        }
+
+        private string ConvertCamelCaseToSnakecase(string name)
+        {
+            int n = name.Length;
+            StringBuilder snakeName = new StringBuilder();
+            snakeName.Append(name[0]);
+            for (int i = 1; i < n; i++)
+            {
+                if (Char.IsUpper(name[i]))
+                {
+                    snakeName.Append("");
+                }
+                snakeName.Append(name[i]);
+            }
+            return snakeName.ToString();
+        }
     }
 }
+
