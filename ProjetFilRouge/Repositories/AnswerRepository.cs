@@ -1,0 +1,90 @@
+﻿using MySql.Data.MySqlClient;
+using ProjetFilRouge.Utils;
+using ProjetFilRouge.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace ProjetFilRouge.Repositories
+{
+    public class AnswerRepository : AbstractRepository<Answer>
+    {
+        public AnswerRepository(QueryBuilder queryBuilder) : base(queryBuilder) { }
+
+        public override Answer Create(Answer obj)
+        {
+            obj.IdAnswer = CreatedObject(obj, "answer", "id_answer");
+            return obj;
+        }
+
+        public override int Delete(int id)
+        {
+            return DeletedObject("answer", id, "id_answer");
+        }
+
+        public override Answer Find(int id)
+        {
+            this.openConnection();
+            string request = _queryBuilder
+                .Select()
+                .From("answer")
+                .Where("id_answer", id, "=")
+                .Get();
+            MySqlCommand cmd = new MySqlCommand(request, connectionSql);
+            MySqlDataReader rdr = cmd.ExecuteReader();
+            Answer ans = new Answer();
+            while (rdr.Read())
+            {
+                ans.IdAnswer = rdr.GetInt32(0);
+                ans.TypeAnswer = ConvertTypeAnswer(rdr.GetString(1));
+                ans.Explication = rdr.GetString(2);
+                ans.TextAnswer = rdr.GetString(3);
+            }
+            this.closeConnection(rdr);
+            return ans;
+        }
+
+        private TypeAnswer ConvertTypeAnswer(string v)
+        {
+            return v switch
+            {
+                "QCM" => TypeAnswer.QCM,
+                "QCM_multiple" => TypeAnswer.QCM_multiple,
+                _ => TypeAnswer.Text,
+            };
+        }
+
+        public override List<Answer> FindAll()
+        {
+            this.openConnection();
+            string request = _queryBuilder
+                .Select()
+                .From("answer")
+                .Get();
+            MySqlCommand cmd = new MySqlCommand(request, connectionSql);
+            MySqlDataReader rdr = cmd.ExecuteReader();
+            List<Answer> list = new List<Answer>();
+            while (rdr.Read())
+            {
+                Answer ans = new Answer
+                {
+                    IdAnswer = rdr.GetInt32(0),
+                    TypeAnswer = ConvertTypeAnswer(rdr.GetString(1)),
+                    Explication = rdr.GetString(2),
+                    TextAnswer = rdr.GetString(3)
+                };
+                list.Add(ans);
+            }    
+            this.closeConnection(rdr);
+            return list;
+        }
+
+        public override Answer Update(int id, Answer obj)
+        {
+            obj.TypeAnswer = ConvertTypeAnswer(obj.TypeAnswer.ToString());
+            UpdatedObject(obj, id, "answer", "id_answer");
+            return Find(id);
+        }
+    }
+}
