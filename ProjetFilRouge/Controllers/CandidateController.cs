@@ -35,6 +35,15 @@ namespace ProjetFilRouge.Controllers
             return this.candidatesServices.GetCandidateById(id);
         }
 
+        /*
+        // GET api/<CandidateController>/5
+        [Route("api/candidatesUser")]
+        [HttpGet("{idUser}")]
+        public List<FindCandidateDto> GetByIdUser(int idUser)
+        {
+            return this.candidatesServices.GetCandidateByIdUser(idUser);
+        }
+        */
         // POST api/<CandidateController>
         [HttpPost]
         public FindCandidateDto Post([FromBody] CreateCandidateDto cand)

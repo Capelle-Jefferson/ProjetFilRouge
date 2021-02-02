@@ -37,6 +37,17 @@ namespace ProjetFilRouge.Services
             return TransformModelToDto(candidat);
         }
 
+        public List<FindCandidateDto> GetCandidateByIdUser(int id)
+        {
+            List<Candidate> candidate = candidateRepository.FindByIdUser(id);
+            List<FindCandidateDto> candidatesDtos = new List<FindCandidateDto>();
+            foreach (Candidate cat in candidate)
+            {
+                candidatesDtos.Add(TransformModelToDto(cat));
+            }
+            return candidatesDtos;
+        }
+
         public FindCandidateDto PostCandidate(CreateCandidateDto cand)
         {
             Candidate candidatModel = TransformDtoToModel(cand);
