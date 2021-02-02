@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace ProjetFilRouge.Controllers
@@ -30,9 +31,15 @@ namespace ProjetFilRouge.Controllers
 
         // GET api/<CategoriesController>/5
         [HttpGet("{id}")]
-        public FindCategoryDto Get(int id)
+        public IActionResult Get(int id)
         {
-            return categoriesServices.GetCategoryById(id);
+            try
+            {
+                return Ok(categoriesServices.GetCategoryById(id));
+            }catch
+            {
+                return NotFound();
+            }
         }
 
         // POST api/<CategoriesController>

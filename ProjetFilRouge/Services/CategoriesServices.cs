@@ -6,7 +6,9 @@ using ProjetFilRouge.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
+using System.Web.Http;
 
 namespace ProjetFilRouge.Services
 {
@@ -41,6 +43,8 @@ namespace ProjetFilRouge.Services
         public FindCategoryDto GetCategoryById(int id)
         {
             Category cat = categoryRepository.Find(id);
+            if (cat.IdCategory == null)
+                throw new HttpResponseException(HttpStatusCode.NotFound);
             return TransformModelToDto(cat);
         }
 
