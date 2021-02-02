@@ -11,8 +11,6 @@ namespace ProjetFilRouge.Services
     public class QuestionsServices
     {
         Repositories.QuestionsRepository questionsRepository;
-
-
         public QuestionsServices ()
             {
             this.questionsRepository = new Repositories.QuestionsRepository(new QueryBuilder());

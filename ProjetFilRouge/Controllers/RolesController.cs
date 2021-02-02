@@ -35,20 +35,23 @@ namespace ProjetFilRouge.Controllers
 
         // POST api/<RolesController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public Dtos.RolesDtos.FindRolesDto Post([FromBody] Dtos.RolesDtos.CreatedRolesDto obj)
         {
+            return rolesServices.PostRole(obj);
         }
 
         // PUT api/<RolesController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public Dtos.RolesDtos.FindRolesDto Put(int id, [FromBody] Dtos.RolesDtos.CreatedRolesDto obj)
         {
+            return rolesServices.PutRole(id,obj);
         }
 
         // DELETE api/<RolesController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public int Delete(int id)
         {
+            return rolesServices.DeleteRole(id);
         }
     }
 }

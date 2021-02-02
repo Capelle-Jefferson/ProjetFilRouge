@@ -33,6 +33,42 @@ namespace ProjetFilRouge.Services
             }
             return listRolesDto;
         }
+
+        /// <summary>
+        /// Permet de persister la bdd dans la table roles
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns>un dto pour l'utilisateur afin de visualiser ce qu'il a inséré</returns>
+        internal FindRolesDto PostRole(CreatedRolesDto obj)
+        {
+            Roles roleModel = transformsDtoToModel(obj);
+            Roles roleCreated = rolesRepository.Create(roleModel);
+            return TransformsModelToDTO(roleCreated);
+        }
+
+        /// <summary>
+        /// Permet de supprimer une donnée de la table roles dans la bdd.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns> 1 si tout c'est bien passé, 0 sinon </returns>
+        internal int DeleteRole(int id)
+        {
+            return rolesRepository.Delete(id);
+        }
+
+        /// <summary>
+        /// Permet de modifier une donnée dans la table roles de la bdd
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="obj"></param>
+        /// <returns>le dto de la donnée modifiée </returns>
+        internal FindRolesDto PutRole(int id, CreatedRolesDto obj)
+        {
+            Roles rolesModels = transformsDtoToModel(obj);
+            Roles roleUpdate = rolesRepository.Update(id, rolesModels);
+            return TransformsModelToDTO(roleUpdate);
+        }
+
         /// <summary>
         /// Recuperer un role selon son id dans la bdd
         /// </summary>
@@ -52,7 +88,16 @@ namespace ProjetFilRouge.Services
         /// <returns>Un roleDTO</returns>
         private FindRolesDto TransformsModelToDTO(Roles role)
         {
-            return new FindRolesDto(role.idRoles,role.nameRole);
+            return new FindRolesDto(role.idRoles, role.nameRole);
+        }
+        /// <summary>
+        /// Convertit un roleDTO en role Model pour persister dans la bdd
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns>un role DTO pour l'utilisateur</returns>
+        private Roles transformsDtoToModel(CreatedRolesDto obj)
+        {
+            return new Roles(null, obj.nameRole);
         }
     }
 }

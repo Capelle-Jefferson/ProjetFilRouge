@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 
 namespace ProjetFilRouge.Dtos.RolesDtos
 {
-    public class CreatedRolesDTO
+    public class CreatedRolesDto
     {
         public string nameRole { get; set; }
 
-        public CreatedRolesDTO( string nameRole)
+        public CreatedRolesDto( string nameRole)
         {
             this.nameRole = nameRole;
         }
