@@ -14,6 +14,7 @@ namespace ProjetFilRouge.Repositories
 
         public override Answer Create(Answer obj)
         {
+            obj.TypeAnswer = ConvertTypeAnswer(obj.TypeAnswer.ToString());
             obj.IdAnswer = CreatedObject(obj, "answer", "id_answer");
             return obj;
         }

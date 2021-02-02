@@ -24,14 +24,21 @@ namespace ProjetFilRouge.Controllers
         [HttpGet]
         public List<FindAnswerDto> Get()
         {
-            return AnswerServices.GetAnswers();
+            return AnswerServices.GetAnswers();           
         }
 
         // GET api/<AnswersController>/5
         [HttpGet("{id}")]
-        public FindAnswerDto Get(int id)
+        public IActionResult Get(int id)
         {
-            return AnswerServices.GetAnswerById(id);
+            try
+            {
+                return Ok(AnswerServices.GetAnswerById(id));
+            }
+            catch
+            {
+                return NotFound();
+            }
         }
 
         // POST api/<AnswersController>

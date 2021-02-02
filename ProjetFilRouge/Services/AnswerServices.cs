@@ -6,6 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web.Http;
+using System.Net;
 
 namespace ProjetFilRouge.Services
 {
@@ -51,6 +53,10 @@ namespace ProjetFilRouge.Services
         internal FindAnswerDto GetAnswerById(int id)
         {
             Answer ans = AnswerRepository.Find(id);
+            if(ans.IdAnswer == null)
+            {
+                throw new HttpResponseException(HttpStatusCode.NotFound);
+            }
             return TransformModelToDto(ans);
         }
 
