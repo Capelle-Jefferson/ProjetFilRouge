@@ -7,7 +7,7 @@ using System.Text;
 
 namespace ProjetFilRouge.Repositories
 {
-    public abstract class AbstractRepository<T>    
+    public abstract class AbstractRepository<T>
     {
         public MySqlConnection connectionSql = ConnectionSql.getConnection();
 
@@ -45,14 +45,14 @@ namespace ProjetFilRouge.Repositories
         public void OpenConnection ()
         {
             Console.WriteLine("Connecting to MySQL...");
-            connectionSql.Open();       
+            connectionSql.Open();
         }
         
         public void CloseConnection (MySqlDataReader reader)
         {
             Console.WriteLine("Close MySQL...");
             reader.Close();
-            connectionSql.Close();       
+            connectionSql.Close();
         }
 
         public Dictionary<string, dynamic> ObjectToDictionary(T obj, string idName)
@@ -75,7 +75,6 @@ namespace ProjetFilRouge.Repositories
             string request = _queryBuilder
                 .Insert(table)
                 .Values(dict);
-            Console.WriteLine(request);
             MySqlCommand cmd = new MySqlCommand(request, connectionSql);
             cmd.ExecuteNonQuery();
             int key = Convert.ToInt32(cmd.LastInsertedId);
@@ -85,7 +84,6 @@ namespace ProjetFilRouge.Repositories
 
         private string ConvertCamelCaseToSnakecase(string name)
         {
-            
             int n = name.Length;
             StringBuilder snakeName = new StringBuilder();
             snakeName.Append(name[0]);
@@ -98,6 +96,29 @@ namespace ProjetFilRouge.Repositories
                 snakeName.Append(name[i]);
             }
             return snakeName.ToString();
+        }
+
+        protected int DeletedObject(string table, int id, string idName)
+        {
+            this.OpenConnection();
+            string request = _queryBuilder.Delete(table, id, idName);
+            MySqlCommand cmd = new MySqlCommand(request, connectionSql);
+            int result = cmd.ExecuteNonQuery();
+            connectionSql.Close();
+            return result;
+        }
+
+        protected void UpdatedObject(T obj, int id, string table, string idName)
+        {
+            this.OpenConnection();
+            Dictionary<string, dynamic> persoDictionnary = this.ObjectToDictionary(obj, idName);
+            string request = _queryBuilder
+              .Update(table)
+              .Set(persoDictionnary)
+              .Where(idName, id).Get();
+            MySqlCommand cmd = new MySqlCommand(request, connectionSql);
+            cmd.ExecuteNonQuery();
+            connectionSql.Close();
         }
     }
 }

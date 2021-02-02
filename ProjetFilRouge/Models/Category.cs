@@ -7,13 +7,13 @@ namespace ProjetFilRouge.Models
 {
     public class Category
     {
-        public int? idCategory { get; set; }
-        public string nameCategory { get; set; } 
+        public int? IdCategory { get; set; }
+        public string NameCategory { get; set; } 
 
         public Category(int? idCategory,string nameCategory)
         {
-            this.idCategory = idCategory;
-            this.nameCategory = nameCategory;
+            this.IdCategory = idCategory;
+            this.NameCategory = nameCategory;
         }
 
         public Category()

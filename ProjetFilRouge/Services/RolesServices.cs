@@ -22,7 +22,7 @@ namespace ProjetFilRouge.Services
         /// Recuperer toutes les données de la table roles 
         /// </summary>
         /// <returns>Liste de DTO </returns>
-        internal List<FindRolesDto> GetAllRoles(int id)
+        internal List<FindRolesDto> GetAllRoles()
         {
             List<Roles> listRoles = rolesRepository.FindAll();
             List<FindRolesDto> listRolesDto = new List<FindRolesDto>();

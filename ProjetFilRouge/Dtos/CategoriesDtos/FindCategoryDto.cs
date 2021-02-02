@@ -1,9 +1,10 @@
-﻿using System;
+﻿using ProjetFilRouge.Dtos.CategoriesDtos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ProjetFilRouge.Dtos
+namespace ProjetFilRouge.Dtos.CategoriesDtos
 {
     public class FindCategoryDto
     {
@@ -14,6 +15,11 @@ namespace ProjetFilRouge.Dtos
         {
             this.IdCategory = idCategory;
             this.NameCategory = nameCategory;
+        }
+
+        public FindCategoryDto()
+        {
+
         }
     }
 }

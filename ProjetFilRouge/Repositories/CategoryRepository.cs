@@ -12,21 +12,56 @@ namespace ProjetFilRouge.Repositories
     {
         public CategoryRepository(QueryBuilder queryBuilder) : base(queryBuilder) { }
 
+        /// <summary>
+        /// Creation d'une catégorie  
+        /// </summary>
+        /// <param name="obj">objet Category à créer</param>
+        /// <returns>Objet category créé</returns>
         public override Category Create(Category obj)
         {
-            throw new NotImplementedException();
+            obj.IdCategory = CreatedObject(obj, "category", "id_category");
+            return obj;
         }
 
+        /// <summary>
+        /// Supprime la catégorie dont l'identifiant est id 
+        /// </summary>
+        /// <param name="id">identifiant de la catégorie à supprimer</param>
+        /// <returns>1 si la catégorie a bien été supprimé, 0 sinon</returns>
         public override int Delete(int id)
         {
-            throw new NotImplementedException();
+            return DeletedObject("category", id, "id_category");
         }
 
+        /// <summary>
+        /// Selectionne une catégorie dont l'identifiant est id 
+        /// </summary>
+        /// <param name="id">identifiant de la catégorie à selectionner</param>
+        /// <returns>objet Catégorie</returns>
         public override Category Find(int id)
         {
-            throw new NotImplementedException();
+            this.OpenConnection();
+            string request = _queryBuilder
+                .Select()
+                .From("category")
+                .Where("id_category", id, "=")
+                .Get();
+            MySqlCommand cmd = new MySqlCommand(request, connectionSql);
+            MySqlDataReader rdr = cmd.ExecuteReader();
+            Category cat = new Category();
+            while (rdr.Read())
+            {
+                cat.IdCategory = rdr.GetInt32(0);
+                cat.NameCategory = rdr.GetString(1);
+            }
+            this.CloseConnection(rdr);
+            return cat;
         }
 
+        /// <summary>
+        /// Selectionne toutes les catégories
+        /// </summary>
+        /// <returns>Liste de Catégories</returns>
         public override List<Category> FindAll()
         {
             this.OpenConnection();
@@ -40,17 +75,24 @@ namespace ProjetFilRouge.Repositories
             while (rdr.Read())
             {
                 Category cat = new Category();
-                cat.idCategory = rdr.GetInt32(0);
-                cat.nameCategory = rdr.GetString(1);
+                cat.IdCategory = rdr.GetInt32(0);
+                cat.NameCategory = rdr.GetString(1);
                 list.Add(cat);
             }
             this.CloseConnection(rdr);
             return list;
         }
 
+        /// <summary>
+        /// Met à jour la catégorie dont l'identifiant est id 
+        /// </summary>
+        /// <param name="id">l'indentifiant de la catégorie à modifier</param>
+        /// <param name="obj">La nouvelle Catégorie</param>
+        /// <returns>La nouvelle Catégorie</returns>
         public override Category Update(int id, Category obj)
         {
-            throw new NotImplementedException();
+            UpdatedObject(obj, id, "category", "id_category");
+            return Find(id);
         }
     }
 }
