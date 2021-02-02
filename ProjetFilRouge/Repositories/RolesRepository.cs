@@ -23,7 +23,7 @@ namespace ProjetFilRouge.Repositories
         public override int Delete(int id)
         {
             this.OpenConnection();
-            string request = _queryBuilder.Delete("roles", id);
+            string request = _queryBuilder.Delete("roles", id,"id_roles");
             MySqlCommand cmd = new MySqlCommand(request, connectionSql);
             int result = cmd.ExecuteNonQuery();
             connectionSql.Close();
@@ -64,9 +64,10 @@ namespace ProjetFilRouge.Repositories
              .Get();
             MySqlCommand cmd = new MySqlCommand(request, connectionSql);
             MySqlDataReader rdr = cmd.ExecuteReader();
-            Roles role = new Roles();
+            
             while (rdr.Read())
             {
+                Roles role = new Roles();
                 role.idRoles = rdr.GetInt32(0);
                 role.nameRole = rdr.GetString(1); 
                 list.Add(role);
