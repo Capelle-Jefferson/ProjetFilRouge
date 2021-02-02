@@ -170,12 +170,12 @@ namespace ProjetFilRouge.Repositories
             }
             for (int i = 0; i < nombreQuestion; i++)
             {
-                int qIndex = rnd.Next(0, taille - 1);
+                int qIndex = rnd.Next(0, taille);
                 listQuestionQuizz.Add(listQuestion[qIndex]);
                 listQuestion.RemoveAt(qIndex);
                 taille--;
             }
-            return listQuestion;
+            return listQuestionQuizz;
         }
     }
 }

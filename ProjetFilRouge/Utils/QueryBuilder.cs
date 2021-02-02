@@ -88,7 +88,7 @@ namespace ProjetFilRouge.Utils
 
         internal QueryBuilder And(string key, dynamic value, string type = "=")
         {
-            request.Append($"AND {key} {type} {value}");
+            request.Append($" AND {key} {type} {value}");
             return this;
         }
 

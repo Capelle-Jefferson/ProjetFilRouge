@@ -49,6 +49,11 @@ namespace ProjetFilRouge.Services
             return questionDto;
         }
 
+        internal List<Question> GetQuestionQuizz(int idLevels,int idCategory,int nombreQuestion)
+        {
+            return questionsRepository.GenererQuestionQuizz(idLevels, idCategory, nombreQuestion);
+        }
+
         /// <summary>
         /// Supprime la question correspondant à l'id donné
         /// </summary>
