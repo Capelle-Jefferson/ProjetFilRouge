@@ -41,7 +41,7 @@ namespace ProjetFilRouge.Services
         /// <returns>un dto pour l'utilisateur afin de visualiser ce qu'il a inséré</returns>
         internal FindRolesDto PostRole(CreatedRolesDto obj)
         {
-            Roles roleModel = transformsDtoToModel(obj);
+            Roles roleModel = TransformsDtoToModel(obj);
             Roles roleCreated = rolesRepository.Create(roleModel);
             return TransformsModelToDTO(roleCreated);
         }
@@ -64,7 +64,7 @@ namespace ProjetFilRouge.Services
         /// <returns>le dto de la donnée modifiée </returns>
         internal FindRolesDto PutRole(int id, CreatedRolesDto obj)
         {
-            Roles rolesModels = transformsDtoToModel(obj);
+            Roles rolesModels = TransformsDtoToModel(obj);
             Roles roleUpdate = rolesRepository.Update(id, rolesModels);
             return TransformsModelToDTO(roleUpdate);
         }
@@ -77,6 +77,10 @@ namespace ProjetFilRouge.Services
         internal FindRolesDto GetRoles(int id)
         {
             Roles role = rolesRepository.Find(id);
+            if (role.idRoles == null)
+            {
+                throw new KeyNotFoundException();
+            }
             FindRolesDto roleDto = TransformsModelToDTO(role);
             return roleDto;
         }
@@ -95,7 +99,7 @@ namespace ProjetFilRouge.Services
         /// </summary>
         /// <param name="obj"></param>
         /// <returns>un role DTO pour l'utilisateur</returns>
-        private Roles transformsDtoToModel(CreatedRolesDto obj)
+        private Roles TransformsDtoToModel(CreatedRolesDto obj)
         {
             return new Roles(null, obj.nameRole);
         }
