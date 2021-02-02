@@ -23,7 +23,6 @@ namespace ProjetFilRouge.Repositories
         /// <param name="id"> id de référence en bdd</param>
         /// <returns>Renvoi un objet</returns>
         public abstract T Find(int id);
-
         /**
          * Permet de récupérer une liste d'objet
          */
