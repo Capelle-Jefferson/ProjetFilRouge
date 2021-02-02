@@ -5,6 +5,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HttpExceptions.Exceptions;
+using System.Net.Http;
+using System.Net;
+using System.Web.Http;
 
 namespace ProjetFilRouge.Services
 {
@@ -79,7 +83,7 @@ namespace ProjetFilRouge.Services
             Roles role = rolesRepository.Find(id);
             if (role.idRoles == null)
             {
-                throw new KeyNotFoundException();
+                throw new HttpResponseException(HttpStatusCode.NotFound);
             }
             FindRolesDto roleDto = TransformsModelToDTO(role);
             return roleDto;

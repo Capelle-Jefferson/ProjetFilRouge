@@ -30,13 +30,7 @@ namespace ProjetFilRouge.Controllers
         [HttpGet("{id}")]
         public Dtos.RolesDtos.FindRolesDto Get(int id)
         {
-            try
-            { return rolesServices.GetRoles(id);
-            }
-            catch (KeyNotFoundException)
-            {
-               
-            }
+            return rolesServices.GetRoles(id);
         }
 
         // POST api/<RolesController>
