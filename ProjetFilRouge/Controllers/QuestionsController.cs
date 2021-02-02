@@ -24,9 +24,16 @@ namespace ProjetFilRouge.Controllers
 
         // GET api/<QuestionsController>/5
         [HttpGet("{id}")]
-        public Dtos.QuestionsDtos.FindQuestionsDto Get(int id)
+        public IActionResult Get(int id)
         {
-            return questionService.GetQuestions(id);
+            try
+            {
+                return Ok(questionService.GetQuestions(id));
+            }
+            catch
+            {
+                return NotFound();
+            }
         }
 
         // POST api/<QuestionsController>
