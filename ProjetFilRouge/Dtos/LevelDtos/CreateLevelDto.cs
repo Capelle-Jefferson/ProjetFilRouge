@@ -3,18 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ProjetFilRouge.Models
+namespace ProjetFilRouge.Dtos.LevelDtos
 {
-    public class Level
+    public class CreateLevelDto
     {
-        public int? IdLevel { get; set; }
         public string NameLevel { get; set; }
-        public Level(int? idLevel,string nameLevel)
+
+        public CreateLevelDto(string nameLevel)
         {
-            this.IdLevel = idLevel;
             this.NameLevel = nameLevel;
         }
 
-        public Level() { }
+        public CreateLevelDto() { }
     }
 }

@@ -7,7 +7,7 @@ using System.Text;
 
 namespace ProjetFilRouge.Repositories
 {
-    public abstract class AbstractRepository<T>    
+    public abstract class AbstractRepository<T>
     {
         public MySqlConnection connectionSql = ConnectionSql.getConnection();
 
@@ -23,7 +23,6 @@ namespace ProjetFilRouge.Repositories
         /// <param name="id"> id de référence en bdd</param>
         /// <returns>Renvoi un objet</returns>
         public abstract T Find(int id);
-        
         /**
          * Permet de récupérer une liste d'objet
          */
@@ -42,17 +41,17 @@ namespace ProjetFilRouge.Repositories
         */
         public abstract int Delete(int id);
 
-        public void openConnection ()
+        public void openConnection()
         {
             Console.WriteLine("Connecting to MySQL...");
-            connectionSql.Open();       
+            connectionSql.Open();
         }
-        
-        public void closeConnection (MySqlDataReader reader)
+
+        public void closeConnection(MySqlDataReader reader)
         {
             Console.WriteLine("Close MySQL...");
             reader.Close();
-            connectionSql.Close();       
+            connectionSql.Close();
         }
         public Dictionary<string, dynamic> ObjectToDictionary(T obj, string idName)
         {
@@ -87,9 +86,9 @@ namespace ProjetFilRouge.Repositories
             int n = name.Length;
             StringBuilder snakeName = new StringBuilder();
             snakeName.Append(name[0]);
-            for(int i = 1; i<n; i++)
+            for (int i = 1; i < n; i++)
             {
-                if(Char.IsUpper(name[i]))
+                if (Char.IsUpper(name[i]))
                 {
                     snakeName.Append("_");
                 }
