@@ -18,6 +18,10 @@ namespace ProjetFilRouge.Services
             categoryRepository = new CategoryRepository(new QueryBuilder());
         }
 
+        /// <summary>
+        /// Récupération de toutes les catégories
+        /// </summary>
+        /// <returns>List<Category></returns>
         public List<FindCategoryDto> GetCategories()
         {
             List<Category> categories = categoryRepository.FindAll();
@@ -29,12 +33,22 @@ namespace ProjetFilRouge.Services
             return cetegoriesDto;
         }
 
+        /// <summary>
+        /// Récupération de la catégorie dont l'identifiant est id 
+        /// </summary>
+        /// <param name="id">identifiant de la catégorie recherché</param> 
+        /// <returns>Category</returns>
         public FindCategoryDto GetCategoryById(int id)
         {
             Category cat = categoryRepository.Find(id);
             return TransformModelToDto(cat);
         }
 
+        /// <summary>
+        /// Persister la categorie cat 
+        /// </summary>
+        /// <param name="cat">la catégorie à persister</param>
+        /// <returns>Categorie</returns>
         public FindCategoryDto PostCategory(CreateCategoryDto cat)
         {
             Category categoryModel = TransformDtoToModel(cat);
@@ -42,11 +56,22 @@ namespace ProjetFilRouge.Services
             return TransformModelToDto(categoryCreated);
         }
 
+        /// <summary>
+        /// Supprimer la catégorie dont l'identifiant est id
+        /// </summary>
+        /// <param name="id">identifiant de la categorie à supprimer</param>
+        /// <returns>1 si la catégorie à bien était supprimé, 0 sinon</returns>
         public int Delete(int id)
         {
             return this.categoryRepository.Delete(id);
         }
 
+        /// <summary>
+        /// Modifier la catégorie dont l'identifiant est id
+        /// </summary>
+        /// <param name="id">identifiant</param>
+        /// <param name="cat">la nouvelle catégorie</param>
+        /// <returns>Categorie</returns>
         public FindCategoryDto PutCategory(int id, CreateCategoryDto cat)
         {
             Category categoryModel = TransformDtoToModel(cat);
@@ -54,11 +79,21 @@ namespace ProjetFilRouge.Services
             return TransformModelToDto(categoryUpdated);
         }
 
+        /// <summary>
+        /// Transforme un createdCategorie DTO en model 
+        /// </summary>
+        /// <param name="cat">le createCategoryDto</param>
+        /// <returns>Categorie</returns>
         private Category TransformDtoToModel(CreateCategoryDto cat)
         {
             return new Category(null, cat.NameCategory);
         }
 
+        /// <summary>
+        /// Transforme une Catgorie en Find DTO
+        /// </summary>
+        /// <param name="cat">La catégorie</param>
+        /// <returns>FindCategoryDto</returns>
         private FindCategoryDto TransformModelToDto(Category cat)
         {
             return new FindCategoryDto(cat.NameCategory, cat.IdCategory);
