@@ -1,4 +1,4 @@
-﻿namespace ProjetTest.Models
+﻿namespace ProjetFilRouge.Models
 {
     public class QuizzQuestion
     {
