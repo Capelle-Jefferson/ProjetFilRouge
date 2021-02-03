@@ -26,7 +26,7 @@ namespace ProjetFilRouge.Repositories
 
         public override Answer Find(int id)
         {
-            this.openConnection();
+            this.OpenConnection();
             string request = _queryBuilder
                 .Select()
                 .From("answer")
@@ -42,23 +42,28 @@ namespace ProjetFilRouge.Repositories
                 ans.Explication = rdr.GetString(2);
                 ans.TextAnswer = rdr.GetString(3);
             }
-            this.closeConnection(rdr);
+            this.CloseConnection(rdr);
             return ans;
         }
 
         private TypeAnswer ConvertTypeAnswer(string v)
         {
-            return v switch
+            switch (v)
             {
-                "QCM" => TypeAnswer.QCM,
-                "QCM_multiple" => TypeAnswer.QCM_multiple,
-                _ => TypeAnswer.Text,
-            };
+                case "QCM":
+                    return TypeAnswer.QCM;
+                case "QCM_Multiple":
+                    return TypeAnswer.QCM_multiple;
+                case "Text":
+                    return TypeAnswer.Text;
+                default:
+                    return TypeAnswer.Text;
+            }
         }
 
         public override List<Answer> FindAll()
         {
-            this.openConnection();
+            this.OpenConnection();
             string request = _queryBuilder
                 .Select()
                 .From("answer")
@@ -68,16 +73,21 @@ namespace ProjetFilRouge.Repositories
             List<Answer> list = new List<Answer>();
             while (rdr.Read())
             {
-                Answer ans = new Answer
+                Answer ans = new Answer();
+                ans.IdAnswer = rdr.GetInt32(0);
+                ans.TypeAnswer = ConvertTypeAnswer(rdr.GetString(1));
+                ans.Explication = rdr.GetString(2);
+                if (rdr.IsDBNull(3))
                 {
-                    IdAnswer = rdr.GetInt32(0),
-                    TypeAnswer = ConvertTypeAnswer(rdr.GetString(1)),
-                    Explication = rdr.GetString(2),
-                    TextAnswer = rdr.GetString(3)
-                };
+                    ans.TextAnswer = null;
+                }else
+                {
+                    ans.TextAnswer = rdr.GetString(3);
+                }
+                
                 list.Add(ans);
             }    
-            this.closeConnection(rdr);
+            this.CloseConnection(rdr);
             return list;
         }
 
