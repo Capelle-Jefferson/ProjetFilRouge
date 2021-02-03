@@ -4,6 +4,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Threading.Tasks;
 

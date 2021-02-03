@@ -43,21 +43,11 @@ namespace ProjetFilRouge.Controllers
         }
 
         // POST api/<QuizzesController>
-        [HttpPost]
-        public void Post([FromBody] string value)
+        [HttpGet("{nbreQuestion}/{idLevel}/{idCategory}")]
+        public FindQuizzDto Get(int nbreQuestion, int idLevel, int idCategory)
         {
+            return this.quizzesServices.GenerateQuizz(nbreQuestion, idLevel, idCategory);
         }
 
-        // PUT api/<QuizzesController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<QuizzesController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }

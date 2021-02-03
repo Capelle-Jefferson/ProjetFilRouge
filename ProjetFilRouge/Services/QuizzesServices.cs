@@ -1,10 +1,13 @@
-﻿using ProjetFilRouge.Models;
+﻿using Newtonsoft.Json;
+using ProjetFilRouge.Models;
 using ProjetFilRouge.Repositories;
 using ProjetFilRouge.Utils;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Configuration;
 
 namespace ProjetFilRouge.Services
 {
@@ -32,6 +35,20 @@ namespace ProjetFilRouge.Services
             Quizz quizz = quizzRepository.Find(id);
             return TransformModelToDto(quizz);
         }
+        public FindQuizzDto GenerateQuizz(int nbreQuestion, int idLevel, int idCategory)
+        {
+            string key = TransformeIdLevelToString(idLevel);
+            double nbreQuestionJunior = Math.Round(nbreQuestion * Double.Parse(ConfigurationManager.AppSettings.Get(key + "_junior")));
+            double nbreQuestionConfirme = Math.Round(nbreQuestion * Double.Parse(ConfigurationManager.AppSettings.Get(key + "_confirme")));
+            double nbreQuestionExpert = Math.Round(nbreQuestion * Double.Parse(ConfigurationManager.AppSettings.Get(key + "_expert")));
+
+            QuestionsRepository repoQuestion = new QuestionsRepository(new QueryBuilder());
+            
+
+            throw new NotImplementedException();
+        }
+
+
 
         private FindQuizzDto TransformModelToDto(Quizz quizz)
         {
@@ -47,5 +64,12 @@ namespace ProjetFilRouge.Services
                 quizz.idCandidate
                 );
         }
+
+        public string TransformeIdLevelToString(int id)
+        {
+            LevelRepository repo = new LevelRepository(new QueryBuilder());
+            return repo.Find(id).NameLevel;
+        }
+
     }
 }
