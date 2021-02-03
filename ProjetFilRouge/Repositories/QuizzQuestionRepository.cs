@@ -29,12 +29,52 @@ namespace ProjetFilRouge.Repositories
 
         public override QuizzQuestion Find(int id)
         {
-            throw new NotImplementedException();
+            this.OpenConnection();
+            string request = _queryBuilder
+                .Select()
+                .From("quizz_question")
+                .Where("id_quizz", id, "=")
+                .Get();
+
+            MySqlCommand cmd = new MySqlCommand(request, connectionSql);
+            MySqlDataReader rdr = cmd.ExecuteReader();
+            QuizzQuestion quizzQ = new QuizzQuestion();
+            while (rdr.Read())
+            {
+                quizzQ.IdQuizz = rdr.GetInt32(0);
+                quizzQ.IdQuestion = rdr.GetInt32(1);
+                quizzQ.Comment = rdr.GetString(2);
+                quizzQ.IdAnswerCandidate = rdr.GetInt32(3);
+            }
+            rdr.Close();
+            return quizzQ;
         }
 
         public override List<QuizzQuestion> FindAll()
         {
-            throw new NotImplementedException();
+            this.OpenConnection();
+
+            List<QuizzQuestion> listQuizzQ = new List<QuizzQuestion>();
+
+            string request = _queryBuilder   // Pour construire la requête sql
+             .Select()
+             .From("quizz_question")
+             .Get();
+            MySqlCommand cmd = new MySqlCommand(request, connectionSql);
+            MySqlDataReader rdr = cmd.ExecuteReader();
+            QuizzQuestion quizzQ = new QuizzQuestion();
+            while (rdr.Read())
+            {
+                quizzQ.IdQuizz = rdr.GetInt32(0);
+                quizzQ.IdQuestion = rdr.GetInt32(1);
+                quizzQ.Comment = rdr.GetString(2);
+                quizzQ.IdAnswerCandidate = rdr.GetInt32(3);
+                
+                listQuizzQ.Add(quizzQ);
+            }
+
+            this.CloseConnection(rdr);
+            return listQuizzQ;
         }
 
         public override QuizzQuestion Update(int id, QuizzQuestion obj)

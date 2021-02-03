@@ -2,6 +2,10 @@
 {
     public class QuizzQuestion
     {
+        public QuizzQuestion()
+        {
+        }
+
         public QuizzQuestion(int idQuizz, int idQuestion, string comment, int? idAnswerCandidate = null)
         {
             IdQuizz = idQuizz;

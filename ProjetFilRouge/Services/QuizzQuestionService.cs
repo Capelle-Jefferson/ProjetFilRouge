@@ -30,11 +30,6 @@ namespace ProjetFilRouge.Services
             return listQuestionDto;
         }
 
-        private FindQuizzQDto TransformsModelToDTO(QuizzQuestion quizzQ)
-        {
-            return new FindQuizzQDto((int)quizzQ.IdQuizz, (int)quizzQ.IdQuestion, quizzQ.Comment, quizzQ.IdAnswerCandidate);
-        }
-
         internal FindQuizzQDto GetQuizzQ(int idQuizz)
         {
             QuizzQuestion quizzQ = quizzquestionsRepository.Find(idQuizz);
@@ -56,6 +51,11 @@ namespace ProjetFilRouge.Services
         private QuizzQuestion transformsDtoToModel(CreateQuizzQDto obj)
         {
             return new QuizzQuestion((int)obj.IdQuizz, (int)obj.IdQuestion, obj.Comment, obj.IdAnswerCandidate);
+        }
+
+        private FindQuizzQDto TransformsModelToDTO(QuizzQuestion quizzQ)
+        {
+            return new FindQuizzQDto((int)quizzQ.IdQuizz, (int)quizzQ.IdQuestion, quizzQ.Comment, quizzQ.IdAnswerCandidate);
         }
     }
 }
