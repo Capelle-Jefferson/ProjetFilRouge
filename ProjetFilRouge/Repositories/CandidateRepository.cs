@@ -104,7 +104,17 @@ namespace ProjetFilRouge.Repositories
 
         public override Candidate Update(int id, Candidate obj)
         {
-            throw new NotImplementedException();
+            this.OpenConnection();
+            Dictionary<string, dynamic> candidateDictionnary = this.ObjectToDictionary(obj, "id_candidate");
+            string request = _queryBuilder
+              .Update("candidate")
+              .Set(candidateDictionnary)
+              .Where("id_candidate", id).Get();
+            MySqlCommand cmd = new MySqlCommand(request, connectionSql);
+            cmd.ExecuteNonQuery();
+            obj.idCandidate = Convert.ToInt32(cmd.LastInsertedId);
+            connectionSql.Close();
+            return obj;
         }
     }
 }

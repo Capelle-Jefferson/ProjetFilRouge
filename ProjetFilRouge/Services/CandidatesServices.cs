@@ -55,6 +55,44 @@ namespace ProjetFilRouge.Services
             return TransformModelToDto(candidatCreated);
         }
 
+        internal FindCandidateDto PutCandidate(int id, CreateCandidateDto updatecandidate)
+        {
+            Candidate candidateModel = TransformDtoToModel(updatecandidate);
+            Candidate candidateUpdated = this.candidateRepository.Update(id, candidateModel);
+            return TransformModelToDto(candidateUpdated);
+
+            //Candidate candidateModel = candidateRepository.Find(id);
+            //candidateModel = checkBeforeUpdate(candidateModel, updatecandidate);
+            //candidateModel = candidateRepository.Update(id, candidateModel);
+            //return TransformModelToDto(candidateModel);
+        }
+
+        //private Candidate checkBeforeUpdate(Candidate candidateModel, CreateCandidateDto updatecandidate)
+        //{
+        //        if (candidateModel.firstname != updatecandidate.firstname)
+        //        {
+        //            candidateModel.firstname = updatecandidate.firstname;
+        //        }
+        //        if (candidateModel.lastname != updatecandidate.lastname)
+        //        {
+        //            candidateModel.lastname = updatecandidate.lastname ;
+        //        }
+        //        if (candidateModel.email !=  updatecandidate.email)
+        //        {
+        //            candidateModel.email = updatecandidate.email;
+        //        }
+        //        if (updatecandidate.idLevel != null && candidateModel.idLevel != updatecandidate.idLevel)
+        //        {
+        //            candidateModel.idLevel = (int)updatecandidate.idLevel;
+        //        }
+        //        if (updatecandidate.idUser!= null && candidateModel.idUser != updatecandidate.idUser)
+        //        {
+        //            candidateModel.idUser= (int)updatecandidate.idUser;
+        //        }
+               
+        //        return candidateModel;
+        //    }
+
         internal int DeleteCandidate(int id)
         {
             return candidateRepository.Delete(id);

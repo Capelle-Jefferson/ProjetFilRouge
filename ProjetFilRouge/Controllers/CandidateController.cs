@@ -49,13 +49,14 @@ namespace ProjetFilRouge.Controllers
             return candidatesServices.PostCandidate(cand);
         }
 
-        /*
+
         // PUT api/<CandidateController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public FindCandidateDto Put(int id, [FromBody] CreateCandidateDto updatecandidate)
         {
+            return candidatesServices.PutCandidate(id, updatecandidate);
         }
-        */
+
 
         // DELETE api/<CandidateController>/5
         [HttpDelete("api /[controller]{id}")]
