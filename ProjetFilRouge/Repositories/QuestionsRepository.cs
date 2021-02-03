@@ -83,7 +83,6 @@ namespace ProjetFilRouge.Repositories
 
             MySqlCommand cmd = new MySqlCommand(request, connectionSql);
             MySqlDataReader rdr = cmd.ExecuteReader();
-
             while (rdr.Read())
             {
                 Question question = new Question();
