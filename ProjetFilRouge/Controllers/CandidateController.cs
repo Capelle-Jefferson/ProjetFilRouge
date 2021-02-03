@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace ProjetFilRouge.Controllers
 {
-    [Route("api/[controller]")]
+    
     [ApiController]
     public class CandidateController : ControllerBase
     {
@@ -22,30 +22,28 @@ namespace ProjetFilRouge.Controllers
         }
 
         // GET: api/<CandidateController>
-        [HttpGet]
+        [HttpGet("api/[controller]")]
         public List<FindCandidateDto> Get()
         {
             return this.candidatesServices.GetCandidates();
         }
 
         // GET api/<CandidateController>/5
-        [HttpGet("{id}")]
+        [HttpGet("api /[controller]/{id}")]
         public FindCandidateDto Get(int id)
         {
             return this.candidatesServices.GetCandidateById(id);
         }
 
-        /*
         // GET api/<CandidateController>/5
-        [Route("api/candidatesUser")]
-        [HttpGet("{idUser}")]
+        [HttpGet("api/candidatesUser/{idUser}")]
         public List<FindCandidateDto> GetByIdUser(int idUser)
         {
             return this.candidatesServices.GetCandidateByIdUser(idUser);
         }
-        */
+
         // POST api/<CandidateController>
-        [HttpPost]
+        [HttpPost("api/[controller]")]
         public FindCandidateDto Post([FromBody] CreateCandidateDto cand)
         {
             return candidatesServices.PostCandidate(cand);
@@ -60,7 +58,7 @@ namespace ProjetFilRouge.Controllers
         */
 
         // DELETE api/<CandidateController>/5
-        [HttpDelete("{id}")]
+        [HttpDelete("api /[controller]{id}")]
         public int Delete(int id)
         {
             return candidatesServices.DeleteCandidate(id);
