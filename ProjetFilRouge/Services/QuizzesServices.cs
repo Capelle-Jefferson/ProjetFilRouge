@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Configuration;
+using ProjetFilRouge.Dtos.QuestionsDtos;
 
 namespace ProjetFilRouge.Services
 {
@@ -99,10 +100,12 @@ namespace ProjetFilRouge.Services
             return quizz.idQuizz != null;
         }
 
+        /// A FINIR ERREUR AJOUT LISTE QUESTIONS
         private FindQuizzDto TransformModelToDto(Quizz quizz)
         {
             CategoryRepository repoCat = new CategoryRepository(new QueryBuilder());
             LevelRepository repoLev = new LevelRepository(new QueryBuilder());
+            QuizzQuestionRepository quizzQRepo = new QuizzQuestionRepository(new QueryBuilder());
             return new FindQuizzDto(
                 quizz.idQuizz,
                 quizz.codeQuizz,
@@ -110,14 +113,32 @@ namespace ProjetFilRouge.Services
                 repoCat.Find((int)quizz.idCategory).NameCategory,
                 repoLev.Find((int)quizz.idLevel).NameLevel,
                 quizz.idUser,
-                quizz.idCandidate
+                quizz.idCandidate,
+                ReturnQuestionsQuizz(quizzQRepo.FindAll((int)quizz.idQuizz))
                 );
+        }
+
+        private List<FindQuestionsDto> ReturnQuestionsQuizz(List<QuizzQuestion> questionsQuizz)
+        {
+            QuestionsRepository questionRepo = new QuestionsRepository(new QueryBuilder());
+            List<FindQuestionsDto> questionsDtos = new List<FindQuestionsDto>();
+            foreach(QuizzQuestion quizzQ in questionsQuizz)
+            {
+                Question question = questionRepo.Find((int)quizzQ.IdQuestion);
+                questionsDtos.Add(TransformsModelToDTOQuestion(question));
+            }
+            return questionsDtos;
         }
 
         public string TransformeIdLevelToString(int id)
         {
             LevelRepository repo = new LevelRepository(new QueryBuilder());
             return repo.Find(id).NameLevel;
+        }
+
+        private FindQuestionsDto TransformsModelToDTOQuestion(Question question)
+        {
+            return new FindQuestionsDto(question.IdQuestion, question.Intitule, question.IdCategory, question.IdLevel, question.IdAnswer);
         }
     }
 }

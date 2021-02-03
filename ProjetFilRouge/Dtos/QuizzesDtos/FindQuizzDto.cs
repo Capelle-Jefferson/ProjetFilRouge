@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjetFilRouge.Dtos.QuestionsDtos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,7 +16,9 @@ namespace ProjetFilRouge.Models
         public int? idUser { get; set; }
         public int? idCandidat { get; set; }
 
-        public FindQuizzDto(int? idQuizz, string codeQuizz, DateTime? date, string category, string level, int? idUser, int? idCandidat)
+        public List<FindQuestionsDto> Questions { get; set; }
+
+        public FindQuizzDto(int? idQuizz, string codeQuizz, DateTime? date, string category, string level, int? idUser, int? idCandidat, List<FindQuestionsDto> Questions)
         {
             this.idQuizz = idQuizz;
             this.codeQuizz = codeQuizz;
@@ -24,6 +27,7 @@ namespace ProjetFilRouge.Models
             this.level = level;
             this.idUser = idUser;
             this.idCandidat = idCandidat;
+            this.Questions = Questions;
         }
 
         public FindQuizzDto() { }
