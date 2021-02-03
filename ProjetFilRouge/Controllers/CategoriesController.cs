@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using HttpExceptions.Exceptions;
+using Microsoft.AspNetCore.Mvc;
 using ProjetFilRouge.Dtos;
 using ProjetFilRouge.Dtos.CategoriesDtos;
 using ProjetFilRouge.Services;
@@ -30,9 +31,16 @@ namespace ProjetFilRouge.Controllers
 
         // GET api/<CategoriesController>/5
         [HttpGet("{id}")]
-        public FindCategoryDto Get(int id)
+        public IActionResult Get(int id)
         {
-            return categoriesServices.GetCategoryById(id);
+            try
+            {
+                return Ok(categoriesServices.GetCategoryById(id));
+            }
+            catch(NotFoundException)
+            {
+                return NotFound();
+            }
         }
 
         // POST api/<CategoriesController>

@@ -4,7 +4,9 @@ using ProjetTest.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
+using System.Web.Http;
 
 namespace ProjetFilRouge.Services
 {
@@ -39,8 +41,17 @@ namespace ProjetFilRouge.Services
         internal FindQuestionsDto GetQuestions(int id)
         {
             Question question = questionsRepository.Find(id);
+            if (question.IdQuestion == null)
+            {
+                throw new HttpResponseException(HttpStatusCode.NotFound);
+            }
             FindQuestionsDto questionDto = TransformsModelToDTO(question);
             return questionDto;
+        }
+
+        internal List<Question> GetQuestionQuizz(int idLevels,int idCategory,int nombreQuestion)
+        {
+            return questionsRepository.GenererQuestionQuizz(idLevels, idCategory, nombreQuestion);
         }
 
         /// <summary>

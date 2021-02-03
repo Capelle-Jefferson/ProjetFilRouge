@@ -72,6 +72,35 @@ namespace ProjetFilRouge.Repositories
             return question;
         }
 
+        public List<Question> Find(int id1, int id2)
+        {
+            this.OpenConnection();
+            List<Question> list = new List<Question>();
+            string request = _queryBuilder
+                .Select()
+                .From("question")
+                .Where("id_level", id1, "=")
+                .And("id_category", id2,"=")
+                .Get();
+
+            MySqlCommand cmd = new MySqlCommand(request, connectionSql);
+            MySqlDataReader rdr = cmd.ExecuteReader();
+            
+            while (rdr.Read())
+            {
+                Question question = new Question();
+                question.IdQuestion = rdr.GetInt32(0);
+                question.Intitule = rdr.GetString(1);
+                question.IdCategory = rdr.GetInt32(2);
+                question.IdLevel = rdr.GetInt32(3);
+                question.IdAnswer = rdr.GetInt32(4);
+
+                list.Add(question);
+            }
+            rdr.Close();
+            return list;
+        }
+
         /// <summary>
         /// Creer la requête sql pour selectionner toute la table
         /// </summary>
@@ -127,6 +156,26 @@ namespace ProjetFilRouge.Repositories
             connectionSql.Close();
             obj.IdQuestion = id;
             return obj;
+        }
+
+        public List<Question> GenererQuestionQuizz(int idLevel ,int idCategory,int nombreQuestion)
+        {
+            Random rnd = new Random();
+            List<Question> listQuestion=Find(idLevel, idCategory);
+            int taille = listQuestion.Count;
+            List<Question> listQuestionQuizz = new List<Question>();
+            if (taille < nombreQuestion)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+            for (int i = 0; i < nombreQuestion; i++)
+            {
+                int qIndex = rnd.Next(0, taille);
+                listQuestionQuizz.Add(listQuestion[qIndex]);
+                listQuestion.RemoveAt(qIndex);
+                taille--;
+            }
+            return listQuestionQuizz;
         }
     }
 }

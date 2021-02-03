@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProjetFilRouge.Services;
+using ProjetTest.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,9 +25,23 @@ namespace ProjetFilRouge.Controllers
 
         // GET api/<QuestionsController>/5
         [HttpGet("{id}")]
-        public Dtos.QuestionsDtos.FindQuestionsDto Get(int id)
+        public IActionResult Get(int id)
         {
-            return questionService.GetQuestions(id);
+            try
+            {
+                return Ok(questionService.GetQuestions(id));
+            }
+            catch
+            {
+                return NotFound();
+            }
+        }
+
+        [HttpGet("{idLevel}/{idCategory}/{nombreQuestion}")]
+
+        public List<Question> GetQuestions(int idLevel,int idCategory,int nombreQuestion)
+        {
+            return questionService.GetQuestionQuizz(idLevel, idCategory, nombreQuestion);
         }
 
         // POST api/<QuestionsController>

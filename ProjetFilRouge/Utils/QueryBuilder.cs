@@ -86,6 +86,13 @@ namespace ProjetFilRouge.Utils
             return this;
         }
 
+        internal QueryBuilder And(string key, dynamic value, string type = "=")
+        {
+            request.Append($" AND {key} {type} {value}");
+            return this;
+        }
+
+
         internal QueryBuilder From(string table)
         {
             request.Append($" FROM {table} ");
