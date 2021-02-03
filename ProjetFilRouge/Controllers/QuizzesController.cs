@@ -43,10 +43,10 @@ namespace ProjetFilRouge.Controllers
         }
 
         // POST api/<QuizzesController>
-        [HttpGet("{nbreQuestion}/{idLevel}/{idCategory}")]
-        public FindQuizzDto Get(int nbreQuestion, int idLevel, int idCategory)
+        [HttpPost("{nbreQuestion}")]
+        public FindQuizzDto Get(CreateQuizzDto createQuizzDto, int nbreQuestion)
         {
-            return this.quizzesServices.GenerateQuizz(nbreQuestion, idLevel, idCategory);
+            return this.quizzesServices.GenerateQuizz(createQuizzDto, nbreQuestion);
         }
 
     }

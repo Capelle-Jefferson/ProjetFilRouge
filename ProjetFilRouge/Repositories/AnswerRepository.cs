@@ -26,7 +26,7 @@ namespace ProjetFilRouge.Repositories
 
         public override Answer Find(int id)
         {
-            this.openConnection();
+            this.OpenConnection();
             string request = _queryBuilder
                 .Select()
                 .From("answer")
@@ -42,7 +42,7 @@ namespace ProjetFilRouge.Repositories
                 ans.Explication = rdr.GetString(2);
                 ans.TextAnswer = rdr.GetString(3);
             }
-            this.closeConnection(rdr);
+            this.CloseConnection(rdr);
             return ans;
         }
 
@@ -58,7 +58,7 @@ namespace ProjetFilRouge.Repositories
 
         public override List<Answer> FindAll()
         {
-            this.openConnection();
+            this.OpenConnection();
             string request = _queryBuilder
                 .Select()
                 .From("answer")
@@ -77,7 +77,7 @@ namespace ProjetFilRouge.Repositories
                 };
                 list.Add(ans);
             }    
-            this.closeConnection(rdr);
+            this.CloseConnection(rdr);
             return list;
         }
 

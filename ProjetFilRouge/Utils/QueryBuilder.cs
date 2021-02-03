@@ -83,7 +83,14 @@ namespace ProjetFilRouge.Utils
 
         internal QueryBuilder Where(string key, dynamic value, string type = "=")
         {
-            request.Append($"WHERE {key} {type} {value}");
+            if(value is string)
+            {
+                request.Append($"WHERE {key} {type} '{value}'");
+            }
+            else
+            {
+                request.Append($"WHERE {key} {type} {value}");
+            }
             return this;
         }
 
