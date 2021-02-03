@@ -8,11 +8,17 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Configuration;
+using ProjetTest.Models;
 
 namespace ProjetFilRouge.Services
 {
     public class QuizzesServices
     {
+        private const int ID_JUNIOR = 1;
+        private const int ID_CONFIRME = 2;
+        private const int ID_EXPERT = 3;
+
+
         private QuizzRepository quizzRepository;
         public QuizzesServices()
         {
@@ -43,6 +49,10 @@ namespace ProjetFilRouge.Services
             double nbreQuestionExpert = Math.Round(nbreQuestion * Double.Parse(ConfigurationManager.AppSettings.Get(key + "_expert")));
 
             QuestionsRepository repoQuestion = new QuestionsRepository(new QueryBuilder());
+            List<Question> questions = new List<Question>();
+            questions.AddRange(repoQuestion.GenererQuestionQuizz(ID_JUNIOR, idCategory, (int)nbreQuestionJunior));
+            questions.AddRange(repoQuestion.GenererQuestionQuizz(ID_CONFIRME, idCategory, (int)nbreQuestionConfirme));
+            questions.AddRange(repoQuestion.GenererQuestionQuizz(ID_EXPERT, idCategory, (int)nbreQuestionExpert));
             
 
             throw new NotImplementedException();
@@ -70,6 +80,5 @@ namespace ProjetFilRouge.Services
             LevelRepository repo = new LevelRepository(new QueryBuilder());
             return repo.Find(id).NameLevel;
         }
-
     }
 }

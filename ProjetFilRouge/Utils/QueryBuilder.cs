@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -34,7 +35,7 @@ namespace ProjetFilRouge.Utils
             request.Append($"INSERT INTO {table}");
             return this;
         }
-        
+
         internal string Values(Dictionary<string, dynamic> obj)
         {
             request.Append("(");
@@ -85,6 +86,13 @@ namespace ProjetFilRouge.Utils
             request.Append($"WHERE {key} {type} {value}");
             return this;
         }
+
+        internal QueryBuilder And(string key, dynamic value, string type = "=")
+        {
+            request.Append($" AND {key} {type} {value}");
+            return this;
+        }
+
 
         internal QueryBuilder From(string table)
         {
