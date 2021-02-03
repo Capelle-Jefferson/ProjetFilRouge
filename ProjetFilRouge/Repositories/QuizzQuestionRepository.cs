@@ -29,25 +29,7 @@ namespace ProjetFilRouge.Repositories
 
         public override QuizzQuestion Find(int id)
         {
-            this.OpenConnection();
-            string request = _queryBuilder
-                .Select()
-                .From("quizz_question")
-                .Where("id_quizz", id, "=")
-                .Get();
-
-            MySqlCommand cmd = new MySqlCommand(request, connectionSql);
-            MySqlDataReader rdr = cmd.ExecuteReader();
-            QuizzQuestion quizzQ = new QuizzQuestion();
-            while (rdr.Read())
-            {
-                quizzQ.IdQuizz = rdr.GetInt32(0);
-                quizzQ.IdQuestion = rdr.GetInt32(1);
-                quizzQ.Comment = rdr.GetString(2);
-                quizzQ.IdAnswerCandidate = rdr.GetInt32(3);
-            }
-            rdr.Close();
-            return quizzQ;
+            throw new NotImplementedException();
         }
 
         public override List<QuizzQuestion> FindAll()
@@ -62,14 +44,58 @@ namespace ProjetFilRouge.Repositories
              .Get();
             MySqlCommand cmd = new MySqlCommand(request, connectionSql);
             MySqlDataReader rdr = cmd.ExecuteReader();
-            QuizzQuestion quizzQ = new QuizzQuestion();
+            
             while (rdr.Read())
             {
+                QuizzQuestion quizzQ = new QuizzQuestion();
                 quizzQ.IdQuizz = rdr.GetInt32(0);
                 quizzQ.IdQuestion = rdr.GetInt32(1);
                 quizzQ.Comment = rdr.GetString(2);
-                quizzQ.IdAnswerCandidate = rdr.GetInt32(3);
+                if (rdr.IsDBNull(3))
+                {
+                    quizzQ.IdAnswerCandidate = null;
+                }
+                else
+                {
+                    quizzQ.IdAnswerCandidate = rdr.GetInt32(3);
+                }
                 
+                listQuizzQ.Add(quizzQ);
+            }
+
+            this.CloseConnection(rdr);
+            return listQuizzQ;
+        }
+
+        public List<QuizzQuestion> FindAll(int id)
+        {
+            this.OpenConnection();
+
+            List<QuizzQuestion> listQuizzQ = new List<QuizzQuestion>();
+
+            string request = _queryBuilder 
+             .Select()
+             .From("quizz_question")
+             .Where("id_quizz", id,"=")
+             .Get();
+            MySqlCommand cmd = new MySqlCommand(request, connectionSql);
+            MySqlDataReader rdr = cmd.ExecuteReader();
+
+            while (rdr.Read())
+            {
+                QuizzQuestion quizzQ = new QuizzQuestion();
+                quizzQ.IdQuizz = rdr.GetInt32(0);
+                quizzQ.IdQuestion = rdr.GetInt32(1);
+                quizzQ.Comment = rdr.GetString(2);
+                if (rdr.IsDBNull(3))
+                {
+                    quizzQ.IdAnswerCandidate = null;
+                }
+                else
+                {
+                    quizzQ.IdAnswerCandidate = rdr.GetInt32(3);
+                }
+
                 listQuizzQ.Add(quizzQ);
             }
 

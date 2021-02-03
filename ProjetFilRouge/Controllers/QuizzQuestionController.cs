@@ -13,10 +13,8 @@ namespace ProjetFilRouge.Controllers
     [ApiController]
     public class QuizzQuestionController : ControllerBase
     {
-        public class QuizzQuestionsController : ControllerBase
-        {
             QuizzQuestionService quizzquestionService;
-            public QuizzQuestionsController() { this.quizzquestionService = new QuizzQuestionService(); }
+            public QuizzQuestionController() { this.quizzquestionService = new QuizzQuestionService(); }
 
             // GET: api/<QuizzQuestionController>
             [HttpGet]
@@ -26,24 +24,27 @@ namespace ProjetFilRouge.Controllers
             }
 
             // GET api/<QuizzQuestionController>/5
-            [HttpGet("{id}")]
-            public IActionResult Get(int idQuizz)
-            {
-                try
-                {
-                    return Ok(quizzquestionService.GetQuizzQ(idQuizz));
-                }catch
-                {
-                    return NotFound();
-                }
-            }
 
-            // POST api/<QuizzQuestionController>
-            [HttpPost]
+            [HttpGet("{idQuizz}")]
+        public IActionResult Get(int idQuizz)
+        {
+            //try
+            //{
+                return Ok(quizzquestionService.GetQuizzQ(idQuizz));
+            //}
+            //catch
+            //{
+            //    return NotFound();
+            //}
+        }
+
+        // POST api/<QuizzQuestionController>
+
+        [HttpPost]
             public Dtos.QuizzQDTO.FindQuizzQDto Post([FromBody] Dtos.QuizzQDTO.CreateQuizzQDto obj)
             {
                 return quizzquestionService.PostQuizzQ(obj);
             }
         }
     }
-}
+

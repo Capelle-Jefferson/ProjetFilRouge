@@ -21,24 +21,30 @@ namespace ProjetFilRouge.Services
         internal List<FindQuizzQDto> GettAllQuizzQ()
         {
             List<QuizzQuestion> listQuizzQ = quizzquestionsRepository.FindAll();
-            List<FindQuizzQDto> listQuestionDto = new List<FindQuizzQDto>();
+            List<FindQuizzQDto> listQuizzQDto = new List<FindQuizzQDto>();
             foreach (QuizzQuestion quizzQ in listQuizzQ)
             {
                 FindQuizzQDto quizzQDto = TransformsModelToDTO(quizzQ);
-                listQuestionDto.Add(quizzQDto);
+                listQuizzQDto.Add(quizzQDto);
             }
-            return listQuestionDto;
+            return listQuizzQDto;
         }
 
-        internal FindQuizzQDto GetQuizzQ(int idQuizz)
+        internal List<FindQuizzQDto> GetQuizzQ(int idQuizz)
         {
-            QuizzQuestion quizzQ = quizzquestionsRepository.Find(idQuizz);
-            if (quizzQ.IdQuizz == null)
+            List<FindQuizzQDto> listQuizzQDto = new List<FindQuizzQDto>();
+            List<QuizzQuestion> listquizzQ = quizzquestionsRepository.FindAll(idQuizz);
+            
+            if (listquizzQ[0].IdQuizz == null)
             {
                 throw new HttpResponseException(HttpStatusCode.NotFound);
             }
-            FindQuizzQDto quizzQDto = TransformsModelToDTO(quizzQ);
-            return quizzQDto;
+            foreach (QuizzQuestion quizzQ in listquizzQ)
+            {
+                FindQuizzQDto quizzQDto = TransformsModelToDTO(quizzQ);
+                listQuizzQDto.Add(quizzQDto);
+            }
+            return listQuizzQDto;
         }
 
         internal FindQuizzQDto PostQuizzQ(CreateQuizzQDto obj)

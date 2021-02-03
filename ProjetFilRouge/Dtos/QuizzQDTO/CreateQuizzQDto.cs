@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 namespace ProjetFilRouge.Dtos.QuizzQDTO
 {
     public class CreateQuizzQDto
+
     {
+        public CreateQuizzQDto (){}
+
         public CreateQuizzQDto(int idQuizz, int idQuestion, string comment, int? idAnswerCandidate = null)
         {
             IdQuizz = idQuizz;
