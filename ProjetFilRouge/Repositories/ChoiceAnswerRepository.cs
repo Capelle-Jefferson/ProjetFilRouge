@@ -16,7 +16,8 @@ namespace ProjetFilRouge.Repositories
 
         public override ChoiceAnswer Create(ChoiceAnswer obj)
         {
-            throw new NotImplementedException();
+            obj.IdChoiceAnswer = CreatedObject(obj, "choice_answer", "id_choice_answer");
+            return obj;
         }
 
         public override int Delete(int id)

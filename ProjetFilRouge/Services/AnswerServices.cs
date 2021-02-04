@@ -121,9 +121,30 @@ namespace ProjetFilRouge.Services
         /// <returns></returns>
         internal FindAnswerDto PostAnswer(CreateAnswerDto value)
         {
-            Answer levelModel = TransformDtoToModel(value);
-            Answer levelCreated = this.AnswerRepository.Create(levelModel);
-            return TransformModelToDto(levelCreated);
+            // Enregistrement Answer
+            Answer answerModel = TransformDtoToModel(value);
+            Answer answerCreated = this.AnswerRepository.Create(answerModel);
+
+            // Enregistrement des Choices answers si il s'agit d'un QCM
+            if(answerCreated.TypeAnswer != TypeAnswer.Text)
+            {
+                foreach (CreateChoiceAnswerDto choiceDto in  value.ListChoiceAnswer)
+                {
+                    this.ChoiceAnswerRepository.Create(TransformChoiceDtoToModel(choiceDto));
+                }
+            }
+
+            return TransformModelToDto(answerCreated);
+        }
+
+        private ChoiceAnswer TransformChoiceDtoToModel(CreateChoiceAnswerDto choiceDto)
+        {
+            return new ChoiceAnswer(
+                null,
+                choiceDto.TextChoice,
+                choiceDto.IsAnswer,
+                (int)choiceDto.IdAnswer
+            );
         }
 
         /// <summary>
