@@ -17,11 +17,21 @@ namespace ProjetFilRouge.Repositories
             return obj;
         }
 
+        /// <summary>
+        ///     Suppression du quizz dans la bdd
+        /// </summary>
+        /// <param name="id">L'identifiant du quizz à supprimer</param>
+        /// <returns>1 si le quizz à était supprimé, 0 sinon</returns>
         public override int Delete(int id)
         {
-            throw new NotImplementedException();
+            return DeletedObject("quizz", id, "id_quizz");
         }
 
+        /// <summary>
+        ///     Récupération d'un quizz
+        /// </summary>
+        /// <param name="id">identifiant du quizz à récupérer</param>
+        /// <returns>Quizz</returns>
         public override Quizz Find(int id)
         {
             this.OpenConnection();
@@ -48,6 +58,10 @@ namespace ProjetFilRouge.Repositories
             return quizz;
         }
 
+        /// <summary>
+        ///     Récupération de la liste des quizzes
+        /// </summary>
+        /// <returns>List<Quizz></returns>
         public override List<Quizz> FindAll()
         {
             this.OpenConnection();
@@ -80,6 +94,11 @@ namespace ProjetFilRouge.Repositories
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        ///     Récupèration un quizz
+        /// </summary>
+        /// <param name="code">Code du quizz à récupérer</param>
+        /// <returns></returns>
         internal Quizz FindByCode(string code)
         {
             this.OpenConnection();
@@ -96,11 +115,6 @@ namespace ProjetFilRouge.Repositories
             {
                 quizz.idQuizz = rdr.GetInt32(0);
                 quizz.codeQuizz = rdr.GetString(1);
-                quizz.date = rdr.GetDateTime(2);
-                quizz.idCategory = rdr.GetInt32(3);
-                quizz.idLevel = rdr.GetInt32(4);
-                quizz.idUser = rdr.GetInt32(5);
-                quizz.idCandidate = rdr.GetInt32(6);
             }
             this.CloseConnection(rdr);
             return quizz;

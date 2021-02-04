@@ -26,6 +26,10 @@ namespace ProjetFilRouge.Services
             quizzRepository = new QuizzRepository(new QueryBuilder());
         }
 
+        /// <summary>
+        ///     Recupération de la liste des quizzes
+        /// </summary>
+        /// <returns>List<FindQuizzDto></returns>
         public List<FindQuizzDto> GetQuizzes()
         {
             List<Quizz> quizzes = quizzRepository.FindAll();
@@ -37,11 +41,23 @@ namespace ProjetFilRouge.Services
             return quizzesDtos;
         }
 
+        /// <summary>
+        ///     Récupération d'un quizz
+        /// </summary>
+        /// <param name="id">identitfiant du quizz à récupérer</param>
+        /// <returns>FindQuizzDto</returns>
         public FindQuizzDto GetQuizzById(int id)
         {
             Quizz quizz = quizzRepository.Find(id);
             return TransformModelToDto(quizz);
         }
+
+        /// <summary>
+        ///     Génère un quizz
+        /// </summary>
+        /// <param name="createQuizzDto">Objetc quizz à créer</param>
+        /// <param name="nbreQuestion">Nombre de questions composant le quizz</param>
+        /// <returns></returns>
         public FindQuizzDto GenerateQuizz(CreateQuizzDto createQuizzDto, int nbreQuestion)
         {
             // Récupère le nombre de questions par niveau de difficultés
@@ -72,6 +88,11 @@ namespace ProjetFilRouge.Services
             return TransformModelToDto(quizz);
         }
 
+        /// <summary>
+        ///     Remplis la table QuizzQuestion en associant chaque question du quizz
+        /// </summary>
+        /// <param name="questions">Listes des questions du quizz</param>
+        /// <param name="quizz">le quizz</param>
         private void PersisteQuizzQuestion(List<Question> questions, Quizz quizz)
         {
             QuizzQuestionRepository questionQuizzRepo = new QuizzQuestionRepository(new QueryBuilder());
@@ -82,6 +103,11 @@ namespace ProjetFilRouge.Services
             }
         }
 
+        /// <summary>
+        ///     Génère un code aléatoire
+        /// </summary>
+        /// <param name="n">Nombre de caractères à générer</param>
+        /// <returns>code aléatoire</returns>
         public string GenerateCode(int n)
         {
             Random rd = new Random();
@@ -95,12 +121,22 @@ namespace ProjetFilRouge.Services
             return code;
         }
 
+        /// <summary>
+        ///     Vérifie si un quizz ne possède pas déjà ce même code
+        /// </summary>
+        /// <param name="code">code du quizz à vérifier</param>
+        /// <returns>true si le code est déjà utilisé, false sinon</returns>
         public bool IsAlreadyExist(string code)
         {
             Quizz quizz = quizzRepository.FindByCode(code);
             return quizz.idQuizz != null;
         }
 
+        /// <summary>
+        ///     Transforme le model d'un quizz en dto
+        /// </summary>
+        /// <param name="quizz">Quizz à transformer</param>
+        /// <returns>FindQuizzDto</returns>
         private FindQuizzDto TransformModelToDto(Quizz quizz)
         {
             CategoryRepository repoCat = new CategoryRepository(new QueryBuilder());
@@ -118,6 +154,11 @@ namespace ProjetFilRouge.Services
                 );
         }
 
+        /// <summary>
+        ///     Récupérations des questions composant le quizz
+        /// </summary>
+        /// <param name="questionsQuizz">liste de QuizzQuestion</param>
+        /// <returns>List<FindQuizzQuestionsDto></returns>
         private List<FindQuizzQuestionsDto> ReturnQuestionsQuizz(List<QuizzQuestion> questionsQuizz)
         {
             QuestionsRepository questionRepo = new QuestionsRepository(new QueryBuilder());
@@ -130,15 +171,25 @@ namespace ProjetFilRouge.Services
             return questionsDtos;
         }
 
+        /// <summary>
+        ///     Transforme l'id level par son nom
+        /// </summary>
+        /// <param name="id">identifiant de Level</param>
+        /// <returns>son du level</returns>
         public string TransformeIdLevelToString(int id)
         {
             LevelRepository repo = new LevelRepository(new QueryBuilder());
             return repo.Find(id).NameLevel;
         }
 
+        /// <summary>
+        ///     Trasnforme une question en FindQuizzQuestionsDto
+        /// </summary>
+        /// <param name="question">question à transformer</param>
+        /// <param name="idAnswerCandidate">id de la réponse du candidat</param>
+        /// <returns>FindQuizzQuestionsDto</returns>
         private FindQuizzQuestionsDto TransformsModelToDTOQuestion(Question question, int? idAnswerCandidate)
         {
-            LevelRepository lvlRepo = new LevelRepository(new QueryBuilder());
             CategoryRepository catRepo = new CategoryRepository(new QueryBuilder());
             AnswerServices answerServices = new AnswerServices();
             FindAnswerDto answer = answerServices.GetAnswerById((int)question.IdAnswer);
@@ -146,11 +197,11 @@ namespace ProjetFilRouge.Services
             return new FindQuizzQuestionsDto(
                 question.IdQuestion,
                 question.Intitule,
-                lvlRepo.Find((int)question.IdCategory).NameLevel,
+                TransformeIdLevelToString((int)question.IdLevel),
                 catRepo.Find((int)question.IdLevel).NameCategory,
                 answer,
                 candidateAnswer
-            );
+            ) ;
         }
     }
 }
