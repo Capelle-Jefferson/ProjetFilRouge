@@ -138,30 +138,19 @@ namespace ProjetFilRouge.Services
 
         private FindQuizzQuestionsDto TransformsModelToDTOQuestion(Question question, int? idAnswerCandidate)
         {
-            AnswerRepository answerRepo = new AnswerRepository(new QueryBuilder());
-            Answer answer = answerRepo.Find((int)question.IdAnswer);
-            Answer candidateAnswer = idAnswerCandidate == null ? null : answerRepo.Find((int)idAnswerCandidate);
-
+            LevelRepository lvlRepo = new LevelRepository(new QueryBuilder());
+            CategoryRepository catRepo = new CategoryRepository(new QueryBuilder());
+            AnswerServices answerServices = new AnswerServices();
+            FindAnswerDto answer = answerServices.GetAnswerById((int)question.IdAnswer);
+            FindAnswerDto candidateAnswer = idAnswerCandidate == null ? null : answerServices.GetAnswerById((int)idAnswerCandidate);
             return new FindQuizzQuestionsDto(
                 question.IdQuestion,
                 question.Intitule,
-                question.IdCategory,
-                question.IdLevel,
-                question.IdAnswer,
-                idAnswerCandidate,
-                TransformModelToAnswerDto(answer),
-                candidateAnswer == null ? null : TransformModelToAnswerDto(candidateAnswer)
+                lvlRepo.Find((int)question.IdCategory).NameLevel,
+                catRepo.Find((int)question.IdLevel).NameCategory,
+                answer,
+                candidateAnswer
             );
-        }
-
-        /// <summary>
-        ///    Permet de transformer un Model en DTO
-        /// </summary>
-        /// <param name="Model answer"></param>
-        /// <returns></returns>
-        private FindAnswerDto TransformModelToAnswerDto(Answer ans)
-        {
-            return new FindAnswerDto(ans.IdAnswer, ans.TypeAnswer, ans.Explication, ans.TextAnswer);
         }
     }
 }

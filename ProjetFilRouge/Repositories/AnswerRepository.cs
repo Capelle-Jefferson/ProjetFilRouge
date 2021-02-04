@@ -40,7 +40,8 @@ namespace ProjetFilRouge.Repositories
                 ans.IdAnswer = rdr.GetInt32(0);
                 ans.TypeAnswer = ConvertTypeAnswer(rdr.GetString(1));
                 ans.Explication = rdr.GetString(2);
-                ans.TextAnswer = rdr.GetString(3);
+                if(!rdr.IsDBNull(3))
+                    ans.TextAnswer = rdr.GetString(3);
             }
             this.CloseConnection(rdr);
             return ans;
