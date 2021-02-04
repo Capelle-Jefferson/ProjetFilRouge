@@ -16,7 +16,7 @@ namespace ProjetFilRouge.Dtos.CandidatesDtos
         public int IdRoles { get; set; }
         public string Role { get; set; }
 
-        public FindUserDto(int? idUser, string username, string firstname, string lastname, string email, int idRoles)
+        public FindUserDto(int? idUser, string username, string firstname, string lastname, string email, int idRoles, string role)
         {
             IdUser = idUser;
             UserName = username;
@@ -24,6 +24,7 @@ namespace ProjetFilRouge.Dtos.CandidatesDtos
             LastName = lastname;
             Email = email;
             IdRoles = idRoles;
+            Role = role;
         }
 
         public FindUserDto()

@@ -87,10 +87,12 @@ namespace ProjetFilRouge.Services
         private FindUserDto TransformModelToDto(User user)
         {
             int idr = 0;
+            string r = "";
             RolesRepository repo = new RolesRepository(new QueryBuilder());
             if (user.IdRoles != null)
             {
                 idr = (int)repo.Find((int)user.IdRoles).idRoles;
+                r = ConvertIdRoleToRole(idr);
             }
             return new FindUserDto(
                     user.IdUser,
@@ -98,7 +100,15 @@ namespace ProjetFilRouge.Services
                     user.FirstName,
                     user.LastName,
                     user.Email,
-                    idr);
+                    idr,
+                    r);
+        }
+
+        private string ConvertIdRoleToRole(int idr)
+        {
+            RolesRepository repo = new RolesRepository(new QueryBuilder());            
+            Roles role = repo.Find(idr);
+            return role.nameRole.ToUpper();
         }
     }
 }
