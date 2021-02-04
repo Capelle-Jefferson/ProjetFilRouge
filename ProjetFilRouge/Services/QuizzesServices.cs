@@ -9,6 +9,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Configuration;
 using ProjetFilRouge.Dtos.QuestionsDtos;
+using ProjetFilRouge.Dtos.AnswerDtos;
 
 namespace ProjetFilRouge.Services
 {
@@ -137,7 +138,30 @@ namespace ProjetFilRouge.Services
 
         private FindQuizzQuestionsDto TransformsModelToDTOQuestion(Question question, int? idAnswerCandidate)
         {
-            return new FindQuizzQuestionsDto(question.IdQuestion, question.Intitule, question.IdCategory, question.IdLevel, question.IdAnswer, idAnswerCandidate);
+            AnswerRepository answerRepo = new AnswerRepository(new QueryBuilder());
+            Answer answer = answerRepo.Find((int)question.IdAnswer);
+            Answer candidateAnswer = idAnswerCandidate == null ? null : answerRepo.Find((int)idAnswerCandidate);
+
+            return new FindQuizzQuestionsDto(
+                question.IdQuestion,
+                question.Intitule,
+                question.IdCategory,
+                question.IdLevel,
+                question.IdAnswer,
+                idAnswerCandidate,
+                TransformModelToAnswerDto(answer),
+                candidateAnswer == null ? null : TransformModelToAnswerDto(candidateAnswer)
+            );
+        }
+
+        /// <summary>
+        ///    Permet de transformer un Model en DTO
+        /// </summary>
+        /// <param name="Model answer"></param>
+        /// <returns></returns>
+        private FindAnswerDto TransformModelToAnswerDto(Answer ans)
+        {
+            return new FindAnswerDto(ans.IdAnswer, ans.TypeAnswer, ans.Explication, ans.TextAnswer);
         }
     }
 }
