@@ -6,15 +6,13 @@
         {
         }
 
-        public CreateChoiceAnswerDto(string textChoice, bool isAnswer, int idAnswer)
+        public CreateChoiceAnswerDto(string textChoice, bool isAnswer)
         {
-            TextChoice = textChoice;
+            TextAnswer = textChoice;
             IsAnswer = isAnswer;
-            IdAnswer = idAnswer;
         }
 
-        public string TextChoice { get; set; }
+        public string TextAnswer { get; set; }
         public bool IsAnswer { get; set; }
-        public int? IdAnswer { get; set; }
     }
 }

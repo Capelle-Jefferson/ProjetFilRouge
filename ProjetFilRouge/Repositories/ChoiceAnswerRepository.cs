@@ -41,7 +41,8 @@ namespace ProjetFilRouge.Repositories
             {
                 ChoiceAnswer choice = new ChoiceAnswer();
                 choice.IdChoiceAnswer = rdr.GetInt32(0);
-                choice.TextChoice = rdr.GetString(1);
+                if(!rdr.IsDBNull(1))
+                    choice.TextChoice = rdr.GetString(1);
                 choice.IsAnswer = rdr.GetBoolean(2);
                 choice.IdAnswer = rdr.GetInt32(3);
                 listChoices.Add(choice);

@@ -130,21 +130,21 @@ namespace ProjetFilRouge.Services
             {
                 foreach (CreateChoiceAnswerDto choiceDto in  value.ListChoiceAnswer)
                 {
-                    this.ChoiceAnswerRepository.Create(TransformChoiceDtoToModel(choiceDto));
+                    this.ChoiceAnswerRepository.Create(TransformChoiceDtoToModel(choiceDto, (int)answerCreated.IdAnswer));
                 }
             }
 
             return TransformModelToDto(answerCreated);
         }
 
-        private ChoiceAnswer TransformChoiceDtoToModel(CreateChoiceAnswerDto choiceDto)
+        private ChoiceAnswer TransformChoiceDtoToModel(CreateChoiceAnswerDto choiceDto, int idAnswer)
         {
             return new ChoiceAnswer(
                 null,
-                choiceDto.TextChoice,
+                choiceDto.TextAnswer,
                 choiceDto.IsAnswer,
-                (int)choiceDto.IdAnswer
-            );
+                idAnswer
+            );;
         }
 
         /// <summary>
