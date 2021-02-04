@@ -1,5 +1,6 @@
 ﻿using ProjetFilRouge.Dtos.QuestionsDtos;
 using ProjetFilRouge.Models;
+using ProjetFilRouge.Repositories;
 using ProjetFilRouge.Utils;
 using System;
 using System.Collections.Generic;
@@ -107,7 +108,14 @@ namespace ProjetFilRouge.Services
         /// <returns>Une question en DTO</returns>
         private FindQuestionsDto TransformsModelToDTO(Question question)
         {
-            return new FindQuestionsDto(question.IdQuestion,question.Intitule,question.IdCategory,question.IdLevel,question.IdAnswer);
+            LevelRepository lvlRepo = new LevelRepository(new QueryBuilder());
+            CategoryRepository catRepo = new CategoryRepository(new QueryBuilder());
+            return new FindQuestionsDto(
+                question.IdQuestion,
+                question.Intitule,
+                lvlRepo.Find((int)question.IdCategory).NameLevel,
+                catRepo.Find((int)question.IdLevel).NameCategory,
+                question.IdAnswer);
         }
     }
 }
