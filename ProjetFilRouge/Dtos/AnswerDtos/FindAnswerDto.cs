@@ -12,7 +12,7 @@ namespace ProjetFilRouge.Dtos.AnswerDtos
         {
         }
 
-        public FindAnswerDto(int? idAnswer, Models.TypeAnswer typeAnswer, string explication, string textAnswer,List<ChoiceAnswer> listChoiceAnswer = null )
+        public FindAnswerDto(int? idAnswer, string typeAnswer, string explication, string textAnswer,List<ChoiceAnswer> listChoiceAnswer = null )
         {
             IdAnswer = idAnswer;
             TypeAnswer = typeAnswer;
@@ -22,7 +22,7 @@ namespace ProjetFilRouge.Dtos.AnswerDtos
         }
 
         public int? IdAnswer { get; set; }
-        public Models.TypeAnswer TypeAnswer { get; set; }
+        public string TypeAnswer { get; set; }
         public string Explication { get; set; }
         public string TextAnswer { get; set; }
         public List<ChoiceAnswer> ListChoiceAnswer { get; set; }

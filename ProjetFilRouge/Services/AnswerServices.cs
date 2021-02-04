@@ -71,12 +71,27 @@ namespace ProjetFilRouge.Services
         { 
             if (ans.TypeAnswer!= TypeAnswer.Text)
             {
-                return new FindAnswerDto(ans.IdAnswer, ans.TypeAnswer, ans.Explication, ans.TextAnswer,GetListChoiceAnswer((int)ans.IdAnswer));
+                return new FindAnswerDto(ans.IdAnswer, ConvertTpeAnserToString(ans.TypeAnswer), ans.Explication, ans.TextAnswer,GetListChoiceAnswer((int)ans.IdAnswer));
             } else
             {
-                return new FindAnswerDto(ans.IdAnswer, ans.TypeAnswer, ans.Explication, ans.TextAnswer);
+                return new FindAnswerDto(ans.IdAnswer, ConvertTpeAnserToString(ans.TypeAnswer), ans.Explication, ans.TextAnswer);
             }
             
+        }
+
+        private string ConvertTpeAnserToString(TypeAnswer typeAnswer)
+        {
+            switch (typeAnswer)
+            {
+                case TypeAnswer.QCM:
+                    return "QCM";
+                case TypeAnswer.QCM_multiple:
+                    return "QCM_multiple";
+                case TypeAnswer.Text:
+                    return "Text";
+                default:
+                    return "Text";
+            }
         }
 
         private List<ChoiceAnswer>  GetListChoiceAnswer(int id)
