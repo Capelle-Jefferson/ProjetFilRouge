@@ -94,10 +94,24 @@ namespace ProjetFilRouge.Services
             }
         }
 
-        private List<ChoiceAnswer>  GetListChoiceAnswer(int id)
+        private List<FindChoiceAnswerDto>  GetListChoiceAnswer(int id)
         {
             List<ChoiceAnswer> listChoiceAnswer = ChoiceAnswerRepository.FindList(id);
-            return listChoiceAnswer;
+            List<FindChoiceAnswerDto> listChoiceDto = new List<FindChoiceAnswerDto>();
+            foreach(ChoiceAnswer choice in listChoiceAnswer)
+            {
+                listChoiceDto.Add(TransformeModelToChoiceDto(choice));
+            }
+            return listChoiceDto;
+        }
+
+        private FindChoiceAnswerDto TransformeModelToChoiceDto(ChoiceAnswer choice)
+        {
+            return new FindChoiceAnswerDto(
+                choice.IdChoiceAnswer,
+                choice.TextChoice,
+                choice.IsAnswer
+                );
         }
 
         /// <summary>
