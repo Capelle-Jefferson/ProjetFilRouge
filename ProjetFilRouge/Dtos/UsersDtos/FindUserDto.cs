@@ -10,17 +10,18 @@ namespace ProjetFilRouge.Dtos.CandidatesDtos
     {
         public int? IdUser { get; set; }
         public string UserName { get; set; }
-        public string Firstname { get; set; }
-        public string Fastname { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public string Email { get; set; }
         public int IdRoles { get; set; }
+        public string Role { get; set; }
 
-        public FindUserDto(int? idUser, string userName, string firstname, string fastname, string email, int idRoles)
+        public FindUserDto(int? idUser, string username, string firstname, string lastname, string email, int idRoles)
         {
             IdUser = idUser;
-            UserName = userName;
-            Firstname = firstname;
-            Fastname = fastname;
+            UserName = username;
+            FirstName = firstname;
+            LastName = lastname;
             Email = email;
             IdRoles = idRoles;
         }

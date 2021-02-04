@@ -39,8 +39,8 @@ namespace ProjetFilRouge.Repositories
                 user.IdUser = rdr.GetInt32(0);
                 user.Username = rdr.GetString(1);
                 user.Password = rdr.GetString(2);
-                user.Firstname = rdr.GetString(3);
-                user.Lastname = rdr.GetString(4);
+                user.FirstName = rdr.GetString(3);
+                user.LastName = rdr.GetString(4);
                 user.Email = rdr.GetString(5);
                 user.IdRoles = rdr.GetInt32(6);
             }
@@ -65,8 +65,8 @@ namespace ProjetFilRouge.Repositories
                     IdUser = rdr.GetInt32(0),
                     Username = rdr.GetString(1),
                     Password = rdr.GetString(2),
-                    Firstname = rdr.GetString(3),
-                    Lastname = rdr.GetString(4),
+                    FirstName = rdr.GetString(3),
+                    LastName = rdr.GetString(4),
                     Email = rdr.GetString(5),
                     IdRoles = rdr.GetInt32(6)
                 };
@@ -76,7 +76,7 @@ namespace ProjetFilRouge.Repositories
             return list;
         }
 
-        public List<User> FindByIdUser(int idRoles)
+        public List<User> FindByIdRoles(int idRoles)
         {
             this.OpenConnection();
             string request = _queryBuilder
@@ -94,8 +94,8 @@ namespace ProjetFilRouge.Repositories
                     IdUser = rdr.GetInt32(0),
                     Username = rdr.GetString(1),
                     Password = rdr.GetString(2),
-                    Firstname = rdr.GetString(3),
-                    Lastname = rdr.GetString(4),
+                    FirstName = rdr.GetString(3),
+                    LastName = rdr.GetString(4),
                     Email = rdr.GetString(5),
                     IdRoles = rdr.GetInt32(6)
                 };
@@ -107,7 +107,20 @@ namespace ProjetFilRouge.Repositories
 
         public override User Update(int id, User obj)
         {
-            throw new NotImplementedException();
+            this.OpenConnection();
+            Dictionary<string, dynamic> userDict = new Dictionary<string, dynamic>();
+            userDict = ObjectToDictionary(obj, "id_user");
+            string request = _queryBuilder
+              .Update("user")
+              .Set(userDict)
+              .Where("id_user", id)
+              .Get();
+            Console.WriteLine(request);
+            MySqlCommand cmd = new MySqlCommand(request, connectionSql);
+            cmd.ExecuteNonQuery();
+            connectionSql.Close();
+            obj.IdUser = id;
+            return obj;
         }
     }
 }
