@@ -110,23 +110,20 @@ namespace ProjetFilRouge.Repositories
 
             string request = _queryBuilder   // Pour construire la requête sql
              .Select()
-             .From("personnages")
+             .From("question")
              .Get();
             MySqlCommand cmd = new MySqlCommand(request, connectionSql);
             MySqlDataReader rdr = cmd.ExecuteReader();
-            Question question = new Question();
             while (rdr.Read())
             {
+                Question question = new Question();
                 question.IdQuestion = rdr.GetInt32(0);
                 question.Intitule = rdr.GetString(1);
                 question.IdCategory = rdr.GetInt32(2);
                 question.IdLevel = rdr.GetInt32(3);
                 question.IdAnswer = rdr.GetInt32(4);
-
-
                 list.Add(question);
             }
-
             this.CloseConnection(rdr);
             return list;
         }
