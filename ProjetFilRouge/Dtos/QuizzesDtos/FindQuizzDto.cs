@@ -16,9 +16,9 @@ namespace ProjetFilRouge.Models
         public int? idUser { get; set; }
         public int? idCandidat { get; set; }
 
-        public List<FindQuestionsDto> Questions { get; set; }
+        public List<FindQuizzQuestionsDto> Questions { get; set; }
 
-        public FindQuizzDto(int? idQuizz, string codeQuizz, DateTime? date, string category, string level, int? idUser, int? idCandidat, List<FindQuestionsDto> Questions)
+        public FindQuizzDto(int? idQuizz, string codeQuizz, DateTime? date, string category, string level, int? idUser, int? idCandidat, List<FindQuizzQuestionsDto> Questions)
         {
             this.idQuizz = idQuizz;
             this.codeQuizz = codeQuizz;

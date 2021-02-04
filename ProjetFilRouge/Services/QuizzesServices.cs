@@ -100,7 +100,6 @@ namespace ProjetFilRouge.Services
             return quizz.idQuizz != null;
         }
 
-        /// A FINIR ERREUR AJOUT LISTE QUESTIONS
         private FindQuizzDto TransformModelToDto(Quizz quizz)
         {
             CategoryRepository repoCat = new CategoryRepository(new QueryBuilder());
@@ -118,14 +117,14 @@ namespace ProjetFilRouge.Services
                 );
         }
 
-        private List<FindQuestionsDto> ReturnQuestionsQuizz(List<QuizzQuestion> questionsQuizz)
+        private List<FindQuizzQuestionsDto> ReturnQuestionsQuizz(List<QuizzQuestion> questionsQuizz)
         {
             QuestionsRepository questionRepo = new QuestionsRepository(new QueryBuilder());
-            List<FindQuestionsDto> questionsDtos = new List<FindQuestionsDto>();
-            foreach(QuizzQuestion quizzQ in questionsQuizz)
+            List<FindQuizzQuestionsDto> questionsDtos = new List<FindQuizzQuestionsDto>();
+            foreach (QuizzQuestion quizzQ in questionsQuizz)
             {
                 Question question = questionRepo.Find((int)quizzQ.IdQuestion);
-                questionsDtos.Add(TransformsModelToDTOQuestion(question));
+                questionsDtos.Add(TransformsModelToDTOQuestion(question, quizzQ.IdAnswerCandidate));
             }
             return questionsDtos;
         }
@@ -136,9 +135,9 @@ namespace ProjetFilRouge.Services
             return repo.Find(id).NameLevel;
         }
 
-        private FindQuestionsDto TransformsModelToDTOQuestion(Question question)
+        private FindQuizzQuestionsDto TransformsModelToDTOQuestion(Question question, int? idAnswerCandidate)
         {
-            return new FindQuestionsDto(question.IdQuestion, question.Intitule, question.IdCategory, question.IdLevel, question.IdAnswer);
+            return new FindQuizzQuestionsDto(question.IdQuestion, question.Intitule, question.IdCategory, question.IdLevel, question.IdAnswer, idAnswerCandidate);
         }
     }
 }
