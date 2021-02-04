@@ -37,7 +37,8 @@ namespace ProjetFilRouge.Repositories
             {
                 quizz.idQuizz = rdr.GetInt32(0);
                 quizz.codeQuizz = rdr.GetString(1);
-                quizz.date = rdr.GetDateTime(2);
+                if(!rdr.IsDBNull(2))
+                    quizz.date = rdr.GetDateTime(2);
                 quizz.idCategory = rdr.GetInt32(3);
                 quizz.idLevel = rdr.GetInt32(4);
                 quizz.idUser = rdr.GetInt32(5);
@@ -62,7 +63,8 @@ namespace ProjetFilRouge.Repositories
                 Quizz quizz = new Quizz();
                 quizz.idQuizz = rdr.GetInt32(0);
                 quizz.codeQuizz = rdr.GetString(1);
-                quizz.date = rdr.GetDateTime(2);
+                if (!rdr.IsDBNull(2))
+                    quizz.date = rdr.GetDateTime(2);
                 quizz.idCategory = rdr.GetInt32(3);
                 quizz.idLevel = rdr.GetInt32(4);
                 quizz.idUser = rdr.GetInt32(5);
