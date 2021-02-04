@@ -2,6 +2,10 @@
 {
     public class ChoiceAnswer
     {
+        public ChoiceAnswer()
+        {
+        }
+
         public ChoiceAnswer(int? idChoiceAnswer, string textChoice, bool isAnswer, int idAnswer)
         {
             IdChoiceAnswer = idChoiceAnswer;

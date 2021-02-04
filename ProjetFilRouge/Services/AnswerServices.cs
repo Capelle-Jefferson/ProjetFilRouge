@@ -14,10 +14,12 @@ namespace ProjetFilRouge.Services
     public class AnswerServices
     {
         private AnswerRepository AnswerRepository;
+        private ChoiceAnswerRepository ChoiceAnswerRepository;
 
         public AnswerServices()
         {
             AnswerRepository = new AnswerRepository(new QueryBuilder());
+            ChoiceAnswerRepository = new ChoiceAnswerRepository(new QueryBuilder());
         }
 
         /// <summary>
@@ -66,8 +68,21 @@ namespace ProjetFilRouge.Services
         /// <param name="Model answer"></param>
         /// <returns></returns>
         private FindAnswerDto TransformModelToDto(Answer ans)
+        { 
+            if (ans.TypeAnswer!= TypeAnswer.Text)
+            {
+                return new FindAnswerDto(ans.IdAnswer, ans.TypeAnswer, ans.Explication, ans.TextAnswer,GetListChoiceAnswer((int)ans.IdAnswer));
+            } else
+            {
+                return new FindAnswerDto(ans.IdAnswer, ans.TypeAnswer, ans.Explication, ans.TextAnswer);
+            }
+            
+        }
+
+        private List<ChoiceAnswer>  GetListChoiceAnswer(int id)
         {
-            return new FindAnswerDto(ans.IdAnswer, ans.TypeAnswer, ans.Explication, ans.TextAnswer);
+            List<ChoiceAnswer> listChoiceAnswer = ChoiceAnswerRepository.FindList(id);
+            return listChoiceAnswer;
         }
 
         /// <summary>

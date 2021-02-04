@@ -28,14 +28,14 @@ namespace ProjetFilRouge.Controllers
             [HttpGet("{idQuizz}")]
         public IActionResult Get(int idQuizz)
         {
-            //try
-            //{
+            try
+            {
                 return Ok(quizzquestionService.GetQuizzQ(idQuizz));
-            //}
-            //catch
-            //{
-            //    return NotFound();
-            //}
+            }
+            catch
+            {
+                return NotFound();
+            }
         }
 
         // POST api/<QuizzQuestionController>
