@@ -109,7 +109,7 @@ namespace ProjetFilRouge.Services
         {
             return new FindChoiceAnswerDto(
                 choice.IdChoiceAnswer,
-                choice.TextChoice,
+                choice.TextAnswer,
                 choice.IsAnswer
                 );
         }
