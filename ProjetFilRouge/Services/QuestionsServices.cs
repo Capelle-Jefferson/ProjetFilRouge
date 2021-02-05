@@ -63,7 +63,12 @@ namespace ProjetFilRouge.Services
         /// <returns>"1" si tout c'est bien passé, "0" sinon </returns> 
         internal int DeleteQuestion(int id)
         {
-            return questionsRepository.Delete(id);
+            Question question = this.questionsRepository.Find(id);
+            int idAnswer = (int)question.IdAnswer;
+            int reussi = questionsRepository.Delete(id);
+            AnswerServices answerServices = new AnswerServices();
+            answerServices.Delete(idAnswer);
+            return reussi;
         }
 
         /*

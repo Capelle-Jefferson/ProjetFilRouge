@@ -34,7 +34,7 @@ namespace ProjetFilRouge.Repositories
         public override int Delete(int id)
         {
             this.OpenConnection();
-            string request = _queryBuilder.Delete("question", id);
+            string request = _queryBuilder.Delete("question", id, "id_question");
             MySqlCommand cmd = new MySqlCommand(request, connectionSql);
             int result = cmd.ExecuteNonQuery();
             connectionSql.Close();
@@ -63,8 +63,8 @@ namespace ProjetFilRouge.Repositories
                 question.IdQuestion = rdr.GetInt32(0);
                 question.Intitule = rdr.GetString(1);
                 question.IdCategory = rdr.GetInt32(2);
-                question.IdLevel = rdr.GetInt32(3);
-                question.IdAnswer = rdr.GetInt32(4);
+                question.IdAnswer = rdr.GetInt32(3);
+                question.IdLevel = rdr.GetInt32(4);
             }
             this.CloseConnection(rdr);
             return question;

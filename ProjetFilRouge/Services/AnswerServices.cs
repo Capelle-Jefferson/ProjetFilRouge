@@ -166,6 +166,8 @@ namespace ProjetFilRouge.Services
         /// <param name="id"></param>
         internal int Delete(int id)
         {
+            ChoiceAnswerRepository choiceAnswerRepo = new ChoiceAnswerRepository(new QueryBuilder());
+            choiceAnswerRepo.DeleteByIdAnswer(id);
             return this.AnswerRepository.Delete(id);
         }
     }

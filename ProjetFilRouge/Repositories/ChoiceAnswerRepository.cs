@@ -22,7 +22,7 @@ namespace ProjetFilRouge.Repositories
 
         public override int Delete(int id)
         {
-            throw new NotImplementedException();
+            return DeletedObject("choice_answer", id, "id_choice_answer");
         }
 
         public  List<ChoiceAnswer> FindList (int id)
@@ -64,6 +64,11 @@ namespace ProjetFilRouge.Repositories
         public override ChoiceAnswer Update(int id, ChoiceAnswer obj)
         {
             throw new NotImplementedException();
+        }
+
+        internal int DeleteByIdAnswer(int id)
+        {
+            return DeletedObject("choice_answer", id, "id_answer");
         }
     }
 }
