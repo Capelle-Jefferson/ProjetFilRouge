@@ -110,12 +110,14 @@ namespace ProjetFilRouge.Services
         {
             LevelRepository lvlRepo = new LevelRepository(new QueryBuilder());
             CategoryRepository catRepo = new CategoryRepository(new QueryBuilder());
+            AnswerServices answerServices = new AnswerServices();
             return new FindQuestionsDto(
                 question.IdQuestion,
                 question.Intitule,
                 lvlRepo.Find((int)question.IdCategory).NameLevel,
                 catRepo.Find((int)question.IdLevel).NameCategory,
-                question.IdAnswer);
+                answerServices.GetAnswerById((int)question.IdAnswer)
+            );
         }
     }
 }
