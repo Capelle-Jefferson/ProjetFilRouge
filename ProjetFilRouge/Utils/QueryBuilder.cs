@@ -49,7 +49,7 @@ namespace ProjetFilRouge.Utils
             {
                 if (obj[key] is string)
                 {
-                    request.Append($"'{obj[key]}',");
+                    request.Append($"\"{obj[key]}\",");
                 }
                 else if (obj[key] is int || obj[key] is bool)
                 {
@@ -62,7 +62,7 @@ namespace ProjetFilRouge.Utils
                 }
                 else
                 {
-                    request.Append($"'{obj[key]}',");
+                    request.Append($"\"{obj[key]}\",");
                 }
             }
             request.Remove((request.Length - 1), 1);
@@ -121,7 +121,7 @@ namespace ProjetFilRouge.Utils
             {
                 if (obj[key] is string)
                 {
-                    request.Append($"{key} = '{obj[key]}',");
+                    request.Append($"{key} = \"{obj[key]}\",");
                 }
                 else if (obj[key] is int || obj[key] is bool)
                 {
@@ -134,7 +134,7 @@ namespace ProjetFilRouge.Utils
                 }
                 else
                 {
-                    request.Append($"{key} = '{obj[key]}',");
+                    request.Append($"{key} = \"{obj[key]}\",");
                 }
 
             }
