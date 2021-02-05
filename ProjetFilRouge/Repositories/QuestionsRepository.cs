@@ -89,8 +89,8 @@ namespace ProjetFilRouge.Repositories
                 question.IdQuestion = rdr.GetInt32(0);
                 question.Intitule = rdr.GetString(1);
                 question.IdCategory = rdr.GetInt32(2);
-                question.IdLevel = rdr.GetInt32(3);
-                question.IdAnswer = rdr.GetInt32(4);
+                question.IdAnswer = rdr.GetInt32(3);
+                question.IdLevel = rdr.GetInt32(4);
 
                 list.Add(question);
             }
