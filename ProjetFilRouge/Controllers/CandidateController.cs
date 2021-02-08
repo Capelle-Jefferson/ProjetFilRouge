@@ -29,13 +29,13 @@ namespace ProjetFilRouge.Controllers
         }
 
         // GET api/<CandidateController>/5
-        [HttpGet("api /[controller]/{id}")]
+        [HttpGet("api/[controller]/{id}")]
         public FindCandidateDto Get(int id)
         {
             return this.candidatesServices.GetCandidateById(id);
         }
 
-        // GET api/<CandidateController>/5
+        // GET api/candidatesUser/5
         [HttpGet("api/candidatesUser/{idUser}")]
         public List<FindCandidateDto> GetByIdUser(int idUser)
         {
