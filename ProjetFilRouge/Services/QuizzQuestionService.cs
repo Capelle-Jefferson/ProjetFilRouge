@@ -1,4 +1,5 @@
-﻿using ProjetFilRouge.Dtos.QuizzQDTO;
+﻿using ProjetFilRouge.Dtos.AnswerDtos;
+using ProjetFilRouge.Dtos.QuizzQDTO;
 using ProjetFilRouge.Models;
 using ProjetFilRouge.Utils;
 using System;
@@ -45,6 +46,14 @@ namespace ProjetFilRouge.Services
                 listQuizzQDto.Add(quizzQDto);
             }
             return listQuizzQDto;
+        }
+
+        public FindQuizzQDto AddAnswerCandidate(int idQuizz, int idQuestion, CreateAnswerDto answer)
+        {
+            AnswerServices answerServices = new AnswerServices();
+            FindAnswerDto answerCreatedDto = answerServices.PostAnswer(answer);
+            this.quizzquestionsRepository.AddAnswerCandidate(idQuizz, idQuestion, (int)answerCreatedDto.IdAnswer);
+            return TransformsModelToDTO(quizzquestionsRepository.Find(idQuizz, idQuestion));
         }
 
         internal FindQuizzQDto PostQuizzQ(CreateQuizzQDto obj)

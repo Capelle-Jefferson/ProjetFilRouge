@@ -1,4 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
+using ProjetFilRouge.Dtos.AnswerDtos;
 using ProjetFilRouge.Models;
 using ProjetFilRouge.Utils;
 using System;
@@ -65,6 +66,54 @@ namespace ProjetFilRouge.Repositories
 
             this.CloseConnection(rdr);
             return listQuizzQ;
+        }
+
+        internal QuizzQuestion Find(int idQuizz, int idQuestion)
+        {
+            this.OpenConnection();
+
+            List<QuizzQuestion> listQuizzQ = new List<QuizzQuestion>();
+
+            string request = _queryBuilder
+             .Select()
+             .From("quizz_question")
+             .Where("id_quizz", idQuizz, "=")
+             .And("id_question", idQuestion, "=")
+             .Get();
+            MySqlCommand cmd = new MySqlCommand(request, connectionSql);
+            MySqlDataReader rdr = cmd.ExecuteReader();
+            QuizzQuestion quizzQ = new QuizzQuestion();
+            while (rdr.Read())
+            {
+                quizzQ.IdQuizz = rdr.GetInt32(0);
+                quizzQ.IdQuestion = rdr.GetInt32(1);
+                quizzQ.Comment = rdr.GetString(2);
+                if (rdr.IsDBNull(3))
+                {
+                    quizzQ.IdAnswerCandidate = null;
+                }
+                else
+                {
+                    quizzQ.IdAnswerCandidate = rdr.GetInt32(3);
+                }
+            }
+            this.CloseConnection(rdr);
+            return quizzQ;
+        }
+
+        internal void AddAnswerCandidate(int idQuizz, int idQuestion, int idAnswer)
+        {
+            this.OpenConnection();
+            string request = _queryBuilder
+              .Update("quizz_question")
+              .SetQuizzQuestion(idAnswer)
+              .Where("id_quizz", idQuizz)
+              .And("id_question", idQuestion)
+              .Get();
+            Console.WriteLine(request);
+            MySqlCommand cmd = new MySqlCommand(request, connectionSql);
+            cmd.ExecuteNonQuery();
+            connectionSql.Close();
         }
 
         public List<QuizzQuestion> FindAll(int id)

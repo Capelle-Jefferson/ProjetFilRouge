@@ -114,6 +114,12 @@ namespace ProjetFilRouge.Utils
             return this;
         }
 
+        internal QueryBuilder SetQuizzQuestion(int idAnswer)
+        {
+            request.Append($"SET id_candidat_answer = {idAnswer} ");
+            return this;
+        }
+
         internal QueryBuilder Set(Dictionary<string, dynamic> obj)
         {
             request.Append("SET ");
