@@ -42,6 +42,25 @@ namespace ProjetFilRouge.Services
         }
 
         /// <summary>
+        ///     Récupération d'un quizz en cour, uniquement les questions qui n'ont pas était complété
+        /// </summary>
+        /// <param name="id">identitfiant du quizz à récupérer</param>
+        /// <returns>FindQuizzDto</returns>
+        public FindQuizzDto GetQuizzByIdInProgress(int id)
+        {
+            Quizz quizz = quizzRepository.Find(id);
+            FindQuizzDto quizzDto = TransformModelToDto(quizz);
+            foreach (FindQuizzQuestionsDto q in quizzDto.Questions.ToList())
+            {
+                if(q.CandidateAnswer != null)
+                {
+                    quizzDto.Questions.Remove(q);
+                }
+            }
+            return quizzDto;
+        }
+
+        /// <summary>
         ///     Récupération d'un quizz
         /// </summary>
         /// <param name="id">identitfiant du quizz à récupérer</param>
