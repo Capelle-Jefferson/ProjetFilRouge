@@ -203,5 +203,12 @@ namespace ProjetFilRouge.Services
                 candidateAnswer
             ) ;
         }
+
+        public int DeleteByIdQuizz(int id)
+        {
+            QuizzQuestionService quizzQservices = new QuizzQuestionService();
+            quizzQservices.DeleteQuizzQ(id);
+            return this.quizzRepository.Delete(id);
+        }
     }
 }

@@ -109,7 +109,7 @@ namespace ProjetFilRouge.Repositories
         }
         public override int Delete(int id)
         {
-            throw new NotImplementedException();
+            return DeletedObject("quizz_question",id, "id_quizz");
         }
 
     }

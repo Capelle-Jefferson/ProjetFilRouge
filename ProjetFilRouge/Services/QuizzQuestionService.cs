@@ -54,6 +54,11 @@ namespace ProjetFilRouge.Services
             return TransformsModelToDTO(quizzQCreated);
         }
 
+        public int DeleteQuizzQ(int id)
+        {
+            return this.quizzquestionsRepository.Delete(id);
+        }
+
         private QuizzQuestion transformsDtoToModel(CreateQuizzQDto obj)
         {
             return new QuizzQuestion((int)obj.IdQuizz, (int)obj.IdQuestion, obj.Comment, obj.IdAnswerCandidate);

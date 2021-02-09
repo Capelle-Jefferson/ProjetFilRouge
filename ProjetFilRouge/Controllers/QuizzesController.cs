@@ -49,5 +49,12 @@ namespace ProjetFilRouge.Controllers
             return this.quizzesServices.GenerateQuizz(createQuizzDto, nbreQuestion);
         }
 
+        // DELETE api/<QuizzesController>/5
+        [HttpDelete("{id}")]
+        public int Delete(int id)
+        {
+            return this.quizzesServices.DeleteByIdQuizz(id);
+        }
+
     }
 }
