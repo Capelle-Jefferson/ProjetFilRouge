@@ -1,10 +1,14 @@
-﻿using ProjetFilRouge.Dtos.QuestionsDtos;
+﻿using ProjetFilRouge.Dtos.AnswerDtos;
+using ProjetFilRouge.Dtos.QuestionsDtos;
+using ProjetFilRouge.Models;
+using ProjetFilRouge.Repositories;
 using ProjetFilRouge.Utils;
-using ProjetTest.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
+using System.Web.Http;
 
 namespace ProjetFilRouge.Services
 {
@@ -39,8 +43,17 @@ namespace ProjetFilRouge.Services
         internal FindQuestionsDto GetQuestions(int id)
         {
             Question question = questionsRepository.Find(id);
+            if (question.IdQuestion == null)
+            {
+                throw new HttpResponseException(HttpStatusCode.NotFound);
+            }
             FindQuestionsDto questionDto = TransformsModelToDTO(question);
             return questionDto;
+        }
+
+        internal List<Question> GetQuestionQuizz(int idLevels,int idCategory,int nombreQuestion)
+        {
+            return questionsRepository.GenererQuestionQuizz(idLevels, idCategory, nombreQuestion);
         }
 
         /// <summary>
@@ -50,9 +63,15 @@ namespace ProjetFilRouge.Services
         /// <returns>"1" si tout c'est bien passé, "0" sinon </returns> 
         internal int DeleteQuestion(int id)
         {
-            return questionsRepository.Delete(id);
+            Question question = this.questionsRepository.Find(id);
+            int idAnswer = (int)question.IdAnswer;
+            int reussi = questionsRepository.Delete(id);
+            AnswerServices answerServices = new AnswerServices();
+            answerServices.Delete(idAnswer);
+            return reussi;
         }
 
+        /*
         /// <summary>
         /// Permet d'update une question
         /// </summary>
@@ -65,6 +84,7 @@ namespace ProjetFilRouge.Services
             Question questionUpdate = questionsRepository.Update(id, questionModels);
             return TransformsModelToDTO(questionUpdate);
         }
+        */
 
         /// <summary>
         /// Générer une question dans la bdd
@@ -73,10 +93,15 @@ namespace ProjetFilRouge.Services
         /// <returns>la question créée</returns>
         internal FindQuestionsDto PostQuestion(CreatedQuestionDTO obj)
         {
-            Question questionModel = transformsDtoToModel(obj);
-            Question questioncreated = questionsRepository.Create(questionModel);
-            return TransformsModelToDTO(questioncreated);
+            // Création de la réponse
+            AnswerServices answerSercices = new AnswerServices();
+            FindAnswerDto answer = answerSercices.PostAnswer(obj.Answer);
 
+            // Création de la question
+            Question questionModel = transformsDtoToModel(obj, (int)answer.IdAnswer);
+            Question questioncreated = questionsRepository.Create(questionModel);
+
+            return TransformsModelToDTO(questioncreated, answer);
         }
 
         /// <summary>
@@ -84,9 +109,9 @@ namespace ProjetFilRouge.Services
         /// </summary>
         /// <param name="obj"></param>
         /// <returns>une question en Models </returns>
-        private Question transformsDtoToModel(CreatedQuestionDTO obj)
+        private Question transformsDtoToModel(CreatedQuestionDTO obj, int idAnswer)
         {
-            return new Question(null,obj.Intitule, obj.IdCategory, obj.IdLevel, obj.IdAnswer) ;
+            return new Question(null,obj.Intitule, obj.IdCategory, obj.IdLevel, idAnswer) ;
         }
 
         /// <summary>
@@ -94,9 +119,23 @@ namespace ProjetFilRouge.Services
         /// </summary>
         /// <param name="question"></param>
         /// <returns>Une question en DTO</returns>
-        private FindQuestionsDto TransformsModelToDTO(Question question)
+        private FindQuestionsDto TransformsModelToDTO(Question question, FindAnswerDto answer = null)
         {
-            return new FindQuestionsDto(question.IdQuestion,question.Intitule,question.IdCategory,question.IdLevel,question.IdAnswer);
+            LevelRepository lvlRepo = new LevelRepository(new QueryBuilder());
+            CategoryRepository catRepo = new CategoryRepository(new QueryBuilder());
+            // Si answer est inconnu alors aller le récupérer à l'aide de service answer et rappel la méthode
+            if(answer == null)
+            {
+                AnswerServices answerServices = new AnswerServices();
+                return TransformsModelToDTO(question, answerServices.GetAnswerById((int)question.IdAnswer));
+            }
+            return new FindQuestionsDto(
+                question.IdQuestion,
+                question.Intitule,
+                lvlRepo.Find((int)question.IdCategory).NameLevel,
+                catRepo.Find((int)question.IdLevel).NameCategory,
+                answer
+            );
         }
     }
 }

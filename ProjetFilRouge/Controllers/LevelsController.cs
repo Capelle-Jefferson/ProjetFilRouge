@@ -30,9 +30,17 @@ namespace ProjetFilRouge.Controllers
 
         // GET api/<LevelsController>/5
         [HttpGet("{id}")]
-        public FindLevelDto Get(int id)
+        public IActionResult Get(int id)
         {
-            return levelServices.GetLevelById(id);
+            try 
+            {
+                return Ok(levelServices.GetLevelById(id));
+            }
+            catch
+            {
+                return NotFound();
+            }
+            
         }
 
         // POST api/<LevelsController>

@@ -1,12 +1,15 @@
-﻿namespace ProjetFilRouge.Models
-{
-    public class QuizzQuestion
-    {
-        public QuizzQuestion()
-        {
-        }
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-        public QuizzQuestion(int idQuizz, int idQuestion, string comment, bool? isCorrectAnswer, int? idAnswerCandidate = null)
+namespace ProjetFilRouge.Dtos.QuizzQDTO
+{
+    public class FindQuizzQDto
+    {
+
+        public FindQuizzQDto() { }
+        public FindQuizzQDto(int idQuizz, int idQuestion, string comment, bool? isCorrectAnswer, int? idAnswerCandidate = null)
         {
             IdQuizz = idQuizz;
             IdQuestion = idQuestion;

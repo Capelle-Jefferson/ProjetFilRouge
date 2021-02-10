@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -34,7 +35,7 @@ namespace ProjetFilRouge.Utils
             request.Append($"INSERT INTO {table}");
             return this;
         }
-        
+
         internal string Values(Dictionary<string, dynamic> obj)
         {
             request.Append("(");
@@ -48,7 +49,7 @@ namespace ProjetFilRouge.Utils
             {
                 if (obj[key] is string)
                 {
-                    request.Append($"'{obj[key]}',");
+                    request.Append($"\"{obj[key]}\",");
                 }
                 else if (obj[key] is int || obj[key] is bool)
                 {
@@ -61,7 +62,7 @@ namespace ProjetFilRouge.Utils
                 }
                 else
                 {
-                    request.Append($"'{obj[key]}',");
+                    request.Append($"\"{obj[key]}\",");
                 }
             }
             request.Remove((request.Length - 1), 1);
@@ -82,9 +83,23 @@ namespace ProjetFilRouge.Utils
 
         internal QueryBuilder Where(string key, dynamic value, string type = "=")
         {
-            request.Append($"WHERE {key} {type} {value}");
+            if(value is string)
+            {
+                request.Append($"WHERE {key} {type} '{value}'");
+            }
+            else
+            {
+                request.Append($"WHERE {key} {type} {value}");
+            }
             return this;
         }
+
+        internal QueryBuilder And(string key, dynamic value, string type = "=")
+        {
+            request.Append($" AND {key} {type} {value}");
+            return this;
+        }
+
 
         internal QueryBuilder From(string table)
         {
@@ -99,6 +114,12 @@ namespace ProjetFilRouge.Utils
             return this;
         }
 
+        internal QueryBuilder SetQuizzQuestion(int idAnswer)
+        {
+            request.Append($"SET id_candidat_answer = {idAnswer} ");
+            return this;
+        }
+
         internal QueryBuilder Set(Dictionary<string, dynamic> obj)
         {
             request.Append("SET ");
@@ -106,7 +127,7 @@ namespace ProjetFilRouge.Utils
             {
                 if (obj[key] is string)
                 {
-                    request.Append($"{key} = '{obj[key]}',");
+                    request.Append($"{key} = \"{obj[key]}\",");
                 }
                 else if (obj[key] is int || obj[key] is bool)
                 {
@@ -119,7 +140,7 @@ namespace ProjetFilRouge.Utils
                 }
                 else
                 {
-                    request.Append($"{key} = '{obj[key]}',");
+                    request.Append($"{key} = \"{obj[key]}\",");
                 }
 
             }

@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 
-namespace ProjetTest.Models
+namespace ProjetFilRouge.Models
 {
     public enum TypeAnswer{
         QCM,
+        QCM_multiple,
         Text
     }
     public class Answer

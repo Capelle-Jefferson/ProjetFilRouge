@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using HttpExceptions.Exceptions;
+using Microsoft.AspNetCore.Mvc;
 using ProjetFilRouge.Dtos;
 using ProjetFilRouge.Dtos.CategoriesDtos;
 using ProjetFilRouge.Services;
