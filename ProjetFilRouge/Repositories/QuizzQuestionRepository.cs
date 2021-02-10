@@ -60,7 +60,9 @@ namespace ProjetFilRouge.Repositories
                 {
                     quizzQ.IdAnswerCandidate = rdr.GetInt32(3);
                 }
-                
+                if (!rdr.IsDBNull(4))
+                    quizzQ.IsCorrectAnswer = rdr.GetBoolean(4);
+
                 listQuizzQ.Add(quizzQ);
             }
 
@@ -96,6 +98,8 @@ namespace ProjetFilRouge.Repositories
                 {
                     quizzQ.IdAnswerCandidate = rdr.GetInt32(3);
                 }
+                if (!rdr.IsDBNull(4))
+                    quizzQ.IsCorrectAnswer = rdr.GetBoolean(4);
             }
             this.CloseConnection(rdr);
             return quizzQ;
@@ -144,7 +148,8 @@ namespace ProjetFilRouge.Repositories
                 {
                     quizzQ.IdAnswerCandidate = rdr.GetInt32(3);
                 }
-
+                if(!rdr.IsDBNull(4))
+                    quizzQ.IsCorrectAnswer = rdr.GetBoolean(4);
                 listQuizzQ.Add(quizzQ);
             }
 

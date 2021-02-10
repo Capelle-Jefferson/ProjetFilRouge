@@ -117,7 +117,7 @@ namespace ProjetFilRouge.Services
             QuizzQuestionRepository questionQuizzRepo = new QuizzQuestionRepository(new QueryBuilder());
             foreach (Question question in questions)
             {
-                QuizzQuestion quizzQuestion = new QuizzQuestion((int)quizz.idQuizz, (int)question.IdQuestion, "");
+                QuizzQuestion quizzQuestion = new QuizzQuestion((int)quizz.idQuizz, (int)question.IdQuestion, "", null);
                 questionQuizzRepo.Create(quizzQuestion);
             }
         }

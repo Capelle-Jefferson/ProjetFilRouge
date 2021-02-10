@@ -70,12 +70,12 @@ namespace ProjetFilRouge.Services
 
         private QuizzQuestion transformsDtoToModel(CreateQuizzQDto obj)
         {
-            return new QuizzQuestion((int)obj.IdQuizz, (int)obj.IdQuestion, obj.Comment, obj.IdAnswerCandidate);
+            return new QuizzQuestion((int)obj.IdQuizz, (int)obj.IdQuestion, obj.Comment, null, obj.IdAnswerCandidate);
         }
 
         private FindQuizzQDto TransformsModelToDTO(QuizzQuestion quizzQ)
         {
-            return new FindQuizzQDto((int)quizzQ.IdQuizz, (int)quizzQ.IdQuestion, quizzQ.Comment, quizzQ.IdAnswerCandidate);
+            return new FindQuizzQDto((int)quizzQ.IdQuizz, (int)quizzQ.IdQuestion, quizzQ.Comment, quizzQ.IsCorrectAnswer, quizzQ.IdAnswerCandidate);
         }
     }
 }
