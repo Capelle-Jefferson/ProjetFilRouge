@@ -72,17 +72,22 @@ namespace ProjetFilRouge.Services
         /// <returns>une question modifié (DTO) </returns>
         internal FindQuestionsDto PutQuestion(int id, CreatedQuestionDTO obj)
         {
-            Question questionModels = transformsDtoToModel(obj);
-            Question questionUpdate = questionsRepository.Update(id, questionModels);
+            //Question questionModels = transformsDtoToModel(obj);
+            //Question questionUpdate = questionsRepository.Update(id, questionModels);
+            //return TransformsModelToDTO(questionUpdate);
+
+            Question questionModel = questionsRepository.Find(id);
+            questionModel = CheckBeforeUpdate(questionModel, obj);
+            Question questionUpdate = questionsRepository.Update(id, questionModel);
             return TransformsModelToDTO(questionUpdate);
         }
 
-        /// <summary>
-        /// Générer une question dans la bdd
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns>la question créée</returns>
-        internal FindQuestionsDto PostQuestion(CreatedQuestionDTO obj)
+            /// <summary>
+            /// Générer une question dans la bdd
+            /// </summary>
+            /// <param name="obj"></param>
+            /// <returns>la question créée</returns>
+            internal FindQuestionsDto PostQuestion(CreatedQuestionDTO obj)
         {
             Question questionModel = transformsDtoToModel(obj);
             Question questioncreated = questionsRepository.Create(questionModel);
@@ -108,6 +113,28 @@ namespace ProjetFilRouge.Services
         private FindQuestionsDto TransformsModelToDTO(Question question)
         {
             return new FindQuestionsDto(question.IdQuestion,question.Intitule,question.IdCategory,question.IdLevel,question.IdAnswer);
+        }
+
+        private Question CheckBeforeUpdate(Question questionModel, CreatedQuestionDTO updatequestion)
+        {
+            if (questionModel.Intitule != updatequestion.Intitule)
+            {
+                questionModel.Intitule = updatequestion.Intitule;
+            }
+            if (questionModel.IdCategory != updatequestion.IdCategory)
+            {
+                questionModel.IdCategory = (int)updatequestion.IdCategory;
+            }
+            if (questionModel.IdLevel != updatequestion.IdLevel)
+            {
+                questionModel.IdLevel = (int)updatequestion.IdLevel;
+            }
+            if (questionModel.IdAnswer != updatequestion.IdAnswer)
+            {
+                questionModel.IdAnswer = (int)updatequestion.IdAnswer;
+            }
+
+            return questionModel;
         }
     }
 }

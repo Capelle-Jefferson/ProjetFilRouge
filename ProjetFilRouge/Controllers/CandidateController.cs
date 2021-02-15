@@ -29,7 +29,7 @@ namespace ProjetFilRouge.Controllers
         }
 
         // GET api/<CandidateController>/5
-        [HttpGet("api /[controller]/{id}")]
+        [HttpGet("api/[controller]/{id}")]
         public FindCandidateDto Get(int id)
         {
             return this.candidatesServices.GetCandidateById(id);
@@ -51,7 +51,7 @@ namespace ProjetFilRouge.Controllers
 
 
         // PUT api/<CandidateController>/5
-        [HttpPut("{id}")]
+        [HttpPut("api/[controller]/{id}")]
         public FindCandidateDto Put(int id, [FromBody] CreateCandidateDto updatecandidate)
         {
             return candidatesServices.PutCandidate(id, updatecandidate);

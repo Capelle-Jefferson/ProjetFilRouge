@@ -23,7 +23,7 @@ namespace ProjetFilRouge.Controllers
             return questionService.GetAllQuestions();
         }
 
-        // GET api/<QuestionsController>/5
+        // GET api/<QuestionsController>/
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
@@ -51,14 +51,14 @@ namespace ProjetFilRouge.Controllers
             return questionService.PostQuestion(obj);
         }
 
-        // PUT api/<QuestionsController>/5
+        // PUT api/<QuestionsController>/
         [HttpPut("{id}")]
         public Dtos.QuestionsDtos.FindQuestionsDto Put(int id, [FromBody] Dtos.QuestionsDtos.CreatedQuestionDTO obj)
         {
             return questionService.PutQuestion(id, obj);
         }
 
-        // DELETE api/<QuestionsController>/5
+        // DELETE api/<QuestionsController>/
         [HttpDelete("{id}")]
         public int Delete(int id)
         {

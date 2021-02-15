@@ -68,7 +68,7 @@ namespace ProjetFilRouge.Repositories
 
                 
             }
-            rdr.Close(); 
+            this.CloseConnection(rdr); 
             return question;
         }
 
@@ -97,7 +97,7 @@ namespace ProjetFilRouge.Repositories
 
                 list.Add(question);
             }
-            rdr.Close();
+            this.CloseConnection(rdr);
             return list;
         }
 
