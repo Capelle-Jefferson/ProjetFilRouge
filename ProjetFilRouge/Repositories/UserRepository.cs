@@ -1,4 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
+using ProjetFilRouge.Dtos.CandidatesDtos;
 using ProjetFilRouge.Models;
 using ProjetFilRouge.Utils;
 using System;
@@ -30,6 +31,31 @@ namespace ProjetFilRouge.Repositories
                 .Select()
                 .From("user")
                 .Where("id_user", id, "=")
+                .Get();
+            MySqlCommand cmd = new MySqlCommand(request, connectionSql);
+            MySqlDataReader rdr = cmd.ExecuteReader();
+            User user = new User();
+            while (rdr.Read())
+            {
+                user.IdUser = rdr.GetInt32(0);
+                user.Username = rdr.GetString(1);
+                user.Password = rdr.GetString(2);
+                user.Firstname = rdr.GetString(3);
+                user.Lastname = rdr.GetString(4);
+                user.Email = rdr.GetString(5);
+                user.IdRoles = rdr.GetInt32(6);
+            }
+            this.CloseConnection(rdr);
+            return user;
+        }
+
+        internal User FindByUsername(string username)
+        {
+            this.OpenConnection();
+            string request = _queryBuilder
+                .Select()
+                .From("user")
+                .Where("username", username, "=")
                 .Get();
             MySqlCommand cmd = new MySqlCommand(request, connectionSql);
             MySqlDataReader rdr = cmd.ExecuteReader();

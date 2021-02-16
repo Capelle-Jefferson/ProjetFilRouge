@@ -15,7 +15,7 @@ namespace ProjetFilRouge.Controllers
     public class UserController : ControllerBase
     {
         private UsersServices UsersServices;
-        
+
         public UserController()
         {
             UsersServices = new UsersServices();
@@ -32,6 +32,22 @@ namespace ProjetFilRouge.Controllers
         public FindUserDto Get(int id)
         {
             return this.UsersServices.GetUserById(id);
+        }
+
+        // GET api/<UserController>/
+        [HttpGet("{username}/{password}")]
+        public IActionResult Get(string username, string password)
+        {
+            FindUserDto user = this.UsersServices.IsAvailableUser(username, password);
+            if(user != null)
+            {
+                return Ok(user);
+            }
+            else
+            {
+                return NotFound();
+            }
+
         }
 
         // GET api/<CandidateController>/5

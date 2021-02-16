@@ -48,6 +48,17 @@ namespace ProjetFilRouge.Services
             return UserDtos;
         }
 
+        internal FindUserDto IsAvailableUser(string username, string password)
+        {
+            User user = this.UserRepository.FindByUsername(username);
+            if(user == null)
+                return null;
+            else if (!VerifyHash(password, user.Password))
+                return null;
+            else
+                return TransformModelToDto(user);
+        }
+
         public FindUserDto PostUser(CreateUserDto user)
         {
             user.Password = EncodingPassword(user);
@@ -157,14 +168,15 @@ namespace ProjetFilRouge.Services
         /// <param name="stringNonCrypter">Mot non hasher à vérifier</param>
         /// <param name="hash">Mot hasher</param>
         /// <returns></returns>
-        private static bool VerifyHash(HashAlgorithm hashAlgorithm, string stringNonCrypter, string hash)
+        private static bool VerifyHash(string stringNonCrypter, string hash)
         {
-            // Hash the input.
-            string hashOfInput = GetHash(hashAlgorithm, stringNonCrypter);
-
-            // Create a StringComparer an compare the hashes.
-            StringComparer comparer = StringComparer.OrdinalIgnoreCase;
-
+            StringComparer comparer;
+            string hashOfInput;
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
+                hashOfInput = GetHash(sha256Hash, stringNonCrypter);
+                comparer = StringComparer.OrdinalIgnoreCase;
+            }
             return comparer.Compare(hashOfInput, hash) == 0;
         }
     }
