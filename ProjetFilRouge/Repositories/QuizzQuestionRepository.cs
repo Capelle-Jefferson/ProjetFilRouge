@@ -54,11 +54,11 @@ namespace ProjetFilRouge.Repositories
                 quizzQ.Comment = rdr.GetString(2);
                 if (rdr.IsDBNull(3))
                 {
-                    quizzQ.IdAnswerCandidate = null;
+                    quizzQ.AnswerCandidate = null;
                 }
                 else
                 {
-                    quizzQ.IdAnswerCandidate = rdr.GetInt32(3);
+                    quizzQ.AnswerCandidate = rdr.GetString(3);
                 }
                 if (!rdr.IsDBNull(4))
                     quizzQ.IsCorrectAnswer = rdr.GetBoolean(4);
@@ -92,11 +92,11 @@ namespace ProjetFilRouge.Repositories
                 quizzQ.Comment = rdr.GetString(2);
                 if (rdr.IsDBNull(3))
                 {
-                    quizzQ.IdAnswerCandidate = null;
+                    quizzQ.AnswerCandidate = null;
                 }
                 else
                 {
-                    quizzQ.IdAnswerCandidate = rdr.GetInt32(3);
+                    quizzQ.AnswerCandidate = rdr.GetString(3);
                 }
                 if (!rdr.IsDBNull(4))
                     quizzQ.IsCorrectAnswer = rdr.GetBoolean(4);
@@ -105,12 +105,12 @@ namespace ProjetFilRouge.Repositories
             return quizzQ;
         }
 
-        internal void AddAnswerCandidate(int idQuizz, int idQuestion, int idAnswer)
+        internal void AddAnswerCandidate(int idQuizz, int idQuestion, string answer)
         {
             this.OpenConnection();
             string request = _queryBuilder
               .Update("quizz_question")
-              .SetQuizzQuestion(idAnswer)
+              .SetQuizzQuestion(answer)
               .Where("id_quizz", idQuizz)
               .And("id_question", idQuestion)
               .Get();
@@ -142,11 +142,11 @@ namespace ProjetFilRouge.Repositories
                 quizzQ.Comment = rdr.GetString(2);
                 if (rdr.IsDBNull(3))
                 {
-                    quizzQ.IdAnswerCandidate = null;
+                    quizzQ.AnswerCandidate = null;
                 }
                 else
                 {
-                    quizzQ.IdAnswerCandidate = rdr.GetInt32(3);
+                    quizzQ.AnswerCandidate = rdr.GetString(3);
                 }
                 if(!rdr.IsDBNull(4))
                     quizzQ.IsCorrectAnswer = rdr.GetBoolean(4);

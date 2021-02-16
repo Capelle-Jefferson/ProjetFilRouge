@@ -49,7 +49,7 @@ namespace ProjetFilRouge.Controllers
         */
 
         [HttpPut]
-        public FindQuizzQDto Put(int idQuizz, int idQuestion, [FromBody] CreateAnswerDto answer)
+        public FindQuizzQDto Put(int idQuizz, int idQuestion, [FromBody] string answer)
         {
             return this.quizzquestionService.AddAnswerCandidate(idQuizz, idQuestion, answer);
         }

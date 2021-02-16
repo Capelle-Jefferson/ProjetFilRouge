@@ -6,12 +6,12 @@
         {
         }
 
-        public QuizzQuestion(int idQuizz, int idQuestion, string comment, bool? isCorrectAnswer, int? idAnswerCandidate = null)
+        public QuizzQuestion(int idQuizz, int idQuestion, string comment, bool? isCorrectAnswer, string answerCandidate = null)
         {
             IdQuizz = idQuizz;
             IdQuestion = idQuestion;
             Comment = comment;
-            IdAnswerCandidate = idAnswerCandidate;
+            AnswerCandidate = answerCandidate;
             IsCorrectAnswer = isCorrectAnswer;
         }
 
@@ -19,6 +19,6 @@
         public int? IdQuestion { get; set; }
         public string Comment { get; set; }
         public bool? IsCorrectAnswer { get; set; }
-        public int? IdAnswerCandidate { get; set; }
+        public string AnswerCandidate { get; set; }
     }
 }

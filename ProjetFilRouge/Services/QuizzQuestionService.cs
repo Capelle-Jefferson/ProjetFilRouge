@@ -48,11 +48,9 @@ namespace ProjetFilRouge.Services
             return listQuizzQDto;
         }
 
-        public FindQuizzQDto AddAnswerCandidate(int idQuizz, int idQuestion, CreateAnswerDto answer)
+        public FindQuizzQDto AddAnswerCandidate(int idQuizz, int idQuestion, string answer)
         {
-            AnswerServices answerServices = new AnswerServices();
-            FindAnswerDto answerCreatedDto = answerServices.PostAnswer(answer);
-            this.quizzquestionsRepository.AddAnswerCandidate(idQuizz, idQuestion, (int)answerCreatedDto.IdAnswer);
+            this.quizzquestionsRepository.AddAnswerCandidate(idQuizz, idQuestion, answer);
             return TransformsModelToDTO(quizzquestionsRepository.Find(idQuizz, idQuestion));
         }
 
@@ -70,12 +68,12 @@ namespace ProjetFilRouge.Services
 
         private QuizzQuestion transformsDtoToModel(CreateQuizzQDto obj)
         {
-            return new QuizzQuestion((int)obj.IdQuizz, (int)obj.IdQuestion, obj.Comment, null, obj.IdAnswerCandidate);
+            return new QuizzQuestion((int)obj.IdQuizz, (int)obj.IdQuestion, obj.Comment, null, obj.AnswerCandidate);
         }
 
         private FindQuizzQDto TransformsModelToDTO(QuizzQuestion quizzQ)
         {
-            return new FindQuizzQDto((int)quizzQ.IdQuizz, (int)quizzQ.IdQuestion, quizzQ.Comment, quizzQ.IsCorrectAnswer, quizzQ.IdAnswerCandidate);
+            return new FindQuizzQDto((int)quizzQ.IdQuizz, (int)quizzQ.IdQuestion, quizzQ.Comment, quizzQ.IsCorrectAnswer, quizzQ.AnswerCandidate);
         }
     }
 }

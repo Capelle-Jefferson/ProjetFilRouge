@@ -9,7 +9,7 @@ namespace ProjetFilRouge.Dtos.QuestionsDtos
     public class FindQuizzQuestionsDto
     {
         public FindQuizzQuestionsDto(int? idQuestion, string intitule, string category, string level,
-                    FindAnswerDto answer, FindAnswerDto candidateAnswer)
+                    FindAnswerDto answer, string candidateAnswer)
         {
             IdQuestion = idQuestion;
             Intitule = intitule;
@@ -24,6 +24,6 @@ namespace ProjetFilRouge.Dtos.QuestionsDtos
         public string Category { get; set; }
         public string Level { get; set; }
         public FindAnswerDto Answer { get; set; }
-        public FindAnswerDto CandidateAnswer { get; set; }
+        public string CandidateAnswer { get; set; }
     }
 }
