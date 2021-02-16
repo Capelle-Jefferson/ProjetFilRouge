@@ -74,11 +74,11 @@ namespace ProjetFilRouge.Services
         private User TransformDtoToModel(CreateUserDto user)
         {
             return new User(
-                user.IdUser,
-                user.UserName,
+                null,
+                user.Username,
                 user.Password,
-                user.FirstName,
-                user.LastName,
+                user.Firstname,
+                user.Lastname,
                 user.Email,
                 user.IdRoles
                 );
@@ -97,8 +97,8 @@ namespace ProjetFilRouge.Services
             return new FindUserDto(
                     user.IdUser,
                     user.Username,
-                    user.FirstName,
-                    user.LastName,
+                    user.Firstname,
+                    user.Lastname,
                     user.Email,
                     idr,
                     r);

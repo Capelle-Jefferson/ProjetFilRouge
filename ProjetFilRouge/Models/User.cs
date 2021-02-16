@@ -10,8 +10,8 @@ namespace ProjetFilRouge.Models
         public int? IdUser { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        public string Firstname { get; set; }
+        public string Lastname { get; set; }
         public string Email { get; set; }
         public int? IdRoles { get; set; }
 
@@ -20,8 +20,8 @@ namespace ProjetFilRouge.Models
             this.IdUser = id;
             this.Username = username;
             this.Password = password;
-            this.FirstName = firstname;
-            this.LastName = lastname;
+            this.Firstname = firstname;
+            this.Lastname = lastname;
             this.Email = email;
             this.IdRoles = idRoles;
         }

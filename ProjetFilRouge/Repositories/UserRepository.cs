@@ -39,8 +39,8 @@ namespace ProjetFilRouge.Repositories
                 user.IdUser = rdr.GetInt32(0);
                 user.Username = rdr.GetString(1);
                 user.Password = rdr.GetString(2);
-                user.FirstName = rdr.GetString(3);
-                user.LastName = rdr.GetString(4);
+                user.Firstname = rdr.GetString(3);
+                user.Lastname = rdr.GetString(4);
                 user.Email = rdr.GetString(5);
                 user.IdRoles = rdr.GetInt32(6);
             }
@@ -65,8 +65,8 @@ namespace ProjetFilRouge.Repositories
                     IdUser = rdr.GetInt32(0),
                     Username = rdr.GetString(1),
                     Password = rdr.GetString(2),
-                    FirstName = rdr.GetString(3),
-                    LastName = rdr.GetString(4),
+                    Firstname = rdr.GetString(3),
+                    Lastname = rdr.GetString(4),
                     Email = rdr.GetString(5),
                     IdRoles = rdr.GetInt32(6)
                 };
@@ -94,8 +94,8 @@ namespace ProjetFilRouge.Repositories
                     IdUser = rdr.GetInt32(0),
                     Username = rdr.GetString(1),
                     Password = rdr.GetString(2),
-                    FirstName = rdr.GetString(3),
-                    LastName = rdr.GetString(4),
+                    Firstname = rdr.GetString(3),
+                    Lastname = rdr.GetString(4),
                     Email = rdr.GetString(5),
                     IdRoles = rdr.GetInt32(6)
                 };
