@@ -6,6 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace ProjetFilRouge.Services
 {
@@ -48,10 +50,12 @@ namespace ProjetFilRouge.Services
 
         public FindUserDto PostUser(CreateUserDto user)
         {
+            user.Password = EncodingPassword(user);
             User userModel = TransformDtoToModel(user);
             User candidatCreated = UserRepository.Create(userModel);
             return TransformModelToDto(candidatCreated);
         }
+
 
         /// <summary>
         /// Permet de modifier une donnée dans la table roles de la bdd
@@ -109,6 +113,59 @@ namespace ProjetFilRouge.Services
             RolesRepository repo = new RolesRepository(new QueryBuilder());            
             Roles role = repo.Find(idr);
             return role.nameRole.ToUpper();
+        }
+
+        /// <summary>
+        ///     Crypte le mot de passe pour l'enregistrer dans la base de données
+        /// </summary>
+        /// <param name="user">Objet User contenant le mot de passe</param>
+        /// <returns>le mot de passe crypté</returns>
+        private string EncodingPassword(CreateUserDto user)
+        {
+            string passwordHash = "";
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
+                passwordHash = GetHash(sha256Hash, user.Password);
+            }
+            return passwordHash;
+        }
+
+        /// <summary>
+        ///     Crypte input
+        /// </summary>
+        /// <param name="hashAlgorithm">HashAlgorithm</param>
+        /// <param name="input">mot à crypter</param>
+        /// <returns>input crypté</returns>
+        private static string GetHash(HashAlgorithm hashAlgorithm, string input)
+        {
+            byte[] data = hashAlgorithm.ComputeHash(Encoding.UTF8.GetBytes(input));
+
+            var sBuilder = new StringBuilder();
+
+            for (int i = 0; i < data.Length; i++)
+            {
+                sBuilder.Append(data[i].ToString("x2"));
+            }
+
+            return sBuilder.ToString();
+        }
+
+        /// <summary>
+        ///     Verifie si stringNonCrypter est égal à hash
+        /// </summary>
+        /// <param name="hashAlgorithm">HashAlgorithm</param>
+        /// <param name="stringNonCrypter">Mot non hasher à vérifier</param>
+        /// <param name="hash">Mot hasher</param>
+        /// <returns></returns>
+        private static bool VerifyHash(HashAlgorithm hashAlgorithm, string stringNonCrypter, string hash)
+        {
+            // Hash the input.
+            string hashOfInput = GetHash(hashAlgorithm, stringNonCrypter);
+
+            // Create a StringComparer an compare the hashes.
+            StringComparer comparer = StringComparer.OrdinalIgnoreCase;
+
+            return comparer.Compare(hashOfInput, hash) == 0;
         }
     }
 }
