@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import { observable } from 'rxjs';
 import { User } from 'src/app/_models/user';
 import { UserService } from 'src/app/_services/user.service';
 
@@ -28,11 +29,9 @@ export class FormAuthentificationComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onSubmit() {
-    console.log(this.user);
-    this.service.getAuthentification(this.userAuth.value).then(user => this.user = user)
-    console.log(this.user);
-    
+  async onSubmit() {
+    await this.service.getAuthentification(this.userAuth.value).then((user)=> this.user = user);
+
     // Si utilisateur reconnus
     if(this.user != undefined){
       sessionStorage.setItem("user", JSON.stringify(this.user));
@@ -40,6 +39,7 @@ export class FormAuthentificationComponent implements OnInit {
     }else{
       alert("Identifiant non valide")
     }
+    
   }
 
 }
