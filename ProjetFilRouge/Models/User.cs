@@ -7,25 +7,27 @@ namespace ProjetFilRouge.Models
 {
     public class User
     {
-        public int? idUser { get; set; }
-        public string username { get; set; }
-        public string password { get; set; }
-        public string firstname { get; set; }
-        public string lastname { get; set; }
-        public string email { get; set; }
-        public int? idRoles { get; set; }
+        public int? IdUser { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
+        public string Firstname { get; set; }
+        public string Lastname { get; set; }
+        public string Email { get; set; }
+        public int? IdRoles { get; set; }
 
         public User(int? id,string username,string password,string firstname,string lastname,string email,int? idRoles)
         {
-            this.idUser = id;
-            this.username = username;
-            this.password = password;
-            this.firstname = firstname;
-            this.lastname = lastname;
-            this.email = email;
-            this.idRoles = idRoles;
-
+            this.IdUser = id;
+            this.Username = username;
+            this.Password = password;
+            this.Firstname = firstname;
+            this.Lastname = lastname;
+            this.Email = email;
+            this.IdRoles = idRoles;
         }
 
+        public User()
+        {
+        }
     }
 }
