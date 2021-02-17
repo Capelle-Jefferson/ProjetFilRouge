@@ -5,26 +5,18 @@ using System.Threading.Tasks;
 
 namespace ProjetFilRouge.Dtos.CandidatesDtos
 {
-    public class CreateUserDto
+    public class AuthUserDto
     {
         public string Username { get; set; }
         public string Password { get; set; }
-        public string Firstname { get; set; }
-        public string Lastname { get; set; }
-        public string Email { get; set; }
-        public int IdRoles { get; set; }
 
-        public CreateUserDto(string userName, string password, string firstname, string lastname, string email, int idRoles)
+        public AuthUserDto(string userName, string password)
         {
             Username = userName;
             Password = password;
-            Firstname = firstname;
-            Lastname = lastname;
-            Email = email;
-            IdRoles = idRoles;
         }
 
-        public CreateUserDto()
+        public AuthUserDto()
         {
         }
     }

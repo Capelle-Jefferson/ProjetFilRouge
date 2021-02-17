@@ -34,11 +34,11 @@ namespace ProjetFilRouge.Controllers
             return this.UsersServices.GetUserById(id);
         }
 
-        // GET api/<UserController>/
-        [HttpGet("{username}/{password}")]
-        public IActionResult Get(string username, string password)
+
+        [HttpPut("/api/Authentification")]
+        public IActionResult Put(AuthUserDto userDto)
         {
-            FindUserDto user = this.UsersServices.IsAvailableUser(username, password);
+            FindUserDto user = this.UsersServices.IsAvailableUser(userDto.Username, userDto.Password);
             if(user != null)
             {
                 return Ok(user);
