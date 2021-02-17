@@ -7,15 +7,3 @@
     </label>
     <button type="submit" class="btn btn-success">Se connecter</button>
 </form>
-
-<ul *ngIf="user">
-    <li>{{ user.username }}</li>
-    <li>{{ user.firstname }}</li>
-    <li>{{ user.lastname }}</li>
-    <li>{{ user.email }}</li>
-</ul>
-
-
-<ul>
-    <li *ngFor="let user of users">{{ user.username }}</li>
-</ul>

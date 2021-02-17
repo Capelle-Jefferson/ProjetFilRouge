@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
 import { User } from 'src/app/_models/user';
 import { UserService } from 'src/app/_services/user.service';
 
@@ -11,7 +12,7 @@ import { UserService } from 'src/app/_services/user.service';
 export class FormAuthentificationComponent implements OnInit {
 
   userAuth : FormGroup;
-  user : User;
+  user : User = undefined;
   users: User[] = [];
 
   constructor(
@@ -25,11 +26,20 @@ export class FormAuthentificationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.service.getAll().then(users => this.users = users);
   }
 
   onSubmit() {
+    console.log(this.user);
     this.service.getAuthentification(this.userAuth.value).then(user => this.user = user)
+    console.log(this.user);
+    
+    // Si utilisateur reconnus
+    if(this.user != undefined){
+      sessionStorage.setItem("user", JSON.stringify(this.user));
+      location.reload();
+    }else{
+      alert("Identifiant non valide")
+    }
   }
 
 }
