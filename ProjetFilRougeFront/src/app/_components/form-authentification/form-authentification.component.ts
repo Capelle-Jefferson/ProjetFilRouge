@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { observable } from 'rxjs';
 import { User } from 'src/app/_models/user';
@@ -15,13 +15,15 @@ export class FormAuthentificationComponent implements OnInit {
   userAuth: FormGroup;
   user: User = undefined;
 
+  undefinedUser = false;
+
   constructor(
     private builder: FormBuilder,
     private service: UserService
   ) {
     this.userAuth = this.builder.group({
-      username: [""],
-      password: [""]
+      username: ["", Validators.required],
+      password: ["", Validators.required]
     })
   }
 
@@ -36,15 +38,13 @@ export class FormAuthentificationComponent implements OnInit {
       if (!this.user['status']) {
         sessionStorage.setItem("user", JSON.stringify(this.user));
         location.reload();
-
       // Si utilisateur non reconnus
       } else {
-        this.userAuth.getError("Identifiant non valide");
-        alert("Identifiant non valide");
+        this.undefinedUser = true;
       }
 
     } catch {
-      this.userAuth.getError("Erreur de connexion");
+      this.undefinedUser = true;
       alert("Erreur de connexion");
     }
   }
