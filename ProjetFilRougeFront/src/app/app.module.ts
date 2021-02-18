@@ -8,6 +8,7 @@ import { AuthentificationComponent } from './_pages/authentification/authentific
 import { FormAuthentificationComponent } from './_components/form-authentification/form-authentification.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { CategoriesComponent } from './_pages/categories/categories.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { HttpClientModule } from '@angular/common/http';
     NavbarComponent,
     HeaderComponent,
     AuthentificationComponent,
-    FormAuthentificationComponent
+    FormAuthentificationComponent,
+    CategoriesComponent
   ],
   imports: [
     BrowserModule,

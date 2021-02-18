@@ -1,0 +1,12 @@
+h2{
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+table{
+    margin: 50px;
+    width: 90%;
+}
+.danger{
+    color: red;
+}
