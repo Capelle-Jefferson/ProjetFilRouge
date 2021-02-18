@@ -1,0 +1,41 @@
+<div class="container">
+        <div class="col">
+            <form [formGroup]="questionForm" (ngSubmit)="onSubmit()">
+                <h3>Creation de la question</h3>
+                <div class="inline">
+                <label>Intitulé de la question: 
+                    <input type="text" formControlName="intitule" class="inp">
+                </label>
+                </div>
+                <div class="inline">
+                <label>type de questions: 
+                    <select class="form-select" aria-label="Default select example" formControlName="type" class="inp">
+                        <option selected>Choisissez un type de question</option>
+                        <option value="1">Text</option>
+                        <option value="2">QCM choix unique</option>
+                        <option value="3">QCM choix multiple</option>
+                    </select>
+                </label>
+                </div>
+                <div *ngIf="questionForm.value.type == 1">Reponse: 
+                    <textarea name="" id="" cols="30" rows="10" placeholder="Reponse ouverte"></textarea>
+                </div>
+                <div *ngIf="questionForm.value.type == 2">Reponse:
+                    <input type="text" placeholder="Reponse">
+                </div>
+                <div *ngIf="questionForm.value.type == 3">Reponses possibles:
+                    <div formArrayName="choixReponse">
+                        <div *ngFor="let reponse of choixReponse.controls; let i = index">
+                            <label>
+                                Reponse {{i+1}} :
+                                <input type="text" [formControlName]="i" placeholder="reponse">
+                            </label>
+                         </div>
+                         <button type="button" (click)="addNewReponse()">Ajouter une réponse</button>
+                    </div>
+    
+                </div>
+                <button type="submit" class="btn btn-success">Valider la question</button>
+            </form>
+        </div>
+</div>

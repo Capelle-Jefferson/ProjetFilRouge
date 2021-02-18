@@ -1,0 +1,9 @@
+.container{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+.card{
+    border:solid powderblue;
+    border-radius: 30px;
+}
