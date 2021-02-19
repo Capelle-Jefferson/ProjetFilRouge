@@ -9,6 +9,7 @@ import { FormAuthentificationComponent } from './_components/form-authentificati
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CategoriesComponent } from './_pages/categories/categories.component';
+import { CategoryFormComponent } from './_pages/category-form/category-form.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { CategoriesComponent } from './_pages/categories/categories.component';
     HeaderComponent,
     AuthentificationComponent,
     FormAuthentificationComponent,
-    CategoriesComponent
+    CategoriesComponent,
+    CategoryFormComponent
   ],
   imports: [
     BrowserModule,

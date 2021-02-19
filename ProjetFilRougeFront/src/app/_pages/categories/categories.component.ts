@@ -13,11 +13,17 @@ export class CategoriesComponent implements OnInit {
   categories : Category[]
   deleteIcon = "../assets/images/icons/trash.svg";
 
+  etatForm = false;
+
   constructor(private services : CategoryService) { 
   }
 
   ngOnInit(): void {
     this.services.getAll().then(data => this.categories = data);
+  }
+
+  changeEtat() {
+    this.etatForm = !this.etatForm;
   }
 
 }
