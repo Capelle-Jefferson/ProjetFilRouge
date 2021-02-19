@@ -12,4 +12,15 @@ export class CategoryService {
   getAll(): Promise<Category[]>{
     return fetch(`${environment.apiUrl}/categories`).then(resp => resp.json());
   }
+
+  create(category : Category): Promise<Category>{
+    return fetch(`${environment.apiUrl}/categories`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(category)
+    })
+    .then(resp => resp.json());
+  }
 }
