@@ -23,4 +23,12 @@ export class CategoryService {
     })
     .then(resp => resp.json());
   }
+
+  delete(id : number): Promise<number>{
+    console.log(`${environment.apiUrl}/categories/${id}`);
+    return fetch(`${environment.apiUrl}/categories/${id}`, {
+      method: 'DELETE'
+    })
+    .then(resp => resp.json());
+  }
 }
