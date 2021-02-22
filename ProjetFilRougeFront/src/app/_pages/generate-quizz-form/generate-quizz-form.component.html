@@ -1,0 +1,19 @@
+<form [formGroup]="quizzForm" (ngSubmit)="onSubmit()">
+    <h4>Générer un quizz <a routerLink="../">(-)</a></h4>
+    <label>Nombre de questions: 
+        <input type="number" formControlName="nbreQuestions" placeholder="Nombre de questions">
+    </label>
+    <label>Sélectionnez une Catégorie: 
+        <select formControlName="idCategory">
+            <option value="" disabled selected>Selectionnez une catégorie</option>
+            <option *ngFor="let cat of categories" value={{cat.idCategory}}>{{cat.nameCategory}}</option>
+        </select>
+    </label>
+    <label>Sélectionnez un niveau: 
+        <select formControlName="idLevel">
+            <option value="" disabled selected>Selectionnez un niveau</option>
+            <option *ngFor="let level of levels" value={{level.idLevel}}>{{level.nameLevel}}</option>
+        </select>
+    </label>
+    <button type="submit" class="btn btn-success">Générer</button>
+</form>

@@ -14,6 +14,7 @@ import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { GeneratesQuizzesComponent } from './_pages/generates-quizzes/generates-quizzes.component';
+import { GenerateQuizzFormComponent } from './_pages/generate-quizz-form/generate-quizz-form.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { GeneratesQuizzesComponent } from './_pages/generates-quizzes/generates-
     FormAuthentificationComponent,
     CategoriesComponent,
     CategoryFormComponent,
-    GeneratesQuizzesComponent
+    GeneratesQuizzesComponent,
+    GenerateQuizzFormComponent,
   ],
   imports: [
     BrowserModule,
