@@ -54,11 +54,11 @@ namespace ProjetFilRouge.Repositories
                 quizzQ.Comment = rdr.GetString(2);
                 if (rdr.IsDBNull(3))
                 {
-                    quizzQ.IdAnswerCandidate = null;
+                    quizzQ.AnswerCandidate = null;
                 }
                 else
                 {
-                    quizzQ.IdAnswerCandidate = rdr.GetInt32(3);
+                    quizzQ.AnswerCandidate = rdr.GetString(3);
                 }
                 
                 listQuizzQ.Add(quizzQ);
@@ -90,11 +90,11 @@ namespace ProjetFilRouge.Repositories
                 quizzQ.Comment = rdr.GetString(2);
                 if (rdr.IsDBNull(3))
                 {
-                    quizzQ.IdAnswerCandidate = null;
+                    quizzQ.AnswerCandidate = null;
                 }
                 else
                 {
-                    quizzQ.IdAnswerCandidate = rdr.GetInt32(3);
+                    quizzQ.AnswerCandidate = rdr.GetString(3);
                 }
             }
             this.CloseConnection(rdr);
@@ -138,11 +138,11 @@ namespace ProjetFilRouge.Repositories
                 quizzQ.Comment = rdr.GetString(2);
                 if (rdr.IsDBNull(3))
                 {
-                    quizzQ.IdAnswerCandidate = null;
+                    quizzQ.AnswerCandidate = null;
                 }
                 else
                 {
-                    quizzQ.IdAnswerCandidate = rdr.GetInt32(3);
+                    quizzQ.AnswerCandidate = rdr.GetString(3);
                 }
 
                 listQuizzQ.Add(quizzQ);

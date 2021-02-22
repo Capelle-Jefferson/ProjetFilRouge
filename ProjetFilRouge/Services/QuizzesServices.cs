@@ -41,6 +41,17 @@ namespace ProjetFilRouge.Services
             return quizzesDtos;
         }
 
+        internal List<FindQuizzDto> GetQuizzByCandidateId(int id)
+        {
+            List<Quizz> quizzes = quizzRepository.FindByCandidateId(id);
+            List<FindQuizzDto> quizzesDtos = new List<FindQuizzDto>();
+            foreach (Quizz quizz in quizzes)
+            {
+                quizzesDtos.Add(TransformModelToDto(quizz));
+            }
+            return quizzesDtos;
+        }
+
         /// <summary>
         ///     Récupération d'un quizz
         /// </summary>
@@ -166,7 +177,7 @@ namespace ProjetFilRouge.Services
             foreach (QuizzQuestion quizzQ in questionsQuizz)
             {
                 Question question = questionRepo.Find((int)quizzQ.IdQuestion);
-                questionsDtos.Add(TransformsModelToDTOQuestion(question, quizzQ.IdAnswerCandidate));
+                questionsDtos.Add(TransformsModelToDTOQuestion(question, quizzQ.AnswerCandidate));
             }
             return questionsDtos;
         }
@@ -188,12 +199,12 @@ namespace ProjetFilRouge.Services
         /// <param name="question">question à transformer</param>
         /// <param name="idAnswerCandidate">id de la réponse du candidat</param>
         /// <returns>FindQuizzQuestionsDto</returns>
-        private FindQuizzQuestionsDto TransformsModelToDTOQuestion(Question question, int? idAnswerCandidate)
+        private FindQuizzQuestionsDto TransformsModelToDTOQuestion(Question question, string idAnswerCandidate)
         {
             CategoryRepository catRepo = new CategoryRepository(new QueryBuilder());
             AnswerServices answerServices = new AnswerServices();
             FindAnswerDto answer = answerServices.GetAnswerById((int)question.IdAnswer);
-            FindAnswerDto candidateAnswer = idAnswerCandidate == null ? null : answerServices.GetAnswerById((int)idAnswerCandidate);
+            FindAnswerDto candidateAnswer = idAnswerCandidate == null ? null : answerServices.GetAnswerById(idAnswerCandidate);
             return new FindQuizzQuestionsDto(
                 question.IdQuestion,
                 question.Intitule,

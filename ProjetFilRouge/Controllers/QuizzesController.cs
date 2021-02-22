@@ -42,6 +42,19 @@ namespace ProjetFilRouge.Controllers
             }    
         }
 
+        [HttpGet("/api/UserQuizzes/{idCandidate}")]
+        public IActionResult GetCandidateQuizzes(int idCandidate)
+        {
+            try
+            {
+                return Ok(quizzesServices.GetQuizzByCandidateId(idCandidate));
+            }
+            catch
+            {
+                return NotFound();
+            }
+        }
+
         // POST api/<QuizzesController>
         [HttpPost("{nbreQuestion}")]
         public FindQuizzDto Get(CreateQuizzDto createQuizzDto, int nbreQuestion)

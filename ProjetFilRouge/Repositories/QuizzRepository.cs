@@ -89,6 +89,34 @@ namespace ProjetFilRouge.Repositories
             return list;
         }
 
+        public List<Quizz> FindByCandidateId(int id)
+        {
+            this.OpenConnection();
+            string request = _queryBuilder
+                .Select()
+                .From("quizz")
+                .Where("id_candidate", id)
+                .Get();
+            MySqlCommand cmd = new MySqlCommand(request, connectionSql);
+            MySqlDataReader rdr = cmd.ExecuteReader();
+            List<Quizz> list = new List<Quizz>();
+            while (rdr.Read())
+            {
+                Quizz quizz = new Quizz();
+                quizz.idQuizz = rdr.GetInt32(0);
+                quizz.codeQuizz = rdr.GetString(1);
+                if (!rdr.IsDBNull(2))
+                    quizz.date = rdr.GetDateTime(2);
+                quizz.idCategory = rdr.GetInt32(3);
+                quizz.idLevel = rdr.GetInt32(4);
+                quizz.idUser = rdr.GetInt32(5);
+                quizz.idCandidate = rdr.GetInt32(6);
+                list.Add(quizz);
+            }
+            this.CloseConnection(rdr);
+            return list;
+        }
+
         public override Quizz Update(int id, Quizz obj)
         {
             throw new NotImplementedException();
