@@ -57,7 +57,7 @@ export class GenerateQuizzFormComponent implements OnInit {
       idCategory: +this.quizzForm.get("idCategory").value,
       idLevel: +this.quizzForm.get("idLevel").value,
       idUser: this.user.idUser,
-      idCandidate: this.idCandidate,
+      idCandidat: this.idCandidate,
     }
     this.services.create(quizz, this.quizzForm.get("nbreQuestions").value);
     this.router.navigateByUrl(`/gestionQuizz/${this.idCandidate}`, { skipLocationChange: true}).then(() => {
