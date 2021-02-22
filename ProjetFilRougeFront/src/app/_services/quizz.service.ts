@@ -13,6 +13,6 @@ export class QuizzService {
   constructor() { }
 
   getUserQuizz(id: number) : Promise<Quizz[]>{
-    return fetch(`${environment.apiUrl}/UserQuizzes/${this.user.idUser}/${id}`).then(resp => resp.json());
+    return fetch(`${environment.apiUrl}/UserQuizzes/${id}`).then(resp => resp.json());
   }
 }
