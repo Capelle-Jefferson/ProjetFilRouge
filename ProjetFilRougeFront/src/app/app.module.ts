@@ -13,6 +13,7 @@ import { CategoryFormComponent } from './_pages/category-form/category-form.comp
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { GeneratesQuizzesComponent } from './_pages/generates-quizzes/generates-quizzes.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ToastrModule } from 'ngx-toastr';
     AuthentificationComponent,
     FormAuthentificationComponent,
     CategoriesComponent,
-    CategoryFormComponent
+    CategoryFormComponent,
+    GeneratesQuizzesComponent
   ],
   imports: [
     BrowserModule,
