@@ -9,17 +9,19 @@ namespace ProjetFilRouge.Dtos.QuizzQDTO
     {
 
         public FindQuizzQDto() { }
-        public FindQuizzQDto(int idQuizz, int idQuestion, string comment, int? idAnswerCandidate = null)
+        public FindQuizzQDto(int idQuizz, int idQuestion, string comment, bool? isCorrectAnswer, string answerCandidate = null)
         {
             IdQuizz = idQuizz;
             IdQuestion = idQuestion;
             Comment = comment;
-            IdAnswerCandidate = idAnswerCandidate;
+            AnswerCandidate = answerCandidate;
+            IsCorrectAnswer = isCorrectAnswer;
         }
 
         public int? IdQuizz { get; set; }
         public int? IdQuestion { get; set; }
         public string Comment { get; set; }
-        public int? IdAnswerCandidate { get; set; }
+        public bool? IsCorrectAnswer { get; set; }
+        public string AnswerCandidate { get; set; }
     }
 }

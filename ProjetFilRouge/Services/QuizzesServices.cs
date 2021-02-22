@@ -53,6 +53,25 @@ namespace ProjetFilRouge.Services
         }
 
         /// <summary>
+        ///     Récupération d'un quizz en cour, uniquement les questions qui n'ont pas était complété
+        /// </summary>
+        /// <param name="id">identitfiant du quizz à récupérer</param>
+        /// <returns>FindQuizzDto</returns>
+        public FindQuizzDto GetQuizzByIdInProgress(int id)
+        {
+            Quizz quizz = quizzRepository.Find(id);
+            FindQuizzDto quizzDto = TransformModelToDto(quizz);
+            foreach (FindQuizzQuestionsDto q in quizzDto.Questions.ToList())
+            {
+                if(q.CandidateAnswer != null)
+                {
+                    quizzDto.Questions.Remove(q);
+                }
+            }
+            return quizzDto;
+        }
+
+        /// <summary>
         ///     Récupération d'un quizz
         /// </summary>
         /// <param name="id">identitfiant du quizz à récupérer</param>
@@ -109,7 +128,7 @@ namespace ProjetFilRouge.Services
             QuizzQuestionRepository questionQuizzRepo = new QuizzQuestionRepository(new QueryBuilder());
             foreach (Question question in questions)
             {
-                QuizzQuestion quizzQuestion = new QuizzQuestion((int)quizz.idQuizz, (int)question.IdQuestion, "");
+                QuizzQuestion quizzQuestion = new QuizzQuestion((int)quizz.idQuizz, (int)question.IdQuestion, "", null);
                 questionQuizzRepo.Create(quizzQuestion);
             }
         }
@@ -199,19 +218,18 @@ namespace ProjetFilRouge.Services
         /// <param name="question">question à transformer</param>
         /// <param name="idAnswerCandidate">id de la réponse du candidat</param>
         /// <returns>FindQuizzQuestionsDto</returns>
-        private FindQuizzQuestionsDto TransformsModelToDTOQuestion(Question question, string idAnswerCandidate)
+        private FindQuizzQuestionsDto TransformsModelToDTOQuestion(Question question, string answerCandidate)
         {
             CategoryRepository catRepo = new CategoryRepository(new QueryBuilder());
             AnswerServices answerServices = new AnswerServices();
             FindAnswerDto answer = answerServices.GetAnswerById((int)question.IdAnswer);
-            FindAnswerDto candidateAnswer = idAnswerCandidate == null ? null : answerServices.GetAnswerById(idAnswerCandidate);
             return new FindQuizzQuestionsDto(
                 question.IdQuestion,
                 question.Intitule,
                 TransformeIdLevelToString((int)question.IdLevel),
                 catRepo.Find((int)question.IdLevel).NameCategory,
                 answer,
-                candidateAnswer
+                answerCandidate
             ) ;
         }
 

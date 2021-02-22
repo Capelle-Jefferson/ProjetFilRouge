@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ProjetFilRouge.Controllers
 {
-    [Route("api/[controller]")]
+   
     [ApiController]
     public class QuizzesController : ControllerBase
     {
@@ -22,14 +22,14 @@ namespace ProjetFilRouge.Controllers
         }
 
         // GET: api/<QuizzesController>
-        [HttpGet]
+        [HttpGet("api/[controller]")]
         public List<FindQuizzDto> Get()
         {
             return quizzesServices.GetQuizzes();
         }
 
         // GET api/<QuizzesController>/5
-        [HttpGet("{id}")]
+        [HttpGet("api/[controller]/{id}")]
         public IActionResult Get(int id)
         {
             try
@@ -54,16 +54,29 @@ namespace ProjetFilRouge.Controllers
                 return NotFound();
             }
         }
+        
+        [HttpGet("api/QuizzesInProgress/{id}")]
+        public IActionResult GetInProgress(int id)
+        {
+            try
+            {
+                return Ok(quizzesServices.GetQuizzByIdInProgress(id));
+            }
+            catch
+            {
+                return NotFound();
+            }
+        }
 
         // POST api/<QuizzesController>
-        [HttpPost("{nbreQuestion}")]
+        [HttpPost("api/[controller]/{nbreQuestion}")]
         public FindQuizzDto Get(CreateQuizzDto createQuizzDto, int nbreQuestion)
         {
             return this.quizzesServices.GenerateQuizz(createQuizzDto, nbreQuestion);
         }
 
         // DELETE api/<QuizzesController>/5
-        [HttpDelete("{id}")]
+        [HttpDelete("api/[controller]/{id}")]
         public int Delete(int id)
         {
             return this.quizzesServices.DeleteByIdQuizz(id);

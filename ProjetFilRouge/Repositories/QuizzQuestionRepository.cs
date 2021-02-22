@@ -60,7 +60,9 @@ namespace ProjetFilRouge.Repositories
                 {
                     quizzQ.AnswerCandidate = rdr.GetString(3);
                 }
-                
+                if (!rdr.IsDBNull(4))
+                    quizzQ.IsCorrectAnswer = rdr.GetBoolean(4);
+
                 listQuizzQ.Add(quizzQ);
             }
 
@@ -96,17 +98,19 @@ namespace ProjetFilRouge.Repositories
                 {
                     quizzQ.AnswerCandidate = rdr.GetString(3);
                 }
+                if (!rdr.IsDBNull(4))
+                    quizzQ.IsCorrectAnswer = rdr.GetBoolean(4);
             }
             this.CloseConnection(rdr);
             return quizzQ;
         }
 
-        internal void AddAnswerCandidate(int idQuizz, int idQuestion, int idAnswer)
+        internal void AddAnswerCandidate(int idQuizz, int idQuestion, string answer)
         {
             this.OpenConnection();
             string request = _queryBuilder
               .Update("quizz_question")
-              .SetQuizzQuestion(idAnswer)
+              .SetQuizzQuestion(answer)
               .Where("id_quizz", idQuizz)
               .And("id_question", idQuestion)
               .Get();
@@ -144,7 +148,8 @@ namespace ProjetFilRouge.Repositories
                 {
                     quizzQ.AnswerCandidate = rdr.GetString(3);
                 }
-
+                if(!rdr.IsDBNull(4))
+                    quizzQ.IsCorrectAnswer = rdr.GetBoolean(4);
                 listQuizzQ.Add(quizzQ);
             }
 
