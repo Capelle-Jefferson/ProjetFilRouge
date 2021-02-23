@@ -1,2 +1,12 @@
-<a routerLink="/questions">Questions</a>
-<router-outlet></router-outlet>
+<div id="container">
+  <app-header></app-header>
+
+  <!-- Si utilisateur non connecté -->
+  <app-authentification *ngIf="!user"></app-authentification><br><br>
+
+  <!-- Si utilisateur connecté -->
+  <div *ngIf="user">
+    <app-navbar></app-navbar>
+    <router-outlet></router-outlet>
+  </div>
+</div>

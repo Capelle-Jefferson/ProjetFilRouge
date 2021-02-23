@@ -1,0 +1,10 @@
+<form [formGroup]="userAuth" (ngSubmit)="onSubmit()">
+    <label>Nom d'utilisateur: 
+        <input type="text" formControlName="username" placeholder="Username">
+    </label>
+    <label>Mot de passe: 
+        <input type="password" formControlName="password">
+    </label>
+    <p class="error" *ngIf="undefinedUser">Nom d'utilisateur ou mot de passe incorrect !</p>
+    <button type="submit" class="btn btn-success">Se connecter</button>
+</form>

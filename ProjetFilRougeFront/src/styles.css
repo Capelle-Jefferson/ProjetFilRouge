@@ -1,2 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~bootstrap/dist/css/bootstrap.min.css';
+
+@import '~ngx-toastr/toastr';
+
+body{
+    width: 1024px;
+    border: 2px solid black;
+    margin: auto;
+}

@@ -1,0 +1,7 @@
+<form [formGroup]="categoryForm" (ngSubmit)="onSubmit()">
+    <h4>Ajouter une catégorie<a routerLink="../">(-)</a></h4>
+    <label>Nouvelle catégorie: 
+        <input type="text" formControlName="nameCategory" placeholder="Catégorie">
+    </label>
+    <button type="submit" class="btn btn-success">Ajouter</button>
+</form>

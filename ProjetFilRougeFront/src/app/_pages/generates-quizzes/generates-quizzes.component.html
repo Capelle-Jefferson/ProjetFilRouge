@@ -1,0 +1,24 @@
+<router-outlet ></router-outlet>
+<h2>Liste des Quizzes de {{candidate.firstname}} {{candidate.lastname}}: <a routerLink="ajouter">(+)</a></h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Code</th>
+            <th scope="col">Date</th>
+            <th scope="col">Catégorie</th>
+            <th scope="col">Niveau</th>
+            <th scope="col" class="danger">Supprimer</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let quizz of quizzes; let i = index">
+            <th scope="col">{{i+1}}</th>
+            <th>{{quizz.codeQuizz}}</th>
+            <th>{{quizz.date | date:"dd/MM/y, à hh:mm"}}</th>
+            <th>{{quizz.category}}</th>
+            <th>{{quizz.level}}</th>
+            <td><a routerLink="/gestionQuizz/idUser" (click)="delete(quizz)"><img [src]="deleteIcon" alt=""></a></td>
+        </tr>
+    </tbody>
+</table>

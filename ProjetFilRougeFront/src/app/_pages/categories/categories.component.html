@@ -1,0 +1,18 @@
+<router-outlet></router-outlet>
+<h2>Liste des catégories <a routerLink="ajouter">(+)</a></h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nom de la catégorie</th>
+            <th scope="col" class="danger">Supprimer</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let category of categories; let i = index">
+            <th scope="col">{{i+1}}</th>
+            <td>{{category.nameCategory}}</td>
+            <td><a routerLink="/categories" (click)="deleteCategory(category)"><img [src]="deleteIcon" alt=""></a></td>
+        </tr>
+    </tbody>
+</table>
