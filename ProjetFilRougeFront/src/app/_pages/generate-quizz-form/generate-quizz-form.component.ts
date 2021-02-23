@@ -53,7 +53,7 @@ export class GenerateQuizzFormComponent implements OnInit {
     localStorage.removeItem("idCandidate");
   }
 
-  onSubmit() {
+  async onSubmit() {
     let quizz = {
       idCategory: +this.quizzForm.get("idCategory").value,
       idLevel: +this.quizzForm.get("idLevel").value,
@@ -62,8 +62,8 @@ export class GenerateQuizzFormComponent implements OnInit {
     }
     let success;
     try{
-      this.services.create(quizz, this.quizzForm.get("nbreQuestions").value).then(data => success = data);
-      if(success){
+      await this.services.create(quizz, this.quizzForm.get("nbreQuestions").value).then(data => success = data);
+      if(success != undefined){
         this.toastr.success("Le quizz à bien été généré");
       }else{
         this.toastr.error("Le nombre de questions demandées surpasse le nombre de questions disponibles");
@@ -71,7 +71,7 @@ export class GenerateQuizzFormComponent implements OnInit {
     }catch{
       this.toastr.error("Le quizz n'a pas été généré");
     }
-    this.router.navigateByUrl(`/gestionQuizz/${this.idCandidate}`, { skipLocationChange: true}).then(() => {
+    this.router.navigateByUrl(`/gestionQuizz/${this.idCandidate}`, { skipLocationChange: false}).then(() => {
       this.router.navigate([`/gestionQuizz/${this.idCandidate}`]);
     })
   }
