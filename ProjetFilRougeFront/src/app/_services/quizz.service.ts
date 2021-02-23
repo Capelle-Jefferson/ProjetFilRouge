@@ -27,4 +27,12 @@ export class QuizzService {
     })
     .then(resp => resp.json());
   }
+
+  delete(id : number): Promise<number>{
+    console.log(`${environment.apiUrl}/quizzes/${id}`);
+    return fetch(`${environment.apiUrl}/quizzes/${id}`, {
+      method: 'DELETE'
+    })
+    .then(resp => resp.json());
+  }
 }
