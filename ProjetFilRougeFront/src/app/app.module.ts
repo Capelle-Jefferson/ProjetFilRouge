@@ -25,8 +25,7 @@ import { GenerateQuizzFormComponent } from './_pages/generate-quizz-form/generat
     AppComponent,
     FormQuestionComponent,
     QuestionComponent,
-    QuestionsComponent
-    
+    QuestionsComponent,
     NavbarComponent,
     HeaderComponent,
     AuthentificationComponent,

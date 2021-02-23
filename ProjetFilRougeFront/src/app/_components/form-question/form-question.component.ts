@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Answers } from 'src/app/_models/Answers';
 import { ChoiceAnswers } from 'src/app/_models/ChoiceAnswers';
+import { Question } from 'src/app/_models/question';
 import { QuestionsService } from 'src/app/_services/questions.service';
 
 @Component({
@@ -13,6 +14,7 @@ import { QuestionsService } from 'src/app/_services/questions.service';
 export class FormQuestionComponent implements OnInit {
 
   questionForm: FormGroup;
+  question : Question;
  
   
 
@@ -39,7 +41,7 @@ export class FormQuestionComponent implements OnInit {
   get listChoiceAnswer() :FormArray {
         return this.questionForm.get("answer.listChoiceAnswer.textAnswer") as FormArray;
     }
-    get listAnswers() :FormArray {
+  get listAnswers() :FormArray {
       return this.questionForm.get("answer.listChoiceAnswer.isAnswer") as FormArray;
   }
   addNewReponse() {
@@ -48,9 +50,10 @@ export class FormQuestionComponent implements OnInit {
   addNewValidation() {
     this.listAnswers.push(this.fb.control(""));
   }
-  onSubmit() { 
-      console.log(this.questionForm.value);
-      //await this.service.create(this.questionForm.value).then((question) => this.questionForm = question);
+  async onSubmit() { 
+    
+      //console.log(this.questionForm.value);
+      await this.service.create(this.questionForm.value).then((question) => this.question = question);
   }
   attribuerValue(){
     
@@ -58,25 +61,4 @@ export class FormQuestionComponent implements OnInit {
       // this.questionForm.setValue(this.questionForm.value.answer.listChoiceAnswer.textAnswer);
   }
     
-
-  
-
-  //   displayForm(){
-  //     var div = document.getElementById("addRecruteur");
-  //     if (div.style.display === "none") {
-  //       div.style.display = "block";
-  //     } else {
-  //       div.style.display = "none";
-  //     }
-  // }
-
-  //answer=>{
-      //   this.listChoiceAnswer.push(new FormGroup({
-      //     textAnswer:this.fb.control(""),
-      //     isAnswer:this.fb.control("")
-      //   }))
-      // }])
-
-      
-
 }

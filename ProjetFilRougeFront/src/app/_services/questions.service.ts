@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Question } from '../_models/question';
+import { QuestionsComponent } from '../_pages/questions/questions.component';
 
 @Injectable({
   providedIn: 'root'
@@ -13,24 +14,33 @@ export class QuestionsService {
 
   getAll():Promise<Question[]> {
     return fetch(`${environment.apiUrl}/Questions`).then(response => response.json());
-    }
-
-  // getById(id:number) : Observable<Question> {
-  //   return this.http.get<Question>(`${environment.apiUrl}/Questions/${id}`);
-  // }
-  // getByIds(idLevel:number,idCategory:number,nombreQuestion:number) : Observable<Question> {
-  //   return this.http.get<Question>(`${environment.apiUrl}/Questions/${idLevel}/${idCategory}/${nombreQuestion}`);
-  // }
-    
-  // create(question :Question) : Promise<Question>{
-  //   return fetch(`${environment.apiUrl}/Questions`).then(question=> question.pos);
-  // }
+  }
   
+  create(question :Question):Promise<Question>{
+      return fetch(`${environment.apiUrl}/Questions`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(question)
+      })
+      .then(resp => resp.json());
+  }
 
-  // delete(id:number) :Observable<Question>{
-  //   return this.http.delete<Question>(`${environment.apiUrl}/Questions/${id}`);
+  delete(id : number): Promise<number>{
+      console.log(`${environment.apiUrl}/Questions/${id}`);
+      return fetch(`${environment.apiUrl}/Questions/${id}`, {
+        method: 'DELETE'
+      })
+      .then(resp => resp.json());
+  }
 
-  // }
+  get(id : number): Promise<Question>{
+    return fetch(`${environment.apiUrl}/Questions/${id}`).then(resp => resp.json());
+  }
 
-
+  getByIds(idLevel:number,idCategory:number,nombreQuestion:number) : Promise<Question> {
+    return fetch(`${environment.apiUrl}/Questions/${idLevel}/${idCategory}/${nombreQuestion}`).then(resp=>resp.json());
+  }
+  
 }
