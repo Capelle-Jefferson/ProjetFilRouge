@@ -1,7 +1,5 @@
 .container{
-    display: flex;
-    justify-content: center;
-    text-align: center;
+    display: inline;
 }
 .card{
     border:solid powderblue;

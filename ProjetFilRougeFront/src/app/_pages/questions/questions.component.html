@@ -1,9 +1,9 @@
 <div class="container">
-    <div>
+    <div class="part">
         <button routerLink="formQuestion" class="btn btn-info"> Creer une question </button>
         <router-outlet></router-outlet>
     </div>
-    <div>
+    <div class="part">
         <h2>Voici la liste des questions :</h2>
         <p *ngFor="let question of questions" >
             <app-question [question]="question"></app-question>

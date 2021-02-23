@@ -22,9 +22,10 @@ export class QuestionsService {
   //   return this.http.get<Question>(`${environment.apiUrl}/Questions/${idLevel}/${idCategory}/${nombreQuestion}`);
   // }
     
-  // create(questions :Question) : Observable<Question>{
-  //   return this.http.post<Question>(`${environment.apiUrl}/Questions`,questions);
+  // create(question :Question) : Promise<Question>{
+  //   return fetch(`${environment.apiUrl}/Questions`).then(question=> question.pos);
   // }
+  
 
   // delete(id:number) :Observable<Question>{
   //   return this.http.delete<Question>(`${environment.apiUrl}/Questions/${id}`);
