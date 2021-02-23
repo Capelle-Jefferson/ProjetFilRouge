@@ -30,13 +30,19 @@ export class GeneratesQuizzesComponent implements OnInit {
     private toastr: ToastrService
     ) { }
 
-  ngOnInit(): void {
+   async ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
       this.idCandidate = +params['id'];
-      this.service.getUserQuizz(this.idCandidate).then(data => this.quizzes = data);
     })
+    try{
+      await this.serviceCandidate.get(this.idCandidate).then(data => this.candidate = data);
+    }catch{
+      // ICI AJOUTER URL DE LA PAGE USER !!!!!!!!!!!!!
+      this.router.navigateByUrl(`/`)
+    }
+    this.service.getUserQuizz(this.idCandidate).then(data => this.quizzes = data);
+
     localStorage.setItem("idCandidate", this.idCandidate.toString());
-    this.serviceCandidate.get(this.idCandidate).then(data => this.candidate = data);
   }
 
   delete(quizz: Quizz){

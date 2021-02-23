@@ -1,3 +1,5 @@
+import { QuizzQuestion } from "./quizzQuestion";
+
 export class Quizz{
     private _idQuizz: number;
     private _codeQuizz : string;
@@ -6,8 +8,12 @@ export class Quizz{
     private _idLevel: number;
     private _idUser: number;
     private _idCandidate: number;
+    private _questions : QuizzQuestion[];
 
-    constructor(codeQuizz : string, date: Date, idCategory : number, idLevel: number, idUser: number, idCandidate: number, idQuizz: number = null){
+    constructor(codeQuizz : string, date: Date, idCategory : number,
+                idLevel: number, idUser: number, idCandidate: number,
+                questions: QuizzQuestion[], idQuizz: number = null)
+    {
         this._idQuizz = idQuizz;
         this._codeQuizz = codeQuizz;
         this._date = date;
@@ -15,6 +21,7 @@ export class Quizz{
         this._idLevel = idLevel;
         this._idUser = idUser;
         this._idCandidate = idCandidate;
+        this._questions = questions;
     } 
 
     get idQuizz(): number{
@@ -37,6 +44,9 @@ export class Quizz{
     }
     get idCandidate(): number{
         return this._idCandidate;
+    }
+    get questions() : QuizzQuestion[]{
+        return this._questions;
     }
 
     set codeQuizz(code : string){
