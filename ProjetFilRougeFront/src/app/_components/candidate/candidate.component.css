@@ -1,0 +1,7 @@
+.container{
+    display: inline;
+}
+.card{
+    border:solid powderblue;
+    border-radius: 30px;
+}

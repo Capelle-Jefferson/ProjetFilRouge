@@ -19,6 +19,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { GeneratesQuizzesComponent } from './_pages/generates-quizzes/generates-quizzes.component';
 import { GenerateQuizzFormComponent } from './_pages/generate-quizz-form/generate-quizz-form.component';
+import { CandidateComponent } from './_component/candidate/candidate.component';
+import { CandidatesComponent } from './_pages/candidates/candidates.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,8 @@ import { GenerateQuizzFormComponent } from './_pages/generate-quizz-form/generat
     CategoryFormComponent,
     GeneratesQuizzesComponent,
     GenerateQuizzFormComponent,
+    CandidateComponent,
+    CandidatesComponent,
   ],
   imports: [
     BrowserModule,
