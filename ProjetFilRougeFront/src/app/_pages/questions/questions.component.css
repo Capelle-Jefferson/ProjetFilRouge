@@ -2,7 +2,8 @@
     display: flex;
     flex-direction: column;
 }
-.part{
+.part2{
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }

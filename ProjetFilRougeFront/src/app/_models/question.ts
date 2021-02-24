@@ -4,44 +4,48 @@ export class Question {
 
     private _id : number;
     private _intitule :string;
-    private _category:string;
-    private _level:string;
+    private _idcategory:number;
+    private _idlevel:number;
     private _answer : Answers;
 
-    constructor (id:number,intitule:string,category:string,level:string,answer:Answers){
-        this._id=id;
+    constructor (intitule:string,category:number,level:number,answer:Answers,id:number){
+        
         this._intitule=intitule;
-        this._category=category;
-        this._level=level;
+        this._idcategory=category;
+        this._idlevel=level;
         this._answer=answer;
+        this._id=id
     }
 
-    get id(){
+    get id():number{
         return this._id;
     }
-    get intitule(){
+    get intitule():string{
         return this._intitule;
     }
-    get category(){
-        return this._category;
+    get idcategory():number{
+        return this._idcategory;
     }
-    get level(){
-        return this._level;
+    get idlevel():number{
+        return this._idlevel;
     }
-    get answer(){
+    get answer():Answers{
         return this._answer;
     }
 
-    set id(id){
+    set id(id:number){
         this._id=id;
     }
-    set category(category){
-        this._category=category;
+    set intitule(intitule:string){
+        this._intitule=intitule;
     }
-    set level(level){
-        this._level=level;
+    set category(category:number){
+        this._idcategory=category;
     }
-    set answer(answer){
+    set level(level:number){
+        this._idlevel=level;
+    }
+    set answer(answer:Answers){
         this._answer=answer;
     }
 

@@ -7,20 +7,20 @@
                     <input type="text" formControlName="intitule" class="inp">
                 </label>
                 <label>Categorie:
-                    <select class="form-select" aria-label="Default select example" formControlName="category"
+                    <select class="form-select" aria-label="Default select example" formControlName="idcategory"
                         class="inp">
                         <option selected>Choisissez une categorie</option>
-                        <option value="C#">C#</option>
-                        <option value="Angular">Angular</option>
-                        <option value="Java">Java</option>
+                        <option value="1">C#</option>
+                        <option value="3">Angular</option>
+                        <option value="2">Java</option>
                     </select>
                 </label>
                 <label>Niveau:
-                    <select class="form-select" aria-label="Default select example" formControlName="level" class="inp">
+                    <select class="form-select" aria-label="Default select example" formControlName="idlevel" class="inp">
                         <option selected>Choisissez un niveau</option>
-                        <option value="Junior">Junior</option>
-                        <option value="Confirmé">Confirmé</option>
-                        <option value="Expert">Expert</option>
+                        <option value="1">Junior</option>
+                        <option value="2">Confirmé</option>
+                        <option value="3">Expert</option>
                     </select>
                 </label>
             </div>
@@ -29,11 +29,11 @@
                     <select class="form-select" aria-label="Default select example" formControlName="typeAnswer"
                         class="inp">
                         <option selected>Choisissez un type de question</option>
-                        <option value="text">Text</option>
-                        <option value="QCM">QCM</option>
+                        <option value="2">Text</option>
+                        <option value="1">QCM</option>
                     </select>
                 </label>
-                <div *ngIf="questionForm.value.answer.typeAnswer == 'text'">
+                <div *ngIf="questionForm.value.answer.typeAnswer == 2">
                     <label>Explication:
                         <input type="text" formControlName="explication" class="inp">
                     </label>
@@ -43,7 +43,7 @@
                         </textarea>
                     </label>
                 </div>
-                <div *ngIf="questionForm.value.answer.typeAnswer == 'QCM'">
+                <div *ngIf="questionForm.value.answer.typeAnswer == 1">
                     <label>Explication:
                         <input type="text" formControlName="explication" class="inp">
                     </label>
@@ -65,7 +65,6 @@
                                     id="check" >false
                                 </div>
                                 <button type="button"  (click)="addNewReponse()">Ajouter une réponse</button>
-                                <button type="button"  (click)="addNewValidation()">Ajouter une validation</button>
                             </div>
                         </label>
                     </div>
