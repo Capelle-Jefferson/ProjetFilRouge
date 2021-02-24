@@ -1,9 +1,7 @@
 
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Question } from '../_models/question';
-import { QuestionsComponent } from '../_pages/questions/questions.component';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +14,7 @@ export class QuestionsService {
     return fetch(`${environment.apiUrl}/Questions`).then(response => response.json());
   }
   
-  create(question :Question):Promise<Question>{
+  create(question :any):Promise<Question>{
       return fetch(`${environment.apiUrl}/Questions`, {
         method: 'POST',
         headers: {

@@ -3,28 +3,29 @@ export class ChoiceAnswers {
     private _textAnswer : string;
     private _isAnswer : boolean;
 
-    constructor(id:number,textAnswer:string,isAnswer:boolean){
-        this._id=id;
+    constructor(textAnswer:string,isAnswer:boolean,id:number){
+        
         this._textAnswer=textAnswer;
         this._isAnswer=isAnswer;
-    }
-
-    get id(){
-        return this._id;
-    }
-    get textAnswer(){
-        return this._textAnswer;
-    }
-    get isAnswer(){
-        return this._isAnswer;
-    }
-    set id(id){
         this._id=id;
     }
-    set textAnswer(textAnswer){
+
+    get id():number{
+        return this._id;
+    }
+    get textAnswer():string{
+        return this._textAnswer;
+    }
+    get isAnswer():boolean{
+        return this._isAnswer;
+    }
+    set id(id:number){
+        this._id=id;
+    }
+    set textAnswer(textAnswer:string){
         this._textAnswer=textAnswer;
     }
-    set isAnswer (isAnswer){
+    set isAnswer (isAnswer:boolean){
         this._isAnswer=isAnswer;
     }
 }
