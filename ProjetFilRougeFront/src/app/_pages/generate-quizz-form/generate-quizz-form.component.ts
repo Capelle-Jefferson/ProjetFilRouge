@@ -1,3 +1,4 @@
+import { ifStmt } from '@angular/compiler/src/output/output_ast';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -52,17 +53,26 @@ export class GenerateQuizzFormComponent implements OnInit {
     localStorage.removeItem("idCandidate");
   }
 
-  onSubmit() {
+  async onSubmit() {
     let quizz = {
       idCategory: +this.quizzForm.get("idCategory").value,
       idLevel: +this.quizzForm.get("idLevel").value,
       idUser: this.user.idUser,
       idCandidat: this.idCandidate,
     }
-    this.services.create(quizz, this.quizzForm.get("nbreQuestions").value);
-    this.router.navigateByUrl(`/gestionQuizz/${this.idCandidate}`, { skipLocationChange: true}).then(() => {
+    let success;
+    try{
+      await this.services.create(quizz, this.quizzForm.get("nbreQuestions").value).then(data => success = data);
+      if(success != undefined){
+        this.toastr.success("Le quizz à bien été généré");
+      }else{
+        this.toastr.error("Le nombre de questions demandées surpasse le nombre de questions disponibles");
+      }
+    }catch{
+      this.toastr.error("Le quizz n'a pas été généré");
+    }
+    this.router.navigateByUrl(`/gestionQuizz/${this.idCandidate}`, { skipLocationChange: false}).then(() => {
       this.router.navigate([`/gestionQuizz/${this.idCandidate}`]);
-    this.toastr.success("Le quizz à bien été généré");
     })
   }
 }
