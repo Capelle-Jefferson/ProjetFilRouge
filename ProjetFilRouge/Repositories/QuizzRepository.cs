@@ -89,13 +89,13 @@ namespace ProjetFilRouge.Repositories
             return list;
         }
 
-        public List<Quizz> FindByCandidateId(int id)
+        public List<Quizz> FindByCandidateId(int idCandidate)
         {
             this.OpenConnection();
             string request = _queryBuilder
                 .Select()
                 .From("quizz")
-                .Where("id_candidate", id)
+                .Where("id_candidate", idCandidate)
                 .Get();
             MySqlCommand cmd = new MySqlCommand(request, connectionSql);
             MySqlDataReader rdr = cmd.ExecuteReader();

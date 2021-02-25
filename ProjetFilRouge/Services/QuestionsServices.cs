@@ -132,8 +132,8 @@ namespace ProjetFilRouge.Services
             return new FindQuestionsDto(
                 question.IdQuestion,
                 question.Intitule,
-                lvlRepo.Find((int)question.IdCategory).NameLevel,
-                catRepo.Find((int)question.IdLevel).NameCategory,
+                catRepo.Find((int)question.IdCategory).NameCategory,
+                lvlRepo.Find((int)question.IdLevel).NameLevel,
                 answer
             );
         }

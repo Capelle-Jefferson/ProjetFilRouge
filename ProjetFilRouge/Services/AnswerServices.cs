@@ -44,7 +44,7 @@ namespace ProjetFilRouge.Services
         /// <returns></returns>
         private Answer TransformDtoToModel(CreateAnswerDto ans)
         {
-            return new Answer(null, ans.TypeAnswer, ans.Explication, ans.TextAnswer);
+            return new Answer(null, ConvertStringToTypeAnswer(ans.TypeAnswer), ans.Explication, ans.TextAnswer);
         }
 
         /// <summary>
@@ -91,6 +91,21 @@ namespace ProjetFilRouge.Services
                     return "Text";
                 default:
                     return "Text";
+            }
+        }
+        private TypeAnswer ConvertStringToTypeAnswer(string type)
+        {
+            type = type.ToLower();
+            switch (type)
+            {
+                case "qcm":
+                    return TypeAnswer.QCM;
+                case "qcm_multiple":
+                    return TypeAnswer.QCM_multiple;
+                case "text":
+                    return TypeAnswer.Text;
+                default:
+                    throw new Exception("Le type answer n'est pas reconnus");
             }
         }
 

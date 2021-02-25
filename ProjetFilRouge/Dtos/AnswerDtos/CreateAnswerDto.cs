@@ -12,7 +12,7 @@ namespace ProjetFilRouge.Dtos.AnswerDtos
         {
         }
 
-        public CreateAnswerDto(Models.TypeAnswer typeAnswer, string explication, string textAnswer, List<CreateChoiceAnswerDto> listChoiceAnswer)
+        public CreateAnswerDto(string typeAnswer, string explication, string textAnswer, List<CreateChoiceAnswerDto> listChoiceAnswer)
         {
             TypeAnswer = typeAnswer;
             Explication = explication;
@@ -20,7 +20,7 @@ namespace ProjetFilRouge.Dtos.AnswerDtos
             ListChoiceAnswer = listChoiceAnswer;
         }
 
-        public Models.TypeAnswer TypeAnswer { get; set; }
+        public string TypeAnswer { get; set; }
         public string Explication { get; set; }
         public string TextAnswer { get; set; }
 
