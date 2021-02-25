@@ -20,6 +20,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { GeneratesQuizzesComponent } from './_pages/generates-quizzes/generates-quizzes.component';
 import { GenerateQuizzFormComponent } from './_pages/generate-quizz-form/generate-quizz-form.component';
 import { CandidatesComponent } from './_pages/candidates/candidates.component';
+import { CandidateFormComponent } from './_pages/candidate-form/candidate-form.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { CandidatesComponent } from './_pages/candidates/candidates.component';
     GeneratesQuizzesComponent,
     GenerateQuizzFormComponent,
     CandidatesComponent,
+    CandidateFormComponent,
   ],
   imports: [
     BrowserModule,

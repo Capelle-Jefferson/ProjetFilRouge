@@ -1,8 +1,16 @@
-.container{
-    display: flex;
-    flex-direction: column;
+.btn{
+    margin-top: 25px;
+    margin-left: 5%;
 }
-.part{
-    display: flex;
-    justify-content: center;
+h2{
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+table{
+    margin: 50px;
+    width: 90%;
+}
+.danger{
+    color: red;
 }

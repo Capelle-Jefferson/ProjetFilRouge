@@ -13,8 +13,12 @@ export class CandidateService {
     return fetch(`${environment.apiUrl}/Candidate`).then(response => response.json());
   }
 
+  getByIdUser(id: number) : Promise<Candidate[]>{
+    return fetch(`${environment.apiUrl}/candidatesUser/${id}`).then(resp => resp.json());
+  }
+
   get(id: number) : Promise<Candidate>{
-    return fetch(`${environment.apiUrl}/Candidate/${id}`).then(resp => resp.json());
+    return fetch(`${environment.apiUrl}/candidate/${id}`).then(resp => resp.json());
   }
 
   create(candidat :Candidate):Promise<Candidate>{

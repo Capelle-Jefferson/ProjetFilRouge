@@ -1,0 +1,19 @@
+<form [formGroup]="candidateForm" (ngSubmit)="onSubmit()">
+    <h4>Ajouter un candidat <a routerLink="../">(-)</a></h4>
+    <label>Prénom: 
+        <input type="text" formControlName="firstname" placeholder="Prénom">
+    </label>
+    <label>Nom: 
+        <input type="text" formControlName="lastname" placeholder="Nom">
+    </label>
+    <label>Email: 
+        <input type="text" formControlName="email" placeholder="Email">
+    </label>
+    <label>Sélectionnez un niveau: 
+        <select formControlName="idLevel">
+            <option value="" disabled selected>Selectionnez un niveau</option>
+            <option *ngFor="let level of levels" value={{level.idLevel}}>{{level.nameLevel}}</option>
+        </select>
+    </label>
+    <button type="submit" class="btn btn-success">Ajouter</button>
+</form>
