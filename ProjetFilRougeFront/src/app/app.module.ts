@@ -1,12 +1,16 @@
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { from } from 'rxjs';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { FormQuestionComponent } from './_components/form-question/form-question.component';
+import { QuestionComponent } from './_components/question/question.component';
+import { QuestionsComponent } from './_pages/questions/questions.component';
 import { NavbarComponent } from './_components/navbar/navbar.component';
 import { HeaderComponent } from './_components/header/header.component';
 import { AuthentificationComponent } from './_pages/authentification/authentification.component';
 import { FormAuthentificationComponent } from './_components/form-authentification/form-authentification.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CategoriesComponent } from './_pages/categories/categories.component';
 import { CategoryFormComponent } from './_pages/category-form/category-form.component';
@@ -19,6 +23,9 @@ import { GenerateQuizzFormComponent } from './_pages/generate-quizz-form/generat
 @NgModule({
   declarations: [
     AppComponent,
+    FormQuestionComponent,
+    QuestionComponent,
+    QuestionsComponent,
     NavbarComponent,
     HeaderComponent,
     AuthentificationComponent,

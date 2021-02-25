@@ -1,0 +1,74 @@
+<div class="container">
+    <div class="col">
+        <form [formGroup]="questionForm" (ngSubmit)="onSubmit()">
+            <h3>Creation de la question</h3>
+            <div class="inline">
+                <label>Intitulé de la question:
+                    <input type="text" formControlName="intitule" class="inp">
+                </label>
+                <label>Categorie:
+                    <select class="form-select" aria-label="Default select example" formControlName="idcategory"
+                        class="inp">
+                        <option disable selected>Choisissez une categorie</option>
+                        <option *ngFor="let cat of categories" value="{{cat.idCategory}}">{{cat.nameCategory}}</option>
+                    </select>
+                </label>
+                <label>Niveau:
+                    <select class="form-select" aria-label="Default select example" formControlName="idlevel" class="inp">
+                        <option selected>Choisissez un niveau</option>
+                        <option *ngFor="let level of levels" value="{{level.idLevel}}">{{level.nameLevel}}</option>
+                    </select>
+                </label>
+            </div>
+            <div class="inline" formGroupName="answer">
+                <label>type de questions:
+                    <select class="form-select" aria-label="Default select example" formControlName="typeAnswer"
+                        class="inp">
+                        <option selected>Choisissez un type de question</option>
+                        <option value="text">Text</option>
+                        <option value="qcm">QCM</option>
+                    </select>
+                </label>
+                <!--Si on veut une question avec une réponse ouverte-->
+                <div *ngIf="questionForm.value.answer.typeAnswer == 'text'">
+                    <label>Explication:
+                        <input type="text" formControlName="explication" class="inp">
+                    </label>
+                    <label>Reponse:
+                        <textarea name="" id="" cols="30" rows="10" placeholder="Reponse ouverte"
+                            formControlName="textAnswer">
+                        </textarea>
+                    </label>
+                </div>
+                <!--Si on veut une question QCM-->
+                <div *ngIf="questionForm.value.answer.typeAnswer == 'qcm'">
+                    <label>Explication:
+                        <input type="text" formControlName="explication" class="inp">
+                    </label>
+                    <div formGroupName="listChoiceAnswer">
+                        <label>Reponses possibles:
+                            <div>
+                                <div *ngFor="let answer of listChoiceAnswer.controls; let i = index"
+                                    formArrayName="textAnswer">
+                                    Reponse {{i+1}} :
+                                    <input type="text" [formControlName]="i" placeholder="reponse"
+                                        >
+                                </div>
+                                <div *ngFor="let answer of listAnswers.controls; let i = index"
+                                    formArrayName="isAnswer">
+                                    Validité{{i+1}}:
+                                    <input type="radio" [formControlName]="i" value="true"
+                                        id="check">true
+                                    <input type="radio" [formControlName]="i" value="false"
+                                    id="check" >false
+                                </div>
+                                <button type="button"  (click)="addNewReponse()">Ajouter une réponse</button>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success">Valider la question</button>
+        </form>
+    </div>
+</div>

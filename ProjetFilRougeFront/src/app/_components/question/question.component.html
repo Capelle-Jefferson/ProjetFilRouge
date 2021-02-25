@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">Questions</h5>
+      <h6 class="card-subtitle mb-2 text-muted">{{question.intitule}}</h6>
+      <div class="card-text">
+        <div class="cat">categorie : {{question.category}}</div>
+        <div>levels : {{question.level}}</div>
+      </div>
+      <div class="card-action">
+        <a routerLink="/questions" (click)="deleteQuestion(question)"><img [src]="deleteIcon" alt=""></a>
+      </div>
+    </div>
+  </div>
+</div>

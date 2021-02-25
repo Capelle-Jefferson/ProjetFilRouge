@@ -1,0 +1,7 @@
+.container{
+    display: inline;
+}
+.card{
+    border:solid 1px #3b5f87;
+    border-radius: 30px;
+}
