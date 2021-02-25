@@ -33,12 +33,12 @@ export class QuestionsService {
       .then(resp => resp.json());
   }
 
-  get(id : number): Promise<Question>{
-    return fetch(`${environment.apiUrl}/Questions/${id}`).then(resp => resp.json());
-  }
+  // get(id : number): Promise<Question>{
+  //   return fetch(`${environment.apiUrl}/Questions/${id}`).then(resp => resp.json());
+  // }
 
-  getByIds(idLevel:number,idCategory:number,nombreQuestion:number) : Promise<Question> {
-    return fetch(`${environment.apiUrl}/Questions/${idLevel}/${idCategory}/${nombreQuestion}`).then(resp=>resp.json());
-  }
+  // getByIds(idLevel:number,idCategory:number,nombreQuestion:number) : Promise<Question> {
+  //   return fetch(`${environment.apiUrl}/Questions/${idLevel}/${idCategory}/${nombreQuestion}`).then(resp=>resp.json());
+  // }
   
 }

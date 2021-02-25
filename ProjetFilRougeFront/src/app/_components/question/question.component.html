@@ -8,9 +8,7 @@
         <div>levels : {{question.level}}</div>
       </div>
       <div class="card-action">
-        <button type="button" routerlink="/Question" class="btn btn-default btn-lg" (click)="deleteQuestion(question)">
-          <span class="glyphicon glyphicon-delete" aria-hidden="true"></span> Delete
-        </button>
+        <a routerLink="/questions" (click)="deleteQuestion(question)"><img [src]="deleteIcon" alt=""></a>
       </div>
     </div>
   </div>

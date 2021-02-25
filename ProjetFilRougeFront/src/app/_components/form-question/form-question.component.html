@@ -9,18 +9,14 @@
                 <label>Categorie:
                     <select class="form-select" aria-label="Default select example" formControlName="idcategory"
                         class="inp">
-                        <option selected>Choisissez une categorie</option>
-                        <option value="1">C#</option>
-                        <option value="3">Angular</option>
-                        <option value="2">Java</option>
+                        <option disable selected>Choisissez une categorie</option>
+                        <option *ngFor="let cat of categories" value="{{cat.idCategory}}">{{cat.nameCategory}}</option>
                     </select>
                 </label>
                 <label>Niveau:
                     <select class="form-select" aria-label="Default select example" formControlName="idlevel" class="inp">
                         <option selected>Choisissez un niveau</option>
-                        <option value="1">Junior</option>
-                        <option value="2">Confirmé</option>
-                        <option value="3">Expert</option>
+                        <option *ngFor="let level of levels" value="{{level.idLevel}}">{{level.nameLevel}}</option>
                     </select>
                 </label>
             </div>
@@ -29,11 +25,12 @@
                     <select class="form-select" aria-label="Default select example" formControlName="typeAnswer"
                         class="inp">
                         <option selected>Choisissez un type de question</option>
-                        <option value="2">Text</option>
-                        <option value="1">QCM</option>
+                        <option value="text">Text</option>
+                        <option value="qcm">QCM</option>
                     </select>
                 </label>
-                <div *ngIf="questionForm.value.answer.typeAnswer == 2">
+                <!--Si on veut une question avec une réponse ouverte-->
+                <div *ngIf="questionForm.value.answer.typeAnswer == 'text'">
                     <label>Explication:
                         <input type="text" formControlName="explication" class="inp">
                     </label>
@@ -43,7 +40,8 @@
                         </textarea>
                     </label>
                 </div>
-                <div *ngIf="questionForm.value.answer.typeAnswer == 1">
+                <!--Si on veut une question QCM-->
+                <div *ngIf="questionForm.value.answer.typeAnswer == 'qcm'">
                     <label>Explication:
                         <input type="text" formControlName="explication" class="inp">
                     </label>

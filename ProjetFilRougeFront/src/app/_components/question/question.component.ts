@@ -13,6 +13,9 @@ import { QuestionsService } from 'src/app/_services/questions.service';
 export class QuestionComponent implements OnInit {
 
   @Input() question : Question;
+  deleteIcon = "../assets/images/icons/trash.svg";
+
+
   constructor(private serviceQ:QuestionsService,private serviceA:AnswerService,private router: Router,
     private toastr: ToastrService) { }
 
@@ -20,11 +23,15 @@ export class QuestionComponent implements OnInit {
   }
 
   deleteQuestion(question : Question){
-    let res : Number;
-    this.serviceQ.delete(question.id).then(data => res = data );
-    this.router.navigateByUrl("question", { skipLocationChange: true}).then(() => {
-      this.router.navigate(["/Questions"]);
-    this.toastr.success("La question a bien était supprimée");
+    try {
+       this.serviceQ.delete(question.idQuestion);
+       this.toastr.success("La question a bien était supprimée");
+    }
+    catch {
+        this.toastr.warning("La question appartient à un quizz, elle ne peut pas être supprimée")
+    }
+    this.router.navigateByUrl("/QuestionComponent", { skipLocationChange: true}).then(() => {
+    this.router.navigate(["/questions"]);
     })
   }
 
