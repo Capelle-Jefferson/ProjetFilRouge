@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Candidate } from 'src/app/_models/candidate';
 import { Quizz } from 'src/app/_models/quizz';
-import { User } from 'src/app/_models/user';
 import { CandidateService } from 'src/app/_services/candidate.service';
 import { QuizzService } from 'src/app/_services/quizz.service';
 import { UserService } from 'src/app/_services/user.service';

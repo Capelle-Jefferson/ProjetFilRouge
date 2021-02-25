@@ -1,0 +1,26 @@
+<router-outlet></router-outlet>
+<h2>Liste des candidats : <a routerLink="ajouter">(+)</a></h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Prénom</th>
+            <th scope="col">Nom</th>
+            <th scope="col">Email</th>
+            <th scope="col">Niveau</th>
+            <th scope="col">Quizzes</th>
+            <th scope="col" class="danger">Supprimer</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let candidate of candidates; let i = index">
+            <th scope="col">{{i+1}}</th>
+            <td>{{candidate.firstname}}</td>
+            <td>{{candidate.lastname}}</td>
+            <td>{{candidate.email}}</td>
+            <td>{{candidate.level}}</td>
+            <td><a routerLink="/gestionQuizz/{{candidate.idCandidate}}"><img [src]="quizzIcon"></a></td>
+            <td><a routerLink="/candidats" (click)="deleteCandidate(candidate)"><img [src]="deleteIcon" alt=""></a></td>
+        </tr>
+    </tbody>
+</table>   

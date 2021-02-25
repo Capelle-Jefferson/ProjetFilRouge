@@ -35,4 +35,23 @@ export class Candidate{
         return this._idUser;
     }
 
+    set idCandidate(id){
+        this._idCandidate=id;
+    }
+    set firstname(fn){
+        this._lastname=fn;
+    }
+    set lastname(ln){
+        this._lastname=ln;
+    }
+    set email(email){
+        this._email=email;
+    }
+    set idLevel(lv){
+        this._idLevel=lv;
+    }
+    set idUser(u){
+        this._idUser=u;
+    }
+
 }
