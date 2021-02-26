@@ -1,11 +1,15 @@
 <div class="container">
   <div class="card" style="width: 18rem;">
     <div class="card-body">
-      <h5 class="card-title">Questions</h5>
-      <h6 class="card-subtitle mb-2 text-muted">{{question.intitule}}</h6>
+      <div id="badgeType" class="badge badge-pill">{{question.answer.typeAnswer}}</div>
+      <h5 class="card-title">{{question.intitule}}</h5>
+      <div *ngIf="istypeAnswer">
+        <p class="card-subtitle mb-2 text-muted"*ngFor="let choiceAnswer of question.answer.listChoiceAnswer; let i = index">
+          Réponse {{i+1}}: {{choiceAnswer.textAnswer}}</p>
+      </div>
       <div class="card-text">
-        <div class="cat">categorie : {{question.category}}</div>
-        <div>levels : {{question.level}}</div>
+        <div class="badge badge-pill badge-info">{{question.category}}</div>
+        <div class="badge badge-pill badge-warning">{{question.level}}</div>
       </div>
       <div class="card-action">
         <a routerLink="/questions" (click)="deleteQuestion(question)"><img [src]="deleteIcon" alt=""></a>

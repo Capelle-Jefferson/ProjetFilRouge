@@ -2,12 +2,12 @@ import { ChoiceAnswers } from "./ChoiceAnswers";
 
 export class Answers{
     private _id :number;
-    private _typeAnswer :number;
+    private _typeAnswer :string;
     private _explication :string;
     private _textAnswer:string;
     private _listChoiceAnswer: ChoiceAnswers[];
 
-    constructor(typeAnswer:number,explication:string,textAnswer:string,listChoiceAnswer:ChoiceAnswers[],id:number)
+    constructor(typeAnswer:string,explication:string,textAnswer:string,listChoiceAnswer:ChoiceAnswers[],id:number)
     {
         this._typeAnswer=typeAnswer;
         this._explication=explication;
@@ -19,7 +19,7 @@ export class Answers{
     get id():number{
         return this._id;
     }
-    get typeAnswer():number{
+    get typeAnswer():string{
         return this._typeAnswer
     }
     get explication():string{
@@ -34,7 +34,7 @@ export class Answers{
     set id(id:number){
         this._id=id;
     }
-    set typeAnswer(typeAnswer:number){
+    set typeAnswer(typeAnswer:string){
         this._typeAnswer=typeAnswer;
     }
     set explication(explication:string){

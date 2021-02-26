@@ -13,13 +13,18 @@ import { QuestionsService } from 'src/app/_services/questions.service';
 export class QuestionComponent implements OnInit {
 
   @Input() question : Question;
+  
   deleteIcon = "../assets/images/icons/trash.svg";
+  istypeAnswer:boolean;
 
 
   constructor(private serviceQ:QuestionsService,private serviceA:AnswerService,private router: Router,
     private toastr: ToastrService) { }
 
   ngOnInit(): void {
+    this.istypeAnswer = this.question.answer.typeAnswer != 'text'
+    console.log(this.question);
+    console.log(this.istypeAnswer);
   }
 
   deleteQuestion(question : Question){

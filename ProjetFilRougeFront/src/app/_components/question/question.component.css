@@ -2,6 +2,10 @@
     display: inline;
 }
 .card{
-    border:solid 1px #3b5f87;
+    border:solid 1px #4d618d;
     border-radius: 30px;
+    font-size: 22px;
+}
+#badgeType{
+    background-color:rgb(216, 116, 116);
 }
