@@ -23,6 +23,7 @@ import { CandidatesComponent } from './_pages/candidates/candidates.component';
 import { CandidateFormComponent } from './_pages/candidate-form/candidate-form.component';
 import { ConnexionQuizzComponent } from './_pages/connexion-quizz/connexion-quizz.component';
 import { ConnexionQuizzFormComponent } from './_components/connexion-quizz-form/connexion-quizz-form.component';
+import { DetailsQuizzComponent } from './_pages/details-quizz/details-quizz.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { ConnexionQuizzFormComponent } from './_components/connexion-quizz-form/
     CandidateFormComponent,
     ConnexionQuizzComponent,
     ConnexionQuizzFormComponent,
+    DetailsQuizzComponent,
   ],
   imports: [
     BrowserModule,

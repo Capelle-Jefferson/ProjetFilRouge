@@ -17,6 +17,10 @@ export class QuizzService {
     }
   }
 
+  get(id: number) : Promise<Quizz>{
+    return fetch(`${environment.apiUrl}/Quizzes/${id}`).then(resp => resp.json());
+  }
+
   getUserQuizz(id: number) : Promise<Quizz[]>{
     return fetch(`${environment.apiUrl}/UserQuizzes/${id}`).then(resp => resp.json());
   }

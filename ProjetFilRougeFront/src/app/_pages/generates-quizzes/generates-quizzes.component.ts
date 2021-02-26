@@ -18,7 +18,9 @@ export class GeneratesQuizzesComponent implements OnInit {
   idCandidate: number;
   candidate: Candidate;
   quizzes: Quizz[];
+
   deleteIcon = "../assets/images/icons/trash.svg";
+  detailsIcon = "../assets/images/icons/details.svg";
 
   constructor(
     private route: ActivatedRoute,
