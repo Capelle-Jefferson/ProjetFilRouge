@@ -1,0 +1,7 @@
+<form [formGroup]="levelForm" (ngSubmit)="onSubmit()">
+    <h4>Ajouter un level<a routerLink="../">(-)</a></h4>
+    <label>Nouvel level: 
+        <input type="text" formControlName="nameLevel" placeholder="Level">
+    </label>
+    <button type="submit" class="btn btn-success">Ajouter</button>
+</form>

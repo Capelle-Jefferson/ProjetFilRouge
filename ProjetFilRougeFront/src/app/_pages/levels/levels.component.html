@@ -1,0 +1,18 @@
+<router-outlet></router-outlet>
+<h2>Liste des niveaux <a routerLink="ajouter">(+)</a></h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nom du niveau</th>
+            <th scope="col" class="danger">Supprimer</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let level of levels; let i = index">
+            <th scope="col">{{i+1}}</th>
+            <td>{{level.nameLevel}}</td>
+            <td><a routerLink="/levels" (click)="deleteLevel(level)"><img [src]="deleteIcon" alt=""></a></td>
+        </tr>
+    </tbody>
+</table>

@@ -13,6 +13,8 @@ import { CategoryFormComponent } from './_pages/category-form/category-form.comp
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { LevelsComponent } from './_pages/levels/levels.component';
+import { LevelFormComponent } from './_pages/level-form/level-form.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { ToastrModule } from 'ngx-toastr';
     AuthentificationComponent,
     FormAuthentificationComponent,
     CategoriesComponent,
-    CategoryFormComponent
+    CategoryFormComponent,
+    LevelsComponent,
+    LevelFormComponent
   ],
   imports: [
     BrowserModule,
