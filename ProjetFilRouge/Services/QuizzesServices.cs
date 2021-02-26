@@ -57,9 +57,9 @@ namespace ProjetFilRouge.Services
         /// </summary>
         /// <param name="id">identitfiant du quizz à récupérer</param>
         /// <returns>FindQuizzDto</returns>
-        public FindQuizzDto GetQuizzByIdInProgress(int id)
+        public FindQuizzDto GetQuizzByIdInProgress(string code)
         {
-            Quizz quizz = quizzRepository.Find(id);
+            Quizz quizz = quizzRepository.Find(code);
             FindQuizzDto quizzDto = TransformModelToDto(quizz);
             foreach (FindQuizzQuestionsDto q in quizzDto.Questions.ToList())
             {

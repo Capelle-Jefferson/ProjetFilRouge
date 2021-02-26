@@ -59,6 +59,37 @@ namespace ProjetFilRouge.Repositories
         }
 
         /// <summary>
+        ///     Récupération d'un quizz
+        /// </summary>
+        /// <param name="code">code du quizz à récupérer</param>
+        /// <returns>Quizz</returns>
+        public Quizz Find(string code)
+        {
+            this.OpenConnection();
+            string request = _queryBuilder
+                .Select()
+                .From("quizz")
+                .Where("code_quizz", code, "=")
+                .Get();
+            MySqlCommand cmd = new MySqlCommand(request, connectionSql);
+            MySqlDataReader rdr = cmd.ExecuteReader();
+            Quizz quizz = new Quizz();
+            while (rdr.Read())
+            {
+                quizz.idQuizz = rdr.GetInt32(0);
+                quizz.codeQuizz = rdr.GetString(1);
+                if (!rdr.IsDBNull(2))
+                    quizz.date = rdr.GetDateTime(2);
+                quizz.idCategory = rdr.GetInt32(3);
+                quizz.idLevel = rdr.GetInt32(4);
+                quizz.idUser = rdr.GetInt32(5);
+                quizz.idCandidate = rdr.GetInt32(6);
+            }
+            this.CloseConnection(rdr);
+            return quizz;
+        }
+
+        /// <summary>
         ///     Récupération de la liste des quizzes
         /// </summary>
         /// <returns>List<Quizz></returns>

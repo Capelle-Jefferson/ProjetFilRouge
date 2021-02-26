@@ -55,12 +55,12 @@ namespace ProjetFilRouge.Controllers
             }
         }
         
-        [HttpGet("api/QuizzesInProgress/{id}")]
-        public IActionResult GetInProgress(int id)
+        [HttpGet("api/QuizzesInProgress/{code}")]
+        public IActionResult GetInProgress(string code)
         {
             try
             {
-                return Ok(quizzesServices.GetQuizzByIdInProgress(id));
+                return Ok(quizzesServices.GetQuizzByIdInProgress(code));
             }
             catch
             {
