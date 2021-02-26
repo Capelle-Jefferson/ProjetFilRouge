@@ -58,7 +58,7 @@ namespace ProjetFilRouge.Controllers
         */
 
         // DELETE api/<CandidateController>/5
-        [HttpDelete("api /[controller]{id}")]
+        [HttpDelete("api/[controller]/{id}")]
         public int Delete(int id)
         {
             return candidatesServices.DeleteCandidate(id);

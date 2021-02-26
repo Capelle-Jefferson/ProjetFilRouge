@@ -8,7 +8,7 @@ namespace ProjetFilRouge.Dtos.CandidatesDtos
 {
     public class FindCandidateDto
     {
-        public int? idCandidat { get; set; }
+        public int? idCandidate { get; set; }
         public string firstname { get; set; }
         public string lastname { get; set; }
         public string email { get; set; }
@@ -17,7 +17,7 @@ namespace ProjetFilRouge.Dtos.CandidatesDtos
 
         public FindCandidateDto(int? idCandidat, string firstname, string lastname, string email, string level, int idUser)
         {
-            this.idCandidat = idCandidat;
+            this.idCandidate = idCandidat;
             this.firstname = firstname;
             this.lastname = lastname;
             this.email = email;
