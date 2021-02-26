@@ -1,12 +1,17 @@
 <div id="container">
   <app-header></app-header>
 
-  <!-- Si utilisateur non connecté -->
-  <app-authentification *ngIf="!user"></app-authentification><br><br>
+  <!-- Si Passage d'un quizz -->
+  <app-connexion-quizz *ngIf="isPassageQuiz"></app-connexion-quizz>
 
-  <!-- Si utilisateur connecté -->
-  <div *ngIf="user">
-    <app-navbar></app-navbar>
-    <router-outlet></router-outlet>
+  <div *ngIf="!isPassageQuiz">
+    <!-- Si utilisateur non connecté -->
+    <app-authentification *ngIf="!user"></app-authentification><br><br>
+
+    <!-- Si utilisateur connecté -->
+    <div *ngIf="user">
+      <app-navbar></app-navbar>
+      <router-outlet></router-outlet>
+    </div>
   </div>
 </div>

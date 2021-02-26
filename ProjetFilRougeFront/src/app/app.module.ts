@@ -21,6 +21,8 @@ import { GeneratesQuizzesComponent } from './_pages/generates-quizzes/generates-
 import { GenerateQuizzFormComponent } from './_pages/generate-quizz-form/generate-quizz-form.component';
 import { CandidatesComponent } from './_pages/candidates/candidates.component';
 import { CandidateFormComponent } from './_pages/candidate-form/candidate-form.component';
+import { ConnexionQuizzComponent } from './_pages/connexion-quizz/connexion-quizz.component';
+import { ConnexionQuizzFormComponent } from './_components/connexion-quizz-form/connexion-quizz-form.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,8 @@ import { CandidateFormComponent } from './_pages/candidate-form/candidate-form.c
     GenerateQuizzFormComponent,
     CandidatesComponent,
     CandidateFormComponent,
+    ConnexionQuizzComponent,
+    ConnexionQuizzFormComponent,
   ],
   imports: [
     BrowserModule,

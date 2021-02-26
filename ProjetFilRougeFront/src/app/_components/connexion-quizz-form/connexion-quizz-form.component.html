@@ -1,0 +1,8 @@
+<form [formGroup]="codeQuizzForm" (ngSubmit)="onSubmit()">
+    <h4>Veillez entrer le code du test technique:</h4>
+    <label>
+        <input type="text" formControlName="codeQuizz" placeholder="Code">
+    </label>
+    <p *ngIf="msgErreur" class="error">{{msgErreur}}</p>
+    <button type="submit" class="btn btn-success">Commencer</button>
+</form>
