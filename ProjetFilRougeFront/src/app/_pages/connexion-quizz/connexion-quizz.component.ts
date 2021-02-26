@@ -7,9 +7,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConnexionQuizzComponent implements OnInit {
 
-  constructor() { }
+  quizzJson = localStorage.getItem("quizz");
+  quizz = JSON.parse(this.quizzJson);
+  isQuizz = this.quizz != null;
+
+  constructor(
+  ) { }
 
   ngOnInit(): void {
+    console.log(this.quizz)
+
+    // Suppresion de la variable local Quizz unt fois le quizz completé
+    this.suppresionLocalQuizz();
+  }
+
+  suppresionLocalQuizz(){
+    localStorage.removeItem("quizz");
   }
 
 }

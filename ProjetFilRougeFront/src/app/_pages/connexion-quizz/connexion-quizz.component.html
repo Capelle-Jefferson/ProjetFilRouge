@@ -1,2 +1,11 @@
-<h2>Participer à un test technique</h2>
-<app-connexion-quizz-form></app-connexion-quizz-form>
+<!-- Connexion à un quizz (aucun code entré) -->
+<div *ngIf="!isQuizz">
+    <h2>Participer à un test technique</h2>
+    <app-connexion-quizz-form ></app-connexion-quizz-form>
+</div>
+
+<!-- déroulement du quizz -->
+<div *ngIf="isQuizz">
+    <h2>Déroulement du test technique</h2>
+    
+</div>
