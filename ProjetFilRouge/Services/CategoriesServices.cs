@@ -14,9 +14,9 @@ namespace ProjetFilRouge.Services
     public class CategoriesServices
     {
         private CategoryRepository categoryRepository;
-        public CategoriesServices()
+        public CategoriesServices(CategoryRepository categoryRepository)
         {
-            categoryRepository = new CategoryRepository(new QueryBuilder());
+            this.categoryRepository = categoryRepository;
         }
 
         /// <summary>

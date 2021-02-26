@@ -16,9 +16,9 @@ namespace ProjetFilRouge.Controllers
     public class LevelsController : ControllerBase
     {
         private LevelServices levelServices;
-        public LevelsController()
+        public LevelsController(LevelServices levelServices)
         {
-            levelServices = new LevelServices();
+            this.levelServices = levelServices;   
         }
 
         // GET: api/<LevelsController>

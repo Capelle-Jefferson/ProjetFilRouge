@@ -15,9 +15,9 @@ namespace ProjetFilRouge.Controllers
     {
         public RolesServices rolesServices; 
 
-        public RolesController()
+        public RolesController(RolesServices rolesServices)
         {
-            this.rolesServices = new RolesServices();
+            this.rolesServices = rolesServices;
         }
         // GET: api/<RolesController>
         [HttpGet]

@@ -21,9 +21,13 @@ namespace ProjetFilRouge.Services
         private const string ALPHABET = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
         private QuizzRepository quizzRepository;
-        public QuizzesServices()
+        private QuizzQuestionService quizzQuestionService;
+        private AnswerServices AnswerServices;
+
+        public QuizzesServices(QuizzRepository quizzRepository, QuizzQuestionService quizzQuestionService, AnswerServices answerServices)
         {
-            quizzRepository = new QuizzRepository(new QueryBuilder());
+            this.quizzRepository = quizzRepository;
+            this.quizzQuestionService = quizzQuestionService;
         }
 
         /// <summary>
@@ -41,6 +45,55 @@ namespace ProjetFilRouge.Services
             return quizzesDtos;
         }
 
+        internal void GetGoodAnswersQuizz(int id)
+        {
+            FindQuizzDto quizz = this.GetQuizzById(id);
+            List<string> tableauGoodAnswer=new List<string>();
+            foreach (FindQuizzQuestionsDto question in quizz.Questions)
+            {
+                if (question.Answer.TypeAnswer == "QCM")
+                {
+                    tableauGoodAnswer= correctAnswers(question);
+                    List<string> candidatAnswers = question.CandidateAnswer.Split('§').ToList();
+                    if(CompareAnswers(candidatAnswers,tableauGoodAnswer)){
+                       this.quizzQuestionService.AddIsCorrectAnswer(id, (int)question.IdQuestion, 1);
+                    }else
+                    {
+                       this.quizzQuestionService.AddIsCorrectAnswer(id, (int)question.IdQuestion, 0);
+                    }
+                }
+            }
+           
+        }
+
+        public bool CompareAnswers(List<string> candidatAnswers, List<string> goodAnswers)
+        {
+            int compteur = 0;
+            foreach(string answer in candidatAnswers)
+            {
+                if (goodAnswers.Contains(answer))
+                {
+                    compteur++;
+                }
+            }
+            return (compteur.Equals(goodAnswers.Count));
+            
+        }
+
+        public List<string> correctAnswers(FindQuizzQuestionsDto question)
+        {
+            List<string> goodAnswers =new List<string>() ;
+            foreach (FindChoiceAnswerDto choiceAnswer in question.Answer.ListChoiceAnswer)
+            {
+                if (choiceAnswer.IsAnswer == true)
+                {
+                    goodAnswers.Add(choiceAnswer.TextAnswer);
+                }
+            }
+
+            return goodAnswers;
+        }
+        
         internal List<FindQuizzDto> GetQuizzByCandidateId(int id)
         {
             List<Quizz> quizzes = quizzRepository.FindByCandidateId(id);
@@ -81,6 +134,8 @@ namespace ProjetFilRouge.Services
             Quizz quizz = quizzRepository.Find(id);
             return TransformModelToDto(quizz);
         }
+
+        
 
         /// <summary>
         ///     Génère un quizz
@@ -196,7 +251,7 @@ namespace ProjetFilRouge.Services
             foreach (QuizzQuestion quizzQ in questionsQuizz)
             {
                 Question question = questionRepo.Find((int)quizzQ.IdQuestion);
-                questionsDtos.Add(TransformsModelToDTOQuestion(question, quizzQ.AnswerCandidate));
+                questionsDtos.Add(TransformsModelToDTOQuestion(question, quizzQ.AnswerCandidate, quizzQ.IsCorrectAnswer));
             }
             return questionsDtos;
         }
@@ -218,25 +273,24 @@ namespace ProjetFilRouge.Services
         /// <param name="question">question à transformer</param>
         /// <param name="idAnswerCandidate">id de la réponse du candidat</param>
         /// <returns>FindQuizzQuestionsDto</returns>
-        private FindQuizzQuestionsDto TransformsModelToDTOQuestion(Question question, string answerCandidate)
+        private FindQuizzQuestionsDto TransformsModelToDTOQuestion(Question question, string answerCandidate, bool?isCorrectAnswer)
         {
             CategoryRepository catRepo = new CategoryRepository(new QueryBuilder());
-            AnswerServices answerServices = new AnswerServices();
-            FindAnswerDto answer = answerServices.GetAnswerById((int)question.IdAnswer);
+            FindAnswerDto answer = this.AnswerServices.GetAnswerById((int)question.IdAnswer);
             return new FindQuizzQuestionsDto(
                 question.IdQuestion,
                 question.Intitule,
                 TransformeIdLevelToString((int)question.IdLevel),
                 catRepo.Find((int)question.IdLevel).NameCategory,
                 answer,
-                answerCandidate
+                answerCandidate,
+                isCorrectAnswer
             ) ;
         }
 
         public int DeleteByIdQuizz(int id)
         {
-            QuizzQuestionService quizzQservices = new QuizzQuestionService();
-            quizzQservices.DeleteQuizzQ(id);
+            quizzQuestionService.DeleteQuizzQ(id);
             return this.quizzRepository.Delete(id);
         }
     }

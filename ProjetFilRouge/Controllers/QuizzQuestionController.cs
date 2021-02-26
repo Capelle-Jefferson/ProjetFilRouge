@@ -16,7 +16,7 @@ namespace ProjetFilRouge.Controllers
     public class QuizzQuestionController : ControllerBase
     {
         QuizzQuestionService quizzquestionService;
-        public QuizzQuestionController() { this.quizzquestionService = new QuizzQuestionService(); }
+        public QuizzQuestionController(QuizzQuestionService quizzQuestionService) { this.quizzquestionService = quizzQuestionService; }
 
         // GET: api/<QuizzQuestionController>
         [HttpGet]
@@ -52,6 +52,12 @@ namespace ProjetFilRouge.Controllers
         public FindQuizzQDto Put(int idQuizz, int idQuestion, [FromBody] string answer)
         {
             return this.quizzquestionService.AddAnswerCandidate(idQuizz, idQuestion, answer);
+        }
+
+        [HttpPatch]
+        public FindQuizzQDto Patch(int idQuizz, int idQuestion, int answer)
+        {
+            return this.quizzquestionService.AddIsCorrectAnswer(idQuizz, idQuestion, answer);
         }
     }
 

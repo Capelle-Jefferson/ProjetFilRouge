@@ -15,9 +15,9 @@ namespace ProjetFilRouge.Services
     public class CandidatesServices
     {
         private CandidateRepository candidateRepository;
-        public CandidatesServices()
+        public CandidatesServices(CandidateRepository candidateRepository)
         {
-            candidateRepository = new CandidateRepository(new QueryBuilder());
+            this.candidateRepository = candidateRepository;
         }
 
         public List<FindCandidateDto> GetCandidates()

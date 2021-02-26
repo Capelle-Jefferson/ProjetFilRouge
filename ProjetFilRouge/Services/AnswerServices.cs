@@ -16,10 +16,10 @@ namespace ProjetFilRouge.Services
         private AnswerRepository AnswerRepository;
         private ChoiceAnswerRepository ChoiceAnswerRepository;
 
-        public AnswerServices()
+        public AnswerServices(AnswerRepository answerRepository,ChoiceAnswerRepository choiceAnswerRepository)
         {
-            AnswerRepository = new AnswerRepository(new QueryBuilder());
-            ChoiceAnswerRepository = new ChoiceAnswerRepository(new QueryBuilder());
+            AnswerRepository = answerRepository;
+            ChoiceAnswerRepository = choiceAnswerRepository;
         }
 
         /// <summary>

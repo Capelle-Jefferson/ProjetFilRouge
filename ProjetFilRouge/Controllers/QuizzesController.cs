@@ -16,9 +16,9 @@ namespace ProjetFilRouge.Controllers
     {
 
         private QuizzesServices quizzesServices;
-        public QuizzesController()
+        public QuizzesController(QuizzesServices quizzes)
         {
-            quizzesServices = new QuizzesServices();
+            quizzesServices = quizzes;
         }
 
         // GET: api/<QuizzesController>
@@ -40,6 +40,20 @@ namespace ProjetFilRouge.Controllers
             {
                 return NotFound();
             }    
+        }
+
+        [HttpPatch("api/Correctquizz/{id}")]
+        public IActionResult GetGoodAnswersQuizz(int id)
+        {
+            try
+            {
+                quizzesServices.GetGoodAnswersQuizz(id);
+                return Ok();
+            }
+            catch
+            {
+                return NotFound();
+            }
         }
 
         [HttpGet("/api/UserQuizzes/{idCandidate}")]

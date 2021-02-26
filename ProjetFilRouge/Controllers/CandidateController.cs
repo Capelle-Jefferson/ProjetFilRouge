@@ -16,9 +16,9 @@ namespace ProjetFilRouge.Controllers
     public class CandidateController : ControllerBase
     {
         private CandidatesServices candidatesServices;
-        public CandidateController()
+        public CandidateController(CandidatesServices candidatesServices)
         {
-            candidatesServices = new CandidatesServices();
+            this.candidatesServices = candidatesServices;   
         }
 
         // GET: api/<CandidateController>

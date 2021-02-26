@@ -15,9 +15,9 @@ namespace ProjetFilRouge.Controllers
     public class AnswersController : ControllerBase
     {
         private AnswerServices AnswerServices;
-        public AnswersController()
+        public AnswersController(AnswerServices answerService)
         {
-            AnswerServices = new AnswerServices();
+            this.AnswerServices = answerService;
         }
 
         // GET: api/<AnswersController>

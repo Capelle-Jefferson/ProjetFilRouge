@@ -110,7 +110,22 @@ namespace ProjetFilRouge.Repositories
             this.OpenConnection();
             string request = _queryBuilder
               .Update("quizz_question")
-              .SetQuizzQuestion(answer)
+              .SetCandidateAnswer(answer)
+              .Where("id_quizz", idQuizz)
+              .And("id_question", idQuestion)
+              .Get();
+            Console.WriteLine(request);
+            MySqlCommand cmd = new MySqlCommand(request, connectionSql);
+            cmd.ExecuteNonQuery();
+            connectionSql.Close();
+        }
+
+        internal void AddIsCorrectAnswer(int idQuizz, int idQuestion, int answer)
+        {
+            this.OpenConnection();
+            string request = _queryBuilder
+              .Update("quizz_question")
+              .SetIsCorrectAnswer(answer)
               .Where("id_quizz", idQuizz)
               .And("id_question", idQuestion)
               .Get();

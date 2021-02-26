@@ -15,9 +15,9 @@ namespace ProjetFilRouge.Services
     public class LevelServices
     {
         private LevelRepository LevelRepository;
-        public LevelServices()
+        public LevelServices(LevelRepository levelRepository)
         {
-            LevelRepository = new LevelRepository(new QueryBuilder());
+            LevelRepository = levelRepository;
         }
 
         /// <summary>

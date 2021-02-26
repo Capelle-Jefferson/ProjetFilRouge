@@ -14,10 +14,12 @@ namespace ProjetFilRouge.Services
 {
     public class QuestionsServices
     {
-        Repositories.QuestionsRepository questionsRepository;
-        public QuestionsServices ()
+        QuestionsRepository questionsRepository;
+        AnswerServices AnswerServices;
+        public QuestionsServices (QuestionsRepository questionsRepository, AnswerServices answerServices)
             {
-            this.questionsRepository = new Repositories.QuestionsRepository(new QueryBuilder());
+            this.questionsRepository = questionsRepository;
+            AnswerServices = answerServices;
             }
         /// <summary>
         /// Récupère toute les questions présentes dans la base de données
@@ -66,8 +68,7 @@ namespace ProjetFilRouge.Services
             Question question = this.questionsRepository.Find(id);
             int idAnswer = (int)question.IdAnswer;
             int reussi = questionsRepository.Delete(id);
-            AnswerServices answerServices = new AnswerServices();
-            answerServices.Delete(idAnswer);
+            AnswerServices.Delete(idAnswer);
             return reussi;
         }
 
@@ -94,8 +95,8 @@ namespace ProjetFilRouge.Services
         internal FindQuestionsDto PostQuestion(CreatedQuestionDTO obj)
         {
             // Création de la réponse
-            AnswerServices answerSercices = new AnswerServices();
-            FindAnswerDto answer = answerSercices.PostAnswer(obj.Answer);
+            
+            FindAnswerDto answer = this.AnswerServices.PostAnswer(obj.Answer);
 
             // Création de la question
             Question questionModel = transformsDtoToModel(obj, (int)answer.IdAnswer);
@@ -126,8 +127,7 @@ namespace ProjetFilRouge.Services
             // Si answer est inconnu alors aller le récupérer à l'aide de service answer et rappel la méthode
             if(answer == null)
             {
-                AnswerServices answerServices = new AnswerServices();
-                return TransformsModelToDTO(question, answerServices.GetAnswerById((int)question.IdAnswer));
+                return TransformsModelToDTO(question, AnswerServices.GetAnswerById((int)question.IdAnswer));
             }
             return new FindQuestionsDto(
                 question.IdQuestion,

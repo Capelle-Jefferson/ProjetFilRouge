@@ -1,6 +1,7 @@
 ﻿using ProjetFilRouge.Dtos.AnswerDtos;
 using ProjetFilRouge.Dtos.QuizzQDTO;
 using ProjetFilRouge.Models;
+using ProjetFilRouge.Repositories;
 using ProjetFilRouge.Utils;
 using System;
 using System.Collections.Generic;
@@ -13,10 +14,10 @@ namespace ProjetFilRouge.Services
 {
     public class QuizzQuestionService
     {
-        Repositories.QuizzQuestionRepository quizzquestionsRepository;
-        public QuizzQuestionService()
+        QuizzQuestionRepository quizzquestionsRepository;
+        public QuizzQuestionService(QuizzQuestionRepository quizzQuestionRepository)
         {
-            this.quizzquestionsRepository = new Repositories.QuizzQuestionRepository(new QueryBuilder());
+            this.quizzquestionsRepository = quizzQuestionRepository;
         }
 
         internal List<FindQuizzQDto> GettAllQuizzQ()
@@ -51,6 +52,12 @@ namespace ProjetFilRouge.Services
         public FindQuizzQDto AddAnswerCandidate(int idQuizz, int idQuestion, string answer)
         {
             this.quizzquestionsRepository.AddAnswerCandidate(idQuizz, idQuestion, answer);
+            return TransformsModelToDTO(quizzquestionsRepository.Find(idQuizz, idQuestion));
+        }
+
+        public FindQuizzQDto AddIsCorrectAnswer(int idQuizz, int idQuestion, int answer)
+        {
+            this.quizzquestionsRepository.AddIsCorrectAnswer(idQuizz, idQuestion, answer);
             return TransformsModelToDTO(quizzquestionsRepository.Find(idQuizz, idQuestion));
         }
 

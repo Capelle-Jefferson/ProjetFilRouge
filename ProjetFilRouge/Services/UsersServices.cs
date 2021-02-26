@@ -15,9 +15,9 @@ namespace ProjetFilRouge.Services
     {
         private UserRepository UserRepository;
 
-        public UsersServices()
+        public UsersServices(UserRepository userRepository)
         {
-            UserRepository = new UserRepository(new QueryBuilder());
+            UserRepository = userRepository;
         }
 
         public List<FindUserDto> GetUsers()

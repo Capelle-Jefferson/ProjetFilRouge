@@ -114,9 +114,15 @@ namespace ProjetFilRouge.Utils
             return this;
         }
 
-        internal QueryBuilder SetQuizzQuestion(string answer)
+        internal QueryBuilder SetCandidateAnswer(string answer)
         {
             request.Append($"SET candidate_answer = \"{answer}\" ");
+            return this;
+        }
+
+        internal QueryBuilder SetIsCorrectAnswer(int answer)
+        {
+            request.Append($"SET is_correct_answer = {answer} ");
             return this;
         }
 

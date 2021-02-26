@@ -9,7 +9,7 @@ namespace ProjetFilRouge.Dtos.QuestionsDtos
     public class FindQuizzQuestionsDto
     {
         public FindQuizzQuestionsDto(int? idQuestion, string intitule, string category, string level,
-                    FindAnswerDto answer, string candidateAnswer)
+                    FindAnswerDto answer, string candidateAnswer, bool? iscorrectAnswer)
         {
             IdQuestion = idQuestion;
             Intitule = intitule;
@@ -17,6 +17,7 @@ namespace ProjetFilRouge.Dtos.QuestionsDtos
             Level = level;
             Answer = answer;
             CandidateAnswer = candidateAnswer;
+            IsCorrectAnswer = iscorrectAnswer;
         }
 
         public int? IdQuestion { get; set; }
@@ -25,5 +26,6 @@ namespace ProjetFilRouge.Dtos.QuestionsDtos
         public string Level { get; set; }
         public FindAnswerDto Answer { get; set; }
         public string CandidateAnswer { get; set; }
+        public bool? IsCorrectAnswer { get; set; }
     }
 }

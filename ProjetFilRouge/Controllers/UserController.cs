@@ -16,9 +16,9 @@ namespace ProjetFilRouge.Controllers
     {
         private UsersServices UsersServices;
 
-        public UserController()
+        public UserController(UsersServices usersServices)
         {
-            UsersServices = new UsersServices();
+            this.UsersServices = usersServices;   
         }
         // GET: api/<UserController>
         [HttpGet]

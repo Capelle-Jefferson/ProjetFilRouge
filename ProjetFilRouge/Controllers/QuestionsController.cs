@@ -15,7 +15,7 @@ namespace ProjetFilRouge.Controllers
     public class QuestionsController : ControllerBase
     {
         QuestionsServices questionService;
-        public QuestionsController () { this.questionService = new QuestionsServices(); } 
+        public QuestionsController (QuestionsServices questionsServices) { this.questionService = questionsServices;  } 
         // GET: api/<QuestionsController>
         [HttpGet]
         public List<Dtos.QuestionsDtos.FindQuestionsDto> Get()
