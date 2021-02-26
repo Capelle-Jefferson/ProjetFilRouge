@@ -13,6 +13,7 @@ export class CandidatesComponent implements OnInit {
 
   userJson = sessionStorage['user'];
   user = JSON.parse(this.userJson);
+  admin = this.user.role == "ADMINISTRATEUR"
   candidates : Candidate[];
   deleteIcon = "../assets/images/icons/trash.svg";
   quizzIcon = "../assets/images/icons/quiz.svg";
@@ -25,9 +26,15 @@ export class CandidatesComponent implements OnInit {
 
 
   ngOnInit() {
+    if(this.admin){
+      this.candidateService.getAll().then(data => {
+        this.candidates = data;
+      })
+    }else{
       this.candidateService.getByIdUser(this.user.idUser).then(data => {
         this.candidates = data;
       })
+    }
   }
 
   deleteCandidate(cand: Candidate){

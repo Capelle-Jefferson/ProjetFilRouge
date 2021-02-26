@@ -42,7 +42,6 @@ export class GeneratesQuizzesComponent implements OnInit {
     this.service.getUserQuizz(this.idCandidate).then(data => this.quizzes = data);
 
     localStorage.setItem("idCandidate", this.idCandidate.toString());
-    console.log(this.candidate)
   }
 
   delete(quizz: Quizz){
