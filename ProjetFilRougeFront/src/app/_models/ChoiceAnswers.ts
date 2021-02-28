@@ -3,7 +3,7 @@ export class ChoiceAnswers {
     private _textAnswer : string;
     private _isAnswer : boolean;
 
-    constructor(textAnswer:string,isAnswer:boolean,id:number){
+    constructor(textAnswer:string,isAnswer:boolean,id:number=null){
         
         this._textAnswer=textAnswer;
         this._isAnswer=isAnswer;

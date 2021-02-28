@@ -1,0 +1,23 @@
+.container{
+    display: inline;
+}
+.card{
+    border:solid 1px #4d618d;
+    border-radius: 30px;
+    font-size: 22px;
+    
+}
+.card-body{
+    display: inline;
+}
+#badgeType{
+    background-color:rgb(216, 116, 116);
+    top:1px; left: 2px;
+}
+.question{
+    text-align: center;
+}
+.textarea{
+    display: flex;
+    flex-direction: column;
+}

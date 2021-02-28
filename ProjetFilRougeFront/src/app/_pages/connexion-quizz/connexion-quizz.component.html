@@ -7,5 +7,8 @@
 <!-- déroulement du quizz -->
 <div *ngIf="isQuizz">
     <h2>Déroulement du test technique</h2>
-    
+    <div *ngFor="let question of quizz.questions; let i=index">
+        Question n° {{i+1}} : 
+        <app-passage-quiz [question]="question"></app-passage-quiz>
+    </div>
 </div>

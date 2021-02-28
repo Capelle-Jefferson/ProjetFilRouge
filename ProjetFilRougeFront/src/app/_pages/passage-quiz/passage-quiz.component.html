@@ -1,0 +1,21 @@
+<div class="container">
+    <div class="card" style="width: 50rem;">
+        <div class="card-body">
+            <div id="badgeType" class="badge badge-pill">{{question.answer.typeAnswer}}</div>
+            <div class="question">
+                <h5 class="card-title">Intitule:{{question.intitule}}</h5>
+                <div *ngIf="istypeAnswer">
+                <p class="card-subtitle mb-2 text-muted"*ngFor="let choiceAnswer of question.answer.listChoiceAnswer; let i = index">
+                    <input type="checkbox" >
+                        Réponse {{i+1}}: {{choiceAnswer.textAnswer}}
+                </p>
+                </div>
+                <div *ngIf="!istypeAnswer" class="textarea">
+                    <label>Réponse :</label>
+                    <textarea cols="30" rows="10" placeholder="Reponse ouverte"></textarea> 
+                </div>
+                <button type="submit" class="btn btn-success" id="valider">Valider la réponse</button>
+            </div>
+        </div>
+    </div>
+</div>
