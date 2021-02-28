@@ -22,12 +22,13 @@ namespace ProjetFilRouge.Services
 
         private QuizzRepository quizzRepository;
         private QuizzQuestionService quizzQuestionService;
-        private AnswerServices AnswerServices;
+        private AnswerServices AnswersServices;
 
         public QuizzesServices(QuizzRepository quizzRepository, QuizzQuestionService quizzQuestionService, AnswerServices answerServices)
         {
             this.quizzRepository = quizzRepository;
             this.quizzQuestionService = quizzQuestionService;
+            this.AnswersServices = answerServices;
         }
 
         /// <summary>
@@ -276,7 +277,7 @@ namespace ProjetFilRouge.Services
         private FindQuizzQuestionsDto TransformsModelToDTOQuestion(Question question, string answerCandidate, bool?isCorrectAnswer)
         {
             CategoryRepository catRepo = new CategoryRepository(new QueryBuilder());
-            FindAnswerDto answer = this.AnswerServices.GetAnswerById((int)question.IdAnswer);
+            FindAnswerDto answer = AnswersServices.GetAnswerById((int)question.IdAnswer);
             return new FindQuizzQuestionsDto(
                 question.IdQuestion,
                 question.Intitule,
