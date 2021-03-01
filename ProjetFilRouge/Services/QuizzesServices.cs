@@ -150,12 +150,7 @@ namespace ProjetFilRouge.Services
             string key = TransformeIdLevelToString(createQuizzDto.IdLevel);
             double nbreQuestionJunior = Math.Round(nbreQuestion * Double.Parse(ConfigurationManager.AppSettings.Get(key + "_junior")));
             double nbreQuestionConfirme = Math.Round(nbreQuestion * Double.Parse(ConfigurationManager.AppSettings.Get(key + "_confirme")));
-            double nbreQuestionExpert = Math.Round(nbreQuestion * Double.Parse(ConfigurationManager.AppSettings.Get(key + "_expert")));
-            double sum = nbreQuestionJunior + nbreQuestionConfirme + nbreQuestionExpert;
-            if (sum < nbreQuestion)
-                nbreQuestionJunior++;
-            else if(sum > nbreQuestion)
-                nbreQuestionExpert--;
+            double nbreQuestionExpert = nbreQuestion - nbreQuestionJunior - nbreQuestionConfirme;
 
             // Récupère les questions du quizz
             QuestionsRepository repoQuestion = new QuestionsRepository(new QueryBuilder());
@@ -281,8 +276,8 @@ namespace ProjetFilRouge.Services
             return new FindQuizzQuestionsDto(
                 question.IdQuestion,
                 question.Intitule,
-                TransformeIdLevelToString((int)question.IdLevel),
                 catRepo.Find((int)question.IdLevel).NameCategory,
+                TransformeIdLevelToString((int)question.IdLevel),
                 answer,
                 answerCandidate,
                 isCorrectAnswer
