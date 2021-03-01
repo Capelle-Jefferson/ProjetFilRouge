@@ -51,7 +51,6 @@ export class GenerateQuizzFormComponent implements OnInit {
     this.servicesLevels.getAll().then(data => this.levels = data);
     this.idCandidate = +localStorage.getItem("idCandidate");
     localStorage.removeItem("idCandidate");
-    console.log(this.idCandidate)
   }
 
   async onSubmit() {
@@ -71,7 +70,6 @@ export class GenerateQuizzFormComponent implements OnInit {
       }
     }catch{
       this.toastr.error("Le quizz n'a pas été généré");
-      console.log(quizz)
     }
     this.router.navigateByUrl(`/gestionQuizz/${this.idCandidate}`, { skipLocationChange: false}).then(() => {
       this.router.navigate([`/gestionQuizz/${this.idCandidate}`]);
