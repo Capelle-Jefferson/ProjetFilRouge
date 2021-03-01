@@ -39,14 +39,16 @@ export class CandidateFormComponent implements OnInit {
   }
 
   onSubmit(){
-    let cand : Candidate = this.candidateForm.value;
-    cand.idUser = this.user.idUser;
-    this.services.create(cand);
-    this.router.navigateByUrl('/Candidats', { skipLocationChange: true}).then(() => {
-      this.router.navigate(["/candidats"]);
-    this.toastr.success("Le candidat à bien était ajouté");
-    })
-    
+    if(!this.candidateForm.invalid){
+      let cand : Candidate = this.candidateForm.value;
+      cand.idUser = this.user.idUser;
+      this.services.create(cand);
+      this.router.navigateByUrl('/Candidats', { skipLocationChange: true}).then(() => {
+        this.router.navigate(["/candidats"]);
+      this.toastr.success("Le candidat à bien était ajouté");
+      })
+    }else{
+      this.toastr.warning("Le candidat n'a pas était ajouté");
+    }
   }
-
 }

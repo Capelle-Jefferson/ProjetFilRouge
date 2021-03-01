@@ -25,6 +25,16 @@ export class DetailsQuizzComponent implements OnInit {
     })
     await this.serviceQuizz.get(this.idQuizz).then(data => this.quizz = data);
     console.log(this.quizz)
+
+  }
+
+  public isQuizzCompleted() : boolean{
+    for(let question of this.quizz.questions){
+      if(question.isCorrectAnswer == null){
+        return true
+      }
+    }
+    return false;
   }
 
 }

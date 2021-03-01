@@ -1,13 +1,13 @@
 <form [formGroup]="candidateForm" (ngSubmit)="onSubmit()">
     <h4>Ajouter un candidat <a routerLink="../">(-)</a></h4>
     <label>Prénom: 
-        <input type="text" formControlName="firstname" placeholder="Prénom">
+        <input type="text" formControlName="firstname" placeholder="Prénom" required>
     </label>
     <label>Nom: 
-        <input type="text" formControlName="lastname" placeholder="Nom">
+        <input type="text" formControlName="lastname" placeholder="Nom" required>
     </label>
     <label>Email: 
-        <input type="email" formControlName="email" placeholder="Email">
+        <input type="email" formControlName="email" placeholder="Email" required>
     </label>
     <label>Sélectionnez un niveau: 
         <select formControlName="idLevel">
@@ -15,5 +15,5 @@
             <option *ngFor="let level of levels" value={{level.idLevel}}>{{level.nameLevel}}</option>
         </select>
     </label>
-    <button type="submit" class="btn btn-success">Ajouter</button>
+    <button ng-disabled="candidateForm.$invalid" type="submit" class="btn btn-success">Ajouter</button>
 </form>
