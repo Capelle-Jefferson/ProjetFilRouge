@@ -165,7 +165,7 @@ namespace ProjetFilRouge.Services
             questions.AddRange(repoQuestion.GenererQuestionQuizz(ID_EXPERT, createQuizzDto.IdCategory, (int)nbreQuestionExpert));
 
             // Creation et enregistrement du quizz
-            Quizz quizz = new Quizz(null, GenerateCode(12), null, createQuizzDto.IdCategory, createQuizzDto.IdLevel, createQuizzDto.IdUser, createQuizzDto.IdCandidat);
+            Quizz quizz = new Quizz(null, GenerateCode(12), null, createQuizzDto.IdCategory, createQuizzDto.IdLevel, createQuizzDto.IdUser, createQuizzDto.IdCandidate);
             quizz = quizzRepository.Create(quizz);
 
             // Enregistrement des questions du quizz
