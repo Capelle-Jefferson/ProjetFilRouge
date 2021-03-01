@@ -30,7 +30,6 @@ export class QuizzService {
   }
 
   create(quizz, nbQuestions : number): Promise<Quizz>{
-    console.log(JSON.stringify(quizz));
     return fetch(`${environment.apiUrl}/Quizzes/${nbQuestions}`, {
       method: 'POST',
       headers: {

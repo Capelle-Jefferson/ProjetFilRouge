@@ -17,10 +17,10 @@
 <div *ngIf="question.candidateAnswer && question.isCorrectAnswer==null">
     <form [formGroup]="answerForm" (ngSubmit)="onSubmit()">
         <label>Bonne réponse:
-            <input checked type="radio" formControlName="isCorrectAnswer" value="true" >
+            <input checked type="radio" formControlName="isCorrectAnswer" value="1" >
         </label>
         <label> Mauvaise réponse
-            <input type="radio" formControlName="isCorrectAnswer" value="false">
+            <input type="radio" formControlName="isCorrectAnswer" value="0">
         </label>
         <button type="submit" class="btn btn-success">Corriger</button>
     </form>

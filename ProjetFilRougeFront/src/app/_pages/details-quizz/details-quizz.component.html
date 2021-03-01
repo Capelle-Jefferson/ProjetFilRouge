@@ -27,7 +27,7 @@
         </div>
         <!-- Réponse Text -->
         <div *ngIf="question.answer.typeAnswer == 'Text'">
-            <app-details-quizz-form [question]="question"></app-details-quizz-form>
+            <app-details-quizz-form [question]="question" [idQuizz]="quizz.idQuizz"></app-details-quizz-form>
         </div>
     </div>
 </div>
