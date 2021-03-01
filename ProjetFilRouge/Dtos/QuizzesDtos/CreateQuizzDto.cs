@@ -10,14 +10,14 @@ namespace ProjetFilRouge.Models
         public int IdCategory { get; set; }
         public int IdLevel { get; set; }
         public int? IdUser { get; set; }
-        public int? IdCandidat { get; set; }
+        public int? IdCandidate { get; set; }
 
-        public CreateQuizzDto(DateTime date, int idCategory, int idLevel, int? idUser, int? idCandidat)
+        public CreateQuizzDto(DateTime date, int idCategory, int idLevel, int? idUser, int? idCandidate)
         {
             this.IdCategory = idCategory;
             this.IdLevel = idLevel;
             this.IdUser = idUser;
-            this.IdCandidat = idCandidat;
+            this.IdCandidate = idCandidate;
         }
 
         public CreateQuizzDto() { }
