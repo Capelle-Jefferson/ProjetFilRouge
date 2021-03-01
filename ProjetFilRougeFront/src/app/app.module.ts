@@ -24,6 +24,7 @@ import { CandidateFormComponent } from './_pages/candidate-form/candidate-form.c
 import { ConnexionQuizzComponent } from './_pages/connexion-quizz/connexion-quizz.component';
 import { ConnexionQuizzFormComponent } from './_components/connexion-quizz-form/connexion-quizz-form.component';
 import { DetailsQuizzComponent } from './_pages/details-quizz/details-quizz.component';
+import { DetailsQuizzFormComponent } from './_components/details-quizz-form/details-quizz-form.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { DetailsQuizzComponent } from './_pages/details-quizz/details-quizz.comp
     ConnexionQuizzComponent,
     ConnexionQuizzFormComponent,
     DetailsQuizzComponent,
+    DetailsQuizzFormComponent,
   ],
   imports: [
     BrowserModule,

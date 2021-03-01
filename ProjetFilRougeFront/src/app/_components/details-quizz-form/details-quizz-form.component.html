@@ -1,0 +1,29 @@
+<div class="reponse">
+    <div>
+        <h6>Réponse attendu:</h6>
+        <p>{{question.answer.textAnswer}}</p>
+    </div>
+
+    <!-- Affiche la réponse du candidat si elle existe -->
+    <div *ngIf="question.candidateAnswer">
+        <h6>Réponse du candidat:</h6>
+        <p *ngIf="question.isCorrectAnswer == true" class="correct">{{question.candidateAnswer}}</p>
+        <p *ngIf="!question.isCorrectAnswer == false" class="incorrect">{{question.candidateAnswer}}</p>
+        <p *ngIf="question.isCorrectAnswer == null">{{question.candidateAnswer}}</p>
+    </div>
+</div>
+
+<!-- SI question non corrigé -->
+<div *ngIf="question.candidateAnswer && question.isCorrectAnswer==null">
+    <form [formGroup]="answerForm" (ngSubmit)="onSubmit()">
+        <label>Bonne réponse:
+            <input checked type="radio" formControlName="isCorrectAnswer" value="true" >
+        </label>
+        <label> Mauvaise réponse
+            <input type="radio" formControlName="isCorrectAnswer" value="false">
+        </label>
+        <button type="submit" class="btn btn-success">Corriger</button>
+    </form>
+</div>
+
+

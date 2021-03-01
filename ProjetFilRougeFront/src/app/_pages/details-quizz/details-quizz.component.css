@@ -12,3 +12,20 @@ h2{
 .quizz p {
     font-size: 22px;
 }
+
+.question{
+    border: solid black 0.5px;
+    margin: 30px;
+    padding:10px;
+}
+.reponse p{
+    font-size: 16px;
+    margin: 10px;
+}
+.correct{
+    color:#aeef46;
+}
+.incorrect{
+    color: rgb(255, 0, 0);
+    text-decoration:line-through;
+}

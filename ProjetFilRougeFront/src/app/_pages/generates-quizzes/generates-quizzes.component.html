@@ -17,7 +17,7 @@
         <tr *ngFor="let quizz of quizzes; let i = index">
             <td scope="col">{{i+1}}</td>
             <td>{{quizz.codeQuizz}}</td>
-            <td>{{quizz.date | date:"dd/MM/y, hh:mm"}}</td>
+            <td>{{quizz.date | date:"dd/MM/y, HH:mm"}}</td>
             <td>{{quizz.category}}</td>
             <td>{{quizz.level}}</td>
             <td>{{quizz.questions.length}}</td>
