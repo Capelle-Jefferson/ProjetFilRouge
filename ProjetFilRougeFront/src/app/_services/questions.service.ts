@@ -1,4 +1,3 @@
-
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Question } from '../_models/question';
@@ -15,6 +14,7 @@ export class QuestionsService {
   }
   
   create(question :any):Promise<Question>{
+      console.log(question)
       return fetch(`${environment.apiUrl}/Questions`, {
         method: 'POST',
         headers: {

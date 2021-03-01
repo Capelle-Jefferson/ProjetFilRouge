@@ -90,8 +90,21 @@ export class FormQuestionComponent implements OnInit {
     let explicationS:string=this.questionForm.get("answer.explication").value
     let textAnswerS:string=this.questionForm.get("answer.textAnswer").value
 
+    let typeAnswerForm = this.questionForm.get("answer.typeAnswer").value;
+    if(typeAnswerForm == "qcm"){
+      let nbIsCorrectAnswer = 0;
+      for(let answ of choiceAnswer){
+        if(answ.isAnswer){
+          nbIsCorrectAnswer++;
+        }
+      }
+      if(nbIsCorrectAnswer > 1){
+        typeAnswerForm = "QCM_multiple"
+      }
+    }
+
     let answerF = {
-      typeAnswer:this.questionForm.get("answer.typeAnswer").value,
+      typeAnswer:typeAnswerForm,
       explication:explicationS,
       textAnswer:textAnswerS,
       listChoiceAnswer:choiceAnswer
@@ -104,7 +117,7 @@ export class FormQuestionComponent implements OnInit {
        idlevel: +this.questionForm.get("idlevel").value,
        answer:answerF
      }
-    
+     
      //Création de la question et redirection vers la page questions
      this.serviceQ.create(questionA);
      this.router.navigateByUrl("/QuestionComponent", { skipLocationChange: true}).then(() => {
