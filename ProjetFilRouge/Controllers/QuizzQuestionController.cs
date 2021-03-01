@@ -54,7 +54,7 @@ namespace ProjetFilRouge.Controllers
             return this.quizzquestionService.AddAnswerCandidate(idQuizz, idQuestion, answer);
         }
 
-        [HttpPatch]
+        [HttpPut("/api/quizzQuestionCorrectAnswer")]
         public FindQuizzQDto Patch(int idQuizz, int idQuestion, int answer)
         {
             return this.quizzquestionService.AddIsCorrectAnswer(idQuizz, idQuestion, answer);
