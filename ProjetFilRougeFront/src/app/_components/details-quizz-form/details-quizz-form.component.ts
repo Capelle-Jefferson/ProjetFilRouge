@@ -31,13 +31,10 @@ export class DetailsQuizzFormComponent implements OnInit {
   }
 
   async onSubmit() {
-    let quizzQuestion : QuizzQuestion;
-
     await this.service.correctCandidateAnswer(
       this.idQuizz,
       this.question.idQuestion,
       +this.answerForm.get("isCorrectAnswer").value)
-    .then(data => quizzQuestion=data)
 
     this.router.navigateByUrl('/DetailsQuizzFormComponent', { skipLocationChange: true}).then(() => {
       this.router.navigate([`/gestionQuizz/details/${this.idQuizz}`]);
