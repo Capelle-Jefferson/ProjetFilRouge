@@ -49,16 +49,17 @@ namespace ProjetFilRouge.Repositories
 
         private TypeAnswer ConvertTypeAnswer(string v)
         {
+            v = v.ToLower();
             switch (v)
             {
-                case "QCM":
+                case "qcm":
                     return TypeAnswer.QCM;
-                case "QCM_Multiple":
+                case "qcm_multiple":
                     return TypeAnswer.QCM_multiple;
-                case "Text":
+                case "text":
                     return TypeAnswer.Text;
                 default:
-                    return TypeAnswer.Text;
+                    throw new Exception("type answer inconnus");
             }
         }
 
