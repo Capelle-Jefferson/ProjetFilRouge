@@ -8,7 +8,7 @@
     <div *ngIf="question.candidateAnswer">
         <h6>Réponse du candidat:</h6>
         <p *ngIf="question.isCorrectAnswer == true" class="correct">{{question.candidateAnswer}}</p>
-        <p *ngIf="!question.isCorrectAnswer == false" class="incorrect">{{question.candidateAnswer}}</p>
+        <p *ngIf="question.isCorrectAnswer == false" class="incorrect">{{question.candidateAnswer}}</p>
         <p *ngIf="question.isCorrectAnswer == null">{{question.candidateAnswer}}</p>
     </div>
 </div>
