@@ -15,5 +15,5 @@
             <option *ngFor="let level of levels" value={{level.idLevel}}>{{level.nameLevel}}</option>
         </select>
     </label>
-    <button ng-disabled="candidateForm.$invalid" type="submit" class="btn btn-success">Ajouter</button>
+    <button [disabled]="!candidateForm.valid" type="submit" class="btn btn-success">Ajouter</button>
 </form>

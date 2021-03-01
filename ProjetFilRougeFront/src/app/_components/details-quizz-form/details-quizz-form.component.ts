@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { QuizzQuestion } from 'src/app/_models/quizzQuestion';
@@ -23,7 +23,7 @@ export class DetailsQuizzFormComponent implements OnInit {
     private toastr : ToastrService
   ) { 
     this.answerForm = this.builder.group({
-      isCorrectAnswer: [0]
+      isCorrectAnswer: [null, [Validators.required]]
     })
   }
 

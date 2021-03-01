@@ -29,8 +29,8 @@ export class CandidateFormComponent implements OnInit {
     this.candidateForm = this.builder.group({
       firstname: ["", Validators.required],
       lastname: ["", Validators.required],
-      email: ["", Validators.required],
-      idLevel: [0]
+      email: ["", Validators.email],
+      idLevel: [null, [Validators.required]]
     })
    }
 

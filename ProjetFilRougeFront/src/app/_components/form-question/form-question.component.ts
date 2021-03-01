@@ -1,6 +1,6 @@
 import { stringify } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Answers } from 'src/app/_models/Answers';
 import { Category } from 'src/app/_models/category';
@@ -28,11 +28,11 @@ export class FormQuestionComponent implements OnInit {
   constructor(private fb: FormBuilder, private serviceQ:QuestionsService,private servicesCategories : CategoryService,
     private servicesLevels: LevelService,private router:Router) {
     this.questionForm = this.fb.group({
-      intitule: [""],
-      idcategory:this.fb.control(""),
-      idlevel: this.fb.control(""),
+      intitule: ["", Validators.required],
+      idcategory:[null, [Validators.required]],
+      idlevel: [null, [Validators.required]],
       answer:this.fb.group({
-        typeAnswer: this.fb.control(""),
+        typeAnswer: [null, [Validators.required]],
         explication: [""],
         textAnswer: [""],
         listChoiceAnswer:this.fb.group({
@@ -85,8 +85,6 @@ export class FormQuestionComponent implements OnInit {
       choiceAnswer=null;
     }
     
-    console.log(choiceAnswer);
-    console.log(compteur);
     //Récupération des données pour la Answer
     let intituleS:string = this.questionForm.get("intitule").value
     let explicationS:string=this.questionForm.get("answer.explication").value
@@ -106,15 +104,11 @@ export class FormQuestionComponent implements OnInit {
        idlevel: +this.questionForm.get("idlevel").value,
        answer:answerF
      }
-
-     console.log(questionA);
     
      //Création de la question et redirection vers la page questions
      this.serviceQ.create(questionA);
      this.router.navigateByUrl("/QuestionComponent", { skipLocationChange: true}).then(() => {
       this.router.navigate(["/questions"]);
     })
-     
   }
-  
 }

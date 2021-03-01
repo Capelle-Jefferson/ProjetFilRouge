@@ -23,8 +23,6 @@ export class QuestionComponent implements OnInit {
 
   ngOnInit(): void {
     this.istypeAnswer = this.question.answer.typeAnswer != 'text'
-    console.log(this.question);
-    console.log(this.istypeAnswer);
   }
 
   deleteQuestion(question : Question){

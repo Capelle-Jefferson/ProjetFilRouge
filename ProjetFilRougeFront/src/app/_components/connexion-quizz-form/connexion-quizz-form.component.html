@@ -4,5 +4,5 @@
         <input type="text" formControlName="codeQuizz" placeholder="Code">
     </label>
     <p *ngIf="msgErreur" class="error">{{msgErreur}}</p>
-    <button type="submit" class="btn btn-success">Commencer</button>
+    <button [disabled]="!codeQuizzForm.valid" type="submit" class="btn btn-success">Commencer</button>
 </form>
