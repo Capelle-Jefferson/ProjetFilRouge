@@ -58,7 +58,7 @@ export class GenerateQuizzFormComponent implements OnInit {
       idCategory: +this.quizzForm.get("idCategory").value,
       idLevel: +this.quizzForm.get("idLevel").value,
       idUser: this.user.idUser,
-      idCandidat: this.idCandidate,
+      idCandidate: this.idCandidate,
     }
     let success;
     try{
