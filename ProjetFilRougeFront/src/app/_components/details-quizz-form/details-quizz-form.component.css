@@ -1,0 +1,25 @@
+form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid black;
+    margin: 20px 20% 20px 20%;
+    padding: 30px;
+}
+.reponse{
+    display: flex;
+    justify-content: center;
+}
+.reponse div{
+    border: darkcyan solid 0.5px;
+    padding: 10px;
+    margin: 25px;
+    max-width: 45%;
+}
+.correct{
+    color:#aeef46;
+}
+.incorrect{
+    color: rgb(255, 0, 0);
+    text-decoration:line-through;
+}

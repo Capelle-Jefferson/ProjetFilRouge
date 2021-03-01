@@ -7,6 +7,7 @@ import { CandidatesComponent } from './_pages/candidates/candidates.component';
 import { CategoriesComponent } from './_pages/categories/categories.component';
 import { CategoryFormComponent } from './_pages/category-form/category-form.component';
 import { ConnexionQuizzComponent } from './_pages/connexion-quizz/connexion-quizz.component';
+import { DetailsQuizzComponent } from './_pages/details-quizz/details-quizz.component';
 import { GenerateQuizzFormComponent } from './_pages/generate-quizz-form/generate-quizz-form.component';
 import { GeneratesQuizzesComponent } from './_pages/generates-quizzes/generates-quizzes.component';
 import { QuestionsComponent } from './_pages/questions/questions.component';
@@ -18,6 +19,7 @@ const routes: Routes = [
   {path: "gestionQuizz/:id", component: GeneratesQuizzesComponent, children: [
     {path: "ajouter", component: GenerateQuizzFormComponent}
   ]},
+  {path: "gestionQuizz/details/:idQuizz", component: DetailsQuizzComponent},
   {path:"questions",component:QuestionsComponent,children:[
     {path:"ajouter",component:FormQuestionComponent}
   ]},

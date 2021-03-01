@@ -9,6 +9,7 @@
             <th scope="col">Catégorie</th>
             <th scope="col">Niveau</th>
             <th scope="col">Nombre de questions</th>
+            <th scope="col">Détail du quizz</th>
             <th scope="col" class="danger">Supprimer</th>
         </tr>
     </thead>
@@ -16,10 +17,11 @@
         <tr *ngFor="let quizz of quizzes; let i = index">
             <td scope="col">{{i+1}}</td>
             <td>{{quizz.codeQuizz}}</td>
-            <td>{{quizz.date | date:"dd/MM/y, hh:mm"}}</td>
+            <td>{{quizz.date | date:"dd/MM/y, HH:mm"}}</td>
             <td>{{quizz.category}}</td>
             <td>{{quizz.level}}</td>
             <td>{{quizz.questions.length}}</td>
+            <td><a routerLink="/gestionQuizz/details/{{quizz.idQuizz}}"><img [src]="detailsIcon"></a></td>
             <td><a routerLink="/gestionQuizz/idUser" (click)="delete(quizz)"><img [src]="deleteIcon" alt=""></a></td>
         </tr>
     </tbody>

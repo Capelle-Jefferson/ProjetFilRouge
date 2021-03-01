@@ -17,6 +17,7 @@ export class CandidatesComponent implements OnInit {
   candidates : Candidate[];
   deleteIcon = "../assets/images/icons/trash.svg";
   quizzIcon = "../assets/images/icons/quiz.svg";
+  msgError = ""
 
   constructor(
     private candidateService:CandidateService,
@@ -37,12 +38,17 @@ export class CandidatesComponent implements OnInit {
     }
   }
 
-  deleteCandidate(cand: Candidate){
+ async deleteCandidate(cand: Candidate){
     let res : Number;
-    this.candidateService.delete(cand.idCandidate).then(data => res = data );
+    try{
+      await this.candidateService.delete(cand.idCandidate).then(data => res = data );
+      this.toastr.success("Le candidat à bien était supprimé");
+    }catch{
+      this.toastr.warning("Ce candidat ne peut pas être supprimé, il est associé à un quiz");
+    }
+
     this.router.navigateByUrl('/CandidatesComponent', { skipLocationChange: true}).then(() => {
       this.router.navigate(["/candidats"]);
-    this.toastr.success("Le candidat à bien était supprimé");
     })
   }
 
