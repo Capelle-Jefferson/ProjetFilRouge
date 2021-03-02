@@ -42,13 +42,26 @@ namespace ProjetFilRouge.Controllers
             }    
         }
 
-        [HttpPatch("api/Correctquizz/{id}")]
+        [HttpPut("api/Correctquizz/{id}")]
         public IActionResult GetGoodAnswersQuizz(int id)
         {
             try
             {
                 quizzesServices.GetGoodAnswersQuizz(id);
                 return Ok();
+            }
+            catch
+            {
+                return NotFound();
+            }
+        }
+
+        [HttpGet("api/ResultatQuizz/{id}")]
+        public IActionResult GetQuizzResult(int id)
+        {
+            try
+            {
+                return Ok(quizzesServices.GetQuizzResult(id));
             }
             catch
             {

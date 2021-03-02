@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using System.Configuration;
 using ProjetFilRouge.Dtos.QuestionsDtos;
 using ProjetFilRouge.Dtos.AnswerDtos;
+using ProjetFilRouge.Dtos.ResultDtos;
+using ProjetFilRouge.Dtos.QuizzQDTO;
 
 namespace ProjetFilRouge.Services
 {
@@ -337,11 +339,72 @@ namespace ProjetFilRouge.Services
             ) ;
         }
 
-
         public int DeleteByIdQuizz(int id)
         {
             quizzQuestionService.DeleteQuizzQ(id);
             return this.quizzRepository.Delete(id);
+        }
+
+        /// <summary>
+        ///     Retourne le resultat d'un quizz
+        /// </summary>
+        /// <param name="idQuizz">id du quizz</param>
+        /// <returns>QuizzResultDto</returns>
+        public QuizzResultDto GetQuizzResult(int idQuizz)
+        {
+            FindQuizzDto quizz = this.GetQuizzById(idQuizz);
+
+            // Dictionnaire, key: nom du niveau (junior,..) et
+            // en valeur le nbre de question total du niveau et le nbre de bonne réponse dans ce niveau
+            Dictionary<string, (int, int)> results = new Dictionary<string, (int, int)>();
+            results.Add("junior", (0, 0));
+            results.Add("confirme", (0, 0));
+            results.Add("expert", (0, 0));
+
+            foreach (FindQuizzQuestionsDto question in quizz.Questions)
+            {
+                string key = question.Level;
+                if (results.ContainsKey(key))
+                {
+                    int nbCorrect = results[key].Item2;
+                    if ((bool)question.IsCorrectAnswer)
+                        nbCorrect++;
+                    results[key] = (results[key].Item1 + 1, nbCorrect) ;
+                }
+            }
+            return CalculResult(results);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="results"></param>
+        /// <returns></returns>
+        private QuizzResultDto CalculResult(Dictionary<string, (int, int)> results)
+        {
+            // Calcule du pourcentage de bonne reponse de chaque niveau
+            double junior = -1;
+            if(results["junior"].Item1 != 0)
+                junior = ((double)results["junior"].Item2 / results["junior"].Item1) * 100;
+
+            double confirme = -1;
+            if (results["confirme"].Item1 != 0)
+                confirme = ((double)results["confirme"].Item2 / results["confirme"].Item1)*100;
+
+            double expert = -1;
+            if (results["expert"].Item1 != 0)
+                expert = ((double)results["expert"].Item2 / results["expert"].Item1)*100;
+
+            // Calcule du pourcentage total
+            double nbQuestions = results["junior"].Item1 + results["confirme"].Item1 + results["expert"].Item1;
+            double nbCorrectQuestion = results["junior"].Item2 + results["confirme"].Item2 + results["expert"].Item2;
+            double total = (nbCorrectQuestion / nbQuestions)*100;
+
+            return new QuizzResultDto(
+                Math.Round(total,2),
+                Math.Round(junior,2),
+                Math.Round(confirme, 2),
+                Math.Round(expert, 2)
+            );
         }
     }
 }
