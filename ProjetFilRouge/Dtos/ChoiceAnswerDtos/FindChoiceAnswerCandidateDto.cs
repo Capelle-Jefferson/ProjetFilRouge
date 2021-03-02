@@ -1,18 +1,20 @@
 ﻿namespace ProjetFilRouge.Models
 {
-    public class FindChoiceAnswerCandidateDto
+    public class FindChoiceAnswerDto
     {
-        public FindChoiceAnswerCandidateDto()
+        public FindChoiceAnswerDto()
         {
         }
 
-        public FindChoiceAnswerCandidateDto(int? idChoiceAnswer, string textChoice)
+        public FindChoiceAnswerDto(int? idChoiceAnswer, string textChoice, bool isAnswer)
         {
             IdChoiceAnswer = idChoiceAnswer;
             TextAnswer = textChoice;
+            IsAnswer = isAnswer;
         }
 
         public int? IdChoiceAnswer { get; set;  }
         public string TextAnswer { get; set;  }
+        public bool IsAnswer { get; set;  }
     }
 }

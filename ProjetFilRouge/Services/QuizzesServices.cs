@@ -111,11 +111,11 @@ namespace ProjetFilRouge.Services
         /// </summary>
         /// <param name="id">identitfiant du quizz à récupérer</param>
         /// <returns>FindQuizzDto</returns>
-        public FindQuizzDto GetQuizzByIdInProgress(string code)
+        public FindQuizzCandidateDto GetQuizzByIdInProgress(string code)
         {
             Quizz quizz = quizzRepository.Find(code);
-            FindQuizzDto quizzDto = TransformModelToDto(quizz);
-            foreach (FindQuizzQuestionsDto q in quizzDto.Questions.ToList())
+            FindQuizzCandidateDto quizzDto = TransformModelToDtoCandidate(quizz);
+            foreach (FindQuizzQuestionCandidateDto q in quizzDto.Questions.ToList())
             {
                 if(q.CandidateAnswer != null)
                 {
@@ -236,6 +236,59 @@ namespace ProjetFilRouge.Services
         }
 
         /// <summary>
+        ///     Transforme le model d'un quizz en dto pour un candidat, sans les réponses
+        /// </summary>
+        /// <param name="quizz">Quizz à transformer</param>
+        /// <returns>FindQuizzCandidateDto</returns>
+        private FindQuizzCandidateDto TransformModelToDtoCandidate(Quizz quizz)
+        {
+            CategoryRepository repoCat = new CategoryRepository(new QueryBuilder());
+            LevelRepository repoLev = new LevelRepository(new QueryBuilder());
+            QuizzQuestionRepository quizzQRepo = new QuizzQuestionRepository(new QueryBuilder());
+            return new FindQuizzCandidateDto(
+                quizz.idQuizz,
+                quizz.codeQuizz,
+                quizz.date,
+                repoCat.Find((int)quizz.idCategory).NameCategory,
+                repoLev.Find((int)quizz.idLevel).NameLevel,
+                quizz.idUser,
+                quizz.idCandidate,
+                ReturnQuestionsCandidateQuizz(quizzQRepo.FindAll((int)quizz.idQuizz))
+                );
+        }
+
+        /// <summary>
+        ///     Récupérations des questions composant le quizz pour un candidat
+        /// </summary>
+        /// <param name="questionsQuizz">liste de QuizzQuestion</param>
+        /// <returns>List<FindQuizzQuestionsCandidateDto></returns>
+        private List<FindQuizzQuestionCandidateDto> ReturnQuestionsCandidateQuizz(List<QuizzQuestion> questionsQuizz)
+        {
+            QuestionsRepository questionRepo = new QuestionsRepository(new QueryBuilder());
+            List<FindQuizzQuestionCandidateDto> questionsDtos = new List<FindQuizzQuestionCandidateDto>();
+            foreach (QuizzQuestion quizzQ in questionsQuizz)
+            {
+                Question question = questionRepo.Find((int)quizzQ.IdQuestion);
+                questionsDtos.Add(TransformsModelToDTOQuestionCandidate(question, quizzQ.AnswerCandidate, quizzQ.IsCorrectAnswer));
+            }
+            return questionsDtos;
+        }
+        private FindQuizzQuestionCandidateDto TransformsModelToDTOQuestionCandidate(Question question, string answerCandidate, bool? isCorrectAnswer)
+        {
+            CategoryRepository catRepo = new CategoryRepository(new QueryBuilder());
+            FindAnswerCandidateDto answer = AnswersServices.GetAnswerByIdCandidate((int)question.IdAnswer);
+            return new FindQuizzQuestionCandidateDto(
+                question.IdQuestion,
+                question.Intitule,
+                catRepo.Find((int)question.IdCategory).NameCategory,
+                TransformeIdLevelToString((int)question.IdLevel),
+                answer,
+                answerCandidate,
+                isCorrectAnswer
+            );
+        }
+
+        /// <summary>
         ///     Récupérations des questions composant le quizz
         /// </summary>
         /// <param name="questionsQuizz">liste de QuizzQuestion</param>
@@ -276,13 +329,14 @@ namespace ProjetFilRouge.Services
             return new FindQuizzQuestionsDto(
                 question.IdQuestion,
                 question.Intitule,
-                catRepo.Find((int)question.IdLevel).NameCategory,
+                catRepo.Find((int)question.IdCategory).NameCategory,
                 TransformeIdLevelToString((int)question.IdLevel),
                 answer,
                 answerCandidate,
                 isCorrectAnswer
             ) ;
         }
+
 
         public int DeleteByIdQuizz(int id)
         {

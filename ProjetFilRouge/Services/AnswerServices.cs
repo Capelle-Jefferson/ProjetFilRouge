@@ -179,11 +179,66 @@ namespace ProjetFilRouge.Services
         ///     Permet de supprimer un Answer
         /// </summary>
         /// <param name="id"></param>
-        internal int Delete(int id)
+        public int Delete(int id)
         {
             ChoiceAnswerRepository choiceAnswerRepo = new ChoiceAnswerRepository(new QueryBuilder());
             choiceAnswerRepo.DeleteByIdAnswer(id);
             return this.AnswerRepository.Delete(id);
+        }
+
+        /// <summary>
+        /// Récupère les réponses possible pour un candidat, sans indiquer la vrai réponse
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public FindAnswerCandidateDto GetAnswerByIdCandidate(int id)
+        {
+            Answer ans = AnswerRepository.Find(id);
+            if (ans.IdAnswer == null)
+            {
+                throw new HttpResponseException(HttpStatusCode.NotFound);
+            }
+            return TransformModelToDtoCandidate(ans);
+        }
+
+        /// <summary>
+        ///    Permet de transformer un Model en DTO Pour un candidat
+        /// </summary>
+        /// <param name="Model answer">model à transformer</param>
+        /// <returns>FindAnswerCandidateDto</returns>
+        private FindAnswerCandidateDto TransformModelToDtoCandidate(Answer ans)
+        {
+            if (ans.TypeAnswer != TypeAnswer.Text)
+            {
+                return new FindAnswerCandidateDto(ans.IdAnswer, ConvertTpeAnserToString(ans.TypeAnswer), ans.Explication, GetListChoiceAnswerCandidate((int)ans.IdAnswer));
+            }
+            else
+            {
+                return new FindAnswerCandidateDto(ans.IdAnswer, ConvertTpeAnserToString(ans.TypeAnswer), ans.Explication);
+            }
+        }
+        /// <summary>
+        ///     Récupère la liste des choix possible sans indiquer la vrai réponse
+        /// </summary>
+        /// <param name="id">id Answer</param>
+        /// <returns>List<FindChoiceAnswerDto></returns>
+        private List<FindChoiceAnswerCandidateDto> GetListChoiceAnswerCandidate(int id)
+        {
+            List<ChoiceAnswer> listChoiceAnswer = ChoiceAnswerRepository.FindList(id);
+            List<FindChoiceAnswerCandidateDto> listChoiceDto = new List<FindChoiceAnswerCandidateDto>();
+            foreach (ChoiceAnswer choice in listChoiceAnswer)
+            {
+                listChoiceDto.Add(TransformeModelToChoiceDtoCandidate(choice));
+            }
+            return listChoiceDto;
+        }
+
+        private FindChoiceAnswerCandidateDto TransformeModelToChoiceDtoCandidate(ChoiceAnswer choice)
+        {
+            return new FindChoiceAnswerCandidateDto(
+                choice.IdChoiceAnswer,
+                choice.TextAnswer
+                );
         }
     }
 }
