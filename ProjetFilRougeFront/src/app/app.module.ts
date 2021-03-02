@@ -25,6 +25,8 @@ import { ConnexionQuizzComponent } from './_pages/connexion-quizz/connexion-quiz
 import { ConnexionQuizzFormComponent } from './_components/connexion-quizz-form/connexion-quizz-form.component';
 import { DetailsQuizzComponent } from './_pages/details-quizz/details-quizz.component';
 import { DetailsQuizzFormComponent } from './_components/details-quizz-form/details-quizz-form.component';
+import { QuizzResultComponent } from './_pages/quizz-result/quizz-result.component';
+import { GoogleChartsModule } from 'angular-google-charts';
 
 @NgModule({
   declarations: [
@@ -46,6 +48,7 @@ import { DetailsQuizzFormComponent } from './_components/details-quizz-form/deta
     ConnexionQuizzFormComponent,
     DetailsQuizzComponent,
     DetailsQuizzFormComponent,
+    QuizzResultComponent,
   ],
   imports: [
     BrowserModule,
@@ -56,6 +59,7 @@ import { DetailsQuizzFormComponent } from './_components/details-quizz-form/deta
     CommonModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
+    GoogleChartsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

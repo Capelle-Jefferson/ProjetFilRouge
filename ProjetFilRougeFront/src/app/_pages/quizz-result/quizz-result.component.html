@@ -1,0 +1,15 @@
+<button routerLink="/gestionQuizz/details/{{idQuizz}}" class="btn btn-primary">Revenir aux détails du quiz</button>
+<div *ngIf="results">
+    <h2>Score total: {{results.resultTotal}} % </h2>
+    <div class="chart">
+        <google-chart  
+            title="Resultat du quizz"
+            [type]="type" 
+            [data]="data"    
+            [columnNames]="columnNames"
+            [options]="options"
+            [width]="width"
+            [height]="height">
+        </google-chart>
+    </div>
+</div>

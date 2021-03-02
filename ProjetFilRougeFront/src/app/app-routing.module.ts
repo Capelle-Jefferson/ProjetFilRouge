@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AppComponent } from './app.component';
 import { FormQuestionComponent } from './_components/form-question/form-question.component';
 import { CandidateFormComponent } from './_pages/candidate-form/candidate-form.component';
 import { CandidatesComponent } from './_pages/candidates/candidates.component';
@@ -11,6 +10,7 @@ import { DetailsQuizzComponent } from './_pages/details-quizz/details-quizz.comp
 import { GenerateQuizzFormComponent } from './_pages/generate-quizz-form/generate-quizz-form.component';
 import { GeneratesQuizzesComponent } from './_pages/generates-quizzes/generates-quizzes.component';
 import { QuestionsComponent } from './_pages/questions/questions.component';
+import { QuizzResultComponent } from './_pages/quizz-result/quizz-result.component';
 
 const routes: Routes = [
   {path: "categories", component: CategoriesComponent, children: [
@@ -20,6 +20,7 @@ const routes: Routes = [
     {path: "ajouter", component: GenerateQuizzFormComponent}
   ]},
   {path: "gestionQuizz/details/:idQuizz", component: DetailsQuizzComponent},
+  {path: "gestionQuizz/resultat/:idQuizz", component: QuizzResultComponent},
   {path:"questions",component:QuestionsComponent,children:[
     {path:"ajouter",component:FormQuestionComponent}
   ]},
