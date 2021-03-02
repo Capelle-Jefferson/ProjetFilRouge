@@ -36,8 +36,8 @@ export class GenerateQuizzFormComponent implements OnInit {
   ) { 
     this.quizzForm = this.builder.group({
       nbreQuestions: [0, Validators.required],
-      idCategory: [0],
-      idLevel: [0],
+      idCategory: [null, [Validators.required]],
+      idLevel: [null, [Validators.required]],
       idUser: [0],
       idCandidate: [0]
     })

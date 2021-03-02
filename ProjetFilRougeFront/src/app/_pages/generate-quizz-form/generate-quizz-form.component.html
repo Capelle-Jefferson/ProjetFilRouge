@@ -15,5 +15,5 @@
             <option *ngFor="let level of levels" value={{level.idLevel}}>{{level.nameLevel}}</option>
         </select>
     </label>
-    <button type="submit" class="btn btn-success">Générer</button>
+    <button [disabled]="!quizzForm.valid" type="submit" class="btn btn-success">Générer</button>
 </form>

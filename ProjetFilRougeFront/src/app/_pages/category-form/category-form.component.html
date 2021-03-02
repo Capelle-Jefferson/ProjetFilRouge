@@ -3,5 +3,5 @@
     <label>Nouvelle catégorie: 
         <input type="text" formControlName="nameCategory" placeholder="Catégorie">
     </label>
-    <button type="submit" class="btn btn-success">Ajouter</button>
+    <button [disabled]="!categoryForm.valid" type="submit" class="btn btn-success">Ajouter</button>
 </form>

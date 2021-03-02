@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { QuizzQuestion } from 'src/app/_models/quizzQuestion';
 import { QuizzQuestionService } from 'src/app/_services/quizz-question.service';
 
@@ -16,10 +18,12 @@ export class DetailsQuizzFormComponent implements OnInit {
 
   constructor(
     private builder : FormBuilder,
-    private service: QuizzQuestionService
+    private service: QuizzQuestionService,
+    private router : Router,
+    private toastr : ToastrService
   ) { 
     this.answerForm = this.builder.group({
-      isCorrectAnswer: [0]
+      isCorrectAnswer: [null, [Validators.required]]
     })
   }
 
@@ -27,14 +31,14 @@ export class DetailsQuizzFormComponent implements OnInit {
   }
 
   async onSubmit() {
-    let quizzQuestion : QuizzQuestion;
-
     await this.service.correctCandidateAnswer(
       this.idQuizz,
       this.question.idQuestion,
       +this.answerForm.get("isCorrectAnswer").value)
-    .then(data => quizzQuestion=data)
 
-    console.log(quizzQuestion)
+    this.router.navigateByUrl('/DetailsQuizzFormComponent', { skipLocationChange: true}).then(() => {
+      this.router.navigate([`/gestionQuizz/details/${this.idQuizz}`]);
+    this.toastr.success("La correction à bien était appliqué");
+    })
   }
 }

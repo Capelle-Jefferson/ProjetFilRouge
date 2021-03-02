@@ -9,13 +9,13 @@
                 <label>Categorie:
                     <select class="form-select" aria-label="Default select example" formControlName="idcategory"
                         class="inp">
-                        <option disable selected>Choisissez une categorie</option>
+                        <option value="" disabled selected>Choisissez une categorie</option>
                         <option *ngFor="let cat of categories" value="{{cat.idCategory}}">{{cat.nameCategory}}</option>
                     </select>
                 </label>
                 <label>Niveau:
                     <select class="form-select" aria-label="Default select example" formControlName="idlevel" class="inp">
-                        <option selected>Choisissez un niveau</option>
+                        <option value="" disabled selected>Choisissez un niveau</option>
                         <option *ngFor="let level of levels" value="{{level.idLevel}}">{{level.nameLevel}}</option>
                     </select>
                 </label>
@@ -68,7 +68,7 @@
                     </div>
                 </div>
             </div>
-            <button type="submit" class="btn btn-success">Valider la question</button>
+            <button [disabled]="!questionForm.valid" type="submit" class="btn btn-success">Valider la question</button>
         </form>
     </div>
 </div>

@@ -22,7 +22,7 @@
         <label> Mauvaise réponse
             <input type="radio" formControlName="isCorrectAnswer" value="0">
         </label>
-        <button type="submit" class="btn btn-success">Corriger</button>
+        <button [disabled]="!answerForm.valid" type="submit" class="btn btn-success">Corriger</button>
     </form>
 </div>
 
