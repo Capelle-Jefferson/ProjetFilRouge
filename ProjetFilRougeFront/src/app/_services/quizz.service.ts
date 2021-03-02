@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Quizz } from '../_models/quizz';
+import { QuizzResult } from '../_models/QuizzResult';
 import { User } from '../_models/user';
 
 @Injectable({
@@ -27,6 +28,10 @@ export class QuizzService {
 
   getQuizzByCode(code : string): Promise<Quizz>{
     return fetch(`${environment.apiUrl}/QuizzesInProgress/${code}`).then(resp => resp.json());
+  }
+
+  getQuizzResult(id : number): Promise<QuizzResult>{
+    return fetch(`${environment.apiUrl}/ResultatQuizz/${id}`).then(resp => resp.json()); 
   }
 
   create(quizz, nbQuestions : number): Promise<Quizz>{
