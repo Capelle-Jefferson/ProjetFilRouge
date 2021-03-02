@@ -25,12 +25,17 @@ export class LevelsComponent implements OnInit {
     this.services.getAll().then(data => this.levels = data);
   }
 
-  deleteLevel(lev : Level){
-    let res : Number;
-    this.services.delete(lev.idLevel).then(data => res = data );
+  async deleteLevel(lev : Level){
+    let res =true;
+    await this.services.delete(lev.idLevel).catch(error=>res=false);
+    if(res){
+      this.toastr.success("Le niveau à bien était supprimé");
+    }else
+    {
+      this.toastr.error("Le niveau ne peut pas être supprimé");
+    }
     this.router.navigateByUrl('/LevelComponent', { skipLocationChange: true}).then(() => {
-      this.router.navigate(["/levels"]);
-    this.toastr.success("Le level à bien était supprimé");
+    this.router.navigate(["/niveaux"]);
     })
   }
 

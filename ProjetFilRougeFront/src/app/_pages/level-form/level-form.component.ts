@@ -30,8 +30,8 @@ export class LevelFormComponent implements OnInit {
   onSubmit() {
     this.services.create(this.levelForm.value);
     this.router.navigateByUrl('/LevelComponent', { skipLocationChange: true}).then(() => {
-      this.router.navigate(["/levels"]);
-    this.toastr.success("Le level à bien était ajouté");
+      this.router.navigate(["/niveaux"]);
+      this.toastr.success("Le level à bien était ajouté");
     })
   }
 
