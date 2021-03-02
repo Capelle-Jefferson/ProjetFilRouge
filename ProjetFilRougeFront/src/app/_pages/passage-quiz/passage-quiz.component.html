@@ -8,13 +8,14 @@
                     <div *ngIf="istypeAnswer">
                         <p class="card-subtitle mb-2 text-muted"
                             *ngFor="let choiceAnswer of question.answer.listChoiceAnswer; let i = index">
-                            <input type="checkbox">
-                            Réponse {{i+1}}: {{choiceAnswer.textAnswer}}
+                            <input *ngIf="!isQcmUnique" type="checkbox" id="Reponse" value="{{choiceAnswer.textAnswer}}" (change)="SaveAnswer(choiceAnswer.textAnswer)">
+                            <input *ngIf="isQcmUnique" type="radio" id="ReponseUnique" value="{{choiceAnswer.textAnswer}}" (change)="SaveAnswer(choiceAnswer.textAnswer)">
+                            <label for="Reponse">Réponse {{i+1}}: {{choiceAnswer.textAnswer}}</label>
                         </p>
                     </div>
                     <div *ngIf="!istypeAnswer" class="textarea">
                         <label>Réponse :</label>
-                        <textarea cols="30" rows="10" placeholder="Reponse ouverte" name="reponseOuverte"></textarea>
+                        <input type="text" id="reponse" aria-placeholder="Reponse ouverte" (blur)="SaveAnswerText()">
                     </div>
                     <button type="button" class="btn btn-success" id="valider" (click)="onSubmit()" *ngIf="!isFinished">Suivant</button>
                     <button *ngIf="isFinished" class="btn btn-success" (click)="FinduQuizz()">Valider le quizz</button>
@@ -24,7 +25,12 @@
     </div>
     
 </div>
-<div *ngIf="!Next">
+<div *ngIf="!Next && !lastPage">
     <p>Le quizz va pouvoir démarer.. </p>
     <button  class="btn btn-success" id="valider" (click)="goToFirstQuestion()">Démarrer</button>
+</div>
+<div *ngIf="lastPage && !Next">
+    <p> Féliciations! Le quizz est à présent terminer.
+        Vos résultats vous seront communiqués ultérieurement.
+    </p>
 </div>
