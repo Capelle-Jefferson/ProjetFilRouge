@@ -21,6 +21,7 @@ export class GeneratesQuizzesComponent implements OnInit {
 
   deleteIcon = "../assets/images/icons/trash.svg";
   detailsIcon = "../assets/images/icons/details.svg";
+  sendIcon = "../assets/images/icons/send.svg";
 
   constructor(
     private route: ActivatedRoute,
@@ -43,6 +44,7 @@ export class GeneratesQuizzesComponent implements OnInit {
     this.service.getUserQuizz(this.idCandidate).then(data => this.quizzes = data);
 
     localStorage.setItem("idCandidate", this.idCandidate.toString());
+    localStorage.setItem("candidate", JSON.stringify(this.candidate))
   }
 
   delete(quizz: Quizz){

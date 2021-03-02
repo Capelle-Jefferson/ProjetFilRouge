@@ -10,8 +10,9 @@
             <th scope="col">Date</th>
             <th scope="col">Catégorie</th>
             <th scope="col">Niveau</th>
-            <th scope="col">Nombre de questions</th>
-            <th scope="col">Détail du quizz</th>
+            <th scope="col">Nombre de<br> questions</th>
+            <th scope="col">Envoyer</th>
+            <th scope="col">Détails</th>
             <th scope="col" class="danger">Supprimer</th>
         </tr>
     </thead>
@@ -23,6 +24,7 @@
             <td>{{quizz.category}}</td>
             <td>{{quizz.level}}</td>
             <td>{{quizz.questions.length}}</td>
+            <td><a routerLink="/gestionQuizz/envoyer/{{quizz.codeQuizz}}"><img [src]="sendIcon"></a></td>
             <td><a routerLink="/gestionQuizz/details/{{quizz.idQuizz}}"><img [src]="detailsIcon"></a></td>
             <td><a routerLink="/gestionQuizz/idUser" (click)="delete(quizz)"><img [src]="deleteIcon" alt=""></a></td>
         </tr>

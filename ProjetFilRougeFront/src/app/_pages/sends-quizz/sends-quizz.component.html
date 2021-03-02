@@ -1,0 +1,4 @@
+<button routerLink="/gestionQuizz/{{candidate.idCandidate}}" class="btn btn-primary">Revenir à la liste des quizzes</button>
+
+<h2>Envoyez le quizz à {{candidate.lastname}} {{candidate.firstname}}:</h2>
+<app-sends-quizz-form [candidate]="candidate"></app-sends-quizz-form>

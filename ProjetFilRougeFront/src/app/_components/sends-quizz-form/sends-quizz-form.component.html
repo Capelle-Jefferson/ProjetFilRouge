@@ -1,0 +1,9 @@
+<form [formGroup]="sendForm" (ngSubmit)="onSubmit()">
+    <label>
+        <textarea cols="80" rows="10" formControlName="message" >
+
+            
+        </textarea>
+    </label>
+    <button [disabled]="!sendForm.valid" type="submit" class="btn btn-success">Envoyer</button>
+</form>

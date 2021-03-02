@@ -13,6 +13,7 @@ import { QuestionsComponent } from './_pages/questions/questions.component';
 import { LevelFormComponent } from './_pages/level-form/level-form.component';
 import { LevelsComponent } from './_pages/levels/levels.component';
 import { QuizzResultComponent } from './_pages/quizz-result/quizz-result.component';
+import { SendsQuizzComponent } from './_pages/sends-quizz/sends-quizz.component';
 
 const routes: Routes = [
   {path: "categories", component: CategoriesComponent, children: [
@@ -23,6 +24,7 @@ const routes: Routes = [
   ]},
   {path: "gestionQuizz/details/:idQuizz", component: DetailsQuizzComponent},
   {path: "gestionQuizz/resultat/:idQuizz", component: QuizzResultComponent},
+  {path: "gestionQuizz/envoyer/:codeQuizz", component: SendsQuizzComponent},
   {path:"questions",component:QuestionsComponent,children:[
     {path:"ajouter",component:FormQuestionComponent}
   ]},

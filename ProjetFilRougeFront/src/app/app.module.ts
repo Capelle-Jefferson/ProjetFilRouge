@@ -30,6 +30,8 @@ import { LevelsComponent } from './_pages/levels/levels.component';
 import { LevelFormComponent } from './_pages/level-form/level-form.component';
 import { QuizzResultComponent } from './_pages/quizz-result/quizz-result.component';
 import { GoogleChartsModule } from 'angular-google-charts';
+import { SendsQuizzComponent } from './_pages/sends-quizz/sends-quizz.component';
+import { SendsQuizzFormComponent } from './_components/sends-quizz-form/sends-quizz-form.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +57,8 @@ import { GoogleChartsModule } from 'angular-google-charts';
     LevelsComponent,
     LevelFormComponent,
     QuizzResultComponent,
+    SendsQuizzComponent,
+    SendsQuizzFormComponent,
   ],
   imports: [
     BrowserModule,
