@@ -52,9 +52,10 @@ namespace ProjetFilRouge.Services
         {
             FindQuizzDto quizz = this.GetQuizzById(id);
             List<string> tableauGoodAnswer=new List<string>();
+            string goodUniqueAnswer = "";
             foreach (FindQuizzQuestionsDto question in quizz.Questions)
             {
-                if (question.Answer.TypeAnswer == "QCM")
+                if (question.Answer.TypeAnswer == "QCM_multiple")
                 {
                     tableauGoodAnswer= correctAnswers(question);
                     List<string> candidatAnswers = question.CandidateAnswer.Split('§').ToList();
@@ -63,6 +64,23 @@ namespace ProjetFilRouge.Services
                     }else
                     {
                        this.quizzQuestionService.AddIsCorrectAnswer(id, (int)question.IdQuestion, 0);
+                    }
+                }else if(question.Answer.TypeAnswer == "QCM")
+                {
+                    foreach(FindChoiceAnswerDto choiceAnswer in question.Answer.ListChoiceAnswer)
+                    {
+                        if (choiceAnswer.IsAnswer == true)
+                        {
+                            goodUniqueAnswer = choiceAnswer.TextAnswer;
+                        }
+                    }
+                    if (CompareUniqueAnswer(question.CandidateAnswer, goodUniqueAnswer))
+                    {
+                        this.quizzQuestionService.AddIsCorrectAnswer(id, (int)question.IdQuestion, 1);
+                    }
+                    else
+                    {
+                        this.quizzQuestionService.AddIsCorrectAnswer(id, (int)question.IdQuestion, 0);
                     }
                 }
             }
@@ -81,6 +99,12 @@ namespace ProjetFilRouge.Services
             }
             return (compteur.Equals(goodAnswers.Count));
             
+        }
+
+        public bool CompareUniqueAnswer(string candidatAnswers,string goodAnswers)
+        {
+            int compteur = 0;
+            return (compteur.Equals(goodAnswers));
         }
 
         public List<string> correctAnswers(FindQuizzQuestionsDto question)
