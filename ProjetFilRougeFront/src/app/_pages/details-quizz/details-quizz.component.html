@@ -1,3 +1,5 @@
+<button routerLink="/gestionQuizz/{{idCandidate}}" class="btn btn-primary">Revenir à la liste des quizzes</button>
+
 <h2>Détails du quizz</h2>
 <div class="quizz" *ngIf="quizz">
     <h4>Code du quizz: {{quizz.codeQuizz}}</h4>
@@ -30,5 +32,5 @@
             <app-details-quizz-form [question]="question" [idQuizz]="quizz.idQuizz"></app-details-quizz-form>
         </div>
     </div>
-    <button [disabled]="isQuizzCompleted()" class="btn btn-success" id="ResultatQuizz" >Afficher les résultats</button>
+    <button [disabled]="isQuizzCompleted()" class="btn btn-success" id="ResultatQuizz" routerLink="/gestionQuizz/resultat/{{quizz.idQuizz}}">Afficher les résultats</button>
 </div>

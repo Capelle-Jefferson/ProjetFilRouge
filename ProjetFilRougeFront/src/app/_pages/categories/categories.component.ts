@@ -26,12 +26,17 @@ export class CategoriesComponent implements OnInit {
     this.services.getAll().then(data => this.categories = data);
   }
 
-  deleteCategory(cat : Category){
-    let res : Number;
-    this.services.delete(cat.idCategory).then(data => res = data );
+  async deleteCategory(cat : Category){
+    let res = true;
+    await this.services.delete(cat.idCategory).catch(error => res = false);
+    if(res){
+      this.toastr.success("La catégorie à bien était supprimé");
+    }else{
+      this.toastr.error("Cette catégorie ne peut être supprimé !");
+    }
+
     this.router.navigateByUrl('/CategoryComponent', { skipLocationChange: true}).then(() => {
       this.router.navigate(["/categories"]);
-    this.toastr.success("La catégorie à bien était supprimé");
     })
   }
 

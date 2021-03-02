@@ -28,6 +28,8 @@ import { DetailsQuizzComponent } from './_pages/details-quizz/details-quizz.comp
 import { DetailsQuizzFormComponent } from './_components/details-quizz-form/details-quizz-form.component';
 import { LevelsComponent } from './_pages/levels/levels.component';
 import { LevelFormComponent } from './_pages/level-form/level-form.component';
+import { QuizzResultComponent } from './_pages/quizz-result/quizz-result.component';
+import { GoogleChartsModule } from 'angular-google-charts';
 
 @NgModule({
   declarations: [
@@ -51,7 +53,8 @@ import { LevelFormComponent } from './_pages/level-form/level-form.component';
     DetailsQuizzComponent,
     DetailsQuizzFormComponent,
     LevelsComponent,
-    LevelFormComponent
+    LevelFormComponent,
+    QuizzResultComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,6 +65,7 @@ import { LevelFormComponent } from './_pages/level-form/level-form.component';
     CommonModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
+    GoogleChartsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
