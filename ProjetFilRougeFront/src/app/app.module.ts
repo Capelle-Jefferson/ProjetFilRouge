@@ -26,6 +26,8 @@ import { ConnexionQuizzFormComponent } from './_components/connexion-quizz-form/
 import { PassageQuizComponent } from './_pages/passage-quiz/passage-quiz.component';
 import { DetailsQuizzComponent } from './_pages/details-quizz/details-quizz.component';
 import { DetailsQuizzFormComponent } from './_components/details-quizz-form/details-quizz-form.component';
+import { LevelsComponent } from './_pages/levels/levels.component';
+import { LevelFormComponent } from './_pages/level-form/level-form.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +50,8 @@ import { DetailsQuizzFormComponent } from './_components/details-quizz-form/deta
     PassageQuizComponent,
     DetailsQuizzComponent,
     DetailsQuizzFormComponent,
+    LevelsComponent,
+    LevelFormComponent
   ],
   imports: [
     BrowserModule,

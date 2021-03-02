@@ -11,6 +11,8 @@ import { DetailsQuizzComponent } from './_pages/details-quizz/details-quizz.comp
 import { GenerateQuizzFormComponent } from './_pages/generate-quizz-form/generate-quizz-form.component';
 import { GeneratesQuizzesComponent } from './_pages/generates-quizzes/generates-quizzes.component';
 import { QuestionsComponent } from './_pages/questions/questions.component';
+import { LevelFormComponent } from './_pages/level-form/level-form.component';
+import { LevelsComponent } from './_pages/levels/levels.component';
 
 const routes: Routes = [
   {path: "categories", component: CategoriesComponent, children: [
@@ -27,7 +29,9 @@ const routes: Routes = [
     {path:"ajouter", component: CandidateFormComponent}
   ]},
   {path: "quiz", component: ConnexionQuizzComponent},
-  //{path: "niveaux", },
+  {path: "niveaux", component: LevelsComponent, children: [
+    {path: "ajouter", component: LevelFormComponent}
+  ]},
   //{path: "recruteurs", },
 
   
