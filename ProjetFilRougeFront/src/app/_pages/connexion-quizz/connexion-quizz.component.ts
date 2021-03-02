@@ -16,13 +16,6 @@ export class ConnexionQuizzComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.quizz)
-
-    // Suppresion de la variable local Quizz unt fois le quizz completé
-    this.suppresionLocalQuizz();
   }
-
-  suppresionLocalQuizz(){
-    localStorage.removeItem("quizz");
-  }
-
+  
 }

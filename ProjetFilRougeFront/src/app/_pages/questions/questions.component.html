@@ -2,9 +2,13 @@
     <div class="part2">
         <h2>Liste des questions  <a routerLink="ajouter">(+) </a></h2>
         <router-outlet></router-outlet>
-        <p *ngFor="let question of questions" >
-            <app-question [question]="question"></app-question>
-        </p>
+        <div class="grill-container">
+            <div class="card">
+                <p *ngFor="let question of questions" >
+                <app-question [question]="question"></app-question>
+                </p>
+            </div>
+        </div>
     </div>
 </div>
 

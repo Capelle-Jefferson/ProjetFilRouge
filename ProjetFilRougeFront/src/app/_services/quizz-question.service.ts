@@ -15,5 +15,15 @@ export class QuizzQuestionService {
     })
     .then(resp => resp.json());
   }
+  addCandidateAnswer(idQuizz:number, idQuestion:number, candidateAnswer:string): Promise<QuizzQuestion>{
+    return fetch(`${environment.apiUrl}/quizzQuestion?idQuizz=${idQuizz}&idQuestion=${idQuestion}`, {
+      method: 'put',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(candidateAnswer)
+    })
+    .then(resp => resp.json());
+  }
 
 }

@@ -52,4 +52,9 @@ export class QuizzService {
     })
     .then(resp => resp.json());
   }
+
+  correctQuiz(id:number){
+     fetch(`${environment.apiUrl}/Correctquizz/${id}` ,{
+      method:'PUT'});
+  }
 }

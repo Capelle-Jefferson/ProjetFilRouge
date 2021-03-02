@@ -23,6 +23,7 @@ import { CandidatesComponent } from './_pages/candidates/candidates.component';
 import { CandidateFormComponent } from './_pages/candidate-form/candidate-form.component';
 import { ConnexionQuizzComponent } from './_pages/connexion-quizz/connexion-quizz.component';
 import { ConnexionQuizzFormComponent } from './_components/connexion-quizz-form/connexion-quizz-form.component';
+import { PassageQuizComponent } from './_pages/passage-quiz/passage-quiz.component';
 import { DetailsQuizzComponent } from './_pages/details-quizz/details-quizz.component';
 import { DetailsQuizzFormComponent } from './_components/details-quizz-form/details-quizz-form.component';
 import { QuizzResultComponent } from './_pages/quizz-result/quizz-result.component';
@@ -46,6 +47,7 @@ import { GoogleChartsModule } from 'angular-google-charts';
     CandidateFormComponent,
     ConnexionQuizzComponent,
     ConnexionQuizzFormComponent,
+    PassageQuizComponent,
     DetailsQuizzComponent,
     DetailsQuizzFormComponent,
     QuizzResultComponent,

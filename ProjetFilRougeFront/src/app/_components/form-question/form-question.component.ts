@@ -67,18 +67,19 @@ export class FormQuestionComponent implements OnInit {
     var taille=this.listAnswers.length
     if(this.questionForm.value.answer.typeAnswer!= "text"){
       for(var i=0;i<taille;i++){
-      let isAnswer:boolean;
-      if(this.listAnswers.value[i]=="true"){
-        isAnswer=true;
-        compteur ++;
-      }else{
-        isAnswer=false;
-      }
-      let choice;
-      choice={
-        "textAnswer":this.listChoiceAnswer.value[i],
-        "isAnswer":isAnswer
-      }
+        let isAnswerC:boolean;
+          if(this.listAnswers.value[i]=="true"){
+            isAnswerC=true;
+            compteur ++;
+          }else{
+            isAnswerC=false;
+          }
+        let choice;
+        let textAnswerC:string=this.listChoiceAnswer.value[i]
+        choice ={
+          textAnswer:textAnswerC,
+          isAnswer:isAnswerC
+        }
       choiceAnswer.push(choice);
       }
     }else{
@@ -111,7 +112,7 @@ export class FormQuestionComponent implements OnInit {
      }
      
      //Récupération des donnés pour la question
-    let questionA={
+    let questionA ={
        intitule:intituleS,
        idcategory: +this.questionForm.get("idcategory").value,
        idlevel: +this.questionForm.get("idlevel").value,
