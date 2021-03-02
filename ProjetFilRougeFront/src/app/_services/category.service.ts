@@ -25,7 +25,6 @@ export class CategoryService {
   }
 
   delete(id : number): Promise<number>{
-    console.log(`${environment.apiUrl}/categories/${id}`);
     return fetch(`${environment.apiUrl}/categories/${id}`, {
       method: 'DELETE'
     })
