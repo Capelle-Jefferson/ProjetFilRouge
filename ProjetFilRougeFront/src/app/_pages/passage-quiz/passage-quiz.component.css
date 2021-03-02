@@ -1,5 +1,6 @@
 .container{
-    display: inline;
+    display: flex;
+    justify-content: center;
 }
 .card{
     border:solid 1px #4d618d;
@@ -17,7 +18,8 @@
 .question{
     text-align: center;
 }
-.textarea{
-    display: flex;
-    flex-direction: column;
+.Text{
+    font-size: 30px;
+    font-style: italic;
+    text-align: center;
 }
