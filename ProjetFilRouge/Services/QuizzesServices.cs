@@ -423,11 +423,18 @@ namespace ProjetFilRouge.Services
             double nbCorrectQuestion = results["junior"].Item2 + results["confirme"].Item2 + results["expert"].Item2;
             double total = (nbCorrectQuestion / nbQuestions)*100;
 
+            double juniorTotal = ((double)results["junior"].Item1 / nbQuestions) * 100;
+            double confirmeTotal = ((double)results["confirme"].Item1 / nbQuestions) * 100;
+            double expertTotal = ((double)results["expert"].Item1 / nbQuestions) * 100;
+
             return new QuizzResultDto(
                 Math.Round(total,2),
                 Math.Round(junior,2),
                 Math.Round(confirme, 2),
-                Math.Round(expert, 2)
+                Math.Round(expert, 2),
+                Math.Round(juniorTotal, 2),
+                Math.Round(confirmeTotal, 2),
+                Math.Round(expertTotal, 2)
             );
         }
     }
