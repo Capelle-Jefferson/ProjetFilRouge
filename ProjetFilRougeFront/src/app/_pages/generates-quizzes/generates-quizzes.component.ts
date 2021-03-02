@@ -38,7 +38,6 @@ export class GeneratesQuizzesComponent implements OnInit {
     try{
       await this.serviceCandidate.get(this.idCandidate).then(data => this.candidate = data);
     }catch{
-      // ICI AJOUTER URL DE LA PAGE USER !!!!!!!!!!!!!
       this.router.navigateByUrl(`/candidats`)
     }
     this.service.getUserQuizz(this.idCandidate).then(data => this.quizzes = data);
