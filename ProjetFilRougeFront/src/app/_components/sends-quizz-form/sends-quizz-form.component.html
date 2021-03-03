@@ -1,4 +1,10 @@
 <form [formGroup]="sendForm" (ngSubmit)="onSubmit()">
+    <label>Adresse email:
+        <input type="email" formControlName="email">
+    </label>
+    <label>Sujet:
+        <input type="text" formControlName="subject">
+    </label>
     <label>
         <textarea cols="100" rows="17" formControlName="message"></textarea>
     </label>

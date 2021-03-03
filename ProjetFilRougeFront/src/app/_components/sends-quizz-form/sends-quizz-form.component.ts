@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { CandidateService } from 'src/app/_services/candidate.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -22,13 +23,16 @@ export class SendsQuizzFormComponent implements OnInit {
   constructor(
     private builder : FormBuilder,
     private router : Router,
-    private toastr : ToastrService
+    private toastr : ToastrService,
+    private serviceCandidate : CandidateService
   ) { 
   }
 
   ngOnInit(): void {
 
     this.sendForm = this.builder.group({
+      email: [this.candidate.email, Validators.email],
+      subject: ["Test technique", Validators.required],
       message: [
         "Bonjour " + this.candidate.firstname + ",\n\n" +
         "Nous vous invitons à passer un test technique.\n\n"+
@@ -44,8 +48,18 @@ export class SendsQuizzFormComponent implements OnInit {
     })
   }
 
-  onSubmit(){
-    console.log(this.sendForm.value);
+  async onSubmit(){
+    let res : Boolean
+    await this.serviceCandidate.sendEmail(this.sendForm.value).then(data => res = data)
+  
+    if(res){
+      this.toastr.success("L'email à bien été envoyé");
+      this.router.navigateByUrl('/CandidatesComponent', { skipLocationChange: true}).then(() => {
+        this.router.navigate(["/candidats"]);
+      })
+    }else{
+      this.toastr.error("L'email n'a pas était envoyé");
+    }
   }
 
 }
