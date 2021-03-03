@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProjetFilRouge.Dtos.CandidatesDtos;
+using ProjetFilRouge.Dtos.EmailDtos;
 using ProjetFilRouge.Models;
 using ProjetFilRouge.Services;
 using System;
@@ -62,6 +63,15 @@ namespace ProjetFilRouge.Controllers
         public int Delete(int id)
         {
             return candidatesServices.DeleteCandidate(id);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [HttpPost("api/SendEmail")]
+        public bool SendEmail([FromBody] SendEmailDto sendEmail)
+        {
+            return this.candidatesServices.SendEmail(sendEmail);
         }
     }
 }
