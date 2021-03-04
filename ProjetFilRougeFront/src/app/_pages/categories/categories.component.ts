@@ -14,6 +14,7 @@ export class CategoriesComponent implements OnInit {
 
   categories : Category[]
   deleteIcon = "../assets/images/icons/trash.svg";
+  msgError = ""
 
   constructor(
      private services : CategoryService,
@@ -31,13 +32,14 @@ export class CategoriesComponent implements OnInit {
     await this.services.delete(cat.idCategory).catch(error => res = false);
     if(res){
       this.toastr.success("La catégorie à bien était supprimé");
+      this.router.navigateByUrl('/CategoryComponent', { skipLocationChange: true}).then(() => {
+        this.router.navigate(["/categories"]);
+      })
+
     }else{
       this.toastr.error("Cette catégorie ne peut être supprimé !");
+      this.msgError = "la catégorie " + cat.nameCategory + " est affecté à une ou plusieurs questions, elle ne peut donc être supprimé."
     }
-
-    this.router.navigateByUrl('/CategoryComponent', { skipLocationChange: true}).then(() => {
-      this.router.navigate(["/categories"]);
-    })
   }
 
 }

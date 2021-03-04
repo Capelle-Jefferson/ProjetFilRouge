@@ -1,5 +1,6 @@
 <router-outlet></router-outlet>
 <h2>Liste des catégories <a routerLink="ajouter">(+)</a></h2>
+<p *ngIf="msgError" class="error">{{msgError}}</p>
 <table class="table table-striped">
     <thead>
         <tr>
