@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { QuizzResult } from 'src/app/_models/QuizzResult';
 import { QuizzService } from 'src/app/_services/quizz.service';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
   selector: 'app-quizz-result',
@@ -53,6 +56,13 @@ export class QuizzResultComponent implements OnInit {
     ]
 
     console.log(this.results)
+  }
+
+  generatePdf(){
+    var source = document.getElementsByClassName("chart");
+    
+    var documentDef={content:"Voici les résultats du quizz: "};
+    pdfMake.createPdf(documentDef).download();
   }
 
 }

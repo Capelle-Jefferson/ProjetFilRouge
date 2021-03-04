@@ -30,6 +30,10 @@ import { LevelsComponent } from './_pages/levels/levels.component';
 import { LevelFormComponent } from './_pages/level-form/level-form.component';
 import { QuizzResultComponent } from './_pages/quizz-result/quizz-result.component';
 import { GoogleChartsModule } from 'angular-google-charts';
+import { GeneratePdfComponent } from './_components/generate-pdf/generate-pdf.component';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @NgModule({
   declarations: [
@@ -55,6 +59,7 @@ import { GoogleChartsModule } from 'angular-google-charts';
     LevelsComponent,
     LevelFormComponent,
     QuizzResultComponent,
+    GeneratePdfComponent,
   ],
   imports: [
     BrowserModule,
