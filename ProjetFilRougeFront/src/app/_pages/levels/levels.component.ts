@@ -13,6 +13,7 @@ export class LevelsComponent implements OnInit {
 
   levels : Level[]
   deleteIcon = "../assets/images/icons/trash.svg";
+  msgError = ""
 
   constructor(
      private services : LevelService,
@@ -30,13 +31,13 @@ export class LevelsComponent implements OnInit {
     await this.services.delete(lev.idLevel).catch(error=>res=false);
     if(res){
       this.toastr.success("Le niveau à bien était supprimé");
+      this.router.navigateByUrl('/LevelComponent', { skipLocationChange: true}).then(() => {
+        this.router.navigate(["/niveaux"]);
+        })
     }else
     {
       this.toastr.error("Le niveau ne peut pas être supprimé");
+      this.msgError = "le niveau " + lev.nameLevel + " est affecté à une ou plusieurs questions et/ou candidats, elle ne peut donc être supprimé."
     }
-    this.router.navigateByUrl('/LevelComponent', { skipLocationChange: true}).then(() => {
-    this.router.navigate(["/niveaux"]);
-    })
   }
-
 }
