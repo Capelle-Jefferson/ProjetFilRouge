@@ -33,6 +33,7 @@ import { GoogleChartsModule } from 'angular-google-charts';
 import { GeneratePdfComponent } from './_components/generate-pdf/generate-pdf.component';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
+import { jsPDF } from "jspdf";
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @NgModule({
