@@ -27,7 +27,7 @@ export class DetailsQuizzComponent implements OnInit {
     await this.serviceQuizz.get(this.idQuizz).then(data => this.quizz = data);
 
     this.idCandidate = +localStorage.getItem("idCandidate");
-    localStorage.removeItem("idCandidate");
+    //localStorage.removeItem("idCandidate");
   }
 
   public isQuizzCompleted() : boolean{

@@ -32,6 +32,11 @@ import { QuizzResultComponent } from './_pages/quizz-result/quizz-result.compone
 import { GoogleChartsModule } from 'angular-google-charts';
 import { SendsQuizzComponent } from './_pages/sends-quizz/sends-quizz.component';
 import { SendsQuizzFormComponent } from './_components/sends-quizz-form/sends-quizz-form.component';
+import { GeneratePdfComponent } from './_components/generate-pdf/generate-pdf.component';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+import { jsPDF } from "jspdf";
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @NgModule({
   declarations: [
@@ -59,6 +64,7 @@ import { SendsQuizzFormComponent } from './_components/sends-quizz-form/sends-qu
     QuizzResultComponent,
     SendsQuizzComponent,
     SendsQuizzFormComponent,
+    GeneratePdfComponent,
   ],
   imports: [
     BrowserModule,
