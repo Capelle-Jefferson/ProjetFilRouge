@@ -16,4 +16,5 @@
         </select>
     </label>
     <button [disabled]="!candidateForm.valid" type="submit" class="btn btn-success">Ajouter</button>
+    <p *ngIf="error" class="error">{{error}}</p>
 </form>

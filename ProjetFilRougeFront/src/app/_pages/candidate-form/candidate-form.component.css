@@ -6,3 +6,8 @@ form{
     margin: 20px 20% 20px 20%;
     padding: 30px;
 }
+.error{
+    font-size: 20px;
+    margin-top: 15px;
+    color: red;
+}

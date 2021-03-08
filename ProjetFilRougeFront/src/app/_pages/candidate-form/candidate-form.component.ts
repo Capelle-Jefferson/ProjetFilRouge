@@ -18,6 +18,7 @@ export class CandidateFormComponent implements OnInit {
   candidateForm: FormGroup
   userJson = sessionStorage['user'];
   user = JSON.parse(this.userJson);
+  error = ""
 
   constructor(
     private builder: FormBuilder,
@@ -38,15 +39,23 @@ export class CandidateFormComponent implements OnInit {
     this.servicesLevels.getAll().then(data => this.levels = data);
   }
 
-  onSubmit(){
+  async onSubmit(){
     if(!this.candidateForm.invalid){
       let cand : Candidate = this.candidateForm.value;
+      let res = true;
       cand.idUser = this.user.idUser;
-      this.services.create(cand);
-      this.router.navigateByUrl('/Candidats', { skipLocationChange: true}).then(() => {
-        this.router.navigate(["/candidats"]);
-      this.toastr.success("Le candidat à bien était ajouté");
-      })
+      await this.services.create(cand).catch(error => res = false);
+      
+      if(res){
+        this.router.navigateByUrl('/Candidats', { skipLocationChange: true}).then(() => {
+          this.router.navigate(["/candidats"]);
+        this.toastr.success("Le candidat à bien était ajouté");
+        })
+      }else{
+        this.toastr.error("Le candidat n'a pas était ajouté");
+        this.error = "L'adresse email est déjà existante."
+      }
+
     }else{
       this.toastr.warning("Le candidat n'a pas était ajouté");
     }
