@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CandidateService } from 'src/app/_services/candidate.service';
+import { EmailService } from 'src/app/_services/email.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -24,7 +25,8 @@ export class SendsQuizzFormComponent implements OnInit {
     private builder : FormBuilder,
     private router : Router,
     private toastr : ToastrService,
-    private serviceCandidate : CandidateService
+    private serviceCandidate : CandidateService,
+    private serviceEmail : EmailService
   ) { 
   }
 
@@ -50,7 +52,7 @@ export class SendsQuizzFormComponent implements OnInit {
 
   async onSubmit(){
     let res : Boolean
-    await this.serviceCandidate.sendEmail(this.sendForm.value).then(data => res = data)
+    await this.serviceEmail.sendEmail(this.sendForm.value).then(data => res = data)
   
     if(res){
       this.toastr.success("L'email à bien été envoyé");

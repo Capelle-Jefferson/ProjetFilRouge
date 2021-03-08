@@ -33,17 +33,6 @@ export class CandidateService {
       .then(resp => resp.json());
   }
 
-  sendEmail(sendEmail : SendEmail):Promise<Boolean>{
-    return fetch(`${environment.apiUrl}/SendEmail`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(sendEmail)
-    })
-    .then(resp => resp.json());
-  }
-
   delete(id : number): Promise<number>{
       console.log(`${environment.apiUrl}/Candidate/${id}`);
       return fetch(`${environment.apiUrl}/Candidate/${id}`, {
