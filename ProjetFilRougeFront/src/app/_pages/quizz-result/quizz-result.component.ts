@@ -46,7 +46,7 @@ export class QuizzResultComponent implements OnInit {
     })
     this.idCandidate = +localStorage.getItem("idCandidate");
     await  this.candidatService.get(this.idCandidate).then(response => this.candidate=response);
-    this.candidateName= this.candidate.firstname +' '+ this.candidate.lastname;
+    this.candidateName= this.candidate.firstname +'_'+ this.candidate.lastname;
     
     await this.service.getQuizzResult(this.idQuizz).then(data => this.results = data);
 
@@ -69,7 +69,7 @@ export class QuizzResultComponent implements OnInit {
   generatePdf(){
     let titre = this.candidateName;
     // Fait une capture d'écran de la page Html
-    html2canvas(document.getElementById("result"),{width:1000,height:900}).then(function(canvas) {
+    html2canvas(document.getElementById("result"),{width:1100,height:1200}).then(function(canvas) {
     var img = canvas.toDataURL('image/png'); // Récupère l'url de la page
     var doc = new jsPDF({orientation:'portrait', unit:'mm',format:'a4'});
      // Ajoute la capture d'écran au pdf
