@@ -27,11 +27,16 @@ export class CategoryFormComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onSubmit() {
-    this.services.create(this.categoryForm.value);
+  async onSubmit() {
+    let res = true;
+    await this.services.create(this.categoryForm.value).catch(data => res = false);
+    if(res){
+      this.toastr.success("La catégorie à bien était ajouté");
+    }else{
+      this.toastr.error("Cette catégorie existe déjà");
+    }
     this.router.navigateByUrl('/CategoryComponent', { skipLocationChange: true}).then(() => {
       this.router.navigate(["/categories"]);
-    this.toastr.success("La catégorie à bien était ajouté");
     })
   }
 
