@@ -64,14 +64,5 @@ namespace ProjetFilRouge.Controllers
         {
             return candidatesServices.DeleteCandidate(id);
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        [HttpPost("api/SendEmail")]
-        public bool SendEmail([FromBody] SendEmailDto sendEmail)
-        {
-            return this.candidatesServices.SendEmail(sendEmail);
-        }
     }
 }

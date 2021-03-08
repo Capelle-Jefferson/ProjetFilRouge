@@ -41,6 +41,7 @@ namespace ProjetFilRouge
             services.AddScoped<QuestionsServices, QuestionsServices>();
             services.AddScoped<RolesServices, RolesServices>();
             services.AddScoped<UsersServices, UsersServices>();
+            services.AddScoped<EmailService, EmailService>();
             //Injection repository
             services.AddScoped<QuizzRepository, QuizzRepository>();
             services.AddScoped<AnswerRepository, AnswerRepository>();
