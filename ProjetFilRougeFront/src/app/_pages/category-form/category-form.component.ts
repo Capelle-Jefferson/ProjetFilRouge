@@ -32,12 +32,12 @@ export class CategoryFormComponent implements OnInit {
     await this.services.create(this.categoryForm.value).catch(data => res = false);
     if(res){
       this.toastr.success("La catégorie à bien était ajouté");
+      this.router.navigateByUrl('/CategoryComponent', { skipLocationChange: true}).then(() => {
+        this.router.navigate(["/categories"]);
+      })
     }else{
       this.toastr.error("Cette catégorie existe déjà");
     }
-    this.router.navigateByUrl('/CategoryComponent', { skipLocationChange: true}).then(() => {
-      this.router.navigate(["/categories"]);
-    })
   }
 
 }
