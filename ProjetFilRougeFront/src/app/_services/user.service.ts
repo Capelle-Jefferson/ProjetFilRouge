@@ -30,4 +30,11 @@ export class UserService {
   get(id : number): Promise<User>{
     return fetch(`${environment.apiUrl}/user/${id}`).then(resp => resp.json());
   }
+
+  delete(id : number): Promise<number>{
+    return fetch(`${environment.apiUrl}/User/${id}`, {
+      method: 'DELETE'
+    })
+    .then(resp => resp.json());
+  }
 }

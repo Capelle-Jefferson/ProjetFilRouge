@@ -1,5 +1,6 @@
 <router-outlet></router-outlet>
-<h2>Liste des candidats : <a routerLink="ajouter">(+)</a></h2>
+<h2>Liste des recruteurs: <a routerLink="ajouter">(+)</a></h2>
+<p *ngIf="msgError" class="error">{{msgError}}</p>
 <table class="table table-striped">
     <thead>
         <tr>
@@ -18,7 +19,7 @@
             <td>{{user.firstname}}</td>
             <td>{{user.lastname}}</td>
             <td>{{user.email}}</td>
-            <td><a routerLink="/candidats" (click)="deleteUser(user)"><img [src]="deleteIcon" alt=""></a></td>
+            <td><a routerLink="/recruteurs" (click)="deleteUser(user)"><img [src]="deleteIcon" alt=""></a></td>
         </tr>
     </tbody>
 </table>   
