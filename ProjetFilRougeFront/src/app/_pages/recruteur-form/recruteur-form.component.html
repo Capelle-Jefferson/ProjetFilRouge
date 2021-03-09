@@ -1,1 +1,17 @@
-<p>recruteur-form works!</p>
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <h4>Ajouter un recruteur <a routerLink="../">(-)</a></h4>
+    <label>Nom d'utilisateur: 
+        <input type="text" formControlName="username" placeholder="Nom d'utilisateur" required>
+    </label>
+    <label>Prénom: 
+        <input type="text" formControlName="firstname" placeholder="Prénom" required>
+    </label>
+    <label>Nom: 
+        <input type="text" formControlName="lastname" placeholder="Nom" required>
+    </label>
+    <label>Email: 
+        <input type="email" formControlName="email" placeholder="Email" required>
+    </label>
+    <button [disabled]="!userForm.valid" type="submit" class="btn btn-success">Ajouter</button>
+    <p *ngIf="msgError" class="error">{{msgError}}</p>
+</form>

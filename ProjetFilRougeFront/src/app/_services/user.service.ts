@@ -37,4 +37,15 @@ export class UserService {
     })
     .then(resp => resp.json());
   }
+
+  create(user : any):Promise<User>{
+    return fetch(`${environment.apiUrl}/Recruteur`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(user)
+    })
+    .then(resp => resp.json());
+}
 }
