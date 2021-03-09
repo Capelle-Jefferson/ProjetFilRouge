@@ -14,6 +14,8 @@ import { LevelFormComponent } from './_pages/level-form/level-form.component';
 import { LevelsComponent } from './_pages/levels/levels.component';
 import { QuizzResultComponent } from './_pages/quizz-result/quizz-result.component';
 import { SendsQuizzComponent } from './_pages/sends-quizz/sends-quizz.component';
+import { RecruteursComponent } from './_pages/recruteurs/recruteurs.component';
+import { RecruteurFormComponent } from './_pages/recruteur-form/recruteur-form.component';
 
 const routes: Routes = [
   {path: "categories", component: CategoriesComponent, children: [
@@ -35,7 +37,9 @@ const routes: Routes = [
   {path: "niveaux", component: LevelsComponent, children: [
     {path: "ajouter", component: LevelFormComponent}
   ]},
-  //{path: "recruteurs", },
+  {path: "recruteurs", component: RecruteursComponent, children: [
+    {path: "ajouter", component: RecruteurFormComponent}
+  ]},
 
   
 

@@ -36,6 +36,8 @@ import { GeneratePdfComponent } from './_components/generate-pdf/generate-pdf.co
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import { jsPDF } from "jspdf";
+import { RecruteursComponent } from './_pages/recruteurs/recruteurs.component';
+import { RecruteurFormComponent } from './_pages/recruteur-form/recruteur-form.component';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @NgModule({
@@ -65,6 +67,8 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
     SendsQuizzComponent,
     SendsQuizzFormComponent,
     GeneratePdfComponent,
+    RecruteursComponent,
+    RecruteurFormComponent,
   ],
   imports: [
     BrowserModule,
