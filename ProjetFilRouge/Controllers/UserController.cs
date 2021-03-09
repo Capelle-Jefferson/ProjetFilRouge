@@ -21,11 +21,18 @@ namespace ProjetFilRouge.Controllers
         {
             this.UsersServices = usersServices;   
         }
+
         // GET: api/<UserController>
         [HttpGet]
         public List<FindUserDto> Get()
         {
             return this.UsersServices.GetUsers();
+        }
+
+        [HttpGet("/api/Recruteurs")]
+        public List<FindUserDto> GetRecruteurs()
+        {
+            return this.UsersServices.GetRecruteurs();
         }
 
         // GET api/<UserController>/5
@@ -64,6 +71,7 @@ namespace ProjetFilRouge.Controllers
         {
             return UsersServices.PostUser(obj);
         }
+
         // POST api/<UserController>
         [HttpPost("/api/Recruteur")]
         public FindUserDto Post([FromBody] CreateRecruteurDto obj)

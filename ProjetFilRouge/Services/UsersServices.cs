@@ -37,6 +37,21 @@ namespace ProjetFilRouge.Services
             return UserDtos;
         }
 
+        /// <summary>
+        ///     Récupère la liste des recruteurs 
+        /// </summary>
+        /// <returns>liste des recruteurs </returns>
+        public List<FindUserDto> GetRecruteurs()
+        {
+            List<User> users = UserRepository.FindAllRecruteurs();
+            List<FindUserDto> UserDtos = new List<FindUserDto>();
+            foreach (User u in users)
+            {
+                UserDtos.Add(TransformModelToDto(u));
+            }
+            return UserDtos;
+        }
+
         public FindUserDto GetUserById(int id)
         {
             User user = this.UserRepository.Find(id);

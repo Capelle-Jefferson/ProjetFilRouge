@@ -49,6 +49,39 @@ namespace ProjetFilRouge.Repositories
             return user;
         }
 
+        /// <summary>
+        ///     Recupère la liste des recruteurs
+        /// </summary>
+        /// <returns>Liste des recruteurs</returns>
+        internal List<User> FindAllRecruteurs()
+        {
+            this.OpenConnection();
+            string request = _queryBuilder
+                .Select()
+                .From("user")
+                .Where("id_roles", 2)
+                .Get();
+            MySqlCommand cmd = new MySqlCommand(request, connectionSql);
+            MySqlDataReader rdr = cmd.ExecuteReader();
+            List<User> list = new List<User>();
+            while (rdr.Read())
+            {
+                User user = new User
+                {
+                    IdUser = rdr.GetInt32(0),
+                    Username = rdr.GetString(1),
+                    Password = rdr.GetString(2),
+                    Firstname = rdr.GetString(3),
+                    Lastname = rdr.GetString(4),
+                    Email = rdr.GetString(5),
+                    IdRoles = rdr.GetInt32(6)
+                };
+                list.Add(user);
+            }
+            this.CloseConnection(rdr);
+            return list;
+        }
+
         internal User FindByUsername(string username)
         {
             this.OpenConnection();
