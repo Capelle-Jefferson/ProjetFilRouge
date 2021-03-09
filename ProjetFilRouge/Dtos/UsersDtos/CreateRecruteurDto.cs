@@ -12,15 +12,13 @@ namespace ProjetFilRouge.Dtos.CandidatesDtos
         public string Firstname { get; set; }
         public string Lastname { get; set; }
         public string Email { get; set; }
-        public SendEmailDto EmailDto { get; set; }
 
-        public CreateRecruteurDto(string userName, string firstname, string lastname, string email, SendEmailDto emailDto)
+        public CreateRecruteurDto(string userName, string firstname, string lastname, string email)
         {
             Username = userName;
             Firstname = firstname;
             Lastname = lastname;
             Email = email;
-            EmailDto = emailDto;
         }
 
         public CreateRecruteurDto()

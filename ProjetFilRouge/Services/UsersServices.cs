@@ -89,7 +89,7 @@ namespace ProjetFilRouge.Services
         }
 
         /// <summary>
-        ///     Crée un recruteur et envoi un mail avec ses identifiants
+        ///     Crée un recruteur
         /// </summary>
         /// <param name="obj">CreateRecruteurDto</param>
         /// <returns>FindUserDto</returns>
@@ -98,10 +98,6 @@ namespace ProjetFilRouge.Services
             string code = QuizzesService.GenerateCode(12);
             User user = new User(null, obj.Username, code, obj.Firstname, obj.Lastname, obj.Email, 2);
             User candidatCreated = UserRepository.Create(user);
-
-            // Envoi de l'email 
-            obj.EmailDto.Email = obj.Email;
-            EmailService.SendEmail(obj.EmailDto);
             return TransformModelToDto(candidatCreated);
         }
 
