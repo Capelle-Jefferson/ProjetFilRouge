@@ -89,7 +89,7 @@ namespace ProjetFilRouge.Services
         }
 
         /// <summary>
-        ///     Crée un recruteur et envoi un mail avec ses identifiants
+        ///     Crée un recruteur
         /// </summary>
         /// <param name="obj">CreateRecruteurDto</param>
         /// <returns>FindUserDto</returns>
