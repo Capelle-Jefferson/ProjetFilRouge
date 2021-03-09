@@ -8,16 +8,22 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Security.Cryptography;
 using System.Text;
+using ProjetFilRouge.Dtos.EmailDtos;
 
 namespace ProjetFilRouge.Services
 {
     public class UsersServices
     {
-        private UserRepository UserRepository;
 
-        public UsersServices(UserRepository userRepository)
+        private UserRepository UserRepository;
+        private QuizzesServices QuizzesService;
+        private EmailService EmailService;
+
+        public UsersServices(UserRepository userRepository, QuizzesServices quizzService, EmailService emailService)
         {
             UserRepository = userRepository;
+            QuizzesService = quizzService;
+            EmailService = emailService;
         }
 
         public List<FindUserDto> GetUsers()
@@ -64,6 +70,23 @@ namespace ProjetFilRouge.Services
             user.Password = EncodingPassword(user);
             User userModel = TransformDtoToModel(user);
             User candidatCreated = UserRepository.Create(userModel);
+            return TransformModelToDto(candidatCreated);
+        }
+
+        /// <summary>
+        ///     Crée un recruteur et envoi un mail avec ses identifiants
+        /// </summary>
+        /// <param name="obj">CreateRecruteurDto</param>
+        /// <returns>FindUserDto</returns>
+        internal FindUserDto PostRecruteur(CreateRecruteurDto obj)
+        {
+            string code = QuizzesService.GenerateCode(12);
+            User user = new User(null, obj.Username, code, obj.Firstname, obj.Lastname, obj.Email, 2);
+            User candidatCreated = UserRepository.Create(user);
+
+            // Envoi de l'email 
+            obj.EmailDto.Email = obj.Email;
+            EmailService.SendEmail(obj.EmailDto);
             return TransformModelToDto(candidatCreated);
         }
 

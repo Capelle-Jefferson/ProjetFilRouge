@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProjetFilRouge.Dtos.CandidatesDtos;
+using ProjetFilRouge.Dtos.EmailDtos;
 using ProjetFilRouge.Services;
 using System;
 using System.Collections.Generic;
@@ -62,6 +63,12 @@ namespace ProjetFilRouge.Controllers
         public FindUserDto Post([FromBody] CreateUserDto obj)
         {
             return UsersServices.PostUser(obj);
+        }
+        // POST api/<UserController>
+        [HttpPost("/api/Recruteur")]
+        public FindUserDto Post([FromBody] CreateRecruteurDto obj)
+        {
+            return UsersServices.PostRecruteur(obj);
         }
 
         // PUT api/<UserController>/5
