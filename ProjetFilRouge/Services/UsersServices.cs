@@ -95,14 +95,22 @@ namespace ProjetFilRouge.Services
         /// <returns>FindUserDto</returns>
         internal FindUserDto PostRecruteur(CreateRecruteurDto obj)
         {
-            string code = QuizzesService.GenerateCode(12);
-            User user = new User(null, obj.Username, code, obj.Firstname, obj.Lastname, obj.Email, 2);
-            User candidatCreated = UserRepository.Create(user);
+            string password = QuizzesService.GenerateCode(12);
+            CreateUserDto userDto = new CreateUserDto(obj.Username, password, obj.Firstname, obj.Lastname, obj.Email, 2);
+            FindUserDto candidatCreated = this.PostUser(userDto);
 
             // Envoi de l'email 
-            obj.EmailDto.Email = obj.Email;
-            EmailService.SendEmail(obj.EmailDto);
-            return TransformModelToDto(candidatCreated);
+            SendEmailDto sendEmail = new SendEmailDto(
+                obj.Email,
+                "Bonjour\n\n" +
+                "Vous trouverez ci-joint, vos identifiants vous permettant de vous connecter.\n\n" +
+                "Nom d'utilisateur: " + candidatCreated.Username + "\n" +
+                "Mot de passe: " + password + "\n\n" +
+                "Bien cordialement.",
+                "Vos identifiants"
+            );
+            EmailService.SendEmail(sendEmail);
+            return candidatCreated;
         }
 
 
@@ -217,5 +225,6 @@ namespace ProjetFilRouge.Services
             }
             return comparer.Compare(hashOfInput, hash) == 0;
         }
+
     }
 }
