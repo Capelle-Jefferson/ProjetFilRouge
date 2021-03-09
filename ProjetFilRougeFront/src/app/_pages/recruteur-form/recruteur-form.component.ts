@@ -40,8 +40,8 @@ export class RecruteurFormComponent implements OnInit {
     let res = true;
     await this.services.create(this.userForm.value).catch(error => res = false);
     if(res){
-      this.router.navigateByUrl('/Candidats', { skipLocationChange: true}).then(() => {
-        this.router.navigate(["/candidats"]);
+      this.router.navigateByUrl('/RecruteursComponent', { skipLocationChange: true}).then(() => {
+        this.router.navigate(["/recruteurs"]);
       this.toastr.success("Le recruteur a bien était ajouté, un email lui à était envoyé");
       })
     }else{
