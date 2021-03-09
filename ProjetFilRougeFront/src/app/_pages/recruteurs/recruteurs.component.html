@@ -1,1 +1,24 @@
-<p>recruteurs works!</p>
+<router-outlet></router-outlet>
+<h2>Liste des candidats : <a routerLink="ajouter">(+)</a></h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nom d'utilisateur</th>
+            <th scope="col">Prénom</th>
+            <th scope="col">Nom</th>
+            <th scope="col">Email</th>
+            <th scope="col" class="danger">Supprimer</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let user of users; let i = index">
+            <th scope="col">{{i+1}}</th>
+            <td>{{user.username}}</td>
+            <td>{{user.firstname}}</td>
+            <td>{{user.lastname}}</td>
+            <td>{{user.email}}</td>
+            <td><a routerLink="/candidats" (click)="deleteUser(user)"><img [src]="deleteIcon" alt=""></a></td>
+        </tr>
+    </tbody>
+</table>   

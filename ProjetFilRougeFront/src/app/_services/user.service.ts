@@ -23,6 +23,9 @@ export class UserService {
   getAll(): Promise<User[]>{
     return fetch(`${environment.apiUrl}/user`).then(resp => resp.json());
   }
+  getAllRecruteur(): Promise<User[]>{
+    return fetch(`${environment.apiUrl}/Recruteurs`).then(resp => resp.json());
+  }
 
   get(id : number): Promise<User>{
     return fetch(`${environment.apiUrl}/user/${id}`).then(resp => resp.json());
