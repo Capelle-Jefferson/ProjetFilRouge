@@ -38,6 +38,7 @@ import pdfFonts from 'pdfmake/build/vfs_fonts';
 import { jsPDF } from "jspdf";
 import { RecruteursComponent } from './_pages/recruteurs/recruteurs.component';
 import { RecruteurFormComponent } from './_pages/recruteur-form/recruteur-form.component';
+import { DemandeAdhesionComponent } from './_components/demande-adhesion/demande-adhesion.component';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @NgModule({
@@ -69,6 +70,7 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
     GeneratePdfComponent,
     RecruteursComponent,
     RecruteurFormComponent,
+    DemandeAdhesionComponent,
   ],
   imports: [
     BrowserModule,

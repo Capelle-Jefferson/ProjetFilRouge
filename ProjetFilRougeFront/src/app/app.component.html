@@ -6,12 +6,25 @@
 
   <div *ngIf="!isPassageQuiz">
     <!-- Si utilisateur non connecté -->
-    <app-authentification *ngIf="!user"></app-authentification><br><br>
+    <app-authentification *ngIf="!user"></app-authentification>
+    <router-outlet></router-outlet>
+    <br><br>
 
     <!-- Si utilisateur connecté -->
     <div *ngIf="user">
       <app-navbar></app-navbar>
       <router-outlet></router-outlet>
+      <div class="index">
+        <h1>Bienvenue sur le site du Projet Fil rouge</h1>
+        <div class="division">
+          <p>Grâce à cette application vous pouvez générer des quizz afin de tester le niveau de vos candidats</p>
+          <img [src]="iconquizz" class="image" >
+        </div>
+        
+        <p>Pour cela, il vous suffit de cliquer sur Candidats dans la navigation. Vous aurez alors accès à la liste.
+        Ensuite vous pouvez leur ajouter un quizz, lorsque celui-ci est passé, vous avez la possibilité de voir le résultat et de le télécharger au format PDF.
+        </p>
+      </div>
     </div>
   </div>
 </div>
