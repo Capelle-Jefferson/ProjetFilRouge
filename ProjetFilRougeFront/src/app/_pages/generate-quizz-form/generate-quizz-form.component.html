@@ -16,4 +16,5 @@
         </select>
     </label>
     <button [disabled]="!quizzForm.valid" type="submit" class="btn btn-success">Générer</button>
+    <p *ngIf="msgError" class="error">{{msgError}}</p>
 </form>

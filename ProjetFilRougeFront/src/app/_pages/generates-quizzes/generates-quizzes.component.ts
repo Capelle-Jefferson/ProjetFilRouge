@@ -51,7 +51,9 @@ export class GeneratesQuizzesComponent implements OnInit {
     let res : Number;
     this.service.delete(quizz.idQuizz).then(data => res = data );
     this.toastr.success("Le quizz à bien été supprimé");
-    this.router.navigate(["/gestionQuizz", this.idCandidate]);
+    this.router.navigateByUrl(`/GeneratesQuizzesComponent`, { skipLocationChange: true}).then(() => {
+      this.router.navigate([`/gestionQuizz/${this.idCandidate}`]);
+    })
   }
 
 }
