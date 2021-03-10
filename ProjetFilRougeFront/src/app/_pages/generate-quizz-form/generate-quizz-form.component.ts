@@ -69,7 +69,7 @@ export class GenerateQuizzFormComponent implements OnInit {
           this.router.navigate([`/gestionQuizz/${this.idCandidate}`]);
         })
     }catch{
-      this.toastr.error("Le quizz n'a pas était généré");
+      this.toastr.error("Le quizz n'a pas été généré");
       this.msgError = "Le nombre de questions demandées surpasse le nombre de questions disponibles"
     }
   }
