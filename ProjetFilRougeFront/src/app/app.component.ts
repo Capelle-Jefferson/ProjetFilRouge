@@ -13,5 +13,5 @@ export class AppComponent {
   isPassageQuiz = window.location.href == `${environment.siteUrl}/quiz`;
   title = 'ProjetFilRougeFront';
   user = sessionStorage['user'];
-  iconquizz="../assets/images/icons/iconquiz.svg"
+  
 }

@@ -59,6 +59,7 @@ export class PassageQuizComponent implements OnInit {
 
   SaveAnswer(value: string) {
     this.answerCandidate = value;
+    console.log(this.answerCandidate);
   }
   SaveAnswerText = () => {
     this.answerCandidate = (<HTMLInputElement>document.getElementById("reponse")).value;
