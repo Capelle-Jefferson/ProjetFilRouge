@@ -28,7 +28,7 @@ export class PassageQuizComponent implements OnInit {
   constructor(private service: QuizzQuestionService, private quizzService:QuizzService) { }
 
   ngOnInit(): void {
-
+    this.suppresionLocalQuizz();
   }
 
   onSubmit() {
@@ -75,7 +75,6 @@ export class PassageQuizComponent implements OnInit {
     this.Next = false;
     this.isFinished = false;
     this.lastPage = true;
-    this.suppresionLocalQuizz();
   }
   // Suppresion de la variable local Quizz une fois le quizz completé
   suppresionLocalQuizz() {
