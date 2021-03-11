@@ -1,14 +1,9 @@
-import { stringify } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Answers } from 'src/app/_models/Answers';
 import { Category } from 'src/app/_models/category';
 import { ChoiceAnswers } from 'src/app/_models/ChoiceAnswers';
 import { Level } from 'src/app/_models/level';
-import { Question } from 'src/app/_models/question';
-import { QuestionsComponent } from 'src/app/_pages/questions/questions.component';
-import { AnswerService } from 'src/app/_services/answer.service';
 import { CategoryService } from 'src/app/_services/category.service';
 import { LevelService } from 'src/app/_services/level.service';
 import { QuestionsService } from 'src/app/_services/questions.service';
@@ -121,7 +116,7 @@ export class FormQuestionComponent implements OnInit {
      
      //Création de la question et redirection vers la page questions
      this.serviceQ.create(questionA);
-     this.router.navigateByUrl("/QuestionComponent", { skipLocationChange: true}).then(() => {
+     this.router.navigateByUrl("/QuestionsComponent", { skipLocationChange: true}).then(() => {
       this.router.navigate(["/questions"]);
     })
   }
