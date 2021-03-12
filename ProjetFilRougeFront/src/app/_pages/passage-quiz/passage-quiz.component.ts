@@ -65,8 +65,6 @@ export class PassageQuizComponent implements OnInit {
   }
   goToFirstQuestion() {
     this.question = this.quizz.questions[this.nombre];
-    console.log(this.question.intitule)
-    console.log(this.brToNewLine(this.question.intitule))
     this.Next = true;
     this.istypeAnswer = this.question.answer.typeAnswer != "Text";
     this.isQcmUnique = this.question.answer.typeAnswer != "QCM_multiple";
@@ -82,9 +80,4 @@ export class PassageQuizComponent implements OnInit {
   suppresionLocalQuizz() {
     localStorage.removeItem("quizz");
   }
-
-  brToNewLine(str : string):string {
-    return str.replace(/<br ?\/?>/g, "\n");
-  }
-
 }
