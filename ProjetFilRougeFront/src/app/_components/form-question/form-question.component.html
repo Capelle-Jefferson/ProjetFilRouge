@@ -1,10 +1,10 @@
 <div class="container">
     <div class="col">
         <form [formGroup]="questionForm" (ngSubmit)="onSubmit()">
-            <h3>Creation de la question</h3>
+            <h3>Creation de la question <a routerLink="../">(-)</a></h3>
             <div class="inline">
                 <label>Intitulé de la question:
-                    <input type="text" formControlName="intitule" class="inp">
+                    <textarea formControlName="intitule" class="inp" cols="70" rows="5"></textarea>
                 </label>
                 <label>Categorie:
                     <select class="form-select" aria-label="Default select example" formControlName="idcategory"

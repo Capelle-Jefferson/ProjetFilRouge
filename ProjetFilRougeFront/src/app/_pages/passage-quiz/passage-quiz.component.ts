@@ -76,10 +76,8 @@ export class PassageQuizComponent implements OnInit {
     this.Next = false;
     this.isFinished = false;
     this.lastPage = true;
-
-
   }
-  // Suppresion de la variable local Quizz unt fois le quizz completé
+  // Suppresion de la variable local Quizz une fois le quizz completé
   suppresionLocalQuizz() {
     localStorage.removeItem("quizz");
   }

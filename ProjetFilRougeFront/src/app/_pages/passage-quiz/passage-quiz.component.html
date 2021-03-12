@@ -4,18 +4,22 @@
             <div class="card-body">
                 <div id="badgeType" class="badge badge-pill">{{question.answer.typeAnswer}}</div>
                 <div class="question">
-                    <h5 class="card-title">Intitule:{{question.intitule}}</h5>
+                    <h5 class="card-title">{{question.intitule}}</h5>
                     <div *ngIf="istypeAnswer">
                         <p class="card-subtitle mb-2 text-muted"
                             *ngFor="let choiceAnswer of question.answer.listChoiceAnswer; let i = index"
                             id="p">
                             <span *ngIf="!isQcmUnique" id="reponseMultiple">
-                                <label for="Reponse">Réponse {{i+1}}: {{choiceAnswer.textAnswer}}</label>
-                                <input  type="checkbox" name="name" id="Reponse" class="check" value="{{choiceAnswer.textAnswer}}" (change)="SaveAnswers()">
+                                <label>
+                                    <input  type="checkbox" name="name" id="Reponse" class="check" value="{{choiceAnswer.textAnswer}}" (change)="SaveAnswers()">
+                                    {{choiceAnswer.textAnswer}}
+                                </label>                    
                             </span>
                             <span *ngIf="isQcmUnique">
-                                <input  type="radio" id="ReponseUnique" name="choiceAnswer.textAnswer" value="{{choiceAnswer.textAnswer}}" (change)="SaveAnswer(choiceAnswer.textAnswer)">
-                                <label for="ReponseUnique">Réponse {{i+1}}: {{choiceAnswer.textAnswer}}</label>
+                                <label>
+                                    <input  type="radio" name="choiceAnswer.textAnswer" value="{{choiceAnswer.textAnswer}}" (change)="SaveAnswer(choiceAnswer.textAnswer)">
+                                    {{choiceAnswer.textAnswer}}
+                                </label>
                             </span>
                         </p>
                     </div>
