@@ -51,8 +51,7 @@
                                 <div *ngFor="let answer of listChoiceAnswer.controls; let i = index"
                                     formArrayName="textAnswer">
                                     Reponse {{i+1}} :
-                                    <input type="text" [formControlName]="i" placeholder="reponse"
-                                        >
+                                    <input type="text" [formControlName]="i" placeholder="reponse">
                                 </div>
                                 <div *ngFor="let answer of listAnswers.controls; let i = index"
                                     formArrayName="isAnswer">

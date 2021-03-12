@@ -38,6 +38,7 @@ import pdfFonts from 'pdfmake/build/vfs_fonts';
 import { jsPDF } from "jspdf";
 import { RecruteursComponent } from './_pages/recruteurs/recruteurs.component';
 import { RecruteurFormComponent } from './_pages/recruteur-form/recruteur-form.component';
+import { Nl2BrPipeModule } from 'nl2br-pipe';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @NgModule({
@@ -80,6 +81,7 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     GoogleChartsModule,
+    Nl2BrPipeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
