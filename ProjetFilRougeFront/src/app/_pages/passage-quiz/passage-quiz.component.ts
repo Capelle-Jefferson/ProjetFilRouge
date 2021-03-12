@@ -81,5 +81,4 @@ export class PassageQuizComponent implements OnInit {
   suppresionLocalQuizz() {
     localStorage.removeItem("quizz");
   }
-
 }

@@ -25,17 +25,19 @@ export class QuestionComponent implements OnInit {
     this.istypeAnswer = this.question.answer.typeAnswer != 'text'
   }
 
-  deleteQuestion(question : Question){
-    try {
-       this.serviceQ.delete(question.idQuestion);
+  async deleteQuestion(question : Question){
+    let res;
+    await this.serviceQ.delete(question.idQuestion).then(data => res = data);
+    if(res == 1) {
        this.toastr.success("La question a bien était supprimée");
+       this.router.navigateByUrl("/QuestionComponent", { skipLocationChange: true}).then(() => {
+        this.router.navigate(["/questions"]);
+      })
     }
-    catch {
-        this.toastr.warning("La question appartient à un quizz, elle ne peut pas être supprimée")
+    else {
+        this.toastr.error("La question appartient à un quizz, elle ne peut pas être supprimée")
     }
-    this.router.navigateByUrl("/QuestionComponent", { skipLocationChange: true}).then(() => {
-    this.router.navigate(["/questions"]);
-    })
+
   }
 
 }
