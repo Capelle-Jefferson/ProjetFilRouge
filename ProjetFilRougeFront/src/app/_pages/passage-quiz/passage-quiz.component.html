@@ -6,7 +6,7 @@
                 <div class="question">
                     <p class="card-title title" [innerHTML]="question.intitule | nl2br">{{question.intitule}}</p>
                     <div *ngIf="istypeAnswer">
-                        <p class="card-subtitle mb-2 text-muted"
+                        <p class="card-subtitle mb-2 text-muted rep"
                             *ngFor="let choiceAnswer of question.answer.listChoiceAnswer; let i = index"
                             id="p">
                             <span *ngIf="!isQcmUnique" id="reponseMultiple">

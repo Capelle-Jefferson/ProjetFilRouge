@@ -10,7 +10,11 @@
 }
 .title{
     text-align: left;
-    margin-left: 40%;
+    margin-left: 15%;
+}
+.rep{
+    text-align: left;
+    margin-left: 20%;
 }
 .card-body{
     display: inline;
