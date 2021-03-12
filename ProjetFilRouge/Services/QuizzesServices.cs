@@ -114,8 +114,7 @@ namespace ProjetFilRouge.Services
         /// <returns>bool</returns>
         public bool CompareUniqueAnswer(string candidatAnswers,string goodAnswers)
         {
-            int compteur = 0;
-            return (compteur.Equals(goodAnswers));
+            return (candidatAnswers.Equals(goodAnswers));
         }
         /// <summary>
         /// Récupération de toutes les bonnes réponses dans le cas d'un qcm à choix multiple
