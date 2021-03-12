@@ -98,7 +98,6 @@ namespace ProjetFilRouge.Services
             string password = QuizzesService.GenerateCode(12);
             CreateUserDto userDto = new CreateUserDto(obj.Username, password, obj.Firstname, obj.Lastname, obj.Email, 2);
             FindUserDto candidatCreated = this.PostUser(userDto);
-
             // Envoi de l'email 
             SendEmailDto sendEmail = new SendEmailDto(
                 obj.Email,

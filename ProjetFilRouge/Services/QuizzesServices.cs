@@ -399,10 +399,13 @@ namespace ProjetFilRouge.Services
             return CalculResult(results);
         }
         /// <summary>
-        /// 
+        ///     Calcule et retourne le resultat d'un quizz
         /// </summary>
-        /// <param name="results"></param>
-        /// <returns></returns>
+        /// <param name="results">
+        ///     Dictionnaire, key: nom du niveau (junior,..) et 
+        ///     en valeur le nbre de question total du niveau et le nbre de bonne réponse dans ce niveau 
+        /// </param>
+        /// <returns>Resultat du quizz</returns>
         private QuizzResultDto CalculResult(Dictionary<string, (int, int)> results)
         {
             // Calcule du pourcentage de bonne reponse de chaque niveau
