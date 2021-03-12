@@ -49,8 +49,6 @@ export class PassageQuizComponent implements OnInit {
     if (this.nombre === this.quizz.questions.length - 1) {
       this.isFinished = true;
     }
-    console.log(this.istypeAnswer);
-    console.log(this.question.answer.typeAnswer);
   }
   SaveAnswers = () => {
     this.answerCandidate="";
@@ -69,10 +67,10 @@ export class PassageQuizComponent implements OnInit {
 
   SaveAnswer(value: string) {
     this.answerCandidate = value;
-    console.log(this.answerCandidate);
   }
   SaveAnswerText = () => {
     this.answerCandidate = (<HTMLInputElement>document.getElementById("reponse")).value;
+    (<HTMLInputElement>document.getElementById("reponse")).value = "";
   }
   goToFirstQuestion() {
     if(this.quizz.questions.length > this.nombre){

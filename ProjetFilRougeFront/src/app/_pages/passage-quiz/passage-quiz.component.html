@@ -38,9 +38,8 @@
                     </div>
                     <!--Partie text-->
                     <div *ngIf="!istypeAnswer" class="textarea">
-                        <label>Réponse :
-                            <input type="text" id="reponse" aria-placeholder="Reponse ouverte" (blur)="SaveAnswerText()">
-                        </label>
+                        <p>Réponse :</p>
+                            <textarea id="reponse" cols="50" rows="5" (blur)="SaveAnswerText()"></textarea>
                     </div>
                     <button type="button" class="btn btn-success" id="valider" (click)="onSubmit()" *ngIf="!isFinished">Suivant</button>
                     <button *ngIf="isFinished" class="btn btn-success" (click)="FinduQuizz()">Valider le quizz</button>
