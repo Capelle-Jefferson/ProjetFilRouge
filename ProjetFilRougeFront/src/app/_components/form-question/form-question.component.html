@@ -30,13 +30,13 @@
                     </select>
                 </label>
                 <!--Si on veut une question avec une réponse ouverte-->
-                <div *ngIf="questionForm.value.answer.typeAnswer == 'text'">
+                <div *ngIf="questionForm.value.answer.typeAnswer == 'text'" class="textExp">
                     <label>Explication:
                         <input type="text" formControlName="explication" class="inp">
                     </label>
                     <label>Reponse:
                         <textarea name="" id="" cols="30" rows="10" placeholder="Reponse ouverte"
-                            formControlName="textAnswer">
+                            formControlName="textAnswer" class="inp">
                         </textarea>
                     </label>
                 </div>

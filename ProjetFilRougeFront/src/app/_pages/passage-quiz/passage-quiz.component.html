@@ -1,3 +1,15 @@
+<!--Première page du quizz-->
+<div *ngIf="!Next && !lastPage">
+    <span class="Text">
+        <ul class="list-group">
+            <li class="list-group-item list-group-item-warning active">Notions à savoir avant le début du quizz:</li>
+            <li class="list-group-item">Un retour en arrière n'est pas possible, une fois le bouton suivant cliqué,la réponse est enregistrée, on ne peut pas l'annuler.</li>
+            <li class="list-group-item">En cas de bug, le quiz enregistre les questions répondues, lorsque vous serez reconnecté, vous serez dirigé vers les questions non répondues.</li>
+        </ul>
+    </span>
+    <button  class="btn btn-success btn-lg" id="valider" (click)="goToFirstQuestion()">Démarrer</button>
+</div>
+<!--Partie quizz-->
 <div *ngIf="Next">
     <div class="container" >
         <div class="card" style="width: 50rem;">
@@ -5,6 +17,7 @@
                 <div id="badgeType" class="badge badge-pill">{{question.answer.typeAnswer}}</div>
                 <div class="question">
                     <h5 class="card-title">{{question.intitule}}</h5>
+                    <!--Partie QCM-->
                     <div *ngIf="istypeAnswer">
                         <p class="card-subtitle mb-2 text-muted"
                             *ngFor="let choiceAnswer of question.answer.listChoiceAnswer; let i = index"
@@ -23,8 +36,9 @@
                             </span>
                         </p>
                     </div>
+                    <!--Partie text-->
                     <div *ngIf="!istypeAnswer" class="textarea">
-                        <label>Réponse :</label>
+                        <label for="reponse">Réponse :</label>
                         <input type="text" id="reponse" aria-placeholder="Reponse ouverte" (blur)="SaveAnswerText()">
                     </div>
                     <button type="button" class="btn btn-success" id="valider" (click)="onSubmit()" *ngIf="!isFinished">Suivant</button>
@@ -34,19 +48,10 @@
         </div>
     </div>
 </div>
-<div *ngIf="!Next && !lastPage">
-    <span class="Text">
-        <ul class="list-group">
-            <li class="list-group-item list-group-item-warning active">Notions à savoir avant le début du quizz:</li>
-            <li class="list-group-item">Un retour en arrière n'est pas possible, une fois le bouton suivant cliqué,la réponse est enregistrée, on ne peut pas l'annuler.</li>
-            <li class="list-group-item">En cas de bug, le quiz enregistre les questions répondues, lorsque vous serez reconnecté, vous serez dirigé vers les questions non répondues.</li>
-        </ul>
-    </span>
-    <button  class="btn btn-success btn-lg" id="valider" (click)="goToFirstQuestion()">Démarrer</button>
-</div>
+<!--Page quand le quizz est fini-->
 <div *ngIf="lastPage && !Next">
     <p class="Text"> 
-        Féliciations! Le quizz est à présent terminer.
+        Félicitations! Le quizz est à présent terminer.
         Vos résultats vous seront communiqués ultérieurement.
     </p>
 </div>

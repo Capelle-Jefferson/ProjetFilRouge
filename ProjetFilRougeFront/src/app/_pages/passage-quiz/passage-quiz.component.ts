@@ -36,11 +36,13 @@ export class PassageQuizComponent implements OnInit {
     this.nombre = this.nombre + 1;
     this.question = this.quizz.questions[this.nombre];
     this.Next = true;
-    this.istypeAnswer = this.question.answer.typeanswer != "Text";
-    this.isQcmUnique = this.question.answer.typeAnswer != "QCM_multiple";
+    this.istypeAnswer = (this.question.answer.typeAnswer != "Text");
+    this.isQcmUnique = (this.question.answer.typeAnswer != "QCM_multiple");
     if (this.nombre === this.quizz.questions.length - 1) {
       this.isFinished = true;
     }
+    console.log(this.istypeAnswer);
+    console.log(this.question.answer.typeAnswer);
   }
   SaveAnswers = () => {
     this.answerCandidate="";
@@ -67,8 +69,9 @@ export class PassageQuizComponent implements OnInit {
   goToFirstQuestion() {
     this.question = this.quizz.questions[this.nombre];
     this.Next = true;
-    this.istypeAnswer = this.question.answer.typeAnswer != "Text";
-    this.isQcmUnique = this.question.answer.typeAnswer != "QCM_multiple";
+    this.istypeAnswer = (this.question.answer.typeAnswer != "Text");
+    this.isQcmUnique = (this.question.answer.typeAnswer != "QCM_multiple");
+    console.log(this.question.answer.typeAnswer);
   }
   FinduQuizz() {
     this.service.addCandidateAnswer(this.quizz.idQuizz, this.question.idQuestion, this.answerCandidate);

@@ -38,7 +38,7 @@ export class FormAuthentificationComponent implements OnInit {
       // Si utilisateur reconnus
       if (!this.user['status']) {
         sessionStorage.setItem("user", JSON.stringify(this.user));
-        location.replace("/acceuil");
+        location.replace("/accueil");
         
       // Si utilisateur non reconnus
      } else {

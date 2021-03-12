@@ -43,7 +43,7 @@ const routes: Routes = [
     {path: "ajouter", component: RecruteurFormComponent}
   ]},
   {path:"adhesion", component:DemandeAdhesionComponent},
-  {path:"acceuil", component:AcceuilComponent},
+  {path:"accueil", component:AcceuilComponent},
   {path: "**", redirectTo: ""}
 ];
 
