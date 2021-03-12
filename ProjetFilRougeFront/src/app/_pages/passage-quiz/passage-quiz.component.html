@@ -16,10 +16,10 @@
             <div class="card-body">
                 <div id="badgeType" class="badge badge-pill">{{question.answer.typeAnswer}}</div>
                 <div class="question">
-                    <h5 class="card-title">{{question.intitule}}</h5>
                     <!--Partie QCM-->
+                    <p class="card-title title" [innerHTML]="question.intitule | nl2br">{{question.intitule}}</p>
                     <div *ngIf="istypeAnswer">
-                        <p class="card-subtitle mb-2 text-muted"
+                        <p class="card-subtitle mb-2 text-muted rep"
                             *ngFor="let choiceAnswer of question.answer.listChoiceAnswer; let i = index"
                             id="p">
                             <span *ngIf="!isQcmUnique" id="reponseMultiple">
@@ -38,8 +38,9 @@
                     </div>
                     <!--Partie text-->
                     <div *ngIf="!istypeAnswer" class="textarea">
-                        <label for="reponse">Réponse :</label>
-                        <input type="text" id="reponse" aria-placeholder="Reponse ouverte" (blur)="SaveAnswerText()">
+                        <label>Réponse :
+                            <input type="text" id="reponse" aria-placeholder="Reponse ouverte" (blur)="SaveAnswerText()">
+                        </label>
                     </div>
                     <button type="button" class="btn btn-success" id="valider" (click)="onSubmit()" *ngIf="!isFinished">Suivant</button>
                     <button *ngIf="isFinished" class="btn btn-success" (click)="FinduQuizz()">Valider le quizz</button>

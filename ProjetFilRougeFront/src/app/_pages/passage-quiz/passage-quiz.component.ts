@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CheckboxRequiredValidator } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Toast, ToastrModule, ToastrService } from 'ngx-toastr';
 import { Answers } from 'src/app/_models/Answers';
 import { Question } from 'src/app/_models/question';
 import { Quizz } from 'src/app/_models/quizz';
@@ -23,16 +25,22 @@ export class PassageQuizComponent implements OnInit {
   isFinished: boolean = false;
   answerCandidate: string;
   lastPage: boolean = false;
+  quizzDejaEffectue = ""
 
 
-  constructor(private service: QuizzQuestionService, private quizzService:QuizzService) { }
+  constructor(
+    private service: QuizzQuestionService, 
+    private quizzService:QuizzService,
+    private router : Router,
+    private toastr : ToastrService
+  ) { }
 
   ngOnInit(): void {
     this.suppresionLocalQuizz();
   }
 
-  onSubmit() {
-    this.service.addCandidateAnswer(this.quizz.idQuizz, this.question.idQuestion, this.answerCandidate);
+  async onSubmit() {
+    await this.service.addCandidateAnswer(this.quizz.idQuizz, this.question.idQuestion, this.answerCandidate);
     this.nombre = this.nombre + 1;
     this.question = this.quizz.questions[this.nombre];
     this.Next = true;
@@ -67,14 +75,18 @@ export class PassageQuizComponent implements OnInit {
     this.answerCandidate = (<HTMLInputElement>document.getElementById("reponse")).value;
   }
   goToFirstQuestion() {
-    this.question = this.quizz.questions[this.nombre];
-    this.Next = true;
-    this.istypeAnswer = (this.question.answer.typeAnswer != "Text");
-    this.isQcmUnique = (this.question.answer.typeAnswer != "QCM_multiple");
-    console.log(this.question.answer.typeAnswer);
+    if(this.quizz.questions.length > this.nombre){
+      this.question = this.quizz.questions[this.nombre];
+      this.Next = true;
+      this.istypeAnswer = this.question.answer.typeAnswer != "Text";
+      this.isQcmUnique = this.question.answer.typeAnswer != "QCM_multiple";
+    }else{
+      location.reload();
+      this.toastr.warning("Ce quiz a déjà été effectué")
+    }
   }
-  FinduQuizz() {
-    this.service.addCandidateAnswer(this.quizz.idQuizz, this.question.idQuestion, this.answerCandidate);
+  async FinduQuizz() {
+    await this.service.addCandidateAnswer(this.quizz.idQuizz, this.question.idQuestion, this.answerCandidate);
     this.quizzService.correctQuiz(this.quizz.idQuizz);
     this.Next = false;
     this.isFinished = false;
@@ -84,5 +96,4 @@ export class PassageQuizComponent implements OnInit {
   suppresionLocalQuizz() {
     localStorage.removeItem("quizz");
   }
-
 }

@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { from } from 'rxjs';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormQuestionComponent } from './_components/form-question/form-question.component';
@@ -35,11 +34,11 @@ import { SendsQuizzFormComponent } from './_components/sends-quizz-form/sends-qu
 import { GeneratePdfComponent } from './_components/generate-pdf/generate-pdf.component';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
-import { jsPDF } from "jspdf";
 import { RecruteursComponent } from './_pages/recruteurs/recruteurs.component';
 import { RecruteurFormComponent } from './_pages/recruteur-form/recruteur-form.component';
 import { DemandeAdhesionComponent } from './_components/demande-adhesion/demande-adhesion.component';
 import { AcceuilComponent } from './_pages/acceuil/acceuil.component';
+import { Nl2BrPipeModule } from 'nl2br-pipe';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @NgModule({
@@ -84,6 +83,7 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     GoogleChartsModule,
+    Nl2BrPipeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
