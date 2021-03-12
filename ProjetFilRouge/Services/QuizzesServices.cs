@@ -47,20 +47,26 @@ namespace ProjetFilRouge.Services
             }
             return quizzesDtos;
         }
-
+        /// <summary>
+        /// Correction des réponses dans les quizz
+        /// </summary>
+        /// <param name="id"></param>
         internal void GetGoodAnswersQuizz(int id)
         {
+            //Récupération du quizz
             FindQuizzDto quizz = this.GetQuizzById(id);
+            //Instance d'une liste vide de strings si QCM Multiple et un string vide si QCM
             List<string> tableauGoodAnswer=new List<string>();
             string goodUniqueAnswer = "";
+            //Correction questions par questions
             foreach (FindQuizzQuestionsDto question in quizz.Questions)
             {
                 if (question.Answer.TypeAnswer == "QCM_multiple")
                 {
-                    tableauGoodAnswer= correctAnswers(question);
-                    List<string> candidatAnswers = question.CandidateAnswer.Split('§').ToList();
+                    tableauGoodAnswer= correctAnswers(question);// on récupère la list des bonnes réponses
+                    List<string> candidatAnswers = question.CandidateAnswer.Split('§').ToList(); // On découpe la réponse du candidat en séparant avec le §
                     if(CompareAnswers(candidatAnswers,tableauGoodAnswer)){
-                       this.quizzQuestionService.AddIsCorrectAnswer(id, (int)question.IdQuestion, 1);
+                       this.quizzQuestionService.AddIsCorrectAnswer(id, (int)question.IdQuestion, 1);//Si la réponse est exacte alors c'est "true"
                     }else
                     {
                        this.quizzQuestionService.AddIsCorrectAnswer(id, (int)question.IdQuestion, 0);
@@ -71,12 +77,12 @@ namespace ProjetFilRouge.Services
                     {
                         if (choiceAnswer.IsAnswer == true)
                         {
-                            goodUniqueAnswer = choiceAnswer.TextAnswer;
+                            goodUniqueAnswer = choiceAnswer.TextAnswer; // On récupère la bonne réponse dans la bdd
                         }
                     }
-                    if (CompareUniqueAnswer(question.CandidateAnswer, goodUniqueAnswer))
+                    if (CompareUniqueAnswer(question.CandidateAnswer, goodUniqueAnswer)) //On compare les réponses si c'est un QCM choix multiple
                     {
-                        this.quizzQuestionService.AddIsCorrectAnswer(id, (int)question.IdQuestion, 1);
+                        this.quizzQuestionService.AddIsCorrectAnswer(id, (int)question.IdQuestion, 1);//Si la réponse est exacte alors c'est "true"
                     }
                     else
                     {
@@ -100,13 +106,21 @@ namespace ProjetFilRouge.Services
             return (compteur.Equals(goodAnswers.Count));
             
         }
-
+        /// <summary>
+        /// Comparaison de deux strings 
+        /// </summary>
+        /// <param name="candidatAnswers"></param>
+        /// <param name="goodAnswers"></param>
+        /// <returns>bool</returns>
         public bool CompareUniqueAnswer(string candidatAnswers,string goodAnswers)
         {
-            int compteur = 0;
-            return (compteur.Equals(goodAnswers));
+            return (candidatAnswers.Equals(goodAnswers));
         }
-
+        /// <summary>
+        /// Récupération de toutes les bonnes réponses dans le cas d'un qcm à choix multiple
+        /// </summary>
+        /// <param name="question"></param>
+        /// <returns> une liste de strings </returns>
         public List<string> correctAnswers(FindQuizzQuestionsDto question)
         {
             List<string> goodAnswers =new List<string>() ;
@@ -120,7 +134,11 @@ namespace ProjetFilRouge.Services
 
             return goodAnswers;
         }
-        
+        /// <summary>
+        /// Recuperation des quizz d'un candidat
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>une list de quizz</returns>
         internal List<FindQuizzDto> GetQuizzByCandidateId(int id)
         {
             List<Quizz> quizzes = quizzRepository.FindByCandidateId(id);
