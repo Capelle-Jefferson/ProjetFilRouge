@@ -19,7 +19,8 @@ export class FormAuthentificationComponent implements OnInit {
 
   constructor(
     private builder: FormBuilder,
-    private service: UserService
+    private service: UserService, 
+    private router:Router
   ) {
     this.userAuth = this.builder.group({
       username: ["", Validators.required],
@@ -37,9 +38,10 @@ export class FormAuthentificationComponent implements OnInit {
       // Si utilisateur reconnus
       if (!this.user['status']) {
         sessionStorage.setItem("user", JSON.stringify(this.user));
-        location.reload();
+        location.replace("/acceuil");
+        
       // Si utilisateur non reconnus
-      } else {
+     } else {
         this.undefinedUser = true;
       }
 

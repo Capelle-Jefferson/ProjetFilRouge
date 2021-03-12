@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { EmailService } from 'src/app/_services/email.service';
 import { UserService } from 'src/app/_services/user.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-demande-adhesion',
@@ -22,40 +23,34 @@ export class DemandeAdhesionComponent implements OnInit {
 
   ngOnInit(): void {
     this.sendForm = this.builder.group({
-      email: ["email-admin@gmail.com", Validators.email],
-      subject: ["Test technique", Validators.required],
+      email: [`${environment.emailAdmin}`, Validators.email],
+      subject: ["Demande adhésion", Validators.required],
       message: [
-        "Bonjour " +  + ",\n\n" +
+        "Bonjour " + ",\n\n" +
         "Je souhaite créer un compte pour l'application Projet Fil rouge\n\n"+
         "Voici les informations nécessaires:\n"+
-        "nom: \n"+
-        "Prenom: \n"+
-        "Email: \n" + 
+        "Nom: <Votre nom> \n"+
+        "Prenom: <Votre prénom>\n"+
+        "Email: <Votre email>\n" + 
         `\n\n\n`+
-        "Bien cordialement,\n\n"
-        // `Valeur rentrée dans le input ${valeur rentrée dans le input}.`+
-        // "",
-        //  Validators.required
+        "Bien cordialement,\n\n",
+        Validators.required
       ]
     })
   }
 
-  onSubmit(){
-    console.log("kok");
-  }
-  // async onSubmit(){
-  //   let res : Boolean
-  //   await this.serviceEmail.sendEmail(this.sendForm.value).then(data => res = data)
   
-  //   if(res){
-  //     this.toastr.success("L'email à bien été envoyé");
-  //     this.router.navigateByUrl('/CandidatesComponent', { skipLocationChange: true}).then(() => {
-  //       this.router.navigate(["/candidats"]);
-  //     })
-  //   }else{
-  //     this.toastr.error("L'email n'a pas était envoyé");
-  //   }
-  // }
+  async onSubmit(){
+    let res : Boolean
+    await this.serviceEmail.sendEmail(this.sendForm.value).then(data => res = data)
+  
+    if(res){
+      this.toastr.success("L'email à bien été envoyé");
+      location.replace("");
+    }else{
+      this.toastr.error("L'email n'a pas était envoyé");
+    }
+  }
 }
 
 

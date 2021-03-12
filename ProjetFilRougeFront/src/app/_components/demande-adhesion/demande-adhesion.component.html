@@ -1,13 +1,5 @@
 <form [formGroup]="sendForm" (ngSubmit)="onSubmit()">
-    <label>Adresse email:
-        <input type="email" formControlName="email">
-    </label>
-    <label>Nom:
-        <input type="text" formControlName="subject">
-    </label>
-    <label>Prenom:
-        <input type="text" formControlName="subject">
-    </label>
+    <h4>Afin de contacter l'administrateur, veuillez personnaliser le message ci-dessous avant de cliquer sur Envoyer</h4>
     <label>
         <textarea cols="100" rows="17" formControlName="message"></textarea>
     </label>
