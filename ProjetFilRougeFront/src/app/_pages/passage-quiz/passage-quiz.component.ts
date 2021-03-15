@@ -38,7 +38,7 @@ export class PassageQuizComponent implements OnInit {
   ngOnInit(): void {
     this.suppresionLocalQuizz();
   }
-
+  //Validation de la reponse à la question et passage à la question suivante
   async onSubmit() {
     await this.service.addCandidateAnswer(this.quizz.idQuizz, this.question.idQuestion, this.answerCandidate);
     this.nombre = this.nombre + 1;
@@ -50,6 +50,7 @@ export class PassageQuizComponent implements OnInit {
       this.isFinished = true;
     }
   }
+  //Enregistrement des réponses de QCM Multiple
   SaveAnswers = () => {
     this.answerCandidate="";
     var i,box;
@@ -64,14 +65,17 @@ export class PassageQuizComponent implements OnInit {
     //Concatenation des valeurs des checkboxes
     this.answerCandidate=checked.join('§'); 
   }
-
+ //Enregistrement de la réponses QCM unique 
   SaveAnswer(value: string) {
     this.answerCandidate = value;
   }
+  //Enregistrement de la réponse dans les questions ouvertes
   SaveAnswerText = () => {
     this.answerCandidate = (<HTMLInputElement>document.getElementById("reponse")).value;
     (<HTMLInputElement>document.getElementById("reponse")).value = "";
   }
+
+  //Damarrer le quizz à la question n°1
   goToFirstQuestion() {
     if(this.quizz.questions.length > this.nombre){
       this.question = this.quizz.questions[this.nombre];
@@ -83,6 +87,7 @@ export class PassageQuizComponent implements OnInit {
       this.toastr.warning("Ce quiz a déjà été effectué")
     }
   }
+  //Enregistrement de la dernière question et envoie en correction
   async FinduQuizz() {
     await this.service.addCandidateAnswer(this.quizz.idQuizz, this.question.idQuestion, this.answerCandidate);
     this.quizzService.correctQuiz(this.quizz.idQuizz);

@@ -15,7 +15,6 @@ export class ConnexionQuizzComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log(this.quizz)
   }
   
 }
