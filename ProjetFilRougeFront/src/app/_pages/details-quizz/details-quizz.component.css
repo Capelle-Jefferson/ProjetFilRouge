@@ -23,6 +23,10 @@ h2{
     margin: 10px;
 }
 .correct{
+    border: solid #aeef46 1px;
+    color:#aeef46;
+}
+.correctCandidat{
     color:#aeef46;
 }
 .incorrect{

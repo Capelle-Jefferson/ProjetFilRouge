@@ -14,6 +14,8 @@ export class DetailsQuizzComponent implements OnInit {
   idQuizz : number;
   private sub: any;
   quizz;
+  
+  answersMultiple : string[]
 
   constructor(
     private route: ActivatedRoute,
@@ -27,7 +29,6 @@ export class DetailsQuizzComponent implements OnInit {
     await this.serviceQuizz.get(this.idQuizz).then(data => this.quizz = data);
 
     this.idCandidate = +localStorage.getItem("idCandidate");
-    //localStorage.removeItem("idCandidate");
   }
 
   public isQuizzCompleted() : boolean{
@@ -38,5 +39,4 @@ export class DetailsQuizzComponent implements OnInit {
     }
     return false;
   }
-
 }

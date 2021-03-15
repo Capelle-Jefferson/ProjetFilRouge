@@ -13,7 +13,7 @@
         <!-- Réponse QCM -->
         <div *ngIf="question.answer.typeAnswer != 'Text'" class="reponse">
             <h6>Réponses:</h6>
-            <div *ngFor="let answer of question.answer.listChoiceAnswer">
+            <div *ngFor="let answer of question.answer.listChoiceAnswer; let i = index">
                 <!-- SI réponse correct ou non répondu -->
                 <div *ngIf="question.isCorrectAnswer || question.isCorrectAnswer == null">
                     <p *ngIf="answer.isAnswer" class="correct">- {{answer.textAnswer}}</p>
@@ -21,9 +21,19 @@
                 </div>
                 <!-- SI réponse incorrect -->
                 <div *ngIf="!question.isCorrectAnswer && question.isCorrectAnswer != null">
-                    <p *ngIf="answer.isAnswer" class="correct">- {{answer.textAnswer}}</p>
-                    <p *ngIf="!answer.isAnswer && (question.candidateAnswer == answer.textAnswer)" class="incorrect">- {{answer.textAnswer}}</p>
-                    <p *ngIf="!answer.isAnswer && !(question.candidateAnswer == answer.textAnswer)">- {{answer.textAnswer}}</p>
+                    <p *ngIf="answer.isAnswer && (question.candidateAnswer.includes(answer.textAnswer))" class="correctCandidat">- {{answer.textAnswer}}</p>
+                    <p *ngIf="answer.isAnswer && !(question.candidateAnswer.includes(answer.textAnswer))" class="correct">- {{answer.textAnswer}}</p>
+                    <!-- SI QCM -->
+                    <div *ngIf="question.answer.typeAnswer == 'QCM'">
+                        <p *ngIf="!answer.isAnswer && (question.candidateAnswer == answer.textAnswer)" class="incorrect">- {{answer.textAnswer}}</p>
+                        <p *ngIf="!answer.isAnswer && !(question.candidateAnswer == answer.textAnswer)">- {{answer.textAnswer}}</p>
+                    </div>
+                    <!-- SI QCM Multiple -->
+                    <div *ngIf="question.answer.typeAnswer == 'QCM_multiple'">
+                        <p *ngIf="!answer.isAnswer && (question.candidateAnswer.includes(answer.textAnswer))" class="incorrect">- {{answer.textAnswer}}</p>
+                        <p *ngIf="!answer.isAnswer && !(question.candidateAnswer.includes(answer.textAnswer))">- {{answer.textAnswer}}</p>
+                    </div>
+
                 </div>
             </div>
         </div>

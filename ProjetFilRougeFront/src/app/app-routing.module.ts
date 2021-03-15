@@ -44,7 +44,7 @@ const routes: Routes = [
   ]},
   {path:"adhesion", component:DemandeAdhesionComponent},
   {path:"accueil", component:AcceuilComponent},
-  {path: "**", redirectTo: ""}
+  {path: "**", redirectTo: "accueil"}
 ];
 
 @NgModule({
