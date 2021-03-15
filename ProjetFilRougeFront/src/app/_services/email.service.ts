@@ -10,7 +10,7 @@ export class EmailService {
   constructor() { }
 
   
-  sendEmail(sendEmail : SendEmail):Promise<Boolean>{
+  sendEmail(sendEmail : any):Promise<Boolean>{
     return fetch(`${environment.apiUrl}/SendEmail`, {
       method: 'POST',
       headers: {

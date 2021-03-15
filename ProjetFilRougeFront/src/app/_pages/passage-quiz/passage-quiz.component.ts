@@ -2,12 +2,13 @@ import { Component, Input, OnInit } from '@angular/core';
 import { CheckboxRequiredValidator } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Toast, ToastrModule, ToastrService } from 'ngx-toastr';
-import { Answers } from 'src/app/_models/Answers';
-import { Question } from 'src/app/_models/question';
-import { Quizz } from 'src/app/_models/quizz';
+import { SendEmail } from 'src/app/_models/SendEmail';
+import { CandidateService } from 'src/app/_services/candidate.service';
+import { EmailService } from 'src/app/_services/email.service';
 import { QuizzQuestionService } from 'src/app/_services/quizz-question.service';
 import { QuizzService } from 'src/app/_services/quizz.service';
-import { QuestionsComponent } from '../questions/questions.component';
+import { UserService } from 'src/app/_services/user.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-passage-quiz',
@@ -31,6 +32,9 @@ export class PassageQuizComponent implements OnInit {
   constructor(
     private service: QuizzQuestionService, 
     private quizzService:QuizzService,
+    private emailService : EmailService,
+    private userService : UserService,
+    private candidateService : CandidateService,
     private router : Router,
     private toastr : ToastrService
   ) { }
@@ -91,6 +95,18 @@ export class PassageQuizComponent implements OnInit {
   async FinduQuizz() {
     await this.service.addCandidateAnswer(this.quizz.idQuizz, this.question.idQuestion, this.answerCandidate);
     this.quizzService.correctQuiz(this.quizz.idQuizz);
+    let user = await this.userService.get(this.quizz.idUser);
+    let candidate = await this.candidateService.get(this.quizz.idCandidat);
+    let email = {
+      email: user.email,
+      subject: "Test technique effectué",
+      message:       "Bonjour, \n\n" +
+      `Nous vous informons que ${candidate.lastname} ${candidate.firstname} a terminé le test technique.\n\n`+
+      "Après connexion, vous pouvez accéder aux détails du quiz via l'url suivante:\n" + 
+      `${environment.siteUrl}/gestionQuizz/details/${this.quizz.idQuizz}\n\n`+
+      "Bien cordialement, \n\nL'équipe du projet fil rouge."
+    }
+    await this.emailService.sendEmail(email);
     this.Next = false;
     this.isFinished = false;
     this.lastPage = true;
