@@ -1,3 +1,13 @@
 <h2>Page d'authentification</h2>
 <app-form-authentification></app-form-authentification>
-<a routerLink="adhesion">Pas de compte?Cliquez ici pour contacter l'administrateur</a>
+<input type="button" id="addCompte" value="Pas de compte? cliquez ici" (click)="displayForm('demande')">
+    <div id="demande" style="display: none">
+        <form [formGroup]="sendForm" (ngSubmit)="onSubmit()">
+            <h4>Afin de contacter l'administrateur, veuillez personnaliser le message ci-dessous avant de cliquer sur Envoyer</h4>
+            <label>
+                <textarea cols="100" rows="17" formControlName="message"></textarea>
+            </label>
+            <button [disabled]="!sendForm.valid" type="submit" class="btn btn-warning">Envoyer</button>
+        </form>
+    </div>
+    
