@@ -24,7 +24,8 @@
             <td>{{quizz.category}}</td>
             <td>{{quizz.level}}</td>
             <td>{{quizz.questions.length}}</td>
-            <td><a routerLink="/gestionQuizz/envoyer/{{quizz.codeQuizz}}"><img [src]="sendIcon"></a></td>
+            <td *ngIf="quizz.date == null"><a routerLink="/gestionQuizz/envoyer/{{quizz.codeQuizz}}"><img [src]="sendIcon"></a></td>
+            <td *ngIf="quizz.date != null"><img [src]="sendIcon"></td>
             <td><a routerLink="/gestionQuizz/details/{{quizz.idQuizz}}"><img [src]="detailsIcon"></a></td>
             <td><a routerLink="/gestionQuizz/idUser" (click)="delete(quizz)"><img [src]="deleteIcon" alt=""></a></td>
         </tr>
