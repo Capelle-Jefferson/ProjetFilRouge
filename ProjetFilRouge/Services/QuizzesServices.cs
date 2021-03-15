@@ -92,7 +92,12 @@ namespace ProjetFilRouge.Services
             }
            
         }
-
+        /// <summary>
+        /// Comparaison de deux listes de string
+        /// </summary>
+        /// <param name="candidatAnswers"></param>
+        /// <param name="goodAnswers"></param>
+        /// <returns>un boolean</returns>
         public bool CompareAnswers(List<string> candidatAnswers, List<string> goodAnswers)
         {
             int compteur = 0;
@@ -179,8 +184,6 @@ namespace ProjetFilRouge.Services
             Quizz quizz = quizzRepository.Find(id);
             return TransformModelToDto(quizz);
         }
-
-        
 
         /// <summary>
         ///     Génère un quizz
