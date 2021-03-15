@@ -53,6 +53,7 @@ namespace ProjetFilRouge.Services
         /// <param name="id"></param>
         internal void GetGoodAnswersQuizz(int id)
         {
+            this.quizzRepository.UpdateDateQuizz(id);
             //Récupération du quizz
             FindQuizzDto quizz = this.GetQuizzById(id);
             //Instance d'une liste vide de strings si QCM Multiple et un string vide si QCM
@@ -420,10 +421,13 @@ namespace ProjetFilRouge.Services
             return CalculResult(results);
         }
         /// <summary>
-        /// 
+        ///     Calcule et retourne le resultat d'un quizz
         /// </summary>
-        /// <param name="results"></param>
-        /// <returns></returns>
+        /// <param name="results">
+        ///     Dictionnaire, key: nom du niveau (junior,..) et 
+        ///     en valeur le nbre de question total du niveau et le nbre de bonne réponse dans ce niveau 
+        /// </param>
+        /// <returns>Resultat du quizz</returns>
         private QuizzResultDto CalculResult(Dictionary<string, (int, int)> results)
         {
             // Calcule du pourcentage de bonne reponse de chaque niveau

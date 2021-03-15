@@ -59,6 +59,20 @@ namespace ProjetFilRouge.Repositories
         }
 
         /// <summary>
+        ///     Enregistre la date de passage du quizz
+        /// </summary>
+        /// <param name="id">id du quizz</param>
+        internal void UpdateDateQuizz(int id)
+        {
+            this.OpenConnection();
+            string request = "Update quizz set date = now() where id_quizz = " + id;
+            Console.WriteLine(request);
+            MySqlCommand cmd = new MySqlCommand(request, connectionSql);
+            MySqlDataReader rdr = cmd.ExecuteReader();
+            this.CloseConnection(rdr);
+        }
+
+        /// <summary>
         ///     Récupération d'un quizz
         /// </summary>
         /// <param name="code">code du quizz à récupérer</param>
