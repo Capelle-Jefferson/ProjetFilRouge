@@ -31,15 +31,10 @@ import { QuizzResultComponent } from './_pages/quizz-result/quizz-result.compone
 import { GoogleChartsModule } from 'angular-google-charts';
 import { SendsQuizzComponent } from './_pages/sends-quizz/sends-quizz.component';
 import { SendsQuizzFormComponent } from './_components/sends-quizz-form/sends-quizz-form.component';
-import { GeneratePdfComponent } from './_components/generate-pdf/generate-pdf.component';
-import pdfMake from 'pdfmake/build/pdfmake';
-import pdfFonts from 'pdfmake/build/vfs_fonts';
 import { RecruteursComponent } from './_pages/recruteurs/recruteurs.component';
 import { RecruteurFormComponent } from './_pages/recruteur-form/recruteur-form.component';
-import { DemandeAdhesionComponent } from './_components/demande-adhesion/demande-adhesion.component';
 import { AcceuilComponent } from './_pages/acceuil/acceuil.component';
 import { Nl2BrPipeModule } from 'nl2br-pipe';
-pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @NgModule({
   declarations: [
@@ -67,10 +62,8 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
     QuizzResultComponent,
     SendsQuizzComponent,
     SendsQuizzFormComponent,
-    GeneratePdfComponent,
     RecruteursComponent,
     RecruteurFormComponent,
-    DemandeAdhesionComponent,
     AcceuilComponent,
   ],
   imports: [

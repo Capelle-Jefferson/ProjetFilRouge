@@ -16,7 +16,6 @@ import { QuizzResultComponent } from './_pages/quizz-result/quizz-result.compone
 import { SendsQuizzComponent } from './_pages/sends-quizz/sends-quizz.component';
 import { RecruteursComponent } from './_pages/recruteurs/recruteurs.component';
 import { RecruteurFormComponent } from './_pages/recruteur-form/recruteur-form.component';
-import { DemandeAdhesionComponent } from './_components/demande-adhesion/demande-adhesion.component';
 import { AcceuilComponent } from './_pages/acceuil/acceuil.component';
 
 const routes: Routes = [
@@ -42,7 +41,6 @@ const routes: Routes = [
   {path: "recruteurs", component: RecruteursComponent, children: [
     {path: "ajouter", component: RecruteurFormComponent}
   ]},
-  {path:"adhesion", component:DemandeAdhesionComponent},
   {path:"accueil", component:AcceuilComponent},
   {path: "**", redirectTo: ""}
 ];

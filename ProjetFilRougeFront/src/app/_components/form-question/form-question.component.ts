@@ -82,8 +82,7 @@ export class FormQuestionComponent implements OnInit {
     }
     
     //Récupération des données pour la Answer
-    console.log(this.questionForm.get("intitule").value);
-
+    
     let intituleS:string = (this.questionForm.get("intitule").value) 
     let explicationS:string=this.questionForm.get("answer.explication").value
     let textAnswerS:string=this.questionForm.get("answer.textAnswer").value
