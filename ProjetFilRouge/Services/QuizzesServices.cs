@@ -53,6 +53,7 @@ namespace ProjetFilRouge.Services
         /// <param name="id"></param>
         internal void GetGoodAnswersQuizz(int id)
         {
+            this.quizzRepository.UpdateDateQuizz(id);
             //Récupération du quizz
             FindQuizzDto quizz = this.GetQuizzById(id);
             //Instance d'une liste vide de strings si QCM Multiple et un string vide si QCM
