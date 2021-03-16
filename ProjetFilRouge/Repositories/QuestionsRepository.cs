@@ -1,6 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
+using ProjetFilRouge.Models;
 using ProjetFilRouge.Utils;
-using ProjetTest.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +11,7 @@ namespace ProjetFilRouge.Repositories
 {
     public class QuestionsRepository : AbstractRepository<Question>
     {
-        
+
 
         public QuestionsRepository(QueryBuilder _queryBuilder) : base(_queryBuilder) { }
 
@@ -34,7 +34,7 @@ namespace ProjetFilRouge.Repositories
         public override int Delete(int id)
         {
             this.OpenConnection();
-            string request = _queryBuilder.Delete("question", id);
+            string request = _queryBuilder.Delete("question", id, "id_question");
             MySqlCommand cmd = new MySqlCommand(request, connectionSql);
             int result = cmd.ExecuteNonQuery();
             connectionSql.Close();
@@ -49,27 +49,53 @@ namespace ProjetFilRouge.Repositories
         public override Question Find(int id)
         {
             this.OpenConnection();
-            string request = _queryBuilder   
+            string request = _queryBuilder
                 .Select()
                 .From("question")
                 .Where("id_question", id, "=")
                 .Get();
 
-            MySqlCommand cmd = new MySqlCommand(request, connectionSql); 
-            MySqlDataReader rdr = cmd.ExecuteReader();  
+            MySqlCommand cmd = new MySqlCommand(request, connectionSql);
+            MySqlDataReader rdr = cmd.ExecuteReader();
             Question question = new Question();
-            while (rdr.Read()) 
+            while (rdr.Read())
             {
                 question.IdQuestion = rdr.GetInt32(0);
                 question.Intitule = rdr.GetString(1);
                 question.IdCategory = rdr.GetInt32(2);
-                question.IdLevel = rdr.GetInt32(3);
-                question.IdAnswer = rdr.GetInt32(4);
-
-                
+                question.IdAnswer = rdr.GetInt32(3);
+                question.IdLevel = rdr.GetInt32(4);
             }
-            rdr.Close(); 
+            this.CloseConnection(rdr);
             return question;
+        }
+
+        public List<Question> Find(int id1, int id2)
+        {
+            this.OpenConnection();
+            List<Question> list = new List<Question>();
+            string request = _queryBuilder
+                .Select()
+                .From("question")
+                .Where("id_level", id1, "=")
+                .And("id_category", id2, "=")
+                .Get();
+
+            MySqlCommand cmd = new MySqlCommand(request, connectionSql);
+            MySqlDataReader rdr = cmd.ExecuteReader();
+            while (rdr.Read())
+            {
+                Question question = new Question();
+                question.IdQuestion = rdr.GetInt32(0);
+                question.Intitule = rdr.GetString(1);
+                question.IdCategory = rdr.GetInt32(2);
+                question.IdAnswer = rdr.GetInt32(3);
+                question.IdLevel = rdr.GetInt32(4);
+
+                list.Add(question);
+            }
+            this.CloseConnection(rdr);
+            return list;
         }
 
         /// <summary>
@@ -84,23 +110,20 @@ namespace ProjetFilRouge.Repositories
 
             string request = _queryBuilder   // Pour construire la requête sql
              .Select()
-             .From("personnages")
+             .From("question")
              .Get();
             MySqlCommand cmd = new MySqlCommand(request, connectionSql);
             MySqlDataReader rdr = cmd.ExecuteReader();
-            Question question = new Question();
             while (rdr.Read())
             {
+                Question question = new Question();
                 question.IdQuestion = rdr.GetInt32(0);
                 question.Intitule = rdr.GetString(1);
-                question.IdCategory= rdr.GetInt32(2);
-                question.IdLevel = rdr.GetInt32(3);
-                question.IdAnswer = rdr.GetInt32(4);
-
-
+                question.IdCategory = rdr.GetInt32(2);
+                question.IdAnswer = rdr.GetInt32(3);
+                question.IdLevel = rdr.GetInt32(4);
                 list.Add(question);
             }
-
             this.CloseConnection(rdr);
             return list;
         }
@@ -115,7 +138,7 @@ namespace ProjetFilRouge.Repositories
         {
             this.OpenConnection();
             Dictionary<string, dynamic> questionDict = new Dictionary<string, dynamic>();
-            questionDict = ObjectToDictionary(obj,"id_question");
+            questionDict = ObjectToDictionary(obj, "id_question");
             string request = _queryBuilder
               .Update("question")
               .Set(questionDict)
@@ -127,6 +150,26 @@ namespace ProjetFilRouge.Repositories
             connectionSql.Close();
             obj.IdQuestion = id;
             return obj;
+        }
+
+        public List<Question> GenererQuestionQuizz(int idLevel, int idCategory, int nombreQuestion)
+        {
+            Random rnd = new Random();
+            List<Question> listQuestion = Find(idLevel, idCategory);
+            int taille = listQuestion.Count;
+            List<Question> listQuestionQuizz = new List<Question>();
+            if (taille < nombreQuestion)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+            for (int i = 0; i < nombreQuestion; i++)
+            {
+                int qIndex = rnd.Next(0, taille);
+                listQuestionQuizz.Add(listQuestion[qIndex]);
+                listQuestion.RemoveAt(qIndex);
+                taille--;
+            }
+            return listQuestionQuizz;
         }
     }
 }

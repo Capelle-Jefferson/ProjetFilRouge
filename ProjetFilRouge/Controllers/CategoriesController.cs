@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using HttpExceptions.Exceptions;
+using Microsoft.AspNetCore.Mvc;
 using ProjetFilRouge.Dtos;
 using ProjetFilRouge.Dtos.CategoriesDtos;
 using ProjetFilRouge.Services;
@@ -17,9 +18,9 @@ namespace ProjetFilRouge.Controllers
     public class CategoriesController : ControllerBase
     {
         private CategoriesServices categoriesServices;
-        public CategoriesController()
+        public CategoriesController(CategoriesServices categoriesServices)
         {
-            categoriesServices = new CategoriesServices();
+            this.categoriesServices = categoriesServices;
         }
 
         // GET: api/<CategoriesController>

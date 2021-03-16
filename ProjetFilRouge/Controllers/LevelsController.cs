@@ -16,9 +16,9 @@ namespace ProjetFilRouge.Controllers
     public class LevelsController : ControllerBase
     {
         private LevelServices levelServices;
-        public LevelsController()
+        public LevelsController(LevelServices levelServices)
         {
-            levelServices = new LevelServices();
+            this.levelServices = levelServices;   
         }
 
         // GET: api/<LevelsController>
@@ -30,9 +30,17 @@ namespace ProjetFilRouge.Controllers
 
         // GET api/<LevelsController>/5
         [HttpGet("{id}")]
-        public FindLevelDto Get(int id)
+        public IActionResult Get(int id)
         {
-            return levelServices.GetLevelById(id);
+            try 
+            {
+                return Ok(levelServices.GetLevelById(id));
+            }
+            catch
+            {
+                return NotFound();
+            }
+            
         }
 
         // POST api/<LevelsController>
