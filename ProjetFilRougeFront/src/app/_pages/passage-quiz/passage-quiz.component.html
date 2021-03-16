@@ -1,8 +1,9 @@
 <!--Première page du quizz-->
-<div *ngIf="!Next && !lastPage">
+<div *ngIf="!Next && !lastPage" class="debut">
     <span class="Text">
         <ul class="list-group">
-            <li class="list-group-item list-group-item-warning active">Notions à savoir avant le début du quizz:</li>
+            <li class="list-group-item warning active">Notions à savoir avant le début du quizz:</li>
+            <li class="list-group-item">Une question QCM équivaut à une réponse unique, s'il est précisé QCM_multiple il y a alors plusieurs bonnes réponses.</li>
             <li class="list-group-item">Un retour en arrière n'est pas possible, une fois le bouton suivant cliqué,la réponse est enregistrée, on ne peut pas l'annuler.</li>
             <li class="list-group-item">En cas de bug, le quiz enregistre les questions répondues, lorsque vous serez reconnecté, vous serez dirigé vers les questions non répondues.</li>
         </ul>
@@ -51,7 +52,7 @@
 <!--Page quand le quizz est fini-->
 <div *ngIf="lastPage && !Next">
     <p class="Text"> 
-        Félicitations! Le quizz est à présent terminer.
+        Félicitations! Le quiz est à présent terminé.
         Vos résultats vous seront communiqués ultérieurement.
     </p>
 </div>

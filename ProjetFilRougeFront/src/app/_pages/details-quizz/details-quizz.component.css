@@ -18,6 +18,10 @@ h2{
     margin: 30px;
     padding:10px;
 }
+.question h5{
+    text-align: left;
+    margin-left: 20%;
+}
 .reponse p{
     font-size: 16px;
     margin: 10px;

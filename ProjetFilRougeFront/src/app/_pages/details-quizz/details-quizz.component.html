@@ -7,7 +7,7 @@
     <p>Niveau: {{quizz.level}}</p>
     <p *ngIf="quizz.date">date de passage: {{quizz.date | date: "dd/MM/yy à HH:mm"}}</p>
     <div *ngFor="let question of quizz.questions" class="question">
-        <h5>{{question.intitule}} </h5>
+        <h5 [innerHTML]="question.intitule | nl2br">{{question.intitule}} </h5>
         <p>Niveau de la question: {{question.level}}</p>
 
         <!-- Réponse QCM -->

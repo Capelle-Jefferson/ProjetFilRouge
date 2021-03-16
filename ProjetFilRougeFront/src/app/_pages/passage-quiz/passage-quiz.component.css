@@ -31,4 +31,13 @@
     font-style: italic;
     text-align: center;
 }
+.debut{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#valider{
+    margin-top: 10px;
+}
 
