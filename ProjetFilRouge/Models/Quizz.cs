@@ -9,13 +9,13 @@ namespace ProjetFilRouge.Models
     {
         public int? idQuizz { get; set; }
         public string codeQuizz { get; set; }
-        public DateTime date { get; set; }
+        public DateTime? date { get; set; }
         public int? idCategory { get; set; }
         public int? idLevel { get; set; }
         public int? idUser { get; set; }
-        public int? idCandidat { get; set; }
+        public int? idCandidate { get; set; }
 
-        public Quizz(int? idQuizz, string codeQuizz, DateTime date, int? idCategory, int? idLevel, int? idUser, int? idCandidat)
+        public Quizz(int? idQuizz, string codeQuizz, DateTime? date, int? idCategory, int? idLevel, int? idUser, int? idCandidat)
         {
             this.idQuizz = idQuizz;
             this.codeQuizz = codeQuizz;
@@ -23,7 +23,11 @@ namespace ProjetFilRouge.Models
             this.idCategory = idCategory;
             this.idLevel = idLevel;
             this.idUser = idUser;
-            this.idCandidat = idCandidat;
+            this.idCandidate = idCandidat;
+        }
+
+        public Quizz()
+        {
         }
     }
 }

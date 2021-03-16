@@ -15,9 +15,9 @@ namespace ProjetFilRouge.Controllers
     {
         public RolesServices rolesServices; 
 
-        public RolesController()
+        public RolesController(RolesServices rolesServices)
         {
-            this.rolesServices = new RolesServices();
+            this.rolesServices = rolesServices;
         }
         // GET: api/<RolesController>
         [HttpGet]
@@ -28,9 +28,16 @@ namespace ProjetFilRouge.Controllers
 
         // GET api/<RolesController>/5
         [HttpGet("{id}")]
-        public Dtos.RolesDtos.FindRolesDto Get(int id)
+        public IActionResult Get(int id)
         {
-            return rolesServices.GetRoles(id);
+            try
+            {
+                return Ok(rolesServices.GetRoles(id));
+            }
+            catch
+            {
+                return NotFound();
+            }
         }
 
         // POST api/<RolesController>
@@ -46,6 +53,8 @@ namespace ProjetFilRouge.Controllers
         {
             return rolesServices.PutRole(id,obj);
         }
+
+        
 
         // DELETE api/<RolesController>/5
         [HttpDelete("{id}")]

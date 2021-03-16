@@ -6,16 +6,18 @@ using ProjetFilRouge.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
+using System.Web.Http;
 
 namespace ProjetFilRouge.Services
 {
     public class LevelServices
     {
         private LevelRepository LevelRepository;
-        public LevelServices()
+        public LevelServices(LevelRepository levelRepository)
         {
-            LevelRepository = new LevelRepository(new QueryBuilder());
+            LevelRepository = levelRepository;
         }
 
         /// <summary>
@@ -51,6 +53,10 @@ namespace ProjetFilRouge.Services
         internal FindLevelDto GetLevelById(int id)
         {
             Level lev = LevelRepository.Find(id);
+            if (lev.IdLevel == null)
+            {
+                throw new HttpResponseException(HttpStatusCode.OK);
+            }
             return TransformModelToDto(lev);
         }
 

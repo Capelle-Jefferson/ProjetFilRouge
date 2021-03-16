@@ -1,4 +1,5 @@
-﻿using ProjetFilRouge.Dtos;
+﻿using HttpExceptions.Exceptions;
+using ProjetFilRouge.Dtos;
 using ProjetFilRouge.Dtos.CategoriesDtos;
 using ProjetFilRouge.Models;
 using ProjetFilRouge.Repositories;
@@ -15,9 +16,9 @@ namespace ProjetFilRouge.Services
     public class CategoriesServices
     {
         private CategoryRepository categoryRepository;
-        public CategoriesServices()
+        public CategoriesServices(CategoryRepository categoryRepository)
         {
-            categoryRepository = new CategoryRepository(new QueryBuilder());
+            this.categoryRepository = categoryRepository;
         }
 
         /// <summary>
@@ -44,7 +45,7 @@ namespace ProjetFilRouge.Services
         {
             Category cat = categoryRepository.Find(id);
             if (cat.IdCategory == null)
-                throw new HttpResponseException(HttpStatusCode.NotFound);
+                throw new NotFoundException("not found");
             return TransformModelToDto(cat);
         }
 

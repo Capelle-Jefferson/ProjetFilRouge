@@ -9,17 +9,18 @@ using HttpExceptions.Exceptions;
 using System.Net.Http;
 using System.Net;
 using System.Web.Http;
+using ProjetFilRouge.Repositories;
 
 namespace ProjetFilRouge.Services
 {
     public class RolesServices
     {
-        Repositories.RolesRepository rolesRepository;
+        RolesRepository rolesRepository;
 
 
-        public RolesServices()
+        public RolesServices(RolesRepository rolesRepository)
         {
-            this.rolesRepository = new Repositories.RolesRepository(new QueryBuilder());
+            this.rolesRepository = rolesRepository;
         }
 
         /// <summary>
