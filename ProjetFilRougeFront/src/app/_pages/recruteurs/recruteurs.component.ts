@@ -29,7 +29,7 @@ export class RecruteursComponent implements OnInit {
     let res = true;
     await this.userService.delete(user.idUser).catch(data => res = false );
     if(res){
-      this.toastr.success("Le recruteur à bien était supprimé");
+      this.toastr.success("Le recruteur à bien été supprimé");
       this.router.navigateByUrl('/RecruteursComponent', { skipLocationChange: true}).then(() => {
         this.router.navigate(["/recruteurs"]);
       })

@@ -42,11 +42,11 @@ export class RecruteurFormComponent implements OnInit {
     if(res){
       this.router.navigateByUrl('/RecruteursComponent', { skipLocationChange: true}).then(() => {
         this.router.navigate(["/recruteurs"]);
-      this.toastr.success("Le recruteur a bien était ajouté, un email lui à était envoyé");
+      this.toastr.success("Le recruteur a bien été ajouté, un email lui a été envoyé");
       })
     }else{
-      this.toastr.error("Le recruteur n'a pas était ajouté");
-      this.msgError = "Le recruteur n'a pas était ajouté, l'adresse email ou le nom d'utilisateur est déjà utilisé"
+      this.toastr.error("Le recruteur n'a pas été ajouté");
+      this.msgError = "Le recruteur n'a pas été ajouté, l'adresse email ou le nom d'utilisateur est déjà utilisé"
     }
   }
 

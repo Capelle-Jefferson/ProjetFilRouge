@@ -38,8 +38,8 @@ export class CategoriesComponent implements OnInit {
       })
 
     }else{
-      this.toastr.error("Cette catégorie ne peut être supprimé !");
-      this.msgError = "la catégorie " + cat.nameCategory + " est affecté à une ou plusieurs questions, elle ne peut donc être supprimé."
+      this.toastr.error("Cette catégorie ne peut être supprimée !");
+      this.msgError = "la catégorie " + cat.nameCategory + " est affectée à une ou plusieurs questions, elle ne peut donc être supprimée."
     }
   }
 

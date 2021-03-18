@@ -49,10 +49,10 @@ export class CandidateFormComponent implements OnInit {
       if(res){
         this.router.navigateByUrl('/Candidats', { skipLocationChange: true}).then(() => {
           this.router.navigate(["/candidats"]);
-        this.toastr.success("Le candidat à bien était ajouté");
+        this.toastr.success("Le candidat à bien été ajouté");
         })
       }else{
-        this.toastr.error("Le candidat n'a pas était ajouté");
+        this.toastr.error("Le candidat n'a pas été ajouté");
         this.error = "L'adresse email est déjà existante."
       }
 

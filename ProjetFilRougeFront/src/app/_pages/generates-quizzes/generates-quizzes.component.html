@@ -1,7 +1,7 @@
 <button routerLink="/candidats" class="btn btn-primary">Revenir à la liste des candidats</button>
 
 <router-outlet ></router-outlet>
-<h2 *ngIf="candidate">Liste des Quizzes de {{candidate.firstname}} {{candidate.lastname}}: <a routerLink="ajouter">(+)</a></h2>
+<h2 *ngIf="candidate">La liste des Quiz de {{candidate.firstname}} {{candidate.lastname}}: <a routerLink="ajouter">(+)</a></h2>
 <table class="table table-striped">
     <thead>
         <tr>

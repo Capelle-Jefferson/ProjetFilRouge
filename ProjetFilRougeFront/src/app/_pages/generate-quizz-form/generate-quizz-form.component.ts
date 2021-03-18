@@ -64,12 +64,12 @@ export class GenerateQuizzFormComponent implements OnInit {
     let success;
     try{
       await this.services.create(quizz, this.quizzForm.get("nbreQuestions").value).then(data => success = data);
-        this.toastr.success("Le quizz à bien été généré");
+        this.toastr.success("Le quiz à bien été généré");
         this.router.navigateByUrl(`/GeneratesQuizzesComponent`, { skipLocationChange: true}).then(() => {
           this.router.navigate([`/gestionQuizz/${this.idCandidate}`]);
         })
     }catch{
-      this.toastr.error("Le quizz n'a pas été généré");
+      this.toastr.error("Le quiz n'a pas été généré");
       this.msgError = "Le nombre de questions demandées surpasse le nombre de questions disponibles"
     }
   }

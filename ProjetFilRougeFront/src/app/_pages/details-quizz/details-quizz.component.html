@@ -1,8 +1,8 @@
 <button routerLink="/gestionQuizz/{{idCandidate}}" class="btn btn-primary">Revenir à la liste des quizzes</button>
 
-<h2>Détails du quizz</h2>
+<h2>Détails du quiz</h2>
 <div class="quizz" *ngIf="quizz">
-    <h4>Code du quizz: {{quizz.codeQuizz}}</h4>
+    <h4>Code du quiz: {{quizz.codeQuizz}}</h4>
     <p>Catégorie: {{quizz.category}}</p>
     <p>Niveau: {{quizz.level}}</p>
     <p *ngIf="quizz.date">date de passage: {{quizz.date | date: "dd/MM/yy à HH:mm"}}</p>

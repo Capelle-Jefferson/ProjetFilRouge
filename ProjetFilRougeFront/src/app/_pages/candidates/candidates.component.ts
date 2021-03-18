@@ -42,7 +42,7 @@ export class CandidatesComponent implements OnInit {
     let res : Number;
     try{
       await this.candidateService.delete(cand.idCandidate).then(data => res = data );
-      this.toastr.success("Le candidat à bien était supprimé");
+      this.toastr.success("Le candidat à bien été supprimé");
     }catch{
       this.toastr.warning("Ce candidat ne peut pas être supprimé, il est associé à un quiz");
     }
